@@ -1,0 +1,57 @@
+import { VoucherType } from "../generated/prisma";
+import prisma from "../shared/prisma";
+
+export const GenerateVoucherNumber = async (type: string): Promise<string> => {
+  let voucherNo: string | undefined;
+
+  if (type === "PRV") {
+    const lastVoucher = await prisma.transactionInfo.findFirst({
+      where: { voucherType: VoucherType.PURCHASE },
+      orderBy: { id: "desc" },
+      select: { voucherNo: true },
+    });
+    voucherNo = lastVoucher?.voucherNo;
+  }
+
+  if (type === "ReqO") {
+    const lastVoucher = await prisma.purchaseOrderInfo.findFirst({
+      orderBy: { id: "desc" },
+      select: { orderNo: true },
+    });
+
+    voucherNo = lastVoucher?.orderNo;
+  }
+
+  if (type === "PROD") {
+    const lastVoucher = await prisma.transactionInfo.findFirst({
+      where: { voucherType: VoucherType.PRODUCTION },
+      orderBy: { id: "desc" },
+      select: { voucherNo: true },
+    });
+
+    voucherNo = lastVoucher?.voucherNo;
+  }
+
+  if (voucherNo) {
+    const nextNumber = getNextNumber(voucherNo);
+    const result = type + "-" + currentDate + "/" + nextNumber;
+    return result;
+  } else {
+    const number = "0001";
+    const result = type + "-" + currentDate + "/" + number;
+    return result;
+  }
+};
+
+const getNextNumber = (voucherNo: string) => {
+  const parts = voucherNo.split("/");
+  const lastNumber = parseInt(parts[1]);
+  const nextNumber = (lastNumber + 1).toString().padStart(4, "0");
+  return nextNumber;
+};
+
+const currectDate = new Date().getDate().toString().padStart(2, "0");
+const currectMonth = (new Date().getMonth() + 1).toString().padStart(2, "0");
+const currectYear = new Date().getFullYear().toString().slice(-2);
+
+const currentDate = currectDate + currectMonth + currectYear;

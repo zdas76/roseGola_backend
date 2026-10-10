@@ -1,0 +1,491 @@
+datasource db {
+  provider = "mysql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+model Category {
+  id           Int           @id @default(autoincrement())
+  categoryName String        @unique @db.VarChar(200)
+  subCategory  SubCategory[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@map("categoris")
+}
+
+model SubCategory {
+  id              Int       @id @default(autoincrement())
+  subCategoryName String    @unique @db.VarChar(200)
+  categoryId      Int
+  category        Category  @relation(fields: [categoryId], references: [id])
+  product         Product[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([categoryId])
+  @@map("sub_categoris")
+}
+
+model Unit {
+  id               Int               @id @default(autoincrement())
+  name             String            @db.VarChar(20)
+  RawMaterial      RawMaterial[]
+  Product          Product[]
+  createdAt        DateTime          @default(now())
+  updateAt         DateTime          @updatedAt
+  packingMaterials PackingMaterial[]
+
+  @@map("units")
+}
+
+model AccountHead {
+  id           Int            @id @default(autoincrement())
+  headName     String
+  headId       String         @unique @db.VarChar(2)
+  accountsItem AccountsItem[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  @@map("account_head")
+}
+
+model AccountsItem {
+  id               Int         @id @default(autoincrement())
+  accountsItemName String
+  accountHeadId    String      @db.VarChar(2)
+  accountsItemId   String      @db.VarChar(6)
+  journal          Journal[]
+  accountHead      AccountHead @relation(fields: [accountHeadId], references: [headId])
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  @@map("account_items")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique @db.VarChar(30)
+  password  String
+  name      String   @db.VarChar(50)
+  phone     String   @db.VarChar(14)
+  role      UserRole @default(USER)
+  status    Status   @default(ACTIVE)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@map("user")
+}
+
+model Employee {
+  id           Int       @id @default(autoincrement())
+  email        String?   @unique @db.VarChar(30)
+  name         String    @db.VarChar(50)
+  nid          String?   @db.VarChar(20)
+  dob          DateTime? @db.Date
+  workingPlase String?
+  photo        String?
+  address      String
+  mobile       String    @db.VarChar(14)
+  status       Status    @default(ACTIVE)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([email])
+  @@map("employees")
+}
+
+model Party {
+  id                 Int                 @id @default(autoincrement())
+  name               String              @db.VarChar(50)
+  contactNo          String              @db.VarChar(15)
+  address            String              @db.VarChar(200)
+  partyType          PartyType
+  openingDate        DateTime?           @default(now())
+  openingAmount      Float?              @default(0.00)
+  isDeleted          Boolean             @default(false)
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  transactionInfos   TransactionInfo[]
+  purchaseOrderInfos PurchaseOrderInfo[]
+
+  @@map("parties")
+}
+
+model Product {
+  id                       Int                      @id @default(autoincrement())
+  name                     String                   @db.VarChar(100)
+  description              String                   @db.VarChar(250)
+  subCategoryId            Int
+  minPrice                 Int?
+  size                     String?
+  quantity                 Float
+  unitPrice                Float
+  alertQuantity            Int                      @default(0)
+  unitId                   Int
+  openingDate              DateTime
+  openingAmount            Float
+  isDeleted                Boolean                  @default(false)
+  status                   Status                   @default(ACTIVE)
+  unit                     Unit                     @relation(fields: [unitId], references: [id])
+  subCategory              SubCategory              @relation(fields: [subCategoryId], references: [id])
+  inventory                Inventory[]
+  createdAt                DateTime                 @default(now())
+  updateAt                 DateTime                 @updatedAt
+  purchaseOrderInventories PurchaseOrderInventory[]
+
+  @@index([subCategoryId, name])
+  @@map("products")
+}
+
+model RawMaterial {
+  id            Int      @id @default(autoincrement())
+  name          String   @db.VarChar(50)
+  unitId        Int
+  description   String?  @db.VarChar(250)
+  openingDate   DateTime
+  openingAmount Float
+  quantity      Float
+  alertQuantity Int      @default(0)
+  unitPrice     Float
+  isDeleted     Boolean  @default(false)
+  status        Status   @default(ACTIVE)
+  createdAt     DateTime @default(now())
+  updateAt      DateTime @updatedAt
+
+  inventory                Inventory[]
+  unit                     Unit                     @relation(fields: [unitId], references: [id])
+  purchaseOrderInventories PurchaseOrderInventory[]
+  productRawMaterial       IngredientRawMaterial[]
+
+  @@map("raw_materials")
+}
+
+model PackingMaterial {
+  id                       Int                      @id @default(autoincrement())
+  name                     String                   @db.VarChar(50)
+  unitId                   Int
+  description              String?                  @db.VarChar(250)
+  openingDate              DateTime
+  quantity                 Float
+  alertQuantity            Int                      @default(0)
+  openingAmount            Float
+  unitPrice                Float
+  isDeleted                Boolean                  @default(false)
+  status                   Status                   @default(ACTIVE)
+  unit                     Unit                     @relation(fields: [unitId], references: [id])
+  inventory                Inventory[]
+  purchaseOrderInventories PurchaseOrderInventory[]
+
+  createdAt                  DateTime                    @default(now())
+  updateAt                   DateTime                    @updatedAt
+  ingredientPackingMaterials IngredientPackingMaterial[]
+  pminventories              PMInventory[]
+
+  @@map("packing_materials")
+}
+
+model PurchaseOrderInfo {
+  id            Int                      @id @default(autoincrement())
+  orderNo       String                   @unique
+  date          DateTime?                @default(now())
+  partyId       Int?
+  party         Party?                   @relation(fields: [partyId], references: [id])
+  status        Status                   @default(PENDING)
+  purchaseOrder PurchaseOrderInventory[]
+  createdAt     DateTime                 @default(now())
+  updatedAt     DateTime                 @updatedAt
+
+  @@index([orderNo, partyId])
+  @@index([partyId])
+  @@map("purchase_order_info")
+}
+
+model PurchaseOrderInventory {
+  id                Int               @id @default(autoincrement())
+  purchaseOrderId   Int
+  productId         Int?
+  rawId             Int?
+  unitPrice         Float             @default(0.00)
+  quantity          Float             @default(0.00)
+  amount            Float?            @default(0.00)
+  status            Status            @default(PENDING)
+  purchaseOrder     PurchaseOrderInfo @relation(fields: [purchaseOrderId], references: [id])
+  product           Product?          @relation(fields: [productId], references: [id])
+  raWMaterial       RawMaterial?      @relation(fields: [rawId], references: [id])
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  packingMaterial   PackingMaterial?  @relation(fields: [packingMaterialId], references: [id])
+  packingMaterialId Int?
+
+  @@index([purchaseOrderId, rawId])
+  @@index([purchaseOrderId, productId])
+  @@index([productId])
+  @@index([rawId])
+  @@map("purchase_order_inventory")
+}
+
+model BankAccount {
+  id              Int               @id @default(autoincrement())
+  bankName        String
+  branceName      String?
+  accountNumber   String
+  status          Status            @default(ACTIVE)
+  bankTransaction BankTransaction[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@unique([bankName, accountNumber])
+  @@map("bank_accounts")
+}
+
+model BankTransaction {
+  id              Int              @id @default(autoincrement())
+  date            DateTime
+  bankAccountId   Int
+  transectionId   Int?
+  debitAmount     Int?
+  creditAmount    Int?
+  isClosing       Boolean          @default(false)
+  bankAccount     BankAccount      @relation(fields: [bankAccountId], references: [id])
+  transactionInfo TransactionInfo? @relation(fields: [transectionId], references: [id])
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@map("bank_transactions")
+}
+
+enum Department {
+  PURCHASE
+  PRODUCTION
+  RM_STORE
+  MP_STORE
+  FG_STORE
+}
+
+model Inventory {
+  id                     Int              @id @default(autoincrement())
+  date                   DateTime
+  productId              Int?
+  rawId                  Int?
+  transactionId          Int?
+  department             Department
+  unitPrice              Float            @default(0.00)
+  integratedUnitPrice    Float            @default(0.00)
+  quantityAdd            Float?           @default(0.00)
+  quantityLess           Float?           @default(0.00)
+  discount               Float?           @default(0.00)
+  debitAmount            Float?           @default(0.00)
+  creditAmount           Float?           @default(0.00)
+  integratedDebitAmount  Float?           @default(0.00)
+  integratedCreditAmount Float?           @default(0.00)
+  isOpening              Boolean          @default(false)
+  status                 Status           @default(PENDING)
+  product                Product?         @relation(fields: [productId], references: [id])
+  raWMaterial            RawMaterial?     @relation(fields: [rawId], references: [id])
+  transactionInfo        TransactionInfo? @relation(fields: [transactionId], references: [id])
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+  packingMaterial        PackingMaterial? @relation(fields: [packingMaterialId], references: [id])
+  packingMaterialId      Int?
+
+  @@index([productId, transactionId])
+  @@index([rawId])
+  @@map("inventories")
+}
+
+model PMInventory {
+  id                     Int              @id @default(autoincrement())
+  date                   DateTime
+  packingMaterialId      Int
+  transactionId          Int?
+  department             Department
+  perUnitQty             Float?           @default(0.00)
+  perUnitCost            Float?           @default(0.00)
+  unitPrice              Float            @default(0.00)
+  integratedUnitPrice    Float            @default(0.00)
+  quantityAdd            Float?           @default(0.00)
+  quantityLess           Float?           @default(0.00)
+  discount               Float?           @default(0.00)
+  debitAmount            Float?           @default(0.00)
+  creditAmount           Float?           @default(0.00)
+  integratedDebitAmount  Float?           @default(0.00)
+  integratedCreditAmount Float?           @default(0.00)
+  isOpening              Boolean          @default(false)
+  status                 Status           @default(PENDING)
+  transactionInfo        TransactionInfo? @relation(fields: [transactionId], references: [id])
+  packingMaterial        PackingMaterial  @relation(fields: [packingMaterialId], references: [id])
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+
+  @@map("pm_inventories")
+}
+
+model TransactionInfo {
+  id                          Int                           @id @default(autoincrement())
+  voucherNo                   String                        @unique
+  invoiceNo                   String?
+  date                        DateTime?                     @default(now())
+  batchNo                     String?                       @unique @db.VarChar(50)
+  partyId                     Int?
+  voucherType                 VoucherType
+  status                      TxStatus                      @default(PENDING)
+  createdAt                   DateTime                      @default(now())
+  updatedAt                   DateTime                      @updatedAt
+  bankTransaction             BankTransaction[]
+  journal                     Journal[]
+  inventory                   Inventory[]
+  pminventories               PMInventory[]
+  party                       Party?                        @relation(fields: [partyId], references: [id])
+  productionExpensesInventory ProductionExpensesInventory[]
+
+  @@index([voucherNo, voucherType, partyId])
+  @@map("transaction_info")
+}
+
+enum TxStatus {
+  PENDING
+  INPGRESS
+  COMPLETE
+  DELETE
+  PUSH
+}
+
+model Journal {
+  id                     Int              @id @default(autoincrement())
+  transectionId          Int?
+  accountsItemId         Int?
+  date                   DateTime         @db.Date
+  checkOrRTGS            Float?           @default(0.00)
+  creditAmount           Float?           @default(0.00)
+  debitAmount            Float?           @default(0.00)
+  integratedDebitAmount  Float?           @default(0.00)
+  integratedCreditAmount Float?           @default(0.00)
+  narration              String?
+  isClosing              Boolean          @default(false)
+  transactionInfo        TransactionInfo? @relation(fields: [transectionId], references: [id])
+  accountsItem           AccountsItem?    @relation(fields: [accountsItemId], references: [id])
+  createdAt              DateTime         @default(now())
+  updatedAt              DateTime         @updatedAt
+
+  @@index([accountsItemId])
+  @@map("journals")
+}
+
+model ProductionIngradient {
+  id                        Int                         @id @default(autoincrement())
+  productId                 Int
+  createdAt                 DateTime                    @default(now())
+  updatedAt                 DateTime                    @updatedAt
+  ingredientRawMaterials    IngredientRawMaterial[]
+  ingredientPackingMaterial IngredientPackingMaterial[]
+  ingredientExpneseItems    IngredientExpneseItems[]
+
+  @@map("product_ingradients")
+}
+
+model IngredientRawMaterial {
+  id                     Int                  @id @default(autoincrement())
+  productionIngradientId Int
+  rawId                  Int
+  createdAt              DateTime             @default(now())
+  updatedAt              DateTime             @updatedAt
+  productIngradient      ProductionIngradient @relation(fields: [productionIngradientId], references: [id])
+  rawMaterials           RawMaterial          @relation(fields: [rawId], references: [id])
+
+  @@map("product_raw_materials")
+}
+
+model IngredientPackingMaterial {
+  id                     Int                  @id @default(autoincrement())
+  productionIngradientId Int
+  packingMaterialId      Int
+  createdAt              DateTime             @default(now())
+  updatedAt              DateTime             @updatedAt
+  packingMaterial        PackingMaterial      @relation(fields: [packingMaterialId], references: [id])
+  productionIngradient   ProductionIngradient @relation(fields: [productionIngradientId], references: [id])
+
+  @@map("production_packing_materials")
+}
+
+model IngredientExpneseItems {
+  id                      Int                   @id @default(autoincrement())
+  productionIngradientId  Int
+  productionExpenssItemId Int
+  createdAt               DateTime              @default(now())
+  updatedAt               DateTime              @updatedAt
+  productIngradient       ProductionIngradient  @relation(fields: [productionIngradientId], references: [id])
+  productionExpenseItem   ProductionExpenseItem @relation(fields: [productionExpenssItemId], references: [id])
+
+  @@map("ingredient_expnese")
+}
+
+model ProductionExpenseItem {
+  id          Int      @id @default(autoincrement())
+  expItemName String
+  unitRate    Float    @default(0.00)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  ingredientExpneseItems        IngredientExpneseItems[]
+  productionExpensesInventories ProductionExpensesInventory[]
+}
+
+model ProductionExpensesInventory {
+  id                    Int                   @id @default(autoincrement())
+  date                  DateTime
+  proExpencesItemId     Int
+  transectionId         Int?
+  unitRate              Float                 @default(0.00)
+  expDuration           Float                 @default(0.00)
+  amount                Float                 @default(0.00)
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  transactionInfo       TransactionInfo?      @relation(fields: [transectionId], references: [id])
+  productionExpenseItem ProductionExpenseItem @relation(fields: [proExpencesItemId], references: [id])
+
+  @@map("production_expences_inventory")
+}
+
+enum VoucherType {
+  SALES
+  PURCHASE
+  RECEIPT
+  PAYMENT
+  JOURNAL
+  CONTRA
+  PRODUCTION
+  REQUISITION
+  FINISH_GOODS
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  USER
+}
+
+enum Status {
+  ACTIVE
+  DELETED
+  PUSH
+  BLOCK
+  PENDING
+}
+
+enum PartyType {
+  VENDOR
+  CUSTOMER
+  SUPPLIER
+  DISTRIBUTOR
+}
+
+enum ProductionType {
+  SOAP
+  DETERGENT
+  KITCHENBAR
+}

@@ -40,6 +40,7 @@ const createProduction = async (
         where: { id },
         data: {
           date: new Date(payload.date),
+          ...payload.status && { status: payload?.status },
         },
       });
     } else {
@@ -118,7 +119,7 @@ const createProduction = async (
       });
 
       for (const Item of payload.productionExpenses) {
-        const expencesItem = await tx.productionExpenseItem.findFirst({
+        const expencesItem = await tx.productionexpenseitem.findFirst({
           where: {
             id: Item.proExpencesItemId,
           },
@@ -328,12 +329,14 @@ const getProductionById = async (id: number) => {
             select: {
               id: true,
               name: true,
+              unit: { select: { id: true, name: true } }
             },
           },
           raWMaterial: {
             select: {
               id: true,
               name: true,
+              unit: { select: { id: true, name: true } }
             },
           },
         },

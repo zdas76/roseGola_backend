@@ -1,6 +1,8 @@
+import { TxStatus } from "../../../generated/prisma";
+
 export interface Production {
+  status?: TxStatus;
   date: string;
-  batchNo: string;
   productinfo: {
     productId: number;
     quantityAdd?: number;

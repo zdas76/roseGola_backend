@@ -8,7 +8,7 @@ const createProductionExpItem = async (payload: TProductionExpItem) => {
     throw new AppError(StatusCodes.BAD_REQUEST, "Expense item name is required");
   }
 
-  const isExist = await prisma.productionExpenseItem.findFirst({
+  const isExist = await prisma.productionexpenseitem.findFirst({
     where: {
       expItemName: payload.expItemName.trim(),
     },
@@ -18,12 +18,10 @@ const createProductionExpItem = async (payload: TProductionExpItem) => {
     throw new AppError(StatusCodes.BAD_REQUEST, "This expense item already exists");
   }
 
-  const result = await prisma.productionExpenseItem.create({
+  const result = await prisma.productionexpenseitem.create({
     data: {
       expItemName: payload.expItemName.trim(),
-      // expDuration:
-      //   payload.expDuration !== undefined ? Number(payload.expDuration) : 0,
-      unitRate: payload.unitRate !== undefined ? Number(payload.unitRate) : 0,
+      unitRate: payload.unitRate,
     },
   });
 
@@ -44,7 +42,7 @@ const createProductionExpItemsMany = async (
     .map((p) => p?.expItemName?.trim())
     .filter((name): name is string => Boolean(name));
 
-  const existing = await prisma.productionExpenseItem.findMany({
+  const existing = await prisma.productionexpenseitem.findMany({
     where: {
       expItemName: { in: names },
     },
@@ -62,7 +60,7 @@ const createProductionExpItemsMany = async (
 
   const result = await prisma.$transaction(
     payloads.map((item) =>
-      prisma.productionExpenseItem.create({
+      prisma.productionexpenseitem.create({
         data: {
           expItemName: item.expItemName.trim(),
           // expDuration:
@@ -77,7 +75,7 @@ const createProductionExpItemsMany = async (
 };
 
 const getAllProductionExpItems = async () => {
-  const result = await prisma.productionExpenseItem.findMany({
+  const result = await prisma.productionexpenseitem.findMany({
     orderBy: {
       createdAt: "desc",
     },
@@ -87,7 +85,7 @@ const getAllProductionExpItems = async () => {
 };
 
 const getProductionExpItemById = async (id: number) => {
-  const result = await prisma.productionExpenseItem.findUnique({
+  const result = await prisma.productionexpenseitem.findUnique({
     where: { id },
   });
 
@@ -102,7 +100,7 @@ const updateProductionExpItemById = async (
   id: number,
   payload: Partial<TProductionExpItem>
 ) => {
-  const isExist = await prisma.productionExpenseItem.findUnique({
+  const isExist = await prisma.productionexpenseitem.findUnique({
     where: { id },
   });
 
@@ -114,7 +112,7 @@ const updateProductionExpItemById = async (
     payload.expItemName &&
     payload.expItemName.trim() !== isExist.expItemName
   ) {
-    const duplicate = await prisma.productionExpenseItem.findFirst({
+    const duplicate = await prisma.productionexpenseitem.findFirst({
       where: {
         expItemName: payload.expItemName.trim(),
         id: { not: id },
@@ -129,7 +127,7 @@ const updateProductionExpItemById = async (
     }
   }
 
-  const result = await prisma.productionExpenseItem.update({
+  const result = await prisma.productionexpenseitem.update({
     where: { id },
     data: {
       expItemName: payload.expItemName ? payload.expItemName.trim() : undefined,
@@ -146,7 +144,7 @@ const updateProductionExpItemById = async (
 };
 
 const deleteProductionExpItemById = async (id: number) => {
-  const isExist = await prisma.productionExpenseItem.findUnique({
+  const isExist = await prisma.productionexpenseitem.findUnique({
     where: { id },
   });
 
@@ -154,7 +152,7 @@ const deleteProductionExpItemById = async (id: number) => {
     throw new AppError(StatusCodes.NOT_FOUND, "Expense item not found");
   }
 
-  const result = await prisma.productionExpenseItem.delete({
+  const result = await prisma.productionexpenseitem.delete({
     where: { id },
   });
 

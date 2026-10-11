@@ -8,8 +8,8 @@ const createProduction = catchAsync(async (req: Request, res: Response) => {
   const id = req.params.id
     ? Number(req.params.id)
     : req.body?.id
-    ? Number(req.body.id)
-    : 0;
+      ? Number(req.body.id)
+      : 0;
   const result = await ProductionService.createProduction(id, req.body);
 
   sendResponse(res, {

@@ -6,7 +6,6 @@ import { StatusCodes } from "http-status-codes";
 
 const createProductionExpItem = catchAsync(
   async (req: Request, res: Response) => {
-    console.log(req.body, "============ req body expense");
     const result = await ProductionExpItemService.createProductionExpItem(
       req.body
     );

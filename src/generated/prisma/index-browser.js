@@ -350,9 +350,9 @@ exports.Prisma.TransactionInfoScalarFieldEnum = {
   batchNo: 'batchNo',
   partyId: 'partyId',
   voucherType: 'voucherType',
-  status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  status: 'status'
 };
 
 exports.Prisma.JournalScalarFieldEnum = {
@@ -402,14 +402,6 @@ exports.Prisma.IngredientExpneseItemsScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ProductionExpenseItemScalarFieldEnum = {
-  id: 'id',
-  expItemName: 'expItemName',
-  unitRate: 'unitRate',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.ProductionExpensesInventoryScalarFieldEnum = {
   id: 'id',
   date: 'date',
@@ -418,6 +410,14 @@ exports.Prisma.ProductionExpensesInventoryScalarFieldEnum = {
   unitRate: 'unitRate',
   expDuration: 'expDuration',
   amount: 'amount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductionexpenseitemScalarFieldEnum = {
+  id: 'id',
+  expItemName: 'expItemName',
+  unitRate: 'unitRate',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -514,7 +514,7 @@ exports.Prisma.JournalOrderByRelevanceFieldEnum = {
   narration: 'narration'
 };
 
-exports.Prisma.ProductionExpenseItemOrderByRelevanceFieldEnum = {
+exports.Prisma.productionexpenseitemOrderByRelevanceFieldEnum = {
   expItemName: 'expItemName'
 };
 exports.UserRole = exports.$Enums.UserRole = {
@@ -590,8 +590,8 @@ exports.Prisma.ModelName = {
   IngredientRawMaterial: 'IngredientRawMaterial',
   IngredientPackingMaterial: 'IngredientPackingMaterial',
   IngredientExpneseItems: 'IngredientExpneseItems',
-  ProductionExpenseItem: 'ProductionExpenseItem',
-  ProductionExpensesInventory: 'ProductionExpensesInventory'
+  ProductionExpensesInventory: 'ProductionExpensesInventory',
+  productionexpenseitem: 'productionexpenseitem'
 };
 
 /**

@@ -98,6 +98,7 @@ const updateProductById = async (id: number, payload: Partial<Product>) => {
       subCategoryId: payload.subCategoryId,
       minPrice: payload.minPrice || 0,
       size: payload.size || "",
+      alertQuantity: payload.alertQuantity
     },
   });
 

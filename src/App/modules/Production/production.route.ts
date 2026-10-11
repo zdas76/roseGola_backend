@@ -5,8 +5,13 @@ const router = express.Router();
 
 router.get("/", ProductionController.getProduction);
 
-router.post("/{id}", ProductionController.createProduction);
+router.put("/", ProductionController.createProduction);
+router.put("/:id", ProductionController.createProduction);
+
+router.get("/:id", ProductionController.getProductionById);
 
 router.delete("/{id}", ProductionController.deleteProduction);
 
 export const ProductionRouter = router;
+
+

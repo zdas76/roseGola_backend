@@ -14,7 +14,7 @@ route.put("/", InventoryControllers.updateInventory);
 
 route.put("/", InventoryControllers.deleteInventory);
 
-// get  last raw material rate
+// get  last used raw material quantity
 route.get("/lastRate", InventoryControllers.getLastRawMaterialRate);
 
 route.get("/:id", InventoryControllers.getInventoryById);

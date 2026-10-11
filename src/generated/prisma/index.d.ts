@@ -156,7 +156,7 @@ export type Department = (typeof Department)[keyof typeof Department]
 
 export const TxStatus: {
   PENDING: 'PENDING',
-  INPGRESS: 'INPGRESS',
+  IN_PROGRESS: 'IN_PROGRESS',
   COMPLETE: 'COMPLETE',
   DELETE: 'DELETE',
   PUSH: 'PUSH'

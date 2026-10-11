@@ -560,7 +560,7 @@ exports.VoucherType = exports.$Enums.VoucherType = {
 
 exports.TxStatus = exports.$Enums.TxStatus = {
   PENDING: 'PENDING',
-  INPGRESS: 'INPGRESS',
+  IN_PROGRESS: 'IN_PROGRESS',
   COMPLETE: 'COMPLETE',
   DELETE: 'DELETE',
   PUSH: 'PUSH'

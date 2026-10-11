@@ -40,7 +40,7 @@ const createProduction = async (
         where: { id },
         data: {
           date: new Date(payload.date),
-          ...payload.status && { status: payload?.status },
+          status: payload?.status
         },
       });
     } else {

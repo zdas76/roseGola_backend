@@ -26,7 +26,7 @@ export const GenerateBatchNo = async (productId: number) => {
     batchNo = lastbatchByid.batchNo;
   }
 
-  const currectYear = new Date().getFullYear().toString().slice(-2);
+  const currectYear = new Date().getFullYear().toString().slice(-4);
 
   if (batchNo) {
     const nextNumber = getNextNumber(batchNo);
@@ -41,6 +41,6 @@ export const GenerateBatchNo = async (productId: number) => {
 
 const getNextNumber = (batchNo: string) => {
   const lastNumber = batchNo.split("-").at(-1);
-  const nextNumber = (lastNumber! + 1).toString().padStart(4, "0");
+  const nextNumber = (Number(lastNumber) + 1).toString().padStart(4, "0");
   return nextNumber;
 };

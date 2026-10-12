@@ -10,6 +10,7 @@ const createProduction = async (
   id: number | undefined,
   payload: Production,
 ) => {
+  console.log(payload, "payload form produciton service")
   const isProductExisted = await prisma.product.findFirst({
     where: {
       id: payload.productinfo.productId,
@@ -57,6 +58,7 @@ const createProduction = async (
     }
 
     // 1. Add finished product entry to inventory
+
     await tx.inventory.create({
       data: {
         productId: payload.productinfo.productId,
@@ -176,7 +178,7 @@ const createProduction = async (
             perUnitQty: Number(packmaterial.perUnitQty) || 0,
             perUnitCost: Number(packmaterial.perUnitCost) || 0,
             unitPrice: Number(packmaterial.unitPrice) || 0,
-            quantityLess: Number(packmaterial.Qty) || 0,
+            quantityLess: Number(packmaterial.qty) || 0,
           },
         });
       }

@@ -22,7 +22,7 @@ export interface Production {
   packingMaterials?: {
     packingMaterialId: number;
     unitPrice: number;
-    Qty: number;
+    qty: number;
     perUnitQty: number;
     perUnitCost: number;
   }[];

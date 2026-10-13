@@ -7,12 +7,12 @@ import { Production } from "./productionTypes";
 import { GenerateBatchNo } from "../../../helpars/GenerateBatchNo";
 
 const createProduction = async (
-  transactionId: number | undefined,
+  id: number | undefined,
   payload: Production,
 ) => {
   const isProductExisted = await prisma.product.findFirst({
     where: {
-      id: Number(payload.productinfo.productId),
+      id: payload.productinfo.productId,
       isDeleted: false,
     },
   });
@@ -23,10 +23,9 @@ const createProduction = async (
 
   const addProduction = await prisma.$transaction(async (tx) => {
     let transactionInfo;
-
-    if (transactionId && transactionId > 0) {
+    if (id && id > 0) {
       const existingTx = await tx.transactionInfo.findUnique({
-        where: { id: transactionId },
+        where: { id },
       });
 
       if (!existingTx) {
@@ -37,10 +36,10 @@ const createProduction = async (
       }
 
       transactionInfo = await tx.transactionInfo.update({
-        where: { id: transactionId },
+        where: { id },
         data: {
           date: new Date(payload.date),
-          status: payload?.status
+          status: payload?.status,
         },
       });
     } else {
@@ -52,42 +51,53 @@ const createProduction = async (
           batchNo: batchNo,
           date: new Date(payload.date),
           voucherType: VoucherType.PRODUCTION,
+          status: payload?.status,
         },
       });
     }
-
-    if (transactionId) {
+    // ১. আগে চেক করি inventoryId দিয়ে অথবা এই transaction-এ এই প্রোডাক্টের রেকর্ড আছে কি না
+    const existingInventory = payload.inventoryId
+      ? await tx.inventory.findUnique({ where: { id: payload.inventoryId } })
+      : await tx.inventory.findFirst({
+        where: {
+          transactionId: transactionInfo.id,
+          productId: payload.productinfo.productId,
+        },
+      });
+    if (existingInventory) {
+      // যদি রেকর্ড পাওয়া যায় -> Update হবে
       await tx.inventory.update({
         where: {
-          transactionId: Number(transactionId),
-          productId: Number(payload.productinfo.productId),
+          id: existingInventory.id,
         },
         data: {
-          date: new Date(payload.date),
-          department: Department.PRODUCTION,
-          quantityAdd: Number(payload.productinfo.quantityAdd),
-          unitPrice: Number(payload.productinfo.unitPrice),
-          debitAmount:
-            (Number(payload.productinfo.quantityAdd)) *
-            (Number(payload.productinfo.unitPrice)),
-        },
-      })
-    } else {
-      await tx.inventory.create({
-        data: {
-          productId: Number(payload.productinfo.productId),
+          productId: payload.productinfo.productId,
           transactionId: transactionInfo.id,
           date: new Date(payload.date),
           department: Department.PRODUCTION,
-          quantityAdd: Number(payload.productinfo.quantityAdd),
-          unitPrice: Number(payload.productinfo.unitPrice),
+          quantityAdd: Number(payload.productinfo.quantityAdd) || 0,
+          unitPrice: Number(payload.productinfo.unitPrice) || 0,
           debitAmount:
-            (Number(payload.productinfo.quantityAdd)) *
-            (Number(payload.productinfo.unitPrice)),
-        }
-      })
+            (Number(payload.productinfo.quantityAdd) || 0) *
+            (Number(payload.productinfo.unitPrice) || 0),
+        },
+      });
+    } else {
+      // First hit-এ যখন কোনো রেকর্ড পাওয়া যাবে না -> Create হবে
+      await tx.inventory.create({
+        data: {
+          productId: payload.productinfo.productId,
+          transactionId: transactionInfo.id,
+          date: new Date(payload.date),
+          department: Department.PRODUCTION,
+          quantityAdd: Number(payload.productinfo.quantityAdd) || 0,
+          unitPrice: Number(payload.productinfo.unitPrice) || 0,
+          debitAmount:
+            (Number(payload.productinfo.quantityAdd) || 0) *
+            (Number(payload.productinfo.unitPrice) || 0),
+        },
+      });
     }
-
 
     // 2. Add raw materials consumed to inventory
     if (payload?.rawMaterials && payload.rawMaterials.length > 0) {
@@ -347,14 +357,12 @@ const getProductionById = async (id: number) => {
             select: {
               id: true,
               name: true,
-              unit: { select: { id: true, name: true } },
             },
           },
           raWMaterial: {
             select: {
               id: true,
               name: true,
-              unit: { select: { id: true, name: true } }
             },
           },
         },

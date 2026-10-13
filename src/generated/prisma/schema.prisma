@@ -336,7 +336,7 @@ model TransactionInfo {
   voucherType                 VoucherType
   createdAt                   DateTime                      @default(now())
   updatedAt                   DateTime                      @updatedAt
-  status                      TxStatus                      @default(PENDING)
+  status                      TxStatus                      @default(PROCESSING)
   bankTransaction             BankTransaction[]
   inventory                   Inventory[]
   journal                     Journal[]

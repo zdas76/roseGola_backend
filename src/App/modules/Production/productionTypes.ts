@@ -1,9 +1,11 @@
 import { TxStatus } from "../../../generated/prisma";
 
 export interface Production {
+  id?: number;
   status?: TxStatus;
   date: string;
   productinfo: {
+    id?: number;
     productId: number;
     quantityAdd?: number;
     unitPrice?: number;

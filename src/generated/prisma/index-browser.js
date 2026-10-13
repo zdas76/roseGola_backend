@@ -560,10 +560,10 @@ exports.VoucherType = exports.$Enums.VoucherType = {
 
 exports.TxStatus = exports.$Enums.TxStatus = {
   PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
   IN_PROGRESS: 'IN_PROGRESS',
   COMPLETE: 'COMPLETE',
-  DELETE: 'DELETE',
-  PUSH: 'PUSH'
+  DELETE: 'DELETE'
 };
 
 exports.Prisma.ModelName = {

@@ -463,10 +463,10 @@ enum Department {
 
 enum TxStatus {
   PENDING
+  PROCESSING
   IN_PROGRESS
   COMPLETE
   DELETE
-  PUSH
 }
 
 enum VoucherType {

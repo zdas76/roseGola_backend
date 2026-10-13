@@ -7,13 +7,12 @@ import { Production } from "./productionTypes";
 import { GenerateBatchNo } from "../../../helpars/GenerateBatchNo";
 
 const createProduction = async (
-  id: number | undefined,
+  transactionId: number | undefined,
   payload: Production,
 ) => {
-  console.log(payload, "payload form produciton service")
   const isProductExisted = await prisma.product.findFirst({
     where: {
-      id: payload.productinfo.productId,
+      id: Number(payload.productinfo.productId),
       isDeleted: false,
     },
   });
@@ -25,9 +24,9 @@ const createProduction = async (
   const addProduction = await prisma.$transaction(async (tx) => {
     let transactionInfo;
 
-    if (id && id > 0) {
+    if (transactionId && transactionId > 0) {
       const existingTx = await tx.transactionInfo.findUnique({
-        where: { id },
+        where: { id: transactionId },
       });
 
       if (!existingTx) {
@@ -38,7 +37,7 @@ const createProduction = async (
       }
 
       transactionInfo = await tx.transactionInfo.update({
-        where: { id },
+        where: { id: transactionId },
         data: {
           date: new Date(payload.date),
           status: payload?.status
@@ -57,21 +56,38 @@ const createProduction = async (
       });
     }
 
-    // 1. Add finished product entry to inventory
+    if (transactionId) {
+      await tx.inventory.update({
+        where: {
+          transactionId: Number(transactionId),
+          productId: Number(payload.productinfo.productId),
+        },
+        data: {
+          date: new Date(payload.date),
+          department: Department.PRODUCTION,
+          quantityAdd: Number(payload.productinfo.quantityAdd),
+          unitPrice: Number(payload.productinfo.unitPrice),
+          debitAmount:
+            (Number(payload.productinfo.quantityAdd)) *
+            (Number(payload.productinfo.unitPrice)),
+        },
+      })
+    } else {
+      await tx.inventory.create({
+        data: {
+          productId: Number(payload.productinfo.productId),
+          transactionId: transactionInfo.id,
+          date: new Date(payload.date),
+          department: Department.PRODUCTION,
+          quantityAdd: Number(payload.productinfo.quantityAdd),
+          unitPrice: Number(payload.productinfo.unitPrice),
+          debitAmount:
+            (Number(payload.productinfo.quantityAdd)) *
+            (Number(payload.productinfo.unitPrice)),
+        }
+      })
+    }
 
-    await tx.inventory.create({
-      data: {
-        productId: payload.productinfo.productId,
-        transactionId: transactionInfo.id,
-        date: new Date(payload.date),
-        department: Department.PRODUCTION,
-        quantityAdd: Number(payload.productinfo.quantityAdd) || 0,
-        unitPrice: Number(payload.productinfo.unitPrice) || 0,
-        debitAmount:
-          (Number(payload.productinfo.quantityAdd) || 0) *
-          (Number(payload.productinfo.unitPrice) || 0),
-      },
-    });
 
     // 2. Add raw materials consumed to inventory
     if (payload?.rawMaterials && payload.rawMaterials.length > 0) {
@@ -331,7 +347,7 @@ const getProductionById = async (id: number) => {
             select: {
               id: true,
               name: true,
-              unit: { select: { id: true, name: true } }
+              unit: { select: { id: true, name: true } },
             },
           },
           raWMaterial: {

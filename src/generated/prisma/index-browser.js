@@ -347,12 +347,20 @@ exports.Prisma.TransactionInfoScalarFieldEnum = {
   voucherNo: 'voucherNo',
   invoiceNo: 'invoiceNo',
   date: 'date',
-  batchNo: 'batchNo',
   partyId: 'partyId',
   voucherType: 'voucherType',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  status: 'status'
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductionItemInfoScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  productId: 'productId',
+  batchNo: 'batchNo',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.JournalScalarFieldEnum = {
@@ -506,7 +514,10 @@ exports.Prisma.BankAccountOrderByRelevanceFieldEnum = {
 
 exports.Prisma.TransactionInfoOrderByRelevanceFieldEnum = {
   voucherNo: 'voucherNo',
-  invoiceNo: 'invoiceNo',
+  invoiceNo: 'invoiceNo'
+};
+
+exports.Prisma.ProductionItemInfoOrderByRelevanceFieldEnum = {
   batchNo: 'batchNo'
 };
 
@@ -585,6 +596,7 @@ exports.Prisma.ModelName = {
   Inventory: 'Inventory',
   PMInventory: 'PMInventory',
   TransactionInfo: 'TransactionInfo',
+  ProductionItemInfo: 'ProductionItemInfo',
   Journal: 'Journal',
   ProductionIngradient: 'ProductionIngradient',
   IngredientRawMaterial: 'IngredientRawMaterial',

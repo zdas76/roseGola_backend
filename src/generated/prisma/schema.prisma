@@ -138,6 +138,7 @@ model Product {
   subCategory              SubCategory              @relation(fields: [subCategoryId], references: [id])
   unit                     Unit                     @relation(fields: [unitId], references: [id])
   purchaseOrderInventories PurchaseOrderInventory[]
+  productionItemInfos      ProductionItemInfo[]
 
   @@index([subCategoryId, name])
   @@index([unitId], map: "products_unitId_fkey")
@@ -331,22 +332,33 @@ model TransactionInfo {
   voucherNo                   String                        @unique
   invoiceNo                   String?
   date                        DateTime?                     @default(now())
-  batchNo                     String?                       @unique @db.VarChar(50)
   partyId                     Int?
   voucherType                 VoucherType
   createdAt                   DateTime                      @default(now())
   updatedAt                   DateTime                      @updatedAt
-  status                      TxStatus                      @default(PROCESSING)
   bankTransaction             BankTransaction[]
   inventory                   Inventory[]
   journal                     Journal[]
   pminventories               PMInventory[]
   productionExpensesInventory ProductionExpensesInventory[]
   party                       Party?                        @relation(fields: [partyId], references: [id])
+  productionItemInfo          ProductionItemInfo?
 
   @@index([voucherNo, voucherType, partyId])
   @@index([partyId], map: "transaction_info_partyId_fkey")
   @@map("transaction_info")
+}
+
+model ProductionItemInfo {
+  id              Int             @id @default(autoincrement())
+  transactionId   Int             @unique
+  productId       Int
+  batchNo         String          @unique @db.VarChar(50)
+  status          TxStatus        @default(PROCESSING)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  transactionInfo TransactionInfo @relation(fields: [transactionId], references: [id])
+  product         Product         @relation(fields: [productId], references: [id])
 }
 
 model Journal {

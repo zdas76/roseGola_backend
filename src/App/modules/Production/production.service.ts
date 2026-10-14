@@ -1,4 +1,4 @@
-import { Department, Status, VoucherType } from "../../../generated/prisma";
+import { Department, Status, TxStatus, VoucherType } from "../../../generated/prisma";
 import { GenerateVoucherNumber } from "../../../helpars/generateVoucherNumber";
 import prisma from "../../../shared/prisma";
 import AppError from "../../errors/AppError";
@@ -12,7 +12,7 @@ const createProduction = async (
 ) => {
   const isProductExisted = await prisma.product.findFirst({
     where: {
-      id: payload.productinfo.productId,
+      id: payload?.productinfo?.productId,
       isDeleted: false,
     },
   });
@@ -39,7 +39,11 @@ const createProduction = async (
         where: { id },
         data: {
           date: new Date(payload.date),
-          status: payload?.status,
+          productionItemInfo: {
+            update: {
+              status: payload?.status,
+            }
+          }
         },
       });
     } else {
@@ -48,57 +52,63 @@ const createProduction = async (
       transactionInfo = await tx.transactionInfo.create({
         data: {
           voucherNo: VoucherNo!,
-          batchNo: batchNo,
+          productionItemInfo: {
+            create: {
+              batchNo: batchNo,
+              productId: payload?.productinfo?.productId,
+              status: payload?.status,
+            }
+          },
           date: new Date(payload.date),
           voucherType: VoucherType.PRODUCTION,
-          status: payload?.status,
         },
       });
     }
     // ১. আগে চেক করি inventoryId দিয়ে অথবা এই transaction-এ এই প্রোডাক্টের রেকর্ড আছে কি না
-    const existingInventory = payload.inventoryId
-      ? await tx.inventory.findUnique({ where: { id: payload.inventoryId } })
-      : await tx.inventory.findFirst({
+    let existingInvetory;
+    if (payload.inventoryId && id) {
+      existingInvetory = await tx.inventory.findUnique({
         where: {
-          transactionId: transactionInfo.id,
-          productId: payload.productinfo.productId,
-        },
-      });
-    if (existingInventory) {
+          id: payload.inventoryId,
+          transactionId: id,
+          productId: payload?.productinfo?.productId,
+        }
+      })
+    }
+    if (existingInvetory) {
       // যদি রেকর্ড পাওয়া যায় -> Update হবে
       await tx.inventory.update({
         where: {
-          id: existingInventory.id,
+          id: existingInvetory.id,
         },
         data: {
-          productId: payload.productinfo.productId,
+          productId: payload?.productinfo?.productId,
           transactionId: transactionInfo.id,
           date: new Date(payload.date),
           department: Department.PRODUCTION,
-          quantityAdd: Number(payload.productinfo.quantityAdd) || 0,
-          unitPrice: Number(payload.productinfo.unitPrice) || 0,
+          quantityAdd: Number(payload?.productinfo?.quantityAdd) || 0,
+          unitPrice: Number(payload?.productinfo?.unitPrice) || 0,
           debitAmount:
-            (Number(payload.productinfo.quantityAdd) || 0) *
-            (Number(payload.productinfo.unitPrice) || 0),
+            (Number(payload?.productinfo?.quantityAdd) || 0) *
+            (Number(payload?.productinfo?.unitPrice) || 0),
         },
       });
     } else {
       // First hit-এ যখন কোনো রেকর্ড পাওয়া যাবে না -> Create হবে
       await tx.inventory.create({
         data: {
-          productId: payload.productinfo.productId,
+          productId: payload?.productinfo?.productId,
           transactionId: transactionInfo.id,
           date: new Date(payload.date),
           department: Department.PRODUCTION,
-          quantityAdd: Number(payload.productinfo.quantityAdd) || 0,
-          unitPrice: Number(payload.productinfo.unitPrice) || 0,
+          quantityAdd: Number(payload?.productinfo?.quantityAdd) || 0,
+          unitPrice: Number(payload?.productinfo?.unitPrice) || 0,
           debitAmount:
-            (Number(payload.productinfo.quantityAdd) || 0) *
-            (Number(payload.productinfo.unitPrice) || 0),
+            (Number(payload?.productinfo?.quantityAdd) || 0) *
+            (Number(payload?.productinfo?.unitPrice) || 0),
         },
       });
     }
-
     // 2. Add raw materials consumed to inventory
     if (payload?.rawMaterials && payload.rawMaterials.length > 0) {
       await tx.inventory.deleteMany({
@@ -117,7 +127,6 @@ const createProduction = async (
             status: Status.ACTIVE,
           },
         });
-
         if (!rawMaterial) {
           throw new AppError(
             StatusCodes.NOT_FOUND,
@@ -205,13 +214,22 @@ const createProduction = async (
             perUnitCost: Number(packmaterial.perUnitCost) || 0,
             unitPrice: Number(packmaterial.unitPrice) || 0,
             quantityLess: Number(packmaterial.qty) || 0,
+            creditAmount: Number(packmaterial.perUnitCost) * (Number(packmaterial.qty) || 0) || 0,
           },
         });
       }
     }
-
     // 5. Add Final packed Products
     if (payload?.products && payload.products.length > 0) {
+      await tx.productionItemInfo.update({
+        where: {
+          transactionId: transactionInfo.id,
+          status: TxStatus.PENDING
+        },
+        data: {
+          status: TxStatus.COMPLETE
+        }
+      })
       await tx.inventory.deleteMany({
         where: { transactionId: transactionInfo.id, productId: { not: null } },
       });
@@ -230,20 +248,20 @@ const createProduction = async (
           );
         }
 
-        await tx.pMInventory.create({
+        await tx.inventory.create({
           data: {
             date: new Date(payload.date),
-            packingMaterialId: isProduct.id,
             transactionId: transactionInfo.id,
             department: Department.PRODUCTION,
             unitPrice: Number(product.unitPrice) || 0,
             quantityLess: Number(product.quantityLess) || null,
             quantityAdd: Number(product.quantityAdd) || null,
+            debitAmount: Number(product.unitPrice) * (Number(product.quantityAdd) || 0) || null,
+            creditAmount: Number(product.unitPrice) * (Number(product.quantityLess) || 0) || null,
           },
         });
       }
     }
-
     return transactionInfo;
   });
 
@@ -300,6 +318,19 @@ const getProduction = async () => {
       voucherType: VoucherType.PRODUCTION,
     },
     include: {
+      productionItemInfo: {
+        select: {
+          status: true,
+          productId: true,
+          product: {
+            select: {
+              name: true,
+              id: true,
+              unit: true,
+            }
+          },
+        },
+      },
       inventory: {
         include: {
           product: {
@@ -351,12 +382,19 @@ const getProductionById = async (id: number) => {
       id: id,
     },
     include: {
+      productionItemInfo: true,
       inventory: {
         include: {
           product: {
             select: {
               id: true,
               name: true,
+              subCategory: {
+                select: {
+                  id: true,
+                  subCategoryName: true,
+                }
+              }
             },
           },
           raWMaterial: {
@@ -393,7 +431,6 @@ const getProductionById = async (id: number) => {
   if (!result) {
     throw new AppError(StatusCodes.BAD_REQUEST, "Production not found");
   }
-
   return result;
 };
 

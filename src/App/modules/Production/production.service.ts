@@ -382,7 +382,25 @@ const getProductionById = async (id: number) => {
       id: id,
     },
     include: {
-      productionItemInfo: true,
+      productionItemInfo: {
+        select: {
+          batchNo: true,
+          status: true,
+          product: {
+            select: {
+              name: true,
+              id: true,
+              unit: true,
+              subCategory: {
+                select: {
+                  id: true,
+                  subCategoryName: true,
+                },
+              },
+            },
+          },
+        },
+      },
       inventory: {
         include: {
           product: {

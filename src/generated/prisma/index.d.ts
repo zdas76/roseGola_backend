@@ -104,11 +104,6 @@ export type PMInventory = $Result.DefaultSelection<Prisma.$PMInventoryPayload>
  */
 export type TransactionInfo = $Result.DefaultSelection<Prisma.$TransactionInfoPayload>
 /**
- * Model ProductionItemInfo
- * 
- */
-export type ProductionItemInfo = $Result.DefaultSelection<Prisma.$ProductionItemInfoPayload>
-/**
  * Model Journal
  * 
  */
@@ -143,6 +138,11 @@ export type ProductionExpensesInventory = $Result.DefaultSelection<Prisma.$Produ
  * 
  */
 export type productionexpenseitem = $Result.DefaultSelection<Prisma.$productionexpenseitemPayload>
+/**
+ * Model productioniteminfo
+ * 
+ */
+export type productioniteminfo = $Result.DefaultSelection<Prisma.$productioniteminfoPayload>
 
 /**
  * Enums
@@ -157,17 +157,6 @@ export namespace $Enums {
 };
 
 export type Department = (typeof Department)[keyof typeof Department]
-
-
-export const TxStatus: {
-  PENDING: 'PENDING',
-  PROCESSING: 'PROCESSING',
-  IN_PROGRESS: 'IN_PROGRESS',
-  COMPLETE: 'COMPLETE',
-  DELETE: 'DELETE'
-};
-
-export type TxStatus = (typeof TxStatus)[keyof typeof TxStatus]
 
 
 export const VoucherType: {
@@ -214,15 +203,22 @@ export const PartyType: {
 
 export type PartyType = (typeof PartyType)[keyof typeof PartyType]
 
+
+export const productioniteminfo_status: {
+  PENDING: 'PENDING',
+  PROCESSING: 'PROCESSING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETE: 'COMPLETE',
+  DELETE: 'DELETE'
+};
+
+export type productioniteminfo_status = (typeof productioniteminfo_status)[keyof typeof productioniteminfo_status]
+
 }
 
 export type Department = $Enums.Department
 
 export const Department: typeof $Enums.Department
-
-export type TxStatus = $Enums.TxStatus
-
-export const TxStatus: typeof $Enums.TxStatus
 
 export type VoucherType = $Enums.VoucherType
 
@@ -239,6 +235,10 @@ export const Status: typeof $Enums.Status
 export type PartyType = $Enums.PartyType
 
 export const PartyType: typeof $Enums.PartyType
+
+export type productioniteminfo_status = $Enums.productioniteminfo_status
+
+export const productioniteminfo_status: typeof $Enums.productioniteminfo_status
 
 /**
  * ##  Prisma Client ʲˢ
@@ -542,16 +542,6 @@ export class PrismaClient<
   get transactionInfo(): Prisma.TransactionInfoDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.productionItemInfo`: Exposes CRUD operations for the **ProductionItemInfo** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more ProductionItemInfos
-    * const productionItemInfos = await prisma.productionItemInfo.findMany()
-    * ```
-    */
-  get productionItemInfo(): Prisma.ProductionItemInfoDelegate<ExtArgs, ClientOptions>;
-
-  /**
    * `prisma.journal`: Exposes CRUD operations for the **Journal** model.
     * Example usage:
     * ```ts
@@ -620,6 +610,16 @@ export class PrismaClient<
     * ```
     */
   get productionexpenseitem(): Prisma.productionexpenseitemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.productioniteminfo`: Exposes CRUD operations for the **productioniteminfo** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Productioniteminfos
+    * const productioniteminfos = await prisma.productioniteminfo.findMany()
+    * ```
+    */
+  get productioniteminfo(): Prisma.productioniteminfoDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1085,14 +1085,14 @@ export namespace Prisma {
     Inventory: 'Inventory',
     PMInventory: 'PMInventory',
     TransactionInfo: 'TransactionInfo',
-    ProductionItemInfo: 'ProductionItemInfo',
     Journal: 'Journal',
     ProductionIngradient: 'ProductionIngradient',
     IngredientRawMaterial: 'IngredientRawMaterial',
     IngredientPackingMaterial: 'IngredientPackingMaterial',
     IngredientExpneseItems: 'IngredientExpneseItems',
     ProductionExpensesInventory: 'ProductionExpensesInventory',
-    productionexpenseitem: 'productionexpenseitem'
+    productionexpenseitem: 'productionexpenseitem',
+    productioniteminfo: 'productioniteminfo'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1108,7 +1108,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "category" | "subCategory" | "unit" | "accountHead" | "accountsItem" | "user" | "employee" | "party" | "product" | "rawMaterial" | "packingMaterial" | "purchaseOrderInfo" | "purchaseOrderInventory" | "bankAccount" | "bankTransaction" | "inventory" | "pMInventory" | "transactionInfo" | "productionItemInfo" | "journal" | "productionIngradient" | "ingredientRawMaterial" | "ingredientPackingMaterial" | "ingredientExpneseItems" | "productionExpensesInventory" | "productionexpenseitem"
+      modelProps: "category" | "subCategory" | "unit" | "accountHead" | "accountsItem" | "user" | "employee" | "party" | "product" | "rawMaterial" | "packingMaterial" | "purchaseOrderInfo" | "purchaseOrderInventory" | "bankAccount" | "bankTransaction" | "inventory" | "pMInventory" | "transactionInfo" | "journal" | "productionIngradient" | "ingredientRawMaterial" | "ingredientPackingMaterial" | "ingredientExpneseItems" | "productionExpensesInventory" | "productionexpenseitem" | "productioniteminfo"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2300,72 +2300,6 @@ export namespace Prisma {
           }
         }
       }
-      ProductionItemInfo: {
-        payload: Prisma.$ProductionItemInfoPayload<ExtArgs>
-        fields: Prisma.ProductionItemInfoFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.ProductionItemInfoFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductionItemInfoPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.ProductionItemInfoFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductionItemInfoPayload>
-          }
-          findFirst: {
-            args: Prisma.ProductionItemInfoFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductionItemInfoPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.ProductionItemInfoFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductionItemInfoPayload>
-          }
-          findMany: {
-            args: Prisma.ProductionItemInfoFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductionItemInfoPayload>[]
-          }
-          create: {
-            args: Prisma.ProductionItemInfoCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductionItemInfoPayload>
-          }
-          createMany: {
-            args: Prisma.ProductionItemInfoCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.ProductionItemInfoDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductionItemInfoPayload>
-          }
-          update: {
-            args: Prisma.ProductionItemInfoUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductionItemInfoPayload>
-          }
-          deleteMany: {
-            args: Prisma.ProductionItemInfoDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.ProductionItemInfoUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.ProductionItemInfoUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$ProductionItemInfoPayload>
-          }
-          aggregate: {
-            args: Prisma.ProductionItemInfoAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateProductionItemInfo>
-          }
-          groupBy: {
-            args: Prisma.ProductionItemInfoGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ProductionItemInfoGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.ProductionItemInfoCountArgs<ExtArgs>
-            result: $Utils.Optional<ProductionItemInfoCountAggregateOutputType> | number
-          }
-        }
-      }
       Journal: {
         payload: Prisma.$JournalPayload<ExtArgs>
         fields: Prisma.JournalFieldRefs
@@ -2828,6 +2762,72 @@ export namespace Prisma {
           }
         }
       }
+      productioniteminfo: {
+        payload: Prisma.$productioniteminfoPayload<ExtArgs>
+        fields: Prisma.productioniteminfoFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.productioniteminfoFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productioniteminfoPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.productioniteminfoFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productioniteminfoPayload>
+          }
+          findFirst: {
+            args: Prisma.productioniteminfoFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productioniteminfoPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.productioniteminfoFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productioniteminfoPayload>
+          }
+          findMany: {
+            args: Prisma.productioniteminfoFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productioniteminfoPayload>[]
+          }
+          create: {
+            args: Prisma.productioniteminfoCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productioniteminfoPayload>
+          }
+          createMany: {
+            args: Prisma.productioniteminfoCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.productioniteminfoDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productioniteminfoPayload>
+          }
+          update: {
+            args: Prisma.productioniteminfoUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productioniteminfoPayload>
+          }
+          deleteMany: {
+            args: Prisma.productioniteminfoDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.productioniteminfoUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.productioniteminfoUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$productioniteminfoPayload>
+          }
+          aggregate: {
+            args: Prisma.ProductioniteminfoAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProductioniteminfo>
+          }
+          groupBy: {
+            args: Prisma.productioniteminfoGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductioniteminfoGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.productioniteminfoCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductioniteminfoCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2969,7 +2969,6 @@ export namespace Prisma {
     inventory?: InventoryOmit
     pMInventory?: PMInventoryOmit
     transactionInfo?: TransactionInfoOmit
-    productionItemInfo?: ProductionItemInfoOmit
     journal?: JournalOmit
     productionIngradient?: ProductionIngradientOmit
     ingredientRawMaterial?: IngredientRawMaterialOmit
@@ -2977,6 +2976,7 @@ export namespace Prisma {
     ingredientExpneseItems?: IngredientExpneseItemsOmit
     productionExpensesInventory?: ProductionExpensesInventoryOmit
     productionexpenseitem?: productionexpenseitemOmit
+    productioniteminfo?: productioniteminfoOmit
   }
 
   /* Types for Logging */
@@ -3271,14 +3271,14 @@ export namespace Prisma {
 
   export type ProductCountOutputType = {
     inventory: number
+    productioniteminfo: number
     purchaseOrderInventories: number
-    productionItemInfos: number
   }
 
   export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inventory?: boolean | ProductCountOutputTypeCountInventoryArgs
+    productioniteminfo?: boolean | ProductCountOutputTypeCountProductioniteminfoArgs
     purchaseOrderInventories?: boolean | ProductCountOutputTypeCountPurchaseOrderInventoriesArgs
-    productionItemInfos?: boolean | ProductCountOutputTypeCountProductionItemInfosArgs
   }
 
   // Custom InputTypes
@@ -3302,15 +3302,15 @@ export namespace Prisma {
   /**
    * ProductCountOutputType without action
    */
-  export type ProductCountOutputTypeCountPurchaseOrderInventoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: PurchaseOrderInventoryWhereInput
+  export type ProductCountOutputTypeCountProductioniteminfoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: productioniteminfoWhereInput
   }
 
   /**
    * ProductCountOutputType without action
    */
-  export type ProductCountOutputTypeCountProductionItemInfosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProductionItemInfoWhereInput
+  export type ProductCountOutputTypeCountPurchaseOrderInventoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PurchaseOrderInventoryWhereInput
   }
 
 
@@ -12029,10 +12029,10 @@ export namespace Prisma {
     createdAt?: boolean
     updateAt?: boolean
     inventory?: boolean | Product$inventoryArgs<ExtArgs>
+    productioniteminfo?: boolean | Product$productioniteminfoArgs<ExtArgs>
     subCategory?: boolean | SubCategoryDefaultArgs<ExtArgs>
     unit?: boolean | UnitDefaultArgs<ExtArgs>
     purchaseOrderInventories?: boolean | Product$purchaseOrderInventoriesArgs<ExtArgs>
-    productionItemInfos?: boolean | Product$productionItemInfosArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["product"]>
 
@@ -12060,10 +12060,10 @@ export namespace Prisma {
   export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "subCategoryId" | "minPrice" | "size" | "quantity" | "unitPrice" | "alertQuantity" | "unitId" | "openingDate" | "openingAmount" | "isDeleted" | "status" | "createdAt" | "updateAt", ExtArgs["result"]["product"]>
   export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     inventory?: boolean | Product$inventoryArgs<ExtArgs>
+    productioniteminfo?: boolean | Product$productioniteminfoArgs<ExtArgs>
     subCategory?: boolean | SubCategoryDefaultArgs<ExtArgs>
     unit?: boolean | UnitDefaultArgs<ExtArgs>
     purchaseOrderInventories?: boolean | Product$purchaseOrderInventoriesArgs<ExtArgs>
-    productionItemInfos?: boolean | Product$productionItemInfosArgs<ExtArgs>
     _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -12071,10 +12071,10 @@ export namespace Prisma {
     name: "Product"
     objects: {
       inventory: Prisma.$InventoryPayload<ExtArgs>[]
+      productioniteminfo: Prisma.$productioniteminfoPayload<ExtArgs>[]
       subCategory: Prisma.$SubCategoryPayload<ExtArgs>
       unit: Prisma.$UnitPayload<ExtArgs>
       purchaseOrderInventories: Prisma.$PurchaseOrderInventoryPayload<ExtArgs>[]
-      productionItemInfos: Prisma.$ProductionItemInfoPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -12434,10 +12434,10 @@ export namespace Prisma {
   export interface Prisma__ProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     inventory<T extends Product$inventoryArgs<ExtArgs> = {}>(args?: Subset<T, Product$inventoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    productioniteminfo<T extends Product$productioniteminfoArgs<ExtArgs> = {}>(args?: Subset<T, Product$productioniteminfoArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     subCategory<T extends SubCategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubCategoryDefaultArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     unit<T extends UnitDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UnitDefaultArgs<ExtArgs>>): Prisma__UnitClient<$Result.GetResult<Prisma.$UnitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     purchaseOrderInventories<T extends Product$purchaseOrderInventoriesArgs<ExtArgs> = {}>(args?: Subset<T, Product$purchaseOrderInventoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PurchaseOrderInventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    productionItemInfos<T extends Product$productionItemInfosArgs<ExtArgs> = {}>(args?: Subset<T, Product$productionItemInfosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12855,6 +12855,30 @@ export namespace Prisma {
   }
 
   /**
+   * Product.productioniteminfo
+   */
+  export type Product$productioniteminfoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    where?: productioniteminfoWhereInput
+    orderBy?: productioniteminfoOrderByWithRelationInput | productioniteminfoOrderByWithRelationInput[]
+    cursor?: productioniteminfoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProductioniteminfoScalarFieldEnum | ProductioniteminfoScalarFieldEnum[]
+  }
+
+  /**
    * Product.purchaseOrderInventories
    */
   export type Product$purchaseOrderInventoriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12876,30 +12900,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PurchaseOrderInventoryScalarFieldEnum | PurchaseOrderInventoryScalarFieldEnum[]
-  }
-
-  /**
-   * Product.productionItemInfos
-   */
-  export type Product$productionItemInfosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    where?: ProductionItemInfoWhereInput
-    orderBy?: ProductionItemInfoOrderByWithRelationInput | ProductionItemInfoOrderByWithRelationInput[]
-    cursor?: ProductionItemInfoWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ProductionItemInfoScalarFieldEnum | ProductionItemInfoScalarFieldEnum[]
   }
 
   /**
@@ -20814,6 +20814,7 @@ export namespace Prisma {
     creditAmount: number | null
     integratedDebitAmount: number | null
     integratedCreditAmount: number | null
+    isOpening: number | null
   }
 
   export type PMInventorySumAggregateOutputType = {
@@ -20831,6 +20832,7 @@ export namespace Prisma {
     creditAmount: number | null
     integratedDebitAmount: number | null
     integratedCreditAmount: number | null
+    isOpening: number | null
   }
 
   export type PMInventoryMinAggregateOutputType = {
@@ -20850,7 +20852,7 @@ export namespace Prisma {
     creditAmount: number | null
     integratedDebitAmount: number | null
     integratedCreditAmount: number | null
-    isOpening: boolean | null
+    isOpening: number | null
     status: $Enums.Status | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -20873,7 +20875,7 @@ export namespace Prisma {
     creditAmount: number | null
     integratedDebitAmount: number | null
     integratedCreditAmount: number | null
-    isOpening: boolean | null
+    isOpening: number | null
     status: $Enums.Status | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -20919,6 +20921,7 @@ export namespace Prisma {
     creditAmount?: true
     integratedDebitAmount?: true
     integratedCreditAmount?: true
+    isOpening?: true
   }
 
   export type PMInventorySumAggregateInputType = {
@@ -20936,6 +20939,7 @@ export namespace Prisma {
     creditAmount?: true
     integratedDebitAmount?: true
     integratedCreditAmount?: true
+    isOpening?: true
   }
 
   export type PMInventoryMinAggregateInputType = {
@@ -21111,7 +21115,7 @@ export namespace Prisma {
     creditAmount: number | null
     integratedDebitAmount: number | null
     integratedCreditAmount: number | null
-    isOpening: boolean
+    isOpening: number
     status: $Enums.Status
     createdAt: Date
     updatedAt: Date
@@ -21215,7 +21219,7 @@ export namespace Prisma {
       creditAmount: number | null
       integratedDebitAmount: number | null
       integratedCreditAmount: number | null
-      isOpening: boolean
+      isOpening: number
       status: $Enums.Status
       createdAt: Date
       updatedAt: Date
@@ -21606,7 +21610,7 @@ export namespace Prisma {
     readonly creditAmount: FieldRef<"PMInventory", 'Float'>
     readonly integratedDebitAmount: FieldRef<"PMInventory", 'Float'>
     readonly integratedCreditAmount: FieldRef<"PMInventory", 'Float'>
-    readonly isOpening: FieldRef<"PMInventory", 'Boolean'>
+    readonly isOpening: FieldRef<"PMInventory", 'Int'>
     readonly status: FieldRef<"PMInventory", 'Status'>
     readonly createdAt: FieldRef<"PMInventory", 'DateTime'>
     readonly updatedAt: FieldRef<"PMInventory", 'DateTime'>
@@ -22226,8 +22230,8 @@ export namespace Prisma {
     journal?: boolean | TransactionInfo$journalArgs<ExtArgs>
     pminventories?: boolean | TransactionInfo$pminventoriesArgs<ExtArgs>
     productionExpensesInventory?: boolean | TransactionInfo$productionExpensesInventoryArgs<ExtArgs>
+    productioniteminfo?: boolean | TransactionInfo$productioniteminfoArgs<ExtArgs>
     party?: boolean | TransactionInfo$partyArgs<ExtArgs>
-    productionItemInfo?: boolean | TransactionInfo$productionItemInfoArgs<ExtArgs>
     _count?: boolean | TransactionInfoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["transactionInfo"]>
 
@@ -22251,8 +22255,8 @@ export namespace Prisma {
     journal?: boolean | TransactionInfo$journalArgs<ExtArgs>
     pminventories?: boolean | TransactionInfo$pminventoriesArgs<ExtArgs>
     productionExpensesInventory?: boolean | TransactionInfo$productionExpensesInventoryArgs<ExtArgs>
+    productioniteminfo?: boolean | TransactionInfo$productioniteminfoArgs<ExtArgs>
     party?: boolean | TransactionInfo$partyArgs<ExtArgs>
-    productionItemInfo?: boolean | TransactionInfo$productionItemInfoArgs<ExtArgs>
     _count?: boolean | TransactionInfoCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -22264,8 +22268,8 @@ export namespace Prisma {
       journal: Prisma.$JournalPayload<ExtArgs>[]
       pminventories: Prisma.$PMInventoryPayload<ExtArgs>[]
       productionExpensesInventory: Prisma.$ProductionExpensesInventoryPayload<ExtArgs>[]
+      productioniteminfo: Prisma.$productioniteminfoPayload<ExtArgs> | null
       party: Prisma.$PartyPayload<ExtArgs> | null
-      productionItemInfo: Prisma.$ProductionItemInfoPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -22621,8 +22625,8 @@ export namespace Prisma {
     journal<T extends TransactionInfo$journalArgs<ExtArgs> = {}>(args?: Subset<T, TransactionInfo$journalArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$JournalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pminventories<T extends TransactionInfo$pminventoriesArgs<ExtArgs> = {}>(args?: Subset<T, TransactionInfo$pminventoriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PMInventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     productionExpensesInventory<T extends TransactionInfo$productionExpensesInventoryArgs<ExtArgs> = {}>(args?: Subset<T, TransactionInfo$productionExpensesInventoryArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductionExpensesInventoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    productioniteminfo<T extends TransactionInfo$productioniteminfoArgs<ExtArgs> = {}>(args?: Subset<T, TransactionInfo$productioniteminfoArgs<ExtArgs>>): Prisma__productioniteminfoClient<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     party<T extends TransactionInfo$partyArgs<ExtArgs> = {}>(args?: Subset<T, TransactionInfo$partyArgs<ExtArgs>>): Prisma__PartyClient<$Result.GetResult<Prisma.$PartyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    productionItemInfo<T extends TransactionInfo$productionItemInfoArgs<ExtArgs> = {}>(args?: Subset<T, TransactionInfo$productionItemInfoArgs<ExtArgs>>): Prisma__ProductionItemInfoClient<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -23128,6 +23132,25 @@ export namespace Prisma {
   }
 
   /**
+   * TransactionInfo.productioniteminfo
+   */
+  export type TransactionInfo$productioniteminfoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    where?: productioniteminfoWhereInput
+  }
+
+  /**
    * TransactionInfo.party
    */
   export type TransactionInfo$partyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23147,25 +23170,6 @@ export namespace Prisma {
   }
 
   /**
-   * TransactionInfo.productionItemInfo
-   */
-  export type TransactionInfo$productionItemInfoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    where?: ProductionItemInfoWhereInput
-  }
-
-  /**
    * TransactionInfo without action
    */
   export type TransactionInfoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -23181,1008 +23185,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TransactionInfoInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model ProductionItemInfo
-   */
-
-  export type AggregateProductionItemInfo = {
-    _count: ProductionItemInfoCountAggregateOutputType | null
-    _avg: ProductionItemInfoAvgAggregateOutputType | null
-    _sum: ProductionItemInfoSumAggregateOutputType | null
-    _min: ProductionItemInfoMinAggregateOutputType | null
-    _max: ProductionItemInfoMaxAggregateOutputType | null
-  }
-
-  export type ProductionItemInfoAvgAggregateOutputType = {
-    id: number | null
-    transactionId: number | null
-    productId: number | null
-  }
-
-  export type ProductionItemInfoSumAggregateOutputType = {
-    id: number | null
-    transactionId: number | null
-    productId: number | null
-  }
-
-  export type ProductionItemInfoMinAggregateOutputType = {
-    id: number | null
-    transactionId: number | null
-    productId: number | null
-    batchNo: string | null
-    status: $Enums.TxStatus | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ProductionItemInfoMaxAggregateOutputType = {
-    id: number | null
-    transactionId: number | null
-    productId: number | null
-    batchNo: string | null
-    status: $Enums.TxStatus | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type ProductionItemInfoCountAggregateOutputType = {
-    id: number
-    transactionId: number
-    productId: number
-    batchNo: number
-    status: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type ProductionItemInfoAvgAggregateInputType = {
-    id?: true
-    transactionId?: true
-    productId?: true
-  }
-
-  export type ProductionItemInfoSumAggregateInputType = {
-    id?: true
-    transactionId?: true
-    productId?: true
-  }
-
-  export type ProductionItemInfoMinAggregateInputType = {
-    id?: true
-    transactionId?: true
-    productId?: true
-    batchNo?: true
-    status?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ProductionItemInfoMaxAggregateInputType = {
-    id?: true
-    transactionId?: true
-    productId?: true
-    batchNo?: true
-    status?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type ProductionItemInfoCountAggregateInputType = {
-    id?: true
-    transactionId?: true
-    productId?: true
-    batchNo?: true
-    status?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type ProductionItemInfoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ProductionItemInfo to aggregate.
-     */
-    where?: ProductionItemInfoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ProductionItemInfos to fetch.
-     */
-    orderBy?: ProductionItemInfoOrderByWithRelationInput | ProductionItemInfoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: ProductionItemInfoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ProductionItemInfos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ProductionItemInfos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned ProductionItemInfos
-    **/
-    _count?: true | ProductionItemInfoCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: ProductionItemInfoAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: ProductionItemInfoSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ProductionItemInfoMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ProductionItemInfoMaxAggregateInputType
-  }
-
-  export type GetProductionItemInfoAggregateType<T extends ProductionItemInfoAggregateArgs> = {
-        [P in keyof T & keyof AggregateProductionItemInfo]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateProductionItemInfo[P]>
-      : GetScalarType<T[P], AggregateProductionItemInfo[P]>
-  }
-
-
-
-
-  export type ProductionItemInfoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProductionItemInfoWhereInput
-    orderBy?: ProductionItemInfoOrderByWithAggregationInput | ProductionItemInfoOrderByWithAggregationInput[]
-    by: ProductionItemInfoScalarFieldEnum[] | ProductionItemInfoScalarFieldEnum
-    having?: ProductionItemInfoScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ProductionItemInfoCountAggregateInputType | true
-    _avg?: ProductionItemInfoAvgAggregateInputType
-    _sum?: ProductionItemInfoSumAggregateInputType
-    _min?: ProductionItemInfoMinAggregateInputType
-    _max?: ProductionItemInfoMaxAggregateInputType
-  }
-
-  export type ProductionItemInfoGroupByOutputType = {
-    id: number
-    transactionId: number
-    productId: number
-    batchNo: string
-    status: $Enums.TxStatus
-    createdAt: Date
-    updatedAt: Date
-    _count: ProductionItemInfoCountAggregateOutputType | null
-    _avg: ProductionItemInfoAvgAggregateOutputType | null
-    _sum: ProductionItemInfoSumAggregateOutputType | null
-    _min: ProductionItemInfoMinAggregateOutputType | null
-    _max: ProductionItemInfoMaxAggregateOutputType | null
-  }
-
-  type GetProductionItemInfoGroupByPayload<T extends ProductionItemInfoGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ProductionItemInfoGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ProductionItemInfoGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ProductionItemInfoGroupByOutputType[P]>
-            : GetScalarType<T[P], ProductionItemInfoGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type ProductionItemInfoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    transactionId?: boolean
-    productId?: boolean
-    batchNo?: boolean
-    status?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    transactionInfo?: boolean | TransactionInfoDefaultArgs<ExtArgs>
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["productionItemInfo"]>
-
-
-
-  export type ProductionItemInfoSelectScalar = {
-    id?: boolean
-    transactionId?: boolean
-    productId?: boolean
-    batchNo?: boolean
-    status?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type ProductionItemInfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "transactionId" | "productId" | "batchNo" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["productionItemInfo"]>
-  export type ProductionItemInfoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    transactionInfo?: boolean | TransactionInfoDefaultArgs<ExtArgs>
-    product?: boolean | ProductDefaultArgs<ExtArgs>
-  }
-
-  export type $ProductionItemInfoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "ProductionItemInfo"
-    objects: {
-      transactionInfo: Prisma.$TransactionInfoPayload<ExtArgs>
-      product: Prisma.$ProductPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: number
-      transactionId: number
-      productId: number
-      batchNo: string
-      status: $Enums.TxStatus
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["productionItemInfo"]>
-    composites: {}
-  }
-
-  type ProductionItemInfoGetPayload<S extends boolean | null | undefined | ProductionItemInfoDefaultArgs> = $Result.GetResult<Prisma.$ProductionItemInfoPayload, S>
-
-  type ProductionItemInfoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<ProductionItemInfoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ProductionItemInfoCountAggregateInputType | true
-    }
-
-  export interface ProductionItemInfoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProductionItemInfo'], meta: { name: 'ProductionItemInfo' } }
-    /**
-     * Find zero or one ProductionItemInfo that matches the filter.
-     * @param {ProductionItemInfoFindUniqueArgs} args - Arguments to find a ProductionItemInfo
-     * @example
-     * // Get one ProductionItemInfo
-     * const productionItemInfo = await prisma.productionItemInfo.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends ProductionItemInfoFindUniqueArgs>(args: SelectSubset<T, ProductionItemInfoFindUniqueArgs<ExtArgs>>): Prisma__ProductionItemInfoClient<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one ProductionItemInfo that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {ProductionItemInfoFindUniqueOrThrowArgs} args - Arguments to find a ProductionItemInfo
-     * @example
-     * // Get one ProductionItemInfo
-     * const productionItemInfo = await prisma.productionItemInfo.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends ProductionItemInfoFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductionItemInfoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductionItemInfoClient<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first ProductionItemInfo that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductionItemInfoFindFirstArgs} args - Arguments to find a ProductionItemInfo
-     * @example
-     * // Get one ProductionItemInfo
-     * const productionItemInfo = await prisma.productionItemInfo.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends ProductionItemInfoFindFirstArgs>(args?: SelectSubset<T, ProductionItemInfoFindFirstArgs<ExtArgs>>): Prisma__ProductionItemInfoClient<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first ProductionItemInfo that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductionItemInfoFindFirstOrThrowArgs} args - Arguments to find a ProductionItemInfo
-     * @example
-     * // Get one ProductionItemInfo
-     * const productionItemInfo = await prisma.productionItemInfo.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends ProductionItemInfoFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductionItemInfoFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductionItemInfoClient<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more ProductionItemInfos that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductionItemInfoFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all ProductionItemInfos
-     * const productionItemInfos = await prisma.productionItemInfo.findMany()
-     * 
-     * // Get first 10 ProductionItemInfos
-     * const productionItemInfos = await prisma.productionItemInfo.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const productionItemInfoWithIdOnly = await prisma.productionItemInfo.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends ProductionItemInfoFindManyArgs>(args?: SelectSubset<T, ProductionItemInfoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a ProductionItemInfo.
-     * @param {ProductionItemInfoCreateArgs} args - Arguments to create a ProductionItemInfo.
-     * @example
-     * // Create one ProductionItemInfo
-     * const ProductionItemInfo = await prisma.productionItemInfo.create({
-     *   data: {
-     *     // ... data to create a ProductionItemInfo
-     *   }
-     * })
-     * 
-     */
-    create<T extends ProductionItemInfoCreateArgs>(args: SelectSubset<T, ProductionItemInfoCreateArgs<ExtArgs>>): Prisma__ProductionItemInfoClient<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many ProductionItemInfos.
-     * @param {ProductionItemInfoCreateManyArgs} args - Arguments to create many ProductionItemInfos.
-     * @example
-     * // Create many ProductionItemInfos
-     * const productionItemInfo = await prisma.productionItemInfo.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends ProductionItemInfoCreateManyArgs>(args?: SelectSubset<T, ProductionItemInfoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a ProductionItemInfo.
-     * @param {ProductionItemInfoDeleteArgs} args - Arguments to delete one ProductionItemInfo.
-     * @example
-     * // Delete one ProductionItemInfo
-     * const ProductionItemInfo = await prisma.productionItemInfo.delete({
-     *   where: {
-     *     // ... filter to delete one ProductionItemInfo
-     *   }
-     * })
-     * 
-     */
-    delete<T extends ProductionItemInfoDeleteArgs>(args: SelectSubset<T, ProductionItemInfoDeleteArgs<ExtArgs>>): Prisma__ProductionItemInfoClient<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one ProductionItemInfo.
-     * @param {ProductionItemInfoUpdateArgs} args - Arguments to update one ProductionItemInfo.
-     * @example
-     * // Update one ProductionItemInfo
-     * const productionItemInfo = await prisma.productionItemInfo.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends ProductionItemInfoUpdateArgs>(args: SelectSubset<T, ProductionItemInfoUpdateArgs<ExtArgs>>): Prisma__ProductionItemInfoClient<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more ProductionItemInfos.
-     * @param {ProductionItemInfoDeleteManyArgs} args - Arguments to filter ProductionItemInfos to delete.
-     * @example
-     * // Delete a few ProductionItemInfos
-     * const { count } = await prisma.productionItemInfo.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends ProductionItemInfoDeleteManyArgs>(args?: SelectSubset<T, ProductionItemInfoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more ProductionItemInfos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductionItemInfoUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many ProductionItemInfos
-     * const productionItemInfo = await prisma.productionItemInfo.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends ProductionItemInfoUpdateManyArgs>(args: SelectSubset<T, ProductionItemInfoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one ProductionItemInfo.
-     * @param {ProductionItemInfoUpsertArgs} args - Arguments to update or create a ProductionItemInfo.
-     * @example
-     * // Update or create a ProductionItemInfo
-     * const productionItemInfo = await prisma.productionItemInfo.upsert({
-     *   create: {
-     *     // ... data to create a ProductionItemInfo
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the ProductionItemInfo we want to update
-     *   }
-     * })
-     */
-    upsert<T extends ProductionItemInfoUpsertArgs>(args: SelectSubset<T, ProductionItemInfoUpsertArgs<ExtArgs>>): Prisma__ProductionItemInfoClient<$Result.GetResult<Prisma.$ProductionItemInfoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of ProductionItemInfos.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductionItemInfoCountArgs} args - Arguments to filter ProductionItemInfos to count.
-     * @example
-     * // Count the number of ProductionItemInfos
-     * const count = await prisma.productionItemInfo.count({
-     *   where: {
-     *     // ... the filter for the ProductionItemInfos we want to count
-     *   }
-     * })
-    **/
-    count<T extends ProductionItemInfoCountArgs>(
-      args?: Subset<T, ProductionItemInfoCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ProductionItemInfoCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a ProductionItemInfo.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductionItemInfoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ProductionItemInfoAggregateArgs>(args: Subset<T, ProductionItemInfoAggregateArgs>): Prisma.PrismaPromise<GetProductionItemInfoAggregateType<T>>
-
-    /**
-     * Group by ProductionItemInfo.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ProductionItemInfoGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends ProductionItemInfoGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ProductionItemInfoGroupByArgs['orderBy'] }
-        : { orderBy?: ProductionItemInfoGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, ProductionItemInfoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductionItemInfoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the ProductionItemInfo model
-   */
-  readonly fields: ProductionItemInfoFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for ProductionItemInfo.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__ProductionItemInfoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    transactionInfo<T extends TransactionInfoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TransactionInfoDefaultArgs<ExtArgs>>): Prisma__TransactionInfoClient<$Result.GetResult<Prisma.$TransactionInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    product<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the ProductionItemInfo model
-   */
-  interface ProductionItemInfoFieldRefs {
-    readonly id: FieldRef<"ProductionItemInfo", 'Int'>
-    readonly transactionId: FieldRef<"ProductionItemInfo", 'Int'>
-    readonly productId: FieldRef<"ProductionItemInfo", 'Int'>
-    readonly batchNo: FieldRef<"ProductionItemInfo", 'String'>
-    readonly status: FieldRef<"ProductionItemInfo", 'TxStatus'>
-    readonly createdAt: FieldRef<"ProductionItemInfo", 'DateTime'>
-    readonly updatedAt: FieldRef<"ProductionItemInfo", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * ProductionItemInfo findUnique
-   */
-  export type ProductionItemInfoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    /**
-     * Filter, which ProductionItemInfo to fetch.
-     */
-    where: ProductionItemInfoWhereUniqueInput
-  }
-
-  /**
-   * ProductionItemInfo findUniqueOrThrow
-   */
-  export type ProductionItemInfoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    /**
-     * Filter, which ProductionItemInfo to fetch.
-     */
-    where: ProductionItemInfoWhereUniqueInput
-  }
-
-  /**
-   * ProductionItemInfo findFirst
-   */
-  export type ProductionItemInfoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    /**
-     * Filter, which ProductionItemInfo to fetch.
-     */
-    where?: ProductionItemInfoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ProductionItemInfos to fetch.
-     */
-    orderBy?: ProductionItemInfoOrderByWithRelationInput | ProductionItemInfoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ProductionItemInfos.
-     */
-    cursor?: ProductionItemInfoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ProductionItemInfos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ProductionItemInfos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ProductionItemInfos.
-     */
-    distinct?: ProductionItemInfoScalarFieldEnum | ProductionItemInfoScalarFieldEnum[]
-  }
-
-  /**
-   * ProductionItemInfo findFirstOrThrow
-   */
-  export type ProductionItemInfoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    /**
-     * Filter, which ProductionItemInfo to fetch.
-     */
-    where?: ProductionItemInfoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ProductionItemInfos to fetch.
-     */
-    orderBy?: ProductionItemInfoOrderByWithRelationInput | ProductionItemInfoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for ProductionItemInfos.
-     */
-    cursor?: ProductionItemInfoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ProductionItemInfos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ProductionItemInfos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ProductionItemInfos.
-     */
-    distinct?: ProductionItemInfoScalarFieldEnum | ProductionItemInfoScalarFieldEnum[]
-  }
-
-  /**
-   * ProductionItemInfo findMany
-   */
-  export type ProductionItemInfoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    /**
-     * Filter, which ProductionItemInfos to fetch.
-     */
-    where?: ProductionItemInfoWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of ProductionItemInfos to fetch.
-     */
-    orderBy?: ProductionItemInfoOrderByWithRelationInput | ProductionItemInfoOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing ProductionItemInfos.
-     */
-    cursor?: ProductionItemInfoWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` ProductionItemInfos from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` ProductionItemInfos.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of ProductionItemInfos.
-     */
-    distinct?: ProductionItemInfoScalarFieldEnum | ProductionItemInfoScalarFieldEnum[]
-  }
-
-  /**
-   * ProductionItemInfo create
-   */
-  export type ProductionItemInfoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    /**
-     * The data needed to create a ProductionItemInfo.
-     */
-    data: XOR<ProductionItemInfoCreateInput, ProductionItemInfoUncheckedCreateInput>
-  }
-
-  /**
-   * ProductionItemInfo createMany
-   */
-  export type ProductionItemInfoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many ProductionItemInfos.
-     */
-    data: ProductionItemInfoCreateManyInput | ProductionItemInfoCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * ProductionItemInfo update
-   */
-  export type ProductionItemInfoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    /**
-     * The data needed to update a ProductionItemInfo.
-     */
-    data: XOR<ProductionItemInfoUpdateInput, ProductionItemInfoUncheckedUpdateInput>
-    /**
-     * Choose, which ProductionItemInfo to update.
-     */
-    where: ProductionItemInfoWhereUniqueInput
-  }
-
-  /**
-   * ProductionItemInfo updateMany
-   */
-  export type ProductionItemInfoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update ProductionItemInfos.
-     */
-    data: XOR<ProductionItemInfoUpdateManyMutationInput, ProductionItemInfoUncheckedUpdateManyInput>
-    /**
-     * Filter which ProductionItemInfos to update
-     */
-    where?: ProductionItemInfoWhereInput
-    /**
-     * Limit how many ProductionItemInfos to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * ProductionItemInfo upsert
-   */
-  export type ProductionItemInfoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    /**
-     * The filter to search for the ProductionItemInfo to update in case it exists.
-     */
-    where: ProductionItemInfoWhereUniqueInput
-    /**
-     * In case the ProductionItemInfo found by the `where` argument doesn't exist, create a new ProductionItemInfo with this data.
-     */
-    create: XOR<ProductionItemInfoCreateInput, ProductionItemInfoUncheckedCreateInput>
-    /**
-     * In case the ProductionItemInfo was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<ProductionItemInfoUpdateInput, ProductionItemInfoUncheckedUpdateInput>
-  }
-
-  /**
-   * ProductionItemInfo delete
-   */
-  export type ProductionItemInfoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
-    /**
-     * Filter which ProductionItemInfo to delete.
-     */
-    where: ProductionItemInfoWhereUniqueInput
-  }
-
-  /**
-   * ProductionItemInfo deleteMany
-   */
-  export type ProductionItemInfoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which ProductionItemInfos to delete
-     */
-    where?: ProductionItemInfoWhereInput
-    /**
-     * Limit how many ProductionItemInfos to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * ProductionItemInfo without action
-   */
-  export type ProductionItemInfoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the ProductionItemInfo
-     */
-    select?: ProductionItemInfoSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the ProductionItemInfo
-     */
-    omit?: ProductionItemInfoOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ProductionItemInfoInclude<ExtArgs> | null
   }
 
 
@@ -31377,6 +30379,1008 @@ export namespace Prisma {
 
 
   /**
+   * Model productioniteminfo
+   */
+
+  export type AggregateProductioniteminfo = {
+    _count: ProductioniteminfoCountAggregateOutputType | null
+    _avg: ProductioniteminfoAvgAggregateOutputType | null
+    _sum: ProductioniteminfoSumAggregateOutputType | null
+    _min: ProductioniteminfoMinAggregateOutputType | null
+    _max: ProductioniteminfoMaxAggregateOutputType | null
+  }
+
+  export type ProductioniteminfoAvgAggregateOutputType = {
+    id: number | null
+    transactionId: number | null
+    productId: number | null
+  }
+
+  export type ProductioniteminfoSumAggregateOutputType = {
+    id: number | null
+    transactionId: number | null
+    productId: number | null
+  }
+
+  export type ProductioniteminfoMinAggregateOutputType = {
+    id: number | null
+    transactionId: number | null
+    productId: number | null
+    batchNo: string | null
+    status: $Enums.productioniteminfo_status | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductioniteminfoMaxAggregateOutputType = {
+    id: number | null
+    transactionId: number | null
+    productId: number | null
+    batchNo: string | null
+    status: $Enums.productioniteminfo_status | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductioniteminfoCountAggregateOutputType = {
+    id: number
+    transactionId: number
+    productId: number
+    batchNo: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProductioniteminfoAvgAggregateInputType = {
+    id?: true
+    transactionId?: true
+    productId?: true
+  }
+
+  export type ProductioniteminfoSumAggregateInputType = {
+    id?: true
+    transactionId?: true
+    productId?: true
+  }
+
+  export type ProductioniteminfoMinAggregateInputType = {
+    id?: true
+    transactionId?: true
+    productId?: true
+    batchNo?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductioniteminfoMaxAggregateInputType = {
+    id?: true
+    transactionId?: true
+    productId?: true
+    batchNo?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductioniteminfoCountAggregateInputType = {
+    id?: true
+    transactionId?: true
+    productId?: true
+    batchNo?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProductioniteminfoAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which productioniteminfo to aggregate.
+     */
+    where?: productioniteminfoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of productioniteminfos to fetch.
+     */
+    orderBy?: productioniteminfoOrderByWithRelationInput | productioniteminfoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: productioniteminfoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` productioniteminfos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` productioniteminfos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned productioniteminfos
+    **/
+    _count?: true | ProductioniteminfoCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductioniteminfoAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductioniteminfoSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductioniteminfoMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductioniteminfoMaxAggregateInputType
+  }
+
+  export type GetProductioniteminfoAggregateType<T extends ProductioniteminfoAggregateArgs> = {
+        [P in keyof T & keyof AggregateProductioniteminfo]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProductioniteminfo[P]>
+      : GetScalarType<T[P], AggregateProductioniteminfo[P]>
+  }
+
+
+
+
+  export type productioniteminfoGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: productioniteminfoWhereInput
+    orderBy?: productioniteminfoOrderByWithAggregationInput | productioniteminfoOrderByWithAggregationInput[]
+    by: ProductioniteminfoScalarFieldEnum[] | ProductioniteminfoScalarFieldEnum
+    having?: productioniteminfoScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductioniteminfoCountAggregateInputType | true
+    _avg?: ProductioniteminfoAvgAggregateInputType
+    _sum?: ProductioniteminfoSumAggregateInputType
+    _min?: ProductioniteminfoMinAggregateInputType
+    _max?: ProductioniteminfoMaxAggregateInputType
+  }
+
+  export type ProductioniteminfoGroupByOutputType = {
+    id: number
+    transactionId: number
+    productId: number
+    batchNo: string
+    status: $Enums.productioniteminfo_status
+    createdAt: Date
+    updatedAt: Date
+    _count: ProductioniteminfoCountAggregateOutputType | null
+    _avg: ProductioniteminfoAvgAggregateOutputType | null
+    _sum: ProductioniteminfoSumAggregateOutputType | null
+    _min: ProductioniteminfoMinAggregateOutputType | null
+    _max: ProductioniteminfoMaxAggregateOutputType | null
+  }
+
+  type GetProductioniteminfoGroupByPayload<T extends productioniteminfoGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductioniteminfoGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductioniteminfoGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductioniteminfoGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductioniteminfoGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type productioniteminfoSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    transactionId?: boolean
+    productId?: boolean
+    batchNo?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    products?: boolean | ProductDefaultArgs<ExtArgs>
+    transaction_info?: boolean | TransactionInfoDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["productioniteminfo"]>
+
+
+
+  export type productioniteminfoSelectScalar = {
+    id?: boolean
+    transactionId?: boolean
+    productId?: boolean
+    batchNo?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type productioniteminfoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "transactionId" | "productId" | "batchNo" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["productioniteminfo"]>
+  export type productioniteminfoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    products?: boolean | ProductDefaultArgs<ExtArgs>
+    transaction_info?: boolean | TransactionInfoDefaultArgs<ExtArgs>
+  }
+
+  export type $productioniteminfoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "productioniteminfo"
+    objects: {
+      products: Prisma.$ProductPayload<ExtArgs>
+      transaction_info: Prisma.$TransactionInfoPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      transactionId: number
+      productId: number
+      batchNo: string
+      status: $Enums.productioniteminfo_status
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["productioniteminfo"]>
+    composites: {}
+  }
+
+  type productioniteminfoGetPayload<S extends boolean | null | undefined | productioniteminfoDefaultArgs> = $Result.GetResult<Prisma.$productioniteminfoPayload, S>
+
+  type productioniteminfoCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<productioniteminfoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductioniteminfoCountAggregateInputType | true
+    }
+
+  export interface productioniteminfoDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['productioniteminfo'], meta: { name: 'productioniteminfo' } }
+    /**
+     * Find zero or one Productioniteminfo that matches the filter.
+     * @param {productioniteminfoFindUniqueArgs} args - Arguments to find a Productioniteminfo
+     * @example
+     * // Get one Productioniteminfo
+     * const productioniteminfo = await prisma.productioniteminfo.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends productioniteminfoFindUniqueArgs>(args: SelectSubset<T, productioniteminfoFindUniqueArgs<ExtArgs>>): Prisma__productioniteminfoClient<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Productioniteminfo that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {productioniteminfoFindUniqueOrThrowArgs} args - Arguments to find a Productioniteminfo
+     * @example
+     * // Get one Productioniteminfo
+     * const productioniteminfo = await prisma.productioniteminfo.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends productioniteminfoFindUniqueOrThrowArgs>(args: SelectSubset<T, productioniteminfoFindUniqueOrThrowArgs<ExtArgs>>): Prisma__productioniteminfoClient<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Productioniteminfo that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productioniteminfoFindFirstArgs} args - Arguments to find a Productioniteminfo
+     * @example
+     * // Get one Productioniteminfo
+     * const productioniteminfo = await prisma.productioniteminfo.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends productioniteminfoFindFirstArgs>(args?: SelectSubset<T, productioniteminfoFindFirstArgs<ExtArgs>>): Prisma__productioniteminfoClient<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Productioniteminfo that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productioniteminfoFindFirstOrThrowArgs} args - Arguments to find a Productioniteminfo
+     * @example
+     * // Get one Productioniteminfo
+     * const productioniteminfo = await prisma.productioniteminfo.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends productioniteminfoFindFirstOrThrowArgs>(args?: SelectSubset<T, productioniteminfoFindFirstOrThrowArgs<ExtArgs>>): Prisma__productioniteminfoClient<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Productioniteminfos that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productioniteminfoFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Productioniteminfos
+     * const productioniteminfos = await prisma.productioniteminfo.findMany()
+     * 
+     * // Get first 10 Productioniteminfos
+     * const productioniteminfos = await prisma.productioniteminfo.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productioniteminfoWithIdOnly = await prisma.productioniteminfo.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends productioniteminfoFindManyArgs>(args?: SelectSubset<T, productioniteminfoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Productioniteminfo.
+     * @param {productioniteminfoCreateArgs} args - Arguments to create a Productioniteminfo.
+     * @example
+     * // Create one Productioniteminfo
+     * const Productioniteminfo = await prisma.productioniteminfo.create({
+     *   data: {
+     *     // ... data to create a Productioniteminfo
+     *   }
+     * })
+     * 
+     */
+    create<T extends productioniteminfoCreateArgs>(args: SelectSubset<T, productioniteminfoCreateArgs<ExtArgs>>): Prisma__productioniteminfoClient<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Productioniteminfos.
+     * @param {productioniteminfoCreateManyArgs} args - Arguments to create many Productioniteminfos.
+     * @example
+     * // Create many Productioniteminfos
+     * const productioniteminfo = await prisma.productioniteminfo.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends productioniteminfoCreateManyArgs>(args?: SelectSubset<T, productioniteminfoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Productioniteminfo.
+     * @param {productioniteminfoDeleteArgs} args - Arguments to delete one Productioniteminfo.
+     * @example
+     * // Delete one Productioniteminfo
+     * const Productioniteminfo = await prisma.productioniteminfo.delete({
+     *   where: {
+     *     // ... filter to delete one Productioniteminfo
+     *   }
+     * })
+     * 
+     */
+    delete<T extends productioniteminfoDeleteArgs>(args: SelectSubset<T, productioniteminfoDeleteArgs<ExtArgs>>): Prisma__productioniteminfoClient<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Productioniteminfo.
+     * @param {productioniteminfoUpdateArgs} args - Arguments to update one Productioniteminfo.
+     * @example
+     * // Update one Productioniteminfo
+     * const productioniteminfo = await prisma.productioniteminfo.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends productioniteminfoUpdateArgs>(args: SelectSubset<T, productioniteminfoUpdateArgs<ExtArgs>>): Prisma__productioniteminfoClient<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Productioniteminfos.
+     * @param {productioniteminfoDeleteManyArgs} args - Arguments to filter Productioniteminfos to delete.
+     * @example
+     * // Delete a few Productioniteminfos
+     * const { count } = await prisma.productioniteminfo.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends productioniteminfoDeleteManyArgs>(args?: SelectSubset<T, productioniteminfoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Productioniteminfos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productioniteminfoUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Productioniteminfos
+     * const productioniteminfo = await prisma.productioniteminfo.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends productioniteminfoUpdateManyArgs>(args: SelectSubset<T, productioniteminfoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Productioniteminfo.
+     * @param {productioniteminfoUpsertArgs} args - Arguments to update or create a Productioniteminfo.
+     * @example
+     * // Update or create a Productioniteminfo
+     * const productioniteminfo = await prisma.productioniteminfo.upsert({
+     *   create: {
+     *     // ... data to create a Productioniteminfo
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Productioniteminfo we want to update
+     *   }
+     * })
+     */
+    upsert<T extends productioniteminfoUpsertArgs>(args: SelectSubset<T, productioniteminfoUpsertArgs<ExtArgs>>): Prisma__productioniteminfoClient<$Result.GetResult<Prisma.$productioniteminfoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Productioniteminfos.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productioniteminfoCountArgs} args - Arguments to filter Productioniteminfos to count.
+     * @example
+     * // Count the number of Productioniteminfos
+     * const count = await prisma.productioniteminfo.count({
+     *   where: {
+     *     // ... the filter for the Productioniteminfos we want to count
+     *   }
+     * })
+    **/
+    count<T extends productioniteminfoCountArgs>(
+      args?: Subset<T, productioniteminfoCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductioniteminfoCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Productioniteminfo.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductioniteminfoAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductioniteminfoAggregateArgs>(args: Subset<T, ProductioniteminfoAggregateArgs>): Prisma.PrismaPromise<GetProductioniteminfoAggregateType<T>>
+
+    /**
+     * Group by Productioniteminfo.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {productioniteminfoGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends productioniteminfoGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: productioniteminfoGroupByArgs['orderBy'] }
+        : { orderBy?: productioniteminfoGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, productioniteminfoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductioniteminfoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the productioniteminfo model
+   */
+  readonly fields: productioniteminfoFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for productioniteminfo.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__productioniteminfoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    products<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    transaction_info<T extends TransactionInfoDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TransactionInfoDefaultArgs<ExtArgs>>): Prisma__TransactionInfoClient<$Result.GetResult<Prisma.$TransactionInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the productioniteminfo model
+   */
+  interface productioniteminfoFieldRefs {
+    readonly id: FieldRef<"productioniteminfo", 'Int'>
+    readonly transactionId: FieldRef<"productioniteminfo", 'Int'>
+    readonly productId: FieldRef<"productioniteminfo", 'Int'>
+    readonly batchNo: FieldRef<"productioniteminfo", 'String'>
+    readonly status: FieldRef<"productioniteminfo", 'productioniteminfo_status'>
+    readonly createdAt: FieldRef<"productioniteminfo", 'DateTime'>
+    readonly updatedAt: FieldRef<"productioniteminfo", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * productioniteminfo findUnique
+   */
+  export type productioniteminfoFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    /**
+     * Filter, which productioniteminfo to fetch.
+     */
+    where: productioniteminfoWhereUniqueInput
+  }
+
+  /**
+   * productioniteminfo findUniqueOrThrow
+   */
+  export type productioniteminfoFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    /**
+     * Filter, which productioniteminfo to fetch.
+     */
+    where: productioniteminfoWhereUniqueInput
+  }
+
+  /**
+   * productioniteminfo findFirst
+   */
+  export type productioniteminfoFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    /**
+     * Filter, which productioniteminfo to fetch.
+     */
+    where?: productioniteminfoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of productioniteminfos to fetch.
+     */
+    orderBy?: productioniteminfoOrderByWithRelationInput | productioniteminfoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for productioniteminfos.
+     */
+    cursor?: productioniteminfoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` productioniteminfos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` productioniteminfos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of productioniteminfos.
+     */
+    distinct?: ProductioniteminfoScalarFieldEnum | ProductioniteminfoScalarFieldEnum[]
+  }
+
+  /**
+   * productioniteminfo findFirstOrThrow
+   */
+  export type productioniteminfoFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    /**
+     * Filter, which productioniteminfo to fetch.
+     */
+    where?: productioniteminfoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of productioniteminfos to fetch.
+     */
+    orderBy?: productioniteminfoOrderByWithRelationInput | productioniteminfoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for productioniteminfos.
+     */
+    cursor?: productioniteminfoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` productioniteminfos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` productioniteminfos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of productioniteminfos.
+     */
+    distinct?: ProductioniteminfoScalarFieldEnum | ProductioniteminfoScalarFieldEnum[]
+  }
+
+  /**
+   * productioniteminfo findMany
+   */
+  export type productioniteminfoFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    /**
+     * Filter, which productioniteminfos to fetch.
+     */
+    where?: productioniteminfoWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of productioniteminfos to fetch.
+     */
+    orderBy?: productioniteminfoOrderByWithRelationInput | productioniteminfoOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing productioniteminfos.
+     */
+    cursor?: productioniteminfoWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` productioniteminfos from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` productioniteminfos.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of productioniteminfos.
+     */
+    distinct?: ProductioniteminfoScalarFieldEnum | ProductioniteminfoScalarFieldEnum[]
+  }
+
+  /**
+   * productioniteminfo create
+   */
+  export type productioniteminfoCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    /**
+     * The data needed to create a productioniteminfo.
+     */
+    data: XOR<productioniteminfoCreateInput, productioniteminfoUncheckedCreateInput>
+  }
+
+  /**
+   * productioniteminfo createMany
+   */
+  export type productioniteminfoCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many productioniteminfos.
+     */
+    data: productioniteminfoCreateManyInput | productioniteminfoCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * productioniteminfo update
+   */
+  export type productioniteminfoUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    /**
+     * The data needed to update a productioniteminfo.
+     */
+    data: XOR<productioniteminfoUpdateInput, productioniteminfoUncheckedUpdateInput>
+    /**
+     * Choose, which productioniteminfo to update.
+     */
+    where: productioniteminfoWhereUniqueInput
+  }
+
+  /**
+   * productioniteminfo updateMany
+   */
+  export type productioniteminfoUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update productioniteminfos.
+     */
+    data: XOR<productioniteminfoUpdateManyMutationInput, productioniteminfoUncheckedUpdateManyInput>
+    /**
+     * Filter which productioniteminfos to update
+     */
+    where?: productioniteminfoWhereInput
+    /**
+     * Limit how many productioniteminfos to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * productioniteminfo upsert
+   */
+  export type productioniteminfoUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    /**
+     * The filter to search for the productioniteminfo to update in case it exists.
+     */
+    where: productioniteminfoWhereUniqueInput
+    /**
+     * In case the productioniteminfo found by the `where` argument doesn't exist, create a new productioniteminfo with this data.
+     */
+    create: XOR<productioniteminfoCreateInput, productioniteminfoUncheckedCreateInput>
+    /**
+     * In case the productioniteminfo was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<productioniteminfoUpdateInput, productioniteminfoUncheckedUpdateInput>
+  }
+
+  /**
+   * productioniteminfo delete
+   */
+  export type productioniteminfoDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+    /**
+     * Filter which productioniteminfo to delete.
+     */
+    where: productioniteminfoWhereUniqueInput
+  }
+
+  /**
+   * productioniteminfo deleteMany
+   */
+  export type productioniteminfoDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which productioniteminfos to delete
+     */
+    where?: productioniteminfoWhereInput
+    /**
+     * Limit how many productioniteminfos to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * productioniteminfo without action
+   */
+  export type productioniteminfoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the productioniteminfo
+     */
+    select?: productioniteminfoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the productioniteminfo
+     */
+    omit?: productioniteminfoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: productioniteminfoInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -31677,19 +31681,6 @@ export namespace Prisma {
   export type TransactionInfoScalarFieldEnum = (typeof TransactionInfoScalarFieldEnum)[keyof typeof TransactionInfoScalarFieldEnum]
 
 
-  export const ProductionItemInfoScalarFieldEnum: {
-    id: 'id',
-    transactionId: 'transactionId',
-    productId: 'productId',
-    batchNo: 'batchNo',
-    status: 'status',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type ProductionItemInfoScalarFieldEnum = (typeof ProductionItemInfoScalarFieldEnum)[keyof typeof ProductionItemInfoScalarFieldEnum]
-
-
   export const JournalScalarFieldEnum: {
     id: 'id',
     transectionId: 'transectionId',
@@ -31776,6 +31767,19 @@ export namespace Prisma {
   };
 
   export type ProductionexpenseitemScalarFieldEnum = (typeof ProductionexpenseitemScalarFieldEnum)[keyof typeof ProductionexpenseitemScalarFieldEnum]
+
+
+  export const ProductioniteminfoScalarFieldEnum: {
+    id: 'id',
+    transactionId: 'transactionId',
+    productId: 'productId',
+    batchNo: 'batchNo',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProductioniteminfoScalarFieldEnum = (typeof ProductioniteminfoScalarFieldEnum)[keyof typeof ProductioniteminfoScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -31913,13 +31917,6 @@ export namespace Prisma {
   export type TransactionInfoOrderByRelevanceFieldEnum = (typeof TransactionInfoOrderByRelevanceFieldEnum)[keyof typeof TransactionInfoOrderByRelevanceFieldEnum]
 
 
-  export const ProductionItemInfoOrderByRelevanceFieldEnum: {
-    batchNo: 'batchNo'
-  };
-
-  export type ProductionItemInfoOrderByRelevanceFieldEnum = (typeof ProductionItemInfoOrderByRelevanceFieldEnum)[keyof typeof ProductionItemInfoOrderByRelevanceFieldEnum]
-
-
   export const JournalOrderByRelevanceFieldEnum: {
     narration: 'narration'
   };
@@ -31932,6 +31929,13 @@ export namespace Prisma {
   };
 
   export type productionexpenseitemOrderByRelevanceFieldEnum = (typeof productionexpenseitemOrderByRelevanceFieldEnum)[keyof typeof productionexpenseitemOrderByRelevanceFieldEnum]
+
+
+  export const productioniteminfoOrderByRelevanceFieldEnum: {
+    batchNo: 'batchNo'
+  };
+
+  export type productioniteminfoOrderByRelevanceFieldEnum = (typeof productioniteminfoOrderByRelevanceFieldEnum)[keyof typeof productioniteminfoOrderByRelevanceFieldEnum]
 
 
   /**
@@ -32010,9 +32014,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'TxStatus'
+   * Reference to a field of type 'productioniteminfo_status'
    */
-  export type EnumTxStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TxStatus'>
+  export type Enumproductioniteminfo_statusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'productioniteminfo_status'>
     
   /**
    * Deep Input Types
@@ -32588,10 +32592,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updateAt?: DateTimeFilter<"Product"> | Date | string
     inventory?: InventoryListRelationFilter
+    productioniteminfo?: ProductioniteminfoListRelationFilter
     subCategory?: XOR<SubCategoryScalarRelationFilter, SubCategoryWhereInput>
     unit?: XOR<UnitScalarRelationFilter, UnitWhereInput>
     purchaseOrderInventories?: PurchaseOrderInventoryListRelationFilter
-    productionItemInfos?: ProductionItemInfoListRelationFilter
   }
 
   export type ProductOrderByWithRelationInput = {
@@ -32612,10 +32616,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updateAt?: SortOrder
     inventory?: InventoryOrderByRelationAggregateInput
+    productioniteminfo?: productioniteminfoOrderByRelationAggregateInput
     subCategory?: SubCategoryOrderByWithRelationInput
     unit?: UnitOrderByWithRelationInput
     purchaseOrderInventories?: PurchaseOrderInventoryOrderByRelationAggregateInput
-    productionItemInfos?: ProductionItemInfoOrderByRelationAggregateInput
     _relevance?: ProductOrderByRelevanceInput
   }
 
@@ -32640,10 +32644,10 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Product"> | Date | string
     updateAt?: DateTimeFilter<"Product"> | Date | string
     inventory?: InventoryListRelationFilter
+    productioniteminfo?: ProductioniteminfoListRelationFilter
     subCategory?: XOR<SubCategoryScalarRelationFilter, SubCategoryWhereInput>
     unit?: XOR<UnitScalarRelationFilter, UnitWhereInput>
     purchaseOrderInventories?: PurchaseOrderInventoryListRelationFilter
-    productionItemInfos?: ProductionItemInfoListRelationFilter
   }, "id">
 
   export type ProductOrderByWithAggregationInput = {
@@ -33386,7 +33390,7 @@ export namespace Prisma {
     creditAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedDebitAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedCreditAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    isOpening?: BoolFilter<"PMInventory"> | boolean
+    isOpening?: IntFilter<"PMInventory"> | number
     status?: EnumStatusFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"PMInventory"> | Date | string
     updatedAt?: DateTimeFilter<"PMInventory"> | Date | string
@@ -33439,7 +33443,7 @@ export namespace Prisma {
     creditAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedDebitAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedCreditAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    isOpening?: BoolFilter<"PMInventory"> | boolean
+    isOpening?: IntFilter<"PMInventory"> | number
     status?: EnumStatusFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"PMInventory"> | Date | string
     updatedAt?: DateTimeFilter<"PMInventory"> | Date | string
@@ -33495,7 +33499,7 @@ export namespace Prisma {
     creditAmount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
     integratedDebitAmount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
     integratedCreditAmount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
-    isOpening?: BoolWithAggregatesFilter<"PMInventory"> | boolean
+    isOpening?: IntWithAggregatesFilter<"PMInventory"> | number
     status?: EnumStatusWithAggregatesFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeWithAggregatesFilter<"PMInventory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PMInventory"> | Date | string
@@ -33518,8 +33522,8 @@ export namespace Prisma {
     journal?: JournalListRelationFilter
     pminventories?: PMInventoryListRelationFilter
     productionExpensesInventory?: ProductionExpensesInventoryListRelationFilter
+    productioniteminfo?: XOR<ProductioniteminfoNullableScalarRelationFilter, productioniteminfoWhereInput> | null
     party?: XOR<PartyNullableScalarRelationFilter, PartyWhereInput> | null
-    productionItemInfo?: XOR<ProductionItemInfoNullableScalarRelationFilter, ProductionItemInfoWhereInput> | null
   }
 
   export type TransactionInfoOrderByWithRelationInput = {
@@ -33536,8 +33540,8 @@ export namespace Prisma {
     journal?: JournalOrderByRelationAggregateInput
     pminventories?: PMInventoryOrderByRelationAggregateInput
     productionExpensesInventory?: ProductionExpensesInventoryOrderByRelationAggregateInput
+    productioniteminfo?: productioniteminfoOrderByWithRelationInput
     party?: PartyOrderByWithRelationInput
-    productionItemInfo?: ProductionItemInfoOrderByWithRelationInput
     _relevance?: TransactionInfoOrderByRelevanceInput
   }
 
@@ -33558,8 +33562,8 @@ export namespace Prisma {
     journal?: JournalListRelationFilter
     pminventories?: PMInventoryListRelationFilter
     productionExpensesInventory?: ProductionExpensesInventoryListRelationFilter
+    productioniteminfo?: XOR<ProductioniteminfoNullableScalarRelationFilter, productioniteminfoWhereInput> | null
     party?: XOR<PartyNullableScalarRelationFilter, PartyWhereInput> | null
-    productionItemInfo?: XOR<ProductionItemInfoNullableScalarRelationFilter, ProductionItemInfoWhereInput> | null
   }, "id" | "voucherNo">
 
   export type TransactionInfoOrderByWithAggregationInput = {
@@ -33590,77 +33594,6 @@ export namespace Prisma {
     voucherType?: EnumVoucherTypeWithAggregatesFilter<"TransactionInfo"> | $Enums.VoucherType
     createdAt?: DateTimeWithAggregatesFilter<"TransactionInfo"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"TransactionInfo"> | Date | string
-  }
-
-  export type ProductionItemInfoWhereInput = {
-    AND?: ProductionItemInfoWhereInput | ProductionItemInfoWhereInput[]
-    OR?: ProductionItemInfoWhereInput[]
-    NOT?: ProductionItemInfoWhereInput | ProductionItemInfoWhereInput[]
-    id?: IntFilter<"ProductionItemInfo"> | number
-    transactionId?: IntFilter<"ProductionItemInfo"> | number
-    productId?: IntFilter<"ProductionItemInfo"> | number
-    batchNo?: StringFilter<"ProductionItemInfo"> | string
-    status?: EnumTxStatusFilter<"ProductionItemInfo"> | $Enums.TxStatus
-    createdAt?: DateTimeFilter<"ProductionItemInfo"> | Date | string
-    updatedAt?: DateTimeFilter<"ProductionItemInfo"> | Date | string
-    transactionInfo?: XOR<TransactionInfoScalarRelationFilter, TransactionInfoWhereInput>
-    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-  }
-
-  export type ProductionItemInfoOrderByWithRelationInput = {
-    id?: SortOrder
-    transactionId?: SortOrder
-    productId?: SortOrder
-    batchNo?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    transactionInfo?: TransactionInfoOrderByWithRelationInput
-    product?: ProductOrderByWithRelationInput
-    _relevance?: ProductionItemInfoOrderByRelevanceInput
-  }
-
-  export type ProductionItemInfoWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    transactionId?: number
-    batchNo?: string
-    AND?: ProductionItemInfoWhereInput | ProductionItemInfoWhereInput[]
-    OR?: ProductionItemInfoWhereInput[]
-    NOT?: ProductionItemInfoWhereInput | ProductionItemInfoWhereInput[]
-    productId?: IntFilter<"ProductionItemInfo"> | number
-    status?: EnumTxStatusFilter<"ProductionItemInfo"> | $Enums.TxStatus
-    createdAt?: DateTimeFilter<"ProductionItemInfo"> | Date | string
-    updatedAt?: DateTimeFilter<"ProductionItemInfo"> | Date | string
-    transactionInfo?: XOR<TransactionInfoScalarRelationFilter, TransactionInfoWhereInput>
-    product?: XOR<ProductScalarRelationFilter, ProductWhereInput>
-  }, "id" | "transactionId" | "batchNo">
-
-  export type ProductionItemInfoOrderByWithAggregationInput = {
-    id?: SortOrder
-    transactionId?: SortOrder
-    productId?: SortOrder
-    batchNo?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: ProductionItemInfoCountOrderByAggregateInput
-    _avg?: ProductionItemInfoAvgOrderByAggregateInput
-    _max?: ProductionItemInfoMaxOrderByAggregateInput
-    _min?: ProductionItemInfoMinOrderByAggregateInput
-    _sum?: ProductionItemInfoSumOrderByAggregateInput
-  }
-
-  export type ProductionItemInfoScalarWhereWithAggregatesInput = {
-    AND?: ProductionItemInfoScalarWhereWithAggregatesInput | ProductionItemInfoScalarWhereWithAggregatesInput[]
-    OR?: ProductionItemInfoScalarWhereWithAggregatesInput[]
-    NOT?: ProductionItemInfoScalarWhereWithAggregatesInput | ProductionItemInfoScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"ProductionItemInfo"> | number
-    transactionId?: IntWithAggregatesFilter<"ProductionItemInfo"> | number
-    productId?: IntWithAggregatesFilter<"ProductionItemInfo"> | number
-    batchNo?: StringWithAggregatesFilter<"ProductionItemInfo"> | string
-    status?: EnumTxStatusWithAggregatesFilter<"ProductionItemInfo"> | $Enums.TxStatus
-    createdAt?: DateTimeWithAggregatesFilter<"ProductionItemInfo"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"ProductionItemInfo"> | Date | string
   }
 
   export type JournalWhereInput = {
@@ -34141,6 +34074,77 @@ export namespace Prisma {
     unitRate?: FloatWithAggregatesFilter<"productionexpenseitem"> | number
     createdAt?: DateTimeWithAggregatesFilter<"productionexpenseitem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"productionexpenseitem"> | Date | string
+  }
+
+  export type productioniteminfoWhereInput = {
+    AND?: productioniteminfoWhereInput | productioniteminfoWhereInput[]
+    OR?: productioniteminfoWhereInput[]
+    NOT?: productioniteminfoWhereInput | productioniteminfoWhereInput[]
+    id?: IntFilter<"productioniteminfo"> | number
+    transactionId?: IntFilter<"productioniteminfo"> | number
+    productId?: IntFilter<"productioniteminfo"> | number
+    batchNo?: StringFilter<"productioniteminfo"> | string
+    status?: Enumproductioniteminfo_statusFilter<"productioniteminfo"> | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFilter<"productioniteminfo"> | Date | string
+    updatedAt?: DateTimeFilter<"productioniteminfo"> | Date | string
+    products?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    transaction_info?: XOR<TransactionInfoScalarRelationFilter, TransactionInfoWhereInput>
+  }
+
+  export type productioniteminfoOrderByWithRelationInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    productId?: SortOrder
+    batchNo?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    products?: ProductOrderByWithRelationInput
+    transaction_info?: TransactionInfoOrderByWithRelationInput
+    _relevance?: productioniteminfoOrderByRelevanceInput
+  }
+
+  export type productioniteminfoWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    transactionId?: number
+    batchNo?: string
+    AND?: productioniteminfoWhereInput | productioniteminfoWhereInput[]
+    OR?: productioniteminfoWhereInput[]
+    NOT?: productioniteminfoWhereInput | productioniteminfoWhereInput[]
+    productId?: IntFilter<"productioniteminfo"> | number
+    status?: Enumproductioniteminfo_statusFilter<"productioniteminfo"> | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFilter<"productioniteminfo"> | Date | string
+    updatedAt?: DateTimeFilter<"productioniteminfo"> | Date | string
+    products?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    transaction_info?: XOR<TransactionInfoScalarRelationFilter, TransactionInfoWhereInput>
+  }, "id" | "transactionId" | "batchNo">
+
+  export type productioniteminfoOrderByWithAggregationInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    productId?: SortOrder
+    batchNo?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: productioniteminfoCountOrderByAggregateInput
+    _avg?: productioniteminfoAvgOrderByAggregateInput
+    _max?: productioniteminfoMaxOrderByAggregateInput
+    _min?: productioniteminfoMinOrderByAggregateInput
+    _sum?: productioniteminfoSumOrderByAggregateInput
+  }
+
+  export type productioniteminfoScalarWhereWithAggregatesInput = {
+    AND?: productioniteminfoScalarWhereWithAggregatesInput | productioniteminfoScalarWhereWithAggregatesInput[]
+    OR?: productioniteminfoScalarWhereWithAggregatesInput[]
+    NOT?: productioniteminfoScalarWhereWithAggregatesInput | productioniteminfoScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"productioniteminfo"> | number
+    transactionId?: IntWithAggregatesFilter<"productioniteminfo"> | number
+    productId?: IntWithAggregatesFilter<"productioniteminfo"> | number
+    batchNo?: StringWithAggregatesFilter<"productioniteminfo"> | string
+    status?: Enumproductioniteminfo_statusWithAggregatesFilter<"productioniteminfo"> | $Enums.productioniteminfo_status
+    createdAt?: DateTimeWithAggregatesFilter<"productioniteminfo"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"productioniteminfo"> | Date | string
   }
 
   export type CategoryCreateInput = {
@@ -34721,10 +34725,10 @@ export namespace Prisma {
     createdAt?: Date | string
     updateAt?: Date | string
     inventory?: InventoryCreateNestedManyWithoutProductInput
+    productioniteminfo?: productioniteminfoCreateNestedManyWithoutProductsInput
     subCategory: SubCategoryCreateNestedOneWithoutProductInput
     unit: UnitCreateNestedOneWithoutProductInput
     purchaseOrderInventories?: PurchaseOrderInventoryCreateNestedManyWithoutProductInput
-    productionItemInfos?: ProductionItemInfoCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateInput = {
@@ -34745,8 +34749,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updateAt?: Date | string
     inventory?: InventoryUncheckedCreateNestedManyWithoutProductInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedManyWithoutProductsInput
     purchaseOrderInventories?: PurchaseOrderInventoryUncheckedCreateNestedManyWithoutProductInput
-    productionItemInfos?: ProductionItemInfoUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductUpdateInput = {
@@ -34764,10 +34768,10 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryUpdateManyWithoutProductNestedInput
+    productioniteminfo?: productioniteminfoUpdateManyWithoutProductsNestedInput
     subCategory?: SubCategoryUpdateOneRequiredWithoutProductNestedInput
     unit?: UnitUpdateOneRequiredWithoutProductNestedInput
     purchaseOrderInventories?: PurchaseOrderInventoryUpdateManyWithoutProductNestedInput
-    productionItemInfos?: ProductionItemInfoUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateInput = {
@@ -34788,8 +34792,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryUncheckedUpdateManyWithoutProductNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateManyWithoutProductsNestedInput
     purchaseOrderInventories?: PurchaseOrderInventoryUncheckedUpdateManyWithoutProductNestedInput
-    productionItemInfos?: ProductionItemInfoUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductCreateManyInput = {
@@ -35569,7 +35573,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: boolean
+    isOpening?: number
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35594,7 +35598,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: boolean
+    isOpening?: number
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35614,7 +35618,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: BoolFieldUpdateOperationsInput | boolean
+    isOpening?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35639,7 +35643,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: BoolFieldUpdateOperationsInput | boolean
+    isOpening?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35662,7 +35666,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: boolean
+    isOpening?: number
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35682,7 +35686,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: BoolFieldUpdateOperationsInput | boolean
+    isOpening?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35705,7 +35709,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: BoolFieldUpdateOperationsInput | boolean
+    isOpening?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35723,8 +35727,8 @@ export namespace Prisma {
     journal?: JournalCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryCreateNestedManyWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoCreateNestedOneWithoutTransaction_infoInput
     party?: PartyCreateNestedOneWithoutTransactionInfosInput
-    productionItemInfo?: ProductionItemInfoCreateNestedOneWithoutTransactionInfoInput
   }
 
   export type TransactionInfoUncheckedCreateInput = {
@@ -35741,7 +35745,7 @@ export namespace Prisma {
     journal?: JournalUncheckedCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
-    productionItemInfo?: ProductionItemInfoUncheckedCreateNestedOneWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedOneWithoutTransaction_infoInput
   }
 
   export type TransactionInfoUpdateInput = {
@@ -35756,8 +35760,8 @@ export namespace Prisma {
     journal?: JournalUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUpdateManyWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUpdateOneWithoutTransaction_infoNestedInput
     party?: PartyUpdateOneWithoutTransactionInfosNestedInput
-    productionItemInfo?: ProductionItemInfoUpdateOneWithoutTransactionInfoNestedInput
   }
 
   export type TransactionInfoUncheckedUpdateInput = {
@@ -35774,7 +35778,7 @@ export namespace Prisma {
     journal?: JournalUncheckedUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    productionItemInfo?: ProductionItemInfoUncheckedUpdateOneWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateOneWithoutTransaction_infoNestedInput
   }
 
   export type TransactionInfoCreateManyInput = {
@@ -35804,71 +35808,6 @@ export namespace Prisma {
     date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     partyId?: NullableIntFieldUpdateOperationsInput | number | null
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ProductionItemInfoCreateInput = {
-    batchNo: string
-    status?: $Enums.TxStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    transactionInfo: TransactionInfoCreateNestedOneWithoutProductionItemInfoInput
-    product: ProductCreateNestedOneWithoutProductionItemInfosInput
-  }
-
-  export type ProductionItemInfoUncheckedCreateInput = {
-    id?: number
-    transactionId: number
-    productId: number
-    batchNo: string
-    status?: $Enums.TxStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ProductionItemInfoUpdateInput = {
-    batchNo?: StringFieldUpdateOperationsInput | string
-    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    transactionInfo?: TransactionInfoUpdateOneRequiredWithoutProductionItemInfoNestedInput
-    product?: ProductUpdateOneRequiredWithoutProductionItemInfosNestedInput
-  }
-
-  export type ProductionItemInfoUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    transactionId?: IntFieldUpdateOperationsInput | number
-    productId?: IntFieldUpdateOperationsInput | number
-    batchNo?: StringFieldUpdateOperationsInput | string
-    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ProductionItemInfoCreateManyInput = {
-    id?: number
-    transactionId: number
-    productId: number
-    batchNo: string
-    status?: $Enums.TxStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ProductionItemInfoUpdateManyMutationInput = {
-    batchNo?: StringFieldUpdateOperationsInput | string
-    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ProductionItemInfoUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    transactionId?: IntFieldUpdateOperationsInput | number
-    productId?: IntFieldUpdateOperationsInput | number
-    batchNo?: StringFieldUpdateOperationsInput | string
-    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -36327,6 +36266,71 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     expItemName?: StringFieldUpdateOperationsInput | string
     unitRate?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type productioniteminfoCreateInput = {
+    batchNo: string
+    status?: $Enums.productioniteminfo_status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    products: ProductCreateNestedOneWithoutProductioniteminfoInput
+    transaction_info: TransactionInfoCreateNestedOneWithoutProductioniteminfoInput
+  }
+
+  export type productioniteminfoUncheckedCreateInput = {
+    id?: number
+    transactionId: number
+    productId: number
+    batchNo: string
+    status?: $Enums.productioniteminfo_status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type productioniteminfoUpdateInput = {
+    batchNo?: StringFieldUpdateOperationsInput | string
+    status?: Enumproductioniteminfo_statusFieldUpdateOperationsInput | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    products?: ProductUpdateOneRequiredWithoutProductioniteminfoNestedInput
+    transaction_info?: TransactionInfoUpdateOneRequiredWithoutProductioniteminfoNestedInput
+  }
+
+  export type productioniteminfoUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    transactionId?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
+    batchNo?: StringFieldUpdateOperationsInput | string
+    status?: Enumproductioniteminfo_statusFieldUpdateOperationsInput | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type productioniteminfoCreateManyInput = {
+    id?: number
+    transactionId: number
+    productId: number
+    batchNo: string
+    status?: $Enums.productioniteminfo_status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type productioniteminfoUpdateManyMutationInput = {
+    batchNo?: StringFieldUpdateOperationsInput | string
+    status?: Enumproductioniteminfo_statusFieldUpdateOperationsInput | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type productioniteminfoUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    transactionId?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
+    batchNo?: StringFieldUpdateOperationsInput | string
+    status?: Enumproductioniteminfo_statusFieldUpdateOperationsInput | $Enums.productioniteminfo_status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37041,6 +37045,12 @@ export namespace Prisma {
     none?: InventoryWhereInput
   }
 
+  export type ProductioniteminfoListRelationFilter = {
+    every?: productioniteminfoWhereInput
+    some?: productioniteminfoWhereInput
+    none?: productioniteminfoWhereInput
+  }
+
   export type SubCategoryScalarRelationFilter = {
     is?: SubCategoryWhereInput
     isNot?: SubCategoryWhereInput
@@ -37057,21 +37067,15 @@ export namespace Prisma {
     none?: PurchaseOrderInventoryWhereInput
   }
 
-  export type ProductionItemInfoListRelationFilter = {
-    every?: ProductionItemInfoWhereInput
-    some?: ProductionItemInfoWhereInput
-    none?: ProductionItemInfoWhereInput
-  }
-
   export type InventoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type PurchaseOrderInventoryOrderByRelationAggregateInput = {
+  export type productioniteminfoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ProductionItemInfoOrderByRelationAggregateInput = {
+  export type PurchaseOrderInventoryOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -37785,6 +37789,7 @@ export namespace Prisma {
     creditAmount?: SortOrder
     integratedDebitAmount?: SortOrder
     integratedCreditAmount?: SortOrder
+    isOpening?: SortOrder
   }
 
   export type PMInventoryMaxOrderByAggregateInput = {
@@ -37848,6 +37853,7 @@ export namespace Prisma {
     creditAmount?: SortOrder
     integratedDebitAmount?: SortOrder
     integratedCreditAmount?: SortOrder
+    isOpening?: SortOrder
   }
 
   export type EnumVoucherTypeFilter<$PrismaModel = never> = {
@@ -37863,9 +37869,9 @@ export namespace Prisma {
     none?: ProductionExpensesInventoryWhereInput
   }
 
-  export type ProductionItemInfoNullableScalarRelationFilter = {
-    is?: ProductionItemInfoWhereInput | null
-    isNot?: ProductionItemInfoWhereInput | null
+  export type ProductioniteminfoNullableScalarRelationFilter = {
+    is?: productioniteminfoWhereInput | null
+    isNot?: productioniteminfoWhereInput | null
   }
 
   export type ProductionExpensesInventoryOrderByRelationAggregateInput = {
@@ -37929,81 +37935,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumVoucherTypeFilter<$PrismaModel>
     _max?: NestedEnumVoucherTypeFilter<$PrismaModel>
-  }
-
-  export type EnumTxStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.TxStatus[]
-    notIn?: $Enums.TxStatus[]
-    not?: NestedEnumTxStatusFilter<$PrismaModel> | $Enums.TxStatus
-  }
-
-  export type TransactionInfoScalarRelationFilter = {
-    is?: TransactionInfoWhereInput
-    isNot?: TransactionInfoWhereInput
-  }
-
-  export type ProductScalarRelationFilter = {
-    is?: ProductWhereInput
-    isNot?: ProductWhereInput
-  }
-
-  export type ProductionItemInfoOrderByRelevanceInput = {
-    fields: ProductionItemInfoOrderByRelevanceFieldEnum | ProductionItemInfoOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type ProductionItemInfoCountOrderByAggregateInput = {
-    id?: SortOrder
-    transactionId?: SortOrder
-    productId?: SortOrder
-    batchNo?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ProductionItemInfoAvgOrderByAggregateInput = {
-    id?: SortOrder
-    transactionId?: SortOrder
-    productId?: SortOrder
-  }
-
-  export type ProductionItemInfoMaxOrderByAggregateInput = {
-    id?: SortOrder
-    transactionId?: SortOrder
-    productId?: SortOrder
-    batchNo?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ProductionItemInfoMinOrderByAggregateInput = {
-    id?: SortOrder
-    transactionId?: SortOrder
-    productId?: SortOrder
-    batchNo?: SortOrder
-    status?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type ProductionItemInfoSumOrderByAggregateInput = {
-    id?: SortOrder
-    transactionId?: SortOrder
-    productId?: SortOrder
-  }
-
-  export type EnumTxStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.TxStatus[]
-    notIn?: $Enums.TxStatus[]
-    not?: NestedEnumTxStatusWithAggregatesFilter<$PrismaModel> | $Enums.TxStatus
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTxStatusFilter<$PrismaModel>
-    _max?: NestedEnumTxStatusFilter<$PrismaModel>
   }
 
   export type AccountsItemNullableScalarRelationFilter = {
@@ -38343,6 +38274,81 @@ export namespace Prisma {
   export type productionexpenseitemSumOrderByAggregateInput = {
     id?: SortOrder
     unitRate?: SortOrder
+  }
+
+  export type Enumproductioniteminfo_statusFilter<$PrismaModel = never> = {
+    equals?: $Enums.productioniteminfo_status | Enumproductioniteminfo_statusFieldRefInput<$PrismaModel>
+    in?: $Enums.productioniteminfo_status[]
+    notIn?: $Enums.productioniteminfo_status[]
+    not?: NestedEnumproductioniteminfo_statusFilter<$PrismaModel> | $Enums.productioniteminfo_status
+  }
+
+  export type ProductScalarRelationFilter = {
+    is?: ProductWhereInput
+    isNot?: ProductWhereInput
+  }
+
+  export type TransactionInfoScalarRelationFilter = {
+    is?: TransactionInfoWhereInput
+    isNot?: TransactionInfoWhereInput
+  }
+
+  export type productioniteminfoOrderByRelevanceInput = {
+    fields: productioniteminfoOrderByRelevanceFieldEnum | productioniteminfoOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type productioniteminfoCountOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    productId?: SortOrder
+    batchNo?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type productioniteminfoAvgOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    productId?: SortOrder
+  }
+
+  export type productioniteminfoMaxOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    productId?: SortOrder
+    batchNo?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type productioniteminfoMinOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    productId?: SortOrder
+    batchNo?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type productioniteminfoSumOrderByAggregateInput = {
+    id?: SortOrder
+    transactionId?: SortOrder
+    productId?: SortOrder
+  }
+
+  export type Enumproductioniteminfo_statusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.productioniteminfo_status | Enumproductioniteminfo_statusFieldRefInput<$PrismaModel>
+    in?: $Enums.productioniteminfo_status[]
+    notIn?: $Enums.productioniteminfo_status[]
+    not?: NestedEnumproductioniteminfo_statusWithAggregatesFilter<$PrismaModel> | $Enums.productioniteminfo_status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumproductioniteminfo_statusFilter<$PrismaModel>
+    _max?: NestedEnumproductioniteminfo_statusFilter<$PrismaModel>
   }
 
   export type SubCategoryCreateNestedManyWithoutCategoryInput = {
@@ -38806,6 +38812,13 @@ export namespace Prisma {
     connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
   }
 
+  export type productioniteminfoCreateNestedManyWithoutProductsInput = {
+    create?: XOR<productioniteminfoCreateWithoutProductsInput, productioniteminfoUncheckedCreateWithoutProductsInput> | productioniteminfoCreateWithoutProductsInput[] | productioniteminfoUncheckedCreateWithoutProductsInput[]
+    connectOrCreate?: productioniteminfoCreateOrConnectWithoutProductsInput | productioniteminfoCreateOrConnectWithoutProductsInput[]
+    createMany?: productioniteminfoCreateManyProductsInputEnvelope
+    connect?: productioniteminfoWhereUniqueInput | productioniteminfoWhereUniqueInput[]
+  }
+
   export type SubCategoryCreateNestedOneWithoutProductInput = {
     create?: XOR<SubCategoryCreateWithoutProductInput, SubCategoryUncheckedCreateWithoutProductInput>
     connectOrCreate?: SubCategoryCreateOrConnectWithoutProductInput
@@ -38825,13 +38838,6 @@ export namespace Prisma {
     connect?: PurchaseOrderInventoryWhereUniqueInput | PurchaseOrderInventoryWhereUniqueInput[]
   }
 
-  export type ProductionItemInfoCreateNestedManyWithoutProductInput = {
-    create?: XOR<ProductionItemInfoCreateWithoutProductInput, ProductionItemInfoUncheckedCreateWithoutProductInput> | ProductionItemInfoCreateWithoutProductInput[] | ProductionItemInfoUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: ProductionItemInfoCreateOrConnectWithoutProductInput | ProductionItemInfoCreateOrConnectWithoutProductInput[]
-    createMany?: ProductionItemInfoCreateManyProductInputEnvelope
-    connect?: ProductionItemInfoWhereUniqueInput | ProductionItemInfoWhereUniqueInput[]
-  }
-
   export type InventoryUncheckedCreateNestedManyWithoutProductInput = {
     create?: XOR<InventoryCreateWithoutProductInput, InventoryUncheckedCreateWithoutProductInput> | InventoryCreateWithoutProductInput[] | InventoryUncheckedCreateWithoutProductInput[]
     connectOrCreate?: InventoryCreateOrConnectWithoutProductInput | InventoryCreateOrConnectWithoutProductInput[]
@@ -38839,18 +38845,18 @@ export namespace Prisma {
     connect?: InventoryWhereUniqueInput | InventoryWhereUniqueInput[]
   }
 
+  export type productioniteminfoUncheckedCreateNestedManyWithoutProductsInput = {
+    create?: XOR<productioniteminfoCreateWithoutProductsInput, productioniteminfoUncheckedCreateWithoutProductsInput> | productioniteminfoCreateWithoutProductsInput[] | productioniteminfoUncheckedCreateWithoutProductsInput[]
+    connectOrCreate?: productioniteminfoCreateOrConnectWithoutProductsInput | productioniteminfoCreateOrConnectWithoutProductsInput[]
+    createMany?: productioniteminfoCreateManyProductsInputEnvelope
+    connect?: productioniteminfoWhereUniqueInput | productioniteminfoWhereUniqueInput[]
+  }
+
   export type PurchaseOrderInventoryUncheckedCreateNestedManyWithoutProductInput = {
     create?: XOR<PurchaseOrderInventoryCreateWithoutProductInput, PurchaseOrderInventoryUncheckedCreateWithoutProductInput> | PurchaseOrderInventoryCreateWithoutProductInput[] | PurchaseOrderInventoryUncheckedCreateWithoutProductInput[]
     connectOrCreate?: PurchaseOrderInventoryCreateOrConnectWithoutProductInput | PurchaseOrderInventoryCreateOrConnectWithoutProductInput[]
     createMany?: PurchaseOrderInventoryCreateManyProductInputEnvelope
     connect?: PurchaseOrderInventoryWhereUniqueInput | PurchaseOrderInventoryWhereUniqueInput[]
-  }
-
-  export type ProductionItemInfoUncheckedCreateNestedManyWithoutProductInput = {
-    create?: XOR<ProductionItemInfoCreateWithoutProductInput, ProductionItemInfoUncheckedCreateWithoutProductInput> | ProductionItemInfoCreateWithoutProductInput[] | ProductionItemInfoUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: ProductionItemInfoCreateOrConnectWithoutProductInput | ProductionItemInfoCreateOrConnectWithoutProductInput[]
-    createMany?: ProductionItemInfoCreateManyProductInputEnvelope
-    connect?: ProductionItemInfoWhereUniqueInput | ProductionItemInfoWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -38883,6 +38889,20 @@ export namespace Prisma {
     deleteMany?: InventoryScalarWhereInput | InventoryScalarWhereInput[]
   }
 
+  export type productioniteminfoUpdateManyWithoutProductsNestedInput = {
+    create?: XOR<productioniteminfoCreateWithoutProductsInput, productioniteminfoUncheckedCreateWithoutProductsInput> | productioniteminfoCreateWithoutProductsInput[] | productioniteminfoUncheckedCreateWithoutProductsInput[]
+    connectOrCreate?: productioniteminfoCreateOrConnectWithoutProductsInput | productioniteminfoCreateOrConnectWithoutProductsInput[]
+    upsert?: productioniteminfoUpsertWithWhereUniqueWithoutProductsInput | productioniteminfoUpsertWithWhereUniqueWithoutProductsInput[]
+    createMany?: productioniteminfoCreateManyProductsInputEnvelope
+    set?: productioniteminfoWhereUniqueInput | productioniteminfoWhereUniqueInput[]
+    disconnect?: productioniteminfoWhereUniqueInput | productioniteminfoWhereUniqueInput[]
+    delete?: productioniteminfoWhereUniqueInput | productioniteminfoWhereUniqueInput[]
+    connect?: productioniteminfoWhereUniqueInput | productioniteminfoWhereUniqueInput[]
+    update?: productioniteminfoUpdateWithWhereUniqueWithoutProductsInput | productioniteminfoUpdateWithWhereUniqueWithoutProductsInput[]
+    updateMany?: productioniteminfoUpdateManyWithWhereWithoutProductsInput | productioniteminfoUpdateManyWithWhereWithoutProductsInput[]
+    deleteMany?: productioniteminfoScalarWhereInput | productioniteminfoScalarWhereInput[]
+  }
+
   export type SubCategoryUpdateOneRequiredWithoutProductNestedInput = {
     create?: XOR<SubCategoryCreateWithoutProductInput, SubCategoryUncheckedCreateWithoutProductInput>
     connectOrCreate?: SubCategoryCreateOrConnectWithoutProductInput
@@ -38913,20 +38933,6 @@ export namespace Prisma {
     deleteMany?: PurchaseOrderInventoryScalarWhereInput | PurchaseOrderInventoryScalarWhereInput[]
   }
 
-  export type ProductionItemInfoUpdateManyWithoutProductNestedInput = {
-    create?: XOR<ProductionItemInfoCreateWithoutProductInput, ProductionItemInfoUncheckedCreateWithoutProductInput> | ProductionItemInfoCreateWithoutProductInput[] | ProductionItemInfoUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: ProductionItemInfoCreateOrConnectWithoutProductInput | ProductionItemInfoCreateOrConnectWithoutProductInput[]
-    upsert?: ProductionItemInfoUpsertWithWhereUniqueWithoutProductInput | ProductionItemInfoUpsertWithWhereUniqueWithoutProductInput[]
-    createMany?: ProductionItemInfoCreateManyProductInputEnvelope
-    set?: ProductionItemInfoWhereUniqueInput | ProductionItemInfoWhereUniqueInput[]
-    disconnect?: ProductionItemInfoWhereUniqueInput | ProductionItemInfoWhereUniqueInput[]
-    delete?: ProductionItemInfoWhereUniqueInput | ProductionItemInfoWhereUniqueInput[]
-    connect?: ProductionItemInfoWhereUniqueInput | ProductionItemInfoWhereUniqueInput[]
-    update?: ProductionItemInfoUpdateWithWhereUniqueWithoutProductInput | ProductionItemInfoUpdateWithWhereUniqueWithoutProductInput[]
-    updateMany?: ProductionItemInfoUpdateManyWithWhereWithoutProductInput | ProductionItemInfoUpdateManyWithWhereWithoutProductInput[]
-    deleteMany?: ProductionItemInfoScalarWhereInput | ProductionItemInfoScalarWhereInput[]
-  }
-
   export type InventoryUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<InventoryCreateWithoutProductInput, InventoryUncheckedCreateWithoutProductInput> | InventoryCreateWithoutProductInput[] | InventoryUncheckedCreateWithoutProductInput[]
     connectOrCreate?: InventoryCreateOrConnectWithoutProductInput | InventoryCreateOrConnectWithoutProductInput[]
@@ -38941,6 +38947,20 @@ export namespace Prisma {
     deleteMany?: InventoryScalarWhereInput | InventoryScalarWhereInput[]
   }
 
+  export type productioniteminfoUncheckedUpdateManyWithoutProductsNestedInput = {
+    create?: XOR<productioniteminfoCreateWithoutProductsInput, productioniteminfoUncheckedCreateWithoutProductsInput> | productioniteminfoCreateWithoutProductsInput[] | productioniteminfoUncheckedCreateWithoutProductsInput[]
+    connectOrCreate?: productioniteminfoCreateOrConnectWithoutProductsInput | productioniteminfoCreateOrConnectWithoutProductsInput[]
+    upsert?: productioniteminfoUpsertWithWhereUniqueWithoutProductsInput | productioniteminfoUpsertWithWhereUniqueWithoutProductsInput[]
+    createMany?: productioniteminfoCreateManyProductsInputEnvelope
+    set?: productioniteminfoWhereUniqueInput | productioniteminfoWhereUniqueInput[]
+    disconnect?: productioniteminfoWhereUniqueInput | productioniteminfoWhereUniqueInput[]
+    delete?: productioniteminfoWhereUniqueInput | productioniteminfoWhereUniqueInput[]
+    connect?: productioniteminfoWhereUniqueInput | productioniteminfoWhereUniqueInput[]
+    update?: productioniteminfoUpdateWithWhereUniqueWithoutProductsInput | productioniteminfoUpdateWithWhereUniqueWithoutProductsInput[]
+    updateMany?: productioniteminfoUpdateManyWithWhereWithoutProductsInput | productioniteminfoUpdateManyWithWhereWithoutProductsInput[]
+    deleteMany?: productioniteminfoScalarWhereInput | productioniteminfoScalarWhereInput[]
+  }
+
   export type PurchaseOrderInventoryUncheckedUpdateManyWithoutProductNestedInput = {
     create?: XOR<PurchaseOrderInventoryCreateWithoutProductInput, PurchaseOrderInventoryUncheckedCreateWithoutProductInput> | PurchaseOrderInventoryCreateWithoutProductInput[] | PurchaseOrderInventoryUncheckedCreateWithoutProductInput[]
     connectOrCreate?: PurchaseOrderInventoryCreateOrConnectWithoutProductInput | PurchaseOrderInventoryCreateOrConnectWithoutProductInput[]
@@ -38953,20 +38973,6 @@ export namespace Prisma {
     update?: PurchaseOrderInventoryUpdateWithWhereUniqueWithoutProductInput | PurchaseOrderInventoryUpdateWithWhereUniqueWithoutProductInput[]
     updateMany?: PurchaseOrderInventoryUpdateManyWithWhereWithoutProductInput | PurchaseOrderInventoryUpdateManyWithWhereWithoutProductInput[]
     deleteMany?: PurchaseOrderInventoryScalarWhereInput | PurchaseOrderInventoryScalarWhereInput[]
-  }
-
-  export type ProductionItemInfoUncheckedUpdateManyWithoutProductNestedInput = {
-    create?: XOR<ProductionItemInfoCreateWithoutProductInput, ProductionItemInfoUncheckedCreateWithoutProductInput> | ProductionItemInfoCreateWithoutProductInput[] | ProductionItemInfoUncheckedCreateWithoutProductInput[]
-    connectOrCreate?: ProductionItemInfoCreateOrConnectWithoutProductInput | ProductionItemInfoCreateOrConnectWithoutProductInput[]
-    upsert?: ProductionItemInfoUpsertWithWhereUniqueWithoutProductInput | ProductionItemInfoUpsertWithWhereUniqueWithoutProductInput[]
-    createMany?: ProductionItemInfoCreateManyProductInputEnvelope
-    set?: ProductionItemInfoWhereUniqueInput | ProductionItemInfoWhereUniqueInput[]
-    disconnect?: ProductionItemInfoWhereUniqueInput | ProductionItemInfoWhereUniqueInput[]
-    delete?: ProductionItemInfoWhereUniqueInput | ProductionItemInfoWhereUniqueInput[]
-    connect?: ProductionItemInfoWhereUniqueInput | ProductionItemInfoWhereUniqueInput[]
-    update?: ProductionItemInfoUpdateWithWhereUniqueWithoutProductInput | ProductionItemInfoUpdateWithWhereUniqueWithoutProductInput[]
-    updateMany?: ProductionItemInfoUpdateManyWithWhereWithoutProductInput | ProductionItemInfoUpdateManyWithWhereWithoutProductInput[]
-    deleteMany?: ProductionItemInfoScalarWhereInput | ProductionItemInfoScalarWhereInput[]
   }
 
   export type InventoryCreateNestedManyWithoutRaWMaterialInput = {
@@ -39616,16 +39622,16 @@ export namespace Prisma {
     connect?: ProductionExpensesInventoryWhereUniqueInput | ProductionExpensesInventoryWhereUniqueInput[]
   }
 
+  export type productioniteminfoCreateNestedOneWithoutTransaction_infoInput = {
+    create?: XOR<productioniteminfoCreateWithoutTransaction_infoInput, productioniteminfoUncheckedCreateWithoutTransaction_infoInput>
+    connectOrCreate?: productioniteminfoCreateOrConnectWithoutTransaction_infoInput
+    connect?: productioniteminfoWhereUniqueInput
+  }
+
   export type PartyCreateNestedOneWithoutTransactionInfosInput = {
     create?: XOR<PartyCreateWithoutTransactionInfosInput, PartyUncheckedCreateWithoutTransactionInfosInput>
     connectOrCreate?: PartyCreateOrConnectWithoutTransactionInfosInput
     connect?: PartyWhereUniqueInput
-  }
-
-  export type ProductionItemInfoCreateNestedOneWithoutTransactionInfoInput = {
-    create?: XOR<ProductionItemInfoCreateWithoutTransactionInfoInput, ProductionItemInfoUncheckedCreateWithoutTransactionInfoInput>
-    connectOrCreate?: ProductionItemInfoCreateOrConnectWithoutTransactionInfoInput
-    connect?: ProductionItemInfoWhereUniqueInput
   }
 
   export type BankTransactionUncheckedCreateNestedManyWithoutTransactionInfoInput = {
@@ -39663,10 +39669,10 @@ export namespace Prisma {
     connect?: ProductionExpensesInventoryWhereUniqueInput | ProductionExpensesInventoryWhereUniqueInput[]
   }
 
-  export type ProductionItemInfoUncheckedCreateNestedOneWithoutTransactionInfoInput = {
-    create?: XOR<ProductionItemInfoCreateWithoutTransactionInfoInput, ProductionItemInfoUncheckedCreateWithoutTransactionInfoInput>
-    connectOrCreate?: ProductionItemInfoCreateOrConnectWithoutTransactionInfoInput
-    connect?: ProductionItemInfoWhereUniqueInput
+  export type productioniteminfoUncheckedCreateNestedOneWithoutTransaction_infoInput = {
+    create?: XOR<productioniteminfoCreateWithoutTransaction_infoInput, productioniteminfoUncheckedCreateWithoutTransaction_infoInput>
+    connectOrCreate?: productioniteminfoCreateOrConnectWithoutTransaction_infoInput
+    connect?: productioniteminfoWhereUniqueInput
   }
 
   export type EnumVoucherTypeFieldUpdateOperationsInput = {
@@ -39743,6 +39749,16 @@ export namespace Prisma {
     deleteMany?: ProductionExpensesInventoryScalarWhereInput | ProductionExpensesInventoryScalarWhereInput[]
   }
 
+  export type productioniteminfoUpdateOneWithoutTransaction_infoNestedInput = {
+    create?: XOR<productioniteminfoCreateWithoutTransaction_infoInput, productioniteminfoUncheckedCreateWithoutTransaction_infoInput>
+    connectOrCreate?: productioniteminfoCreateOrConnectWithoutTransaction_infoInput
+    upsert?: productioniteminfoUpsertWithoutTransaction_infoInput
+    disconnect?: productioniteminfoWhereInput | boolean
+    delete?: productioniteminfoWhereInput | boolean
+    connect?: productioniteminfoWhereUniqueInput
+    update?: XOR<XOR<productioniteminfoUpdateToOneWithWhereWithoutTransaction_infoInput, productioniteminfoUpdateWithoutTransaction_infoInput>, productioniteminfoUncheckedUpdateWithoutTransaction_infoInput>
+  }
+
   export type PartyUpdateOneWithoutTransactionInfosNestedInput = {
     create?: XOR<PartyCreateWithoutTransactionInfosInput, PartyUncheckedCreateWithoutTransactionInfosInput>
     connectOrCreate?: PartyCreateOrConnectWithoutTransactionInfosInput
@@ -39751,16 +39767,6 @@ export namespace Prisma {
     delete?: PartyWhereInput | boolean
     connect?: PartyWhereUniqueInput
     update?: XOR<XOR<PartyUpdateToOneWithWhereWithoutTransactionInfosInput, PartyUpdateWithoutTransactionInfosInput>, PartyUncheckedUpdateWithoutTransactionInfosInput>
-  }
-
-  export type ProductionItemInfoUpdateOneWithoutTransactionInfoNestedInput = {
-    create?: XOR<ProductionItemInfoCreateWithoutTransactionInfoInput, ProductionItemInfoUncheckedCreateWithoutTransactionInfoInput>
-    connectOrCreate?: ProductionItemInfoCreateOrConnectWithoutTransactionInfoInput
-    upsert?: ProductionItemInfoUpsertWithoutTransactionInfoInput
-    disconnect?: ProductionItemInfoWhereInput | boolean
-    delete?: ProductionItemInfoWhereInput | boolean
-    connect?: ProductionItemInfoWhereUniqueInput
-    update?: XOR<XOR<ProductionItemInfoUpdateToOneWithWhereWithoutTransactionInfoInput, ProductionItemInfoUpdateWithoutTransactionInfoInput>, ProductionItemInfoUncheckedUpdateWithoutTransactionInfoInput>
   }
 
   export type BankTransactionUncheckedUpdateManyWithoutTransactionInfoNestedInput = {
@@ -39833,46 +39839,14 @@ export namespace Prisma {
     deleteMany?: ProductionExpensesInventoryScalarWhereInput | ProductionExpensesInventoryScalarWhereInput[]
   }
 
-  export type ProductionItemInfoUncheckedUpdateOneWithoutTransactionInfoNestedInput = {
-    create?: XOR<ProductionItemInfoCreateWithoutTransactionInfoInput, ProductionItemInfoUncheckedCreateWithoutTransactionInfoInput>
-    connectOrCreate?: ProductionItemInfoCreateOrConnectWithoutTransactionInfoInput
-    upsert?: ProductionItemInfoUpsertWithoutTransactionInfoInput
-    disconnect?: ProductionItemInfoWhereInput | boolean
-    delete?: ProductionItemInfoWhereInput | boolean
-    connect?: ProductionItemInfoWhereUniqueInput
-    update?: XOR<XOR<ProductionItemInfoUpdateToOneWithWhereWithoutTransactionInfoInput, ProductionItemInfoUpdateWithoutTransactionInfoInput>, ProductionItemInfoUncheckedUpdateWithoutTransactionInfoInput>
-  }
-
-  export type TransactionInfoCreateNestedOneWithoutProductionItemInfoInput = {
-    create?: XOR<TransactionInfoCreateWithoutProductionItemInfoInput, TransactionInfoUncheckedCreateWithoutProductionItemInfoInput>
-    connectOrCreate?: TransactionInfoCreateOrConnectWithoutProductionItemInfoInput
-    connect?: TransactionInfoWhereUniqueInput
-  }
-
-  export type ProductCreateNestedOneWithoutProductionItemInfosInput = {
-    create?: XOR<ProductCreateWithoutProductionItemInfosInput, ProductUncheckedCreateWithoutProductionItemInfosInput>
-    connectOrCreate?: ProductCreateOrConnectWithoutProductionItemInfosInput
-    connect?: ProductWhereUniqueInput
-  }
-
-  export type EnumTxStatusFieldUpdateOperationsInput = {
-    set?: $Enums.TxStatus
-  }
-
-  export type TransactionInfoUpdateOneRequiredWithoutProductionItemInfoNestedInput = {
-    create?: XOR<TransactionInfoCreateWithoutProductionItemInfoInput, TransactionInfoUncheckedCreateWithoutProductionItemInfoInput>
-    connectOrCreate?: TransactionInfoCreateOrConnectWithoutProductionItemInfoInput
-    upsert?: TransactionInfoUpsertWithoutProductionItemInfoInput
-    connect?: TransactionInfoWhereUniqueInput
-    update?: XOR<XOR<TransactionInfoUpdateToOneWithWhereWithoutProductionItemInfoInput, TransactionInfoUpdateWithoutProductionItemInfoInput>, TransactionInfoUncheckedUpdateWithoutProductionItemInfoInput>
-  }
-
-  export type ProductUpdateOneRequiredWithoutProductionItemInfosNestedInput = {
-    create?: XOR<ProductCreateWithoutProductionItemInfosInput, ProductUncheckedCreateWithoutProductionItemInfosInput>
-    connectOrCreate?: ProductCreateOrConnectWithoutProductionItemInfosInput
-    upsert?: ProductUpsertWithoutProductionItemInfosInput
-    connect?: ProductWhereUniqueInput
-    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutProductionItemInfosInput, ProductUpdateWithoutProductionItemInfosInput>, ProductUncheckedUpdateWithoutProductionItemInfosInput>
+  export type productioniteminfoUncheckedUpdateOneWithoutTransaction_infoNestedInput = {
+    create?: XOR<productioniteminfoCreateWithoutTransaction_infoInput, productioniteminfoUncheckedCreateWithoutTransaction_infoInput>
+    connectOrCreate?: productioniteminfoCreateOrConnectWithoutTransaction_infoInput
+    upsert?: productioniteminfoUpsertWithoutTransaction_infoInput
+    disconnect?: productioniteminfoWhereInput | boolean
+    delete?: productioniteminfoWhereInput | boolean
+    connect?: productioniteminfoWhereUniqueInput
+    update?: XOR<XOR<productioniteminfoUpdateToOneWithWhereWithoutTransaction_infoInput, productioniteminfoUpdateWithoutTransaction_infoInput>, productioniteminfoUncheckedUpdateWithoutTransaction_infoInput>
   }
 
   export type AccountsItemCreateNestedOneWithoutJournalInput = {
@@ -40231,6 +40205,38 @@ export namespace Prisma {
     deleteMany?: ProductionExpensesInventoryScalarWhereInput | ProductionExpensesInventoryScalarWhereInput[]
   }
 
+  export type ProductCreateNestedOneWithoutProductioniteminfoInput = {
+    create?: XOR<ProductCreateWithoutProductioniteminfoInput, ProductUncheckedCreateWithoutProductioniteminfoInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutProductioniteminfoInput
+    connect?: ProductWhereUniqueInput
+  }
+
+  export type TransactionInfoCreateNestedOneWithoutProductioniteminfoInput = {
+    create?: XOR<TransactionInfoCreateWithoutProductioniteminfoInput, TransactionInfoUncheckedCreateWithoutProductioniteminfoInput>
+    connectOrCreate?: TransactionInfoCreateOrConnectWithoutProductioniteminfoInput
+    connect?: TransactionInfoWhereUniqueInput
+  }
+
+  export type Enumproductioniteminfo_statusFieldUpdateOperationsInput = {
+    set?: $Enums.productioniteminfo_status
+  }
+
+  export type ProductUpdateOneRequiredWithoutProductioniteminfoNestedInput = {
+    create?: XOR<ProductCreateWithoutProductioniteminfoInput, ProductUncheckedCreateWithoutProductioniteminfoInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutProductioniteminfoInput
+    upsert?: ProductUpsertWithoutProductioniteminfoInput
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutProductioniteminfoInput, ProductUpdateWithoutProductioniteminfoInput>, ProductUncheckedUpdateWithoutProductioniteminfoInput>
+  }
+
+  export type TransactionInfoUpdateOneRequiredWithoutProductioniteminfoNestedInput = {
+    create?: XOR<TransactionInfoCreateWithoutProductioniteminfoInput, TransactionInfoUncheckedCreateWithoutProductioniteminfoInput>
+    connectOrCreate?: TransactionInfoCreateOrConnectWithoutProductioniteminfoInput
+    upsert?: TransactionInfoUpsertWithoutProductioniteminfoInput
+    connect?: TransactionInfoWhereUniqueInput
+    update?: XOR<XOR<TransactionInfoUpdateToOneWithWhereWithoutProductioniteminfoInput, TransactionInfoUpdateWithoutProductioniteminfoInput>, TransactionInfoUncheckedUpdateWithoutProductioniteminfoInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -40553,21 +40559,21 @@ export namespace Prisma {
     _max?: NestedEnumVoucherTypeFilter<$PrismaModel>
   }
 
-  export type NestedEnumTxStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.TxStatus[]
-    notIn?: $Enums.TxStatus[]
-    not?: NestedEnumTxStatusFilter<$PrismaModel> | $Enums.TxStatus
+  export type NestedEnumproductioniteminfo_statusFilter<$PrismaModel = never> = {
+    equals?: $Enums.productioniteminfo_status | Enumproductioniteminfo_statusFieldRefInput<$PrismaModel>
+    in?: $Enums.productioniteminfo_status[]
+    notIn?: $Enums.productioniteminfo_status[]
+    not?: NestedEnumproductioniteminfo_statusFilter<$PrismaModel> | $Enums.productioniteminfo_status
   }
 
-  export type NestedEnumTxStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.TxStatus[]
-    notIn?: $Enums.TxStatus[]
-    not?: NestedEnumTxStatusWithAggregatesFilter<$PrismaModel> | $Enums.TxStatus
+  export type NestedEnumproductioniteminfo_statusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.productioniteminfo_status | Enumproductioniteminfo_statusFieldRefInput<$PrismaModel>
+    in?: $Enums.productioniteminfo_status[]
+    notIn?: $Enums.productioniteminfo_status[]
+    not?: NestedEnumproductioniteminfo_statusWithAggregatesFilter<$PrismaModel> | $Enums.productioniteminfo_status
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumTxStatusFilter<$PrismaModel>
-    _max?: NestedEnumTxStatusFilter<$PrismaModel>
+    _min?: NestedEnumproductioniteminfo_statusFilter<$PrismaModel>
+    _max?: NestedEnumproductioniteminfo_statusFilter<$PrismaModel>
   }
 
   export type SubCategoryCreateWithoutCategoryInput = {
@@ -40637,9 +40643,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updateAt?: Date | string
     inventory?: InventoryCreateNestedManyWithoutProductInput
+    productioniteminfo?: productioniteminfoCreateNestedManyWithoutProductsInput
     unit: UnitCreateNestedOneWithoutProductInput
     purchaseOrderInventories?: PurchaseOrderInventoryCreateNestedManyWithoutProductInput
-    productionItemInfos?: ProductionItemInfoCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutSubCategoryInput = {
@@ -40659,8 +40665,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updateAt?: Date | string
     inventory?: InventoryUncheckedCreateNestedManyWithoutProductInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedManyWithoutProductsInput
     purchaseOrderInventories?: PurchaseOrderInventoryUncheckedCreateNestedManyWithoutProductInput
-    productionItemInfos?: ProductionItemInfoUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutSubCategoryInput = {
@@ -40815,9 +40821,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updateAt?: Date | string
     inventory?: InventoryCreateNestedManyWithoutProductInput
+    productioniteminfo?: productioniteminfoCreateNestedManyWithoutProductsInput
     subCategory: SubCategoryCreateNestedOneWithoutProductInput
     purchaseOrderInventories?: PurchaseOrderInventoryCreateNestedManyWithoutProductInput
-    productionItemInfos?: ProductionItemInfoCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutUnitInput = {
@@ -40837,8 +40843,8 @@ export namespace Prisma {
     createdAt?: Date | string
     updateAt?: Date | string
     inventory?: InventoryUncheckedCreateNestedManyWithoutProductInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedManyWithoutProductsInput
     purchaseOrderInventories?: PurchaseOrderInventoryUncheckedCreateNestedManyWithoutProductInput
-    productionItemInfos?: ProductionItemInfoUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutUnitInput = {
@@ -41198,7 +41204,7 @@ export namespace Prisma {
     journal?: JournalCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryCreateNestedManyWithoutTransactionInfoInput
-    productionItemInfo?: ProductionItemInfoCreateNestedOneWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoCreateNestedOneWithoutTransaction_infoInput
   }
 
   export type TransactionInfoUncheckedCreateWithoutPartyInput = {
@@ -41214,7 +41220,7 @@ export namespace Prisma {
     journal?: JournalUncheckedCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
-    productionItemInfo?: ProductionItemInfoUncheckedCreateNestedOneWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedOneWithoutTransaction_infoInput
   }
 
   export type TransactionInfoCreateOrConnectWithoutPartyInput = {
@@ -41339,6 +41345,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type productioniteminfoCreateWithoutProductsInput = {
+    batchNo: string
+    status?: $Enums.productioniteminfo_status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    transaction_info: TransactionInfoCreateNestedOneWithoutProductioniteminfoInput
+  }
+
+  export type productioniteminfoUncheckedCreateWithoutProductsInput = {
+    id?: number
+    transactionId: number
+    batchNo: string
+    status?: $Enums.productioniteminfo_status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type productioniteminfoCreateOrConnectWithoutProductsInput = {
+    where: productioniteminfoWhereUniqueInput
+    create: XOR<productioniteminfoCreateWithoutProductsInput, productioniteminfoUncheckedCreateWithoutProductsInput>
+  }
+
+  export type productioniteminfoCreateManyProductsInputEnvelope = {
+    data: productioniteminfoCreateManyProductsInput | productioniteminfoCreateManyProductsInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SubCategoryCreateWithoutProductInput = {
     subCategoryName: string
     createdAt?: Date | string
@@ -41416,33 +41449,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ProductionItemInfoCreateWithoutProductInput = {
-    batchNo: string
-    status?: $Enums.TxStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    transactionInfo: TransactionInfoCreateNestedOneWithoutProductionItemInfoInput
-  }
-
-  export type ProductionItemInfoUncheckedCreateWithoutProductInput = {
-    id?: number
-    transactionId: number
-    batchNo: string
-    status?: $Enums.TxStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ProductionItemInfoCreateOrConnectWithoutProductInput = {
-    where: ProductionItemInfoWhereUniqueInput
-    create: XOR<ProductionItemInfoCreateWithoutProductInput, ProductionItemInfoUncheckedCreateWithoutProductInput>
-  }
-
-  export type ProductionItemInfoCreateManyProductInputEnvelope = {
-    data: ProductionItemInfoCreateManyProductInput | ProductionItemInfoCreateManyProductInput[]
-    skipDuplicates?: boolean
-  }
-
   export type InventoryUpsertWithWhereUniqueWithoutProductInput = {
     where: InventoryWhereUniqueInput
     update: XOR<InventoryUpdateWithoutProductInput, InventoryUncheckedUpdateWithoutProductInput>
@@ -41483,6 +41489,35 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Inventory"> | Date | string
     updatedAt?: DateTimeFilter<"Inventory"> | Date | string
     packingMaterialId?: IntNullableFilter<"Inventory"> | number | null
+  }
+
+  export type productioniteminfoUpsertWithWhereUniqueWithoutProductsInput = {
+    where: productioniteminfoWhereUniqueInput
+    update: XOR<productioniteminfoUpdateWithoutProductsInput, productioniteminfoUncheckedUpdateWithoutProductsInput>
+    create: XOR<productioniteminfoCreateWithoutProductsInput, productioniteminfoUncheckedCreateWithoutProductsInput>
+  }
+
+  export type productioniteminfoUpdateWithWhereUniqueWithoutProductsInput = {
+    where: productioniteminfoWhereUniqueInput
+    data: XOR<productioniteminfoUpdateWithoutProductsInput, productioniteminfoUncheckedUpdateWithoutProductsInput>
+  }
+
+  export type productioniteminfoUpdateManyWithWhereWithoutProductsInput = {
+    where: productioniteminfoScalarWhereInput
+    data: XOR<productioniteminfoUpdateManyMutationInput, productioniteminfoUncheckedUpdateManyWithoutProductsInput>
+  }
+
+  export type productioniteminfoScalarWhereInput = {
+    AND?: productioniteminfoScalarWhereInput | productioniteminfoScalarWhereInput[]
+    OR?: productioniteminfoScalarWhereInput[]
+    NOT?: productioniteminfoScalarWhereInput | productioniteminfoScalarWhereInput[]
+    id?: IntFilter<"productioniteminfo"> | number
+    transactionId?: IntFilter<"productioniteminfo"> | number
+    productId?: IntFilter<"productioniteminfo"> | number
+    batchNo?: StringFilter<"productioniteminfo"> | string
+    status?: Enumproductioniteminfo_statusFilter<"productioniteminfo"> | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFilter<"productioniteminfo"> | Date | string
+    updatedAt?: DateTimeFilter<"productioniteminfo"> | Date | string
   }
 
   export type SubCategoryUpsertWithoutProductInput = {
@@ -41570,35 +41605,6 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"PurchaseOrderInventory"> | Date | string
     updatedAt?: DateTimeFilter<"PurchaseOrderInventory"> | Date | string
     packingMaterialId?: IntNullableFilter<"PurchaseOrderInventory"> | number | null
-  }
-
-  export type ProductionItemInfoUpsertWithWhereUniqueWithoutProductInput = {
-    where: ProductionItemInfoWhereUniqueInput
-    update: XOR<ProductionItemInfoUpdateWithoutProductInput, ProductionItemInfoUncheckedUpdateWithoutProductInput>
-    create: XOR<ProductionItemInfoCreateWithoutProductInput, ProductionItemInfoUncheckedCreateWithoutProductInput>
-  }
-
-  export type ProductionItemInfoUpdateWithWhereUniqueWithoutProductInput = {
-    where: ProductionItemInfoWhereUniqueInput
-    data: XOR<ProductionItemInfoUpdateWithoutProductInput, ProductionItemInfoUncheckedUpdateWithoutProductInput>
-  }
-
-  export type ProductionItemInfoUpdateManyWithWhereWithoutProductInput = {
-    where: ProductionItemInfoScalarWhereInput
-    data: XOR<ProductionItemInfoUpdateManyMutationInput, ProductionItemInfoUncheckedUpdateManyWithoutProductInput>
-  }
-
-  export type ProductionItemInfoScalarWhereInput = {
-    AND?: ProductionItemInfoScalarWhereInput | ProductionItemInfoScalarWhereInput[]
-    OR?: ProductionItemInfoScalarWhereInput[]
-    NOT?: ProductionItemInfoScalarWhereInput | ProductionItemInfoScalarWhereInput[]
-    id?: IntFilter<"ProductionItemInfo"> | number
-    transactionId?: IntFilter<"ProductionItemInfo"> | number
-    productId?: IntFilter<"ProductionItemInfo"> | number
-    batchNo?: StringFilter<"ProductionItemInfo"> | string
-    status?: EnumTxStatusFilter<"ProductionItemInfo"> | $Enums.TxStatus
-    createdAt?: DateTimeFilter<"ProductionItemInfo"> | Date | string
-    updatedAt?: DateTimeFilter<"ProductionItemInfo"> | Date | string
   }
 
   export type InventoryCreateWithoutRaWMaterialInput = {
@@ -41910,7 +41916,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: boolean
+    isOpening?: number
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -41933,7 +41939,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: boolean
+    isOpening?: number
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -42087,7 +42093,7 @@ export namespace Prisma {
     creditAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedDebitAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedCreditAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    isOpening?: BoolFilter<"PMInventory"> | boolean
+    isOpening?: IntFilter<"PMInventory"> | number
     status?: EnumStatusFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"PMInventory"> | Date | string
     updatedAt?: DateTimeFilter<"PMInventory"> | Date | string
@@ -42314,9 +42320,9 @@ export namespace Prisma {
     createdAt?: Date | string
     updateAt?: Date | string
     inventory?: InventoryCreateNestedManyWithoutProductInput
+    productioniteminfo?: productioniteminfoCreateNestedManyWithoutProductsInput
     subCategory: SubCategoryCreateNestedOneWithoutProductInput
     unit: UnitCreateNestedOneWithoutProductInput
-    productionItemInfos?: ProductionItemInfoCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutPurchaseOrderInventoriesInput = {
@@ -42337,7 +42343,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updateAt?: Date | string
     inventory?: InventoryUncheckedCreateNestedManyWithoutProductInput
-    productionItemInfos?: ProductionItemInfoUncheckedCreateNestedManyWithoutProductInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedManyWithoutProductsInput
   }
 
   export type ProductCreateOrConnectWithoutPurchaseOrderInventoriesInput = {
@@ -42483,9 +42489,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryUpdateManyWithoutProductNestedInput
+    productioniteminfo?: productioniteminfoUpdateManyWithoutProductsNestedInput
     subCategory?: SubCategoryUpdateOneRequiredWithoutProductNestedInput
     unit?: UnitUpdateOneRequiredWithoutProductNestedInput
-    productionItemInfos?: ProductionItemInfoUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutPurchaseOrderInventoriesInput = {
@@ -42506,7 +42512,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryUncheckedUpdateManyWithoutProductNestedInput
-    productionItemInfos?: ProductionItemInfoUncheckedUpdateManyWithoutProductNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateManyWithoutProductsNestedInput
   }
 
   export type PurchaseOrderInfoUpsertWithoutPurchaseOrderInput = {
@@ -42682,8 +42688,8 @@ export namespace Prisma {
     journal?: JournalCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryCreateNestedManyWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoCreateNestedOneWithoutTransaction_infoInput
     party?: PartyCreateNestedOneWithoutTransactionInfosInput
-    productionItemInfo?: ProductionItemInfoCreateNestedOneWithoutTransactionInfoInput
   }
 
   export type TransactionInfoUncheckedCreateWithoutBankTransactionInput = {
@@ -42699,7 +42705,7 @@ export namespace Prisma {
     journal?: JournalUncheckedCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
-    productionItemInfo?: ProductionItemInfoUncheckedCreateNestedOneWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedOneWithoutTransaction_infoInput
   }
 
   export type TransactionInfoCreateOrConnectWithoutBankTransactionInput = {
@@ -42759,8 +42765,8 @@ export namespace Prisma {
     journal?: JournalUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUpdateManyWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUpdateOneWithoutTransaction_infoNestedInput
     party?: PartyUpdateOneWithoutTransactionInfosNestedInput
-    productionItemInfo?: ProductionItemInfoUpdateOneWithoutTransactionInfoNestedInput
   }
 
   export type TransactionInfoUncheckedUpdateWithoutBankTransactionInput = {
@@ -42776,7 +42782,7 @@ export namespace Prisma {
     journal?: JournalUncheckedUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    productionItemInfo?: ProductionItemInfoUncheckedUpdateOneWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateOneWithoutTransaction_infoNestedInput
   }
 
   export type PackingMaterialCreateWithoutInventoryInput = {
@@ -42835,10 +42841,10 @@ export namespace Prisma {
     status?: $Enums.Status
     createdAt?: Date | string
     updateAt?: Date | string
+    productioniteminfo?: productioniteminfoCreateNestedManyWithoutProductsInput
     subCategory: SubCategoryCreateNestedOneWithoutProductInput
     unit: UnitCreateNestedOneWithoutProductInput
     purchaseOrderInventories?: PurchaseOrderInventoryCreateNestedManyWithoutProductInput
-    productionItemInfos?: ProductionItemInfoCreateNestedManyWithoutProductInput
   }
 
   export type ProductUncheckedCreateWithoutInventoryInput = {
@@ -42858,8 +42864,8 @@ export namespace Prisma {
     status?: $Enums.Status
     createdAt?: Date | string
     updateAt?: Date | string
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedManyWithoutProductsInput
     purchaseOrderInventories?: PurchaseOrderInventoryUncheckedCreateNestedManyWithoutProductInput
-    productionItemInfos?: ProductionItemInfoUncheckedCreateNestedManyWithoutProductInput
   }
 
   export type ProductCreateOrConnectWithoutInventoryInput = {
@@ -42918,8 +42924,8 @@ export namespace Prisma {
     journal?: JournalCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryCreateNestedManyWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoCreateNestedOneWithoutTransaction_infoInput
     party?: PartyCreateNestedOneWithoutTransactionInfosInput
-    productionItemInfo?: ProductionItemInfoCreateNestedOneWithoutTransactionInfoInput
   }
 
   export type TransactionInfoUncheckedCreateWithoutInventoryInput = {
@@ -42935,7 +42941,7 @@ export namespace Prisma {
     journal?: JournalUncheckedCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
-    productionItemInfo?: ProductionItemInfoUncheckedCreateNestedOneWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedOneWithoutTransaction_infoInput
   }
 
   export type TransactionInfoCreateOrConnectWithoutInventoryInput = {
@@ -43016,10 +43022,10 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productioniteminfo?: productioniteminfoUpdateManyWithoutProductsNestedInput
     subCategory?: SubCategoryUpdateOneRequiredWithoutProductNestedInput
     unit?: UnitUpdateOneRequiredWithoutProductNestedInput
     purchaseOrderInventories?: PurchaseOrderInventoryUpdateManyWithoutProductNestedInput
-    productionItemInfos?: ProductionItemInfoUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutInventoryInput = {
@@ -43039,8 +43045,8 @@ export namespace Prisma {
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    productioniteminfo?: productioniteminfoUncheckedUpdateManyWithoutProductsNestedInput
     purchaseOrderInventories?: PurchaseOrderInventoryUncheckedUpdateManyWithoutProductNestedInput
-    productionItemInfos?: ProductionItemInfoUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type RawMaterialUpsertWithoutInventoryInput = {
@@ -43111,8 +43117,8 @@ export namespace Prisma {
     journal?: JournalUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUpdateManyWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUpdateOneWithoutTransaction_infoNestedInput
     party?: PartyUpdateOneWithoutTransactionInfosNestedInput
-    productionItemInfo?: ProductionItemInfoUpdateOneWithoutTransactionInfoNestedInput
   }
 
   export type TransactionInfoUncheckedUpdateWithoutInventoryInput = {
@@ -43128,7 +43134,7 @@ export namespace Prisma {
     journal?: JournalUncheckedUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    productionItemInfo?: ProductionItemInfoUncheckedUpdateOneWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateOneWithoutTransaction_infoNestedInput
   }
 
   export type PackingMaterialCreateWithoutPminventoriesInput = {
@@ -43184,8 +43190,8 @@ export namespace Prisma {
     inventory?: InventoryCreateNestedManyWithoutTransactionInfoInput
     journal?: JournalCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryCreateNestedManyWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoCreateNestedOneWithoutTransaction_infoInput
     party?: PartyCreateNestedOneWithoutTransactionInfosInput
-    productionItemInfo?: ProductionItemInfoCreateNestedOneWithoutTransactionInfoInput
   }
 
   export type TransactionInfoUncheckedCreateWithoutPminventoriesInput = {
@@ -43201,7 +43207,7 @@ export namespace Prisma {
     inventory?: InventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
     journal?: JournalUncheckedCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
-    productionItemInfo?: ProductionItemInfoUncheckedCreateNestedOneWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedOneWithoutTransaction_infoInput
   }
 
   export type TransactionInfoCreateOrConnectWithoutPminventoriesInput = {
@@ -43279,8 +43285,8 @@ export namespace Prisma {
     inventory?: InventoryUpdateManyWithoutTransactionInfoNestedInput
     journal?: JournalUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUpdateManyWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUpdateOneWithoutTransaction_infoNestedInput
     party?: PartyUpdateOneWithoutTransactionInfosNestedInput
-    productionItemInfo?: ProductionItemInfoUpdateOneWithoutTransactionInfoNestedInput
   }
 
   export type TransactionInfoUncheckedUpdateWithoutPminventoriesInput = {
@@ -43296,7 +43302,7 @@ export namespace Prisma {
     inventory?: InventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
     journal?: JournalUncheckedUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    productionItemInfo?: ProductionItemInfoUncheckedUpdateOneWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateOneWithoutTransaction_infoNestedInput
   }
 
   export type BankTransactionCreateWithoutTransactionInfoInput = {
@@ -43436,7 +43442,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: boolean
+    isOpening?: number
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -43459,7 +43465,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: boolean
+    isOpening?: number
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -43506,6 +43512,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type productioniteminfoCreateWithoutTransaction_infoInput = {
+    batchNo: string
+    status?: $Enums.productioniteminfo_status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    products: ProductCreateNestedOneWithoutProductioniteminfoInput
+  }
+
+  export type productioniteminfoUncheckedCreateWithoutTransaction_infoInput = {
+    id?: number
+    productId: number
+    batchNo: string
+    status?: $Enums.productioniteminfo_status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type productioniteminfoCreateOrConnectWithoutTransaction_infoInput = {
+    where: productioniteminfoWhereUniqueInput
+    create: XOR<productioniteminfoCreateWithoutTransaction_infoInput, productioniteminfoUncheckedCreateWithoutTransaction_infoInput>
+  }
+
   export type PartyCreateWithoutTransactionInfosInput = {
     name: string
     contactNo: string
@@ -43536,28 +43564,6 @@ export namespace Prisma {
   export type PartyCreateOrConnectWithoutTransactionInfosInput = {
     where: PartyWhereUniqueInput
     create: XOR<PartyCreateWithoutTransactionInfosInput, PartyUncheckedCreateWithoutTransactionInfosInput>
-  }
-
-  export type ProductionItemInfoCreateWithoutTransactionInfoInput = {
-    batchNo: string
-    status?: $Enums.TxStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    product: ProductCreateNestedOneWithoutProductionItemInfosInput
-  }
-
-  export type ProductionItemInfoUncheckedCreateWithoutTransactionInfoInput = {
-    id?: number
-    productId: number
-    batchNo: string
-    status?: $Enums.TxStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type ProductionItemInfoCreateOrConnectWithoutTransactionInfoInput = {
-    where: ProductionItemInfoWhereUniqueInput
-    create: XOR<ProductionItemInfoCreateWithoutTransactionInfoInput, ProductionItemInfoUncheckedCreateWithoutTransactionInfoInput>
   }
 
   export type BankTransactionUpsertWithWhereUniqueWithoutTransactionInfoInput = {
@@ -43655,6 +43661,34 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ProductionExpensesInventory"> | Date | string
   }
 
+  export type productioniteminfoUpsertWithoutTransaction_infoInput = {
+    update: XOR<productioniteminfoUpdateWithoutTransaction_infoInput, productioniteminfoUncheckedUpdateWithoutTransaction_infoInput>
+    create: XOR<productioniteminfoCreateWithoutTransaction_infoInput, productioniteminfoUncheckedCreateWithoutTransaction_infoInput>
+    where?: productioniteminfoWhereInput
+  }
+
+  export type productioniteminfoUpdateToOneWithWhereWithoutTransaction_infoInput = {
+    where?: productioniteminfoWhereInput
+    data: XOR<productioniteminfoUpdateWithoutTransaction_infoInput, productioniteminfoUncheckedUpdateWithoutTransaction_infoInput>
+  }
+
+  export type productioniteminfoUpdateWithoutTransaction_infoInput = {
+    batchNo?: StringFieldUpdateOperationsInput | string
+    status?: Enumproductioniteminfo_statusFieldUpdateOperationsInput | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    products?: ProductUpdateOneRequiredWithoutProductioniteminfoNestedInput
+  }
+
+  export type productioniteminfoUncheckedUpdateWithoutTransaction_infoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    productId?: IntFieldUpdateOperationsInput | number
+    batchNo?: StringFieldUpdateOperationsInput | string
+    status?: Enumproductioniteminfo_statusFieldUpdateOperationsInput | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PartyUpsertWithoutTransactionInfosInput = {
     update: XOR<PartyUpdateWithoutTransactionInfosInput, PartyUncheckedUpdateWithoutTransactionInfosInput>
     create: XOR<PartyCreateWithoutTransactionInfosInput, PartyUncheckedCreateWithoutTransactionInfosInput>
@@ -43693,210 +43727,6 @@ export namespace Prisma {
     purchaseOrderInfos?: PurchaseOrderInfoUncheckedUpdateManyWithoutPartyNestedInput
   }
 
-  export type ProductionItemInfoUpsertWithoutTransactionInfoInput = {
-    update: XOR<ProductionItemInfoUpdateWithoutTransactionInfoInput, ProductionItemInfoUncheckedUpdateWithoutTransactionInfoInput>
-    create: XOR<ProductionItemInfoCreateWithoutTransactionInfoInput, ProductionItemInfoUncheckedCreateWithoutTransactionInfoInput>
-    where?: ProductionItemInfoWhereInput
-  }
-
-  export type ProductionItemInfoUpdateToOneWithWhereWithoutTransactionInfoInput = {
-    where?: ProductionItemInfoWhereInput
-    data: XOR<ProductionItemInfoUpdateWithoutTransactionInfoInput, ProductionItemInfoUncheckedUpdateWithoutTransactionInfoInput>
-  }
-
-  export type ProductionItemInfoUpdateWithoutTransactionInfoInput = {
-    batchNo?: StringFieldUpdateOperationsInput | string
-    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    product?: ProductUpdateOneRequiredWithoutProductionItemInfosNestedInput
-  }
-
-  export type ProductionItemInfoUncheckedUpdateWithoutTransactionInfoInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    productId?: IntFieldUpdateOperationsInput | number
-    batchNo?: StringFieldUpdateOperationsInput | string
-    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TransactionInfoCreateWithoutProductionItemInfoInput = {
-    voucherNo: string
-    invoiceNo?: string | null
-    date?: Date | string | null
-    voucherType: $Enums.VoucherType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    bankTransaction?: BankTransactionCreateNestedManyWithoutTransactionInfoInput
-    inventory?: InventoryCreateNestedManyWithoutTransactionInfoInput
-    journal?: JournalCreateNestedManyWithoutTransactionInfoInput
-    pminventories?: PMInventoryCreateNestedManyWithoutTransactionInfoInput
-    productionExpensesInventory?: ProductionExpensesInventoryCreateNestedManyWithoutTransactionInfoInput
-    party?: PartyCreateNestedOneWithoutTransactionInfosInput
-  }
-
-  export type TransactionInfoUncheckedCreateWithoutProductionItemInfoInput = {
-    id?: number
-    voucherNo: string
-    invoiceNo?: string | null
-    date?: Date | string | null
-    partyId?: number | null
-    voucherType: $Enums.VoucherType
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    bankTransaction?: BankTransactionUncheckedCreateNestedManyWithoutTransactionInfoInput
-    inventory?: InventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
-    journal?: JournalUncheckedCreateNestedManyWithoutTransactionInfoInput
-    pminventories?: PMInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
-    productionExpensesInventory?: ProductionExpensesInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
-  }
-
-  export type TransactionInfoCreateOrConnectWithoutProductionItemInfoInput = {
-    where: TransactionInfoWhereUniqueInput
-    create: XOR<TransactionInfoCreateWithoutProductionItemInfoInput, TransactionInfoUncheckedCreateWithoutProductionItemInfoInput>
-  }
-
-  export type ProductCreateWithoutProductionItemInfosInput = {
-    name: string
-    description: string
-    minPrice?: number | null
-    size?: string | null
-    quantity: number
-    unitPrice: number
-    alertQuantity?: number
-    openingDate: Date | string
-    openingAmount: number
-    isDeleted?: boolean
-    status?: $Enums.Status
-    createdAt?: Date | string
-    updateAt?: Date | string
-    inventory?: InventoryCreateNestedManyWithoutProductInput
-    subCategory: SubCategoryCreateNestedOneWithoutProductInput
-    unit: UnitCreateNestedOneWithoutProductInput
-    purchaseOrderInventories?: PurchaseOrderInventoryCreateNestedManyWithoutProductInput
-  }
-
-  export type ProductUncheckedCreateWithoutProductionItemInfosInput = {
-    id?: number
-    name: string
-    description: string
-    subCategoryId: number
-    minPrice?: number | null
-    size?: string | null
-    quantity: number
-    unitPrice: number
-    alertQuantity?: number
-    unitId: number
-    openingDate: Date | string
-    openingAmount: number
-    isDeleted?: boolean
-    status?: $Enums.Status
-    createdAt?: Date | string
-    updateAt?: Date | string
-    inventory?: InventoryUncheckedCreateNestedManyWithoutProductInput
-    purchaseOrderInventories?: PurchaseOrderInventoryUncheckedCreateNestedManyWithoutProductInput
-  }
-
-  export type ProductCreateOrConnectWithoutProductionItemInfosInput = {
-    where: ProductWhereUniqueInput
-    create: XOR<ProductCreateWithoutProductionItemInfosInput, ProductUncheckedCreateWithoutProductionItemInfosInput>
-  }
-
-  export type TransactionInfoUpsertWithoutProductionItemInfoInput = {
-    update: XOR<TransactionInfoUpdateWithoutProductionItemInfoInput, TransactionInfoUncheckedUpdateWithoutProductionItemInfoInput>
-    create: XOR<TransactionInfoCreateWithoutProductionItemInfoInput, TransactionInfoUncheckedCreateWithoutProductionItemInfoInput>
-    where?: TransactionInfoWhereInput
-  }
-
-  export type TransactionInfoUpdateToOneWithWhereWithoutProductionItemInfoInput = {
-    where?: TransactionInfoWhereInput
-    data: XOR<TransactionInfoUpdateWithoutProductionItemInfoInput, TransactionInfoUncheckedUpdateWithoutProductionItemInfoInput>
-  }
-
-  export type TransactionInfoUpdateWithoutProductionItemInfoInput = {
-    voucherNo?: StringFieldUpdateOperationsInput | string
-    invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bankTransaction?: BankTransactionUpdateManyWithoutTransactionInfoNestedInput
-    inventory?: InventoryUpdateManyWithoutTransactionInfoNestedInput
-    journal?: JournalUpdateManyWithoutTransactionInfoNestedInput
-    pminventories?: PMInventoryUpdateManyWithoutTransactionInfoNestedInput
-    productionExpensesInventory?: ProductionExpensesInventoryUpdateManyWithoutTransactionInfoNestedInput
-    party?: PartyUpdateOneWithoutTransactionInfosNestedInput
-  }
-
-  export type TransactionInfoUncheckedUpdateWithoutProductionItemInfoInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    voucherNo?: StringFieldUpdateOperationsInput | string
-    invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    partyId?: NullableIntFieldUpdateOperationsInput | number | null
-    voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    bankTransaction?: BankTransactionUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    inventory?: InventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    journal?: JournalUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    pminventories?: PMInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    productionExpensesInventory?: ProductionExpensesInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
-  }
-
-  export type ProductUpsertWithoutProductionItemInfosInput = {
-    update: XOR<ProductUpdateWithoutProductionItemInfosInput, ProductUncheckedUpdateWithoutProductionItemInfosInput>
-    create: XOR<ProductCreateWithoutProductionItemInfosInput, ProductUncheckedCreateWithoutProductionItemInfosInput>
-    where?: ProductWhereInput
-  }
-
-  export type ProductUpdateToOneWithWhereWithoutProductionItemInfosInput = {
-    where?: ProductWhereInput
-    data: XOR<ProductUpdateWithoutProductionItemInfosInput, ProductUncheckedUpdateWithoutProductionItemInfosInput>
-  }
-
-  export type ProductUpdateWithoutProductionItemInfosInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: FloatFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    alertQuantity?: IntFieldUpdateOperationsInput | number
-    openingDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    openingAmount?: FloatFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    inventory?: InventoryUpdateManyWithoutProductNestedInput
-    subCategory?: SubCategoryUpdateOneRequiredWithoutProductNestedInput
-    unit?: UnitUpdateOneRequiredWithoutProductNestedInput
-    purchaseOrderInventories?: PurchaseOrderInventoryUpdateManyWithoutProductNestedInput
-  }
-
-  export type ProductUncheckedUpdateWithoutProductionItemInfosInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    subCategoryId?: IntFieldUpdateOperationsInput | number
-    minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
-    quantity?: FloatFieldUpdateOperationsInput | number
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    alertQuantity?: IntFieldUpdateOperationsInput | number
-    unitId?: IntFieldUpdateOperationsInput | number
-    openingDate?: DateTimeFieldUpdateOperationsInput | Date | string
-    openingAmount?: FloatFieldUpdateOperationsInput | number
-    isDeleted?: BoolFieldUpdateOperationsInput | boolean
-    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    inventory?: InventoryUncheckedUpdateManyWithoutProductNestedInput
-    purchaseOrderInventories?: PurchaseOrderInventoryUncheckedUpdateManyWithoutProductNestedInput
-  }
-
   export type AccountsItemCreateWithoutJournalInput = {
     accountsItemName: string
     accountsItemId: string
@@ -43930,8 +43760,8 @@ export namespace Prisma {
     inventory?: InventoryCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryCreateNestedManyWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoCreateNestedOneWithoutTransaction_infoInput
     party?: PartyCreateNestedOneWithoutTransactionInfosInput
-    productionItemInfo?: ProductionItemInfoCreateNestedOneWithoutTransactionInfoInput
   }
 
   export type TransactionInfoUncheckedCreateWithoutJournalInput = {
@@ -43947,7 +43777,7 @@ export namespace Prisma {
     inventory?: InventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
-    productionItemInfo?: ProductionItemInfoUncheckedCreateNestedOneWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedOneWithoutTransaction_infoInput
   }
 
   export type TransactionInfoCreateOrConnectWithoutJournalInput = {
@@ -44005,8 +43835,8 @@ export namespace Prisma {
     inventory?: InventoryUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUpdateManyWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUpdateOneWithoutTransaction_infoNestedInput
     party?: PartyUpdateOneWithoutTransactionInfosNestedInput
-    productionItemInfo?: ProductionItemInfoUpdateOneWithoutTransactionInfoNestedInput
   }
 
   export type TransactionInfoUncheckedUpdateWithoutJournalInput = {
@@ -44022,7 +43852,7 @@ export namespace Prisma {
     inventory?: InventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    productionItemInfo?: ProductionItemInfoUncheckedUpdateOneWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateOneWithoutTransaction_infoNestedInput
   }
 
   export type IngredientExpneseItemsCreateWithoutProductIngradientInput = {
@@ -44562,8 +44392,8 @@ export namespace Prisma {
     inventory?: InventoryCreateNestedManyWithoutTransactionInfoInput
     journal?: JournalCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryCreateNestedManyWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoCreateNestedOneWithoutTransaction_infoInput
     party?: PartyCreateNestedOneWithoutTransactionInfosInput
-    productionItemInfo?: ProductionItemInfoCreateNestedOneWithoutTransactionInfoInput
   }
 
   export type TransactionInfoUncheckedCreateWithoutProductionExpensesInventoryInput = {
@@ -44579,7 +44409,7 @@ export namespace Prisma {
     inventory?: InventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
     journal?: JournalUncheckedCreateNestedManyWithoutTransactionInfoInput
     pminventories?: PMInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
-    productionItemInfo?: ProductionItemInfoUncheckedCreateNestedOneWithoutTransactionInfoInput
+    productioniteminfo?: productioniteminfoUncheckedCreateNestedOneWithoutTransaction_infoInput
   }
 
   export type TransactionInfoCreateOrConnectWithoutProductionExpensesInventoryInput = {
@@ -44637,8 +44467,8 @@ export namespace Prisma {
     inventory?: InventoryUpdateManyWithoutTransactionInfoNestedInput
     journal?: JournalUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUpdateManyWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUpdateOneWithoutTransaction_infoNestedInput
     party?: PartyUpdateOneWithoutTransactionInfosNestedInput
-    productionItemInfo?: ProductionItemInfoUpdateOneWithoutTransactionInfoNestedInput
   }
 
   export type TransactionInfoUncheckedUpdateWithoutProductionExpensesInventoryInput = {
@@ -44654,7 +44484,7 @@ export namespace Prisma {
     inventory?: InventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
     journal?: JournalUncheckedUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    productionItemInfo?: ProductionItemInfoUncheckedUpdateOneWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateOneWithoutTransaction_infoNestedInput
   }
 
   export type IngredientExpneseItemsCreateWithoutProductionExpenseItemInput = {
@@ -44743,6 +44573,182 @@ export namespace Prisma {
     data: XOR<ProductionExpensesInventoryUpdateManyMutationInput, ProductionExpensesInventoryUncheckedUpdateManyWithoutProductionExpenseItemInput>
   }
 
+  export type ProductCreateWithoutProductioniteminfoInput = {
+    name: string
+    description: string
+    minPrice?: number | null
+    size?: string | null
+    quantity: number
+    unitPrice: number
+    alertQuantity?: number
+    openingDate: Date | string
+    openingAmount: number
+    isDeleted?: boolean
+    status?: $Enums.Status
+    createdAt?: Date | string
+    updateAt?: Date | string
+    inventory?: InventoryCreateNestedManyWithoutProductInput
+    subCategory: SubCategoryCreateNestedOneWithoutProductInput
+    unit: UnitCreateNestedOneWithoutProductInput
+    purchaseOrderInventories?: PurchaseOrderInventoryCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductUncheckedCreateWithoutProductioniteminfoInput = {
+    id?: number
+    name: string
+    description: string
+    subCategoryId: number
+    minPrice?: number | null
+    size?: string | null
+    quantity: number
+    unitPrice: number
+    alertQuantity?: number
+    unitId: number
+    openingDate: Date | string
+    openingAmount: number
+    isDeleted?: boolean
+    status?: $Enums.Status
+    createdAt?: Date | string
+    updateAt?: Date | string
+    inventory?: InventoryUncheckedCreateNestedManyWithoutProductInput
+    purchaseOrderInventories?: PurchaseOrderInventoryUncheckedCreateNestedManyWithoutProductInput
+  }
+
+  export type ProductCreateOrConnectWithoutProductioniteminfoInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutProductioniteminfoInput, ProductUncheckedCreateWithoutProductioniteminfoInput>
+  }
+
+  export type TransactionInfoCreateWithoutProductioniteminfoInput = {
+    voucherNo: string
+    invoiceNo?: string | null
+    date?: Date | string | null
+    voucherType: $Enums.VoucherType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bankTransaction?: BankTransactionCreateNestedManyWithoutTransactionInfoInput
+    inventory?: InventoryCreateNestedManyWithoutTransactionInfoInput
+    journal?: JournalCreateNestedManyWithoutTransactionInfoInput
+    pminventories?: PMInventoryCreateNestedManyWithoutTransactionInfoInput
+    productionExpensesInventory?: ProductionExpensesInventoryCreateNestedManyWithoutTransactionInfoInput
+    party?: PartyCreateNestedOneWithoutTransactionInfosInput
+  }
+
+  export type TransactionInfoUncheckedCreateWithoutProductioniteminfoInput = {
+    id?: number
+    voucherNo: string
+    invoiceNo?: string | null
+    date?: Date | string | null
+    partyId?: number | null
+    voucherType: $Enums.VoucherType
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    bankTransaction?: BankTransactionUncheckedCreateNestedManyWithoutTransactionInfoInput
+    inventory?: InventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
+    journal?: JournalUncheckedCreateNestedManyWithoutTransactionInfoInput
+    pminventories?: PMInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
+    productionExpensesInventory?: ProductionExpensesInventoryUncheckedCreateNestedManyWithoutTransactionInfoInput
+  }
+
+  export type TransactionInfoCreateOrConnectWithoutProductioniteminfoInput = {
+    where: TransactionInfoWhereUniqueInput
+    create: XOR<TransactionInfoCreateWithoutProductioniteminfoInput, TransactionInfoUncheckedCreateWithoutProductioniteminfoInput>
+  }
+
+  export type ProductUpsertWithoutProductioniteminfoInput = {
+    update: XOR<ProductUpdateWithoutProductioniteminfoInput, ProductUncheckedUpdateWithoutProductioniteminfoInput>
+    create: XOR<ProductCreateWithoutProductioniteminfoInput, ProductUncheckedCreateWithoutProductioniteminfoInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutProductioniteminfoInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutProductioniteminfoInput, ProductUncheckedUpdateWithoutProductioniteminfoInput>
+  }
+
+  export type ProductUpdateWithoutProductioniteminfoInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    minPrice?: NullableIntFieldUpdateOperationsInput | number | null
+    size?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    alertQuantity?: IntFieldUpdateOperationsInput | number
+    openingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    openingAmount?: FloatFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventory?: InventoryUpdateManyWithoutProductNestedInput
+    subCategory?: SubCategoryUpdateOneRequiredWithoutProductNestedInput
+    unit?: UnitUpdateOneRequiredWithoutProductNestedInput
+    purchaseOrderInventories?: PurchaseOrderInventoryUpdateManyWithoutProductNestedInput
+  }
+
+  export type ProductUncheckedUpdateWithoutProductioniteminfoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    subCategoryId?: IntFieldUpdateOperationsInput | number
+    minPrice?: NullableIntFieldUpdateOperationsInput | number | null
+    size?: NullableStringFieldUpdateOperationsInput | string | null
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    alertQuantity?: IntFieldUpdateOperationsInput | number
+    unitId?: IntFieldUpdateOperationsInput | number
+    openingDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    openingAmount?: FloatFieldUpdateOperationsInput | number
+    isDeleted?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    inventory?: InventoryUncheckedUpdateManyWithoutProductNestedInput
+    purchaseOrderInventories?: PurchaseOrderInventoryUncheckedUpdateManyWithoutProductNestedInput
+  }
+
+  export type TransactionInfoUpsertWithoutProductioniteminfoInput = {
+    update: XOR<TransactionInfoUpdateWithoutProductioniteminfoInput, TransactionInfoUncheckedUpdateWithoutProductioniteminfoInput>
+    create: XOR<TransactionInfoCreateWithoutProductioniteminfoInput, TransactionInfoUncheckedCreateWithoutProductioniteminfoInput>
+    where?: TransactionInfoWhereInput
+  }
+
+  export type TransactionInfoUpdateToOneWithWhereWithoutProductioniteminfoInput = {
+    where?: TransactionInfoWhereInput
+    data: XOR<TransactionInfoUpdateWithoutProductioniteminfoInput, TransactionInfoUncheckedUpdateWithoutProductioniteminfoInput>
+  }
+
+  export type TransactionInfoUpdateWithoutProductioniteminfoInput = {
+    voucherNo?: StringFieldUpdateOperationsInput | string
+    invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bankTransaction?: BankTransactionUpdateManyWithoutTransactionInfoNestedInput
+    inventory?: InventoryUpdateManyWithoutTransactionInfoNestedInput
+    journal?: JournalUpdateManyWithoutTransactionInfoNestedInput
+    pminventories?: PMInventoryUpdateManyWithoutTransactionInfoNestedInput
+    productionExpensesInventory?: ProductionExpensesInventoryUpdateManyWithoutTransactionInfoNestedInput
+    party?: PartyUpdateOneWithoutTransactionInfosNestedInput
+  }
+
+  export type TransactionInfoUncheckedUpdateWithoutProductioniteminfoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    voucherNo?: StringFieldUpdateOperationsInput | string
+    invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
+    date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    partyId?: NullableIntFieldUpdateOperationsInput | number | null
+    voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    bankTransaction?: BankTransactionUncheckedUpdateManyWithoutTransactionInfoNestedInput
+    inventory?: InventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
+    journal?: JournalUncheckedUpdateManyWithoutTransactionInfoNestedInput
+    pminventories?: PMInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
+    productionExpensesInventory?: ProductionExpensesInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
+  }
+
   export type SubCategoryCreateManyCategoryInput = {
     id?: number
     subCategoryName: string
@@ -44805,9 +44811,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryUpdateManyWithoutProductNestedInput
+    productioniteminfo?: productioniteminfoUpdateManyWithoutProductsNestedInput
     unit?: UnitUpdateOneRequiredWithoutProductNestedInput
     purchaseOrderInventories?: PurchaseOrderInventoryUpdateManyWithoutProductNestedInput
-    productionItemInfos?: ProductionItemInfoUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutSubCategoryInput = {
@@ -44827,8 +44833,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryUncheckedUpdateManyWithoutProductNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateManyWithoutProductsNestedInput
     purchaseOrderInventories?: PurchaseOrderInventoryUncheckedUpdateManyWithoutProductNestedInput
-    productionItemInfos?: ProductionItemInfoUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutSubCategoryInput = {
@@ -44964,9 +44970,9 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryUpdateManyWithoutProductNestedInput
+    productioniteminfo?: productioniteminfoUpdateManyWithoutProductsNestedInput
     subCategory?: SubCategoryUpdateOneRequiredWithoutProductNestedInput
     purchaseOrderInventories?: PurchaseOrderInventoryUpdateManyWithoutProductNestedInput
-    productionItemInfos?: ProductionItemInfoUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateWithoutUnitInput = {
@@ -44986,8 +44992,8 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updateAt?: DateTimeFieldUpdateOperationsInput | Date | string
     inventory?: InventoryUncheckedUpdateManyWithoutProductNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateManyWithoutProductsNestedInput
     purchaseOrderInventories?: PurchaseOrderInventoryUncheckedUpdateManyWithoutProductNestedInput
-    productionItemInfos?: ProductionItemInfoUncheckedUpdateManyWithoutProductNestedInput
   }
 
   export type ProductUncheckedUpdateManyWithoutUnitInput = {
@@ -45209,7 +45215,7 @@ export namespace Prisma {
     journal?: JournalUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUpdateManyWithoutTransactionInfoNestedInput
-    productionItemInfo?: ProductionItemInfoUpdateOneWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUpdateOneWithoutTransaction_infoNestedInput
   }
 
   export type TransactionInfoUncheckedUpdateWithoutPartyInput = {
@@ -45225,7 +45231,7 @@ export namespace Prisma {
     journal?: JournalUncheckedUpdateManyWithoutTransactionInfoNestedInput
     pminventories?: PMInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
     productionExpensesInventory?: ProductionExpensesInventoryUncheckedUpdateManyWithoutTransactionInfoNestedInput
-    productionItemInfo?: ProductionItemInfoUncheckedUpdateOneWithoutTransactionInfoNestedInput
+    productioniteminfo?: productioniteminfoUncheckedUpdateOneWithoutTransaction_infoNestedInput
   }
 
   export type TransactionInfoUncheckedUpdateManyWithoutPartyInput = {
@@ -45260,6 +45266,15 @@ export namespace Prisma {
     packingMaterialId?: number | null
   }
 
+  export type productioniteminfoCreateManyProductsInput = {
+    id?: number
+    transactionId: number
+    batchNo: string
+    status?: $Enums.productioniteminfo_status
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type PurchaseOrderInventoryCreateManyProductInput = {
     id?: number
     purchaseOrderId: number
@@ -45271,15 +45286,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     packingMaterialId?: number | null
-  }
-
-  export type ProductionItemInfoCreateManyProductInput = {
-    id?: number
-    transactionId: number
-    batchNo: string
-    status?: $Enums.TxStatus
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type InventoryUpdateWithoutProductInput = {
@@ -45347,6 +45353,32 @@ export namespace Prisma {
     packingMaterialId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
+  export type productioniteminfoUpdateWithoutProductsInput = {
+    batchNo?: StringFieldUpdateOperationsInput | string
+    status?: Enumproductioniteminfo_statusFieldUpdateOperationsInput | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    transaction_info?: TransactionInfoUpdateOneRequiredWithoutProductioniteminfoNestedInput
+  }
+
+  export type productioniteminfoUncheckedUpdateWithoutProductsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    transactionId?: IntFieldUpdateOperationsInput | number
+    batchNo?: StringFieldUpdateOperationsInput | string
+    status?: Enumproductioniteminfo_statusFieldUpdateOperationsInput | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type productioniteminfoUncheckedUpdateManyWithoutProductsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    transactionId?: IntFieldUpdateOperationsInput | number
+    batchNo?: StringFieldUpdateOperationsInput | string
+    status?: Enumproductioniteminfo_statusFieldUpdateOperationsInput | $Enums.productioniteminfo_status
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PurchaseOrderInventoryUpdateWithoutProductInput = {
     unitPrice?: FloatFieldUpdateOperationsInput | number
     quantity?: FloatFieldUpdateOperationsInput | number
@@ -45383,32 +45415,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     packingMaterialId?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type ProductionItemInfoUpdateWithoutProductInput = {
-    batchNo?: StringFieldUpdateOperationsInput | string
-    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    transactionInfo?: TransactionInfoUpdateOneRequiredWithoutProductionItemInfoNestedInput
-  }
-
-  export type ProductionItemInfoUncheckedUpdateWithoutProductInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    transactionId?: IntFieldUpdateOperationsInput | number
-    batchNo?: StringFieldUpdateOperationsInput | string
-    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type ProductionItemInfoUncheckedUpdateManyWithoutProductInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    transactionId?: IntFieldUpdateOperationsInput | number
-    batchNo?: StringFieldUpdateOperationsInput | string
-    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type InventoryCreateManyRaWMaterialInput = {
@@ -45614,7 +45620,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: boolean
+    isOpening?: number
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -45719,7 +45725,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: BoolFieldUpdateOperationsInput | boolean
+    isOpening?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45742,7 +45748,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: BoolFieldUpdateOperationsInput | boolean
+    isOpening?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45764,7 +45770,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: BoolFieldUpdateOperationsInput | boolean
+    isOpening?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45986,7 +45992,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: boolean
+    isOpening?: number
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46158,7 +46164,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: BoolFieldUpdateOperationsInput | boolean
+    isOpening?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46181,7 +46187,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: BoolFieldUpdateOperationsInput | boolean
+    isOpening?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46203,7 +46209,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: BoolFieldUpdateOperationsInput | boolean
+    isOpening?: IntFieldUpdateOperationsInput | number
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

@@ -76,10 +76,14 @@ const getInventoryAggValueById = async (query: any) => {
     const getDate = await prisma.pMInventory.findFirst({
       where: {
         packingMaterialId: Number(query.packingMaterialId),
-        isOpening: true,
+        isOpening: 1,
       },
       orderBy: [{ id: "desc" }],
     });
+
+    if (!getDate?.date) {
+      throw new AppError(StatusCodes.NOT_FOUND, "Opening date not found");
+    }
 
     const result = await prisma.$queryRaw`
   SELECT 
@@ -88,11 +92,11 @@ const getInventoryAggValueById = async (query: any) => {
     SUM(IFNULL(i.quantityAdd, 0) - IFNULL(i.quantityLess, 0)) AS netQuantity,
     SUM(IFNULL(i.debitAmount, 0) - IFNULL(i.creditAmount, 0)) AS netAmount
     
-  
+
   FROM pm_inventories i
-  WHERE i.packingMaterialId = ${query.packingMaterialId} AND i.date>=${getDate?.date}
+  WHERE i.packingMaterialId = ${Number(query.packingMaterialId)} AND i.date >= ${getDate.date}
   GROUP BY i.packingMaterialId`;
-    console.log(result)
+
     return result;
   }
 };

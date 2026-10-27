@@ -353,16 +353,6 @@ exports.Prisma.TransactionInfoScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
-exports.Prisma.ProductionItemInfoScalarFieldEnum = {
-  id: 'id',
-  transactionId: 'transactionId',
-  productId: 'productId',
-  batchNo: 'batchNo',
-  status: 'status',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
 exports.Prisma.JournalScalarFieldEnum = {
   id: 'id',
   transectionId: 'transectionId',
@@ -426,6 +416,16 @@ exports.Prisma.ProductionexpenseitemScalarFieldEnum = {
   id: 'id',
   expItemName: 'expItemName',
   unitRate: 'unitRate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProductioniteminfoScalarFieldEnum = {
+  id: 'id',
+  transactionId: 'transactionId',
+  productId: 'productId',
+  batchNo: 'batchNo',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -517,16 +517,16 @@ exports.Prisma.TransactionInfoOrderByRelevanceFieldEnum = {
   invoiceNo: 'invoiceNo'
 };
 
-exports.Prisma.ProductionItemInfoOrderByRelevanceFieldEnum = {
-  batchNo: 'batchNo'
-};
-
 exports.Prisma.JournalOrderByRelevanceFieldEnum = {
   narration: 'narration'
 };
 
 exports.Prisma.productionexpenseitemOrderByRelevanceFieldEnum = {
   expItemName: 'expItemName'
+};
+
+exports.Prisma.productioniteminfoOrderByRelevanceFieldEnum = {
+  batchNo: 'batchNo'
 };
 exports.UserRole = exports.$Enums.UserRole = {
   SUPER_ADMIN: 'SUPER_ADMIN',
@@ -569,7 +569,7 @@ exports.VoucherType = exports.$Enums.VoucherType = {
   FINISH_GOODS: 'FINISH_GOODS'
 };
 
-exports.TxStatus = exports.$Enums.TxStatus = {
+exports.productioniteminfo_status = exports.$Enums.productioniteminfo_status = {
   PENDING: 'PENDING',
   PROCESSING: 'PROCESSING',
   IN_PROGRESS: 'IN_PROGRESS',
@@ -596,14 +596,14 @@ exports.Prisma.ModelName = {
   Inventory: 'Inventory',
   PMInventory: 'PMInventory',
   TransactionInfo: 'TransactionInfo',
-  ProductionItemInfo: 'ProductionItemInfo',
   Journal: 'Journal',
   ProductionIngradient: 'ProductionIngradient',
   IngredientRawMaterial: 'IngredientRawMaterial',
   IngredientPackingMaterial: 'IngredientPackingMaterial',
   IngredientExpneseItems: 'IngredientExpneseItems',
   ProductionExpensesInventory: 'ProductionExpensesInventory',
-  productionexpenseitem: 'productionexpenseitem'
+  productionexpenseitem: 'productionexpenseitem',
+  productioniteminfo: 'productioniteminfo'
 };
 
 /**

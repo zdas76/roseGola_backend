@@ -1,4 +1,4 @@
-import { Department, Status, TxStatus, VoucherType } from "../../../generated/prisma";
+import { Department, Status, productioniteminfo_status, VoucherType } from "../../../generated/prisma";
 import { GenerateVoucherNumber } from "../../../helpars/generateVoucherNumber";
 import prisma from "../../../shared/prisma";
 import AppError from "../../errors/AppError";
@@ -16,7 +16,6 @@ const createProduction = async (
       isDeleted: false,
     },
   });
-
   if (!isProductExisted) {
     throw new AppError(StatusCodes.BAD_REQUEST, "Product not found");
   }
@@ -25,7 +24,7 @@ const createProduction = async (
     let transactionInfo;
     if (id && id > 0) {
       const existingTx = await tx.transactionInfo.findUnique({
-        where: { id },
+        where: { id: Number(id) },
       });
 
       if (!existingTx) {
@@ -39,7 +38,7 @@ const createProduction = async (
         where: { id },
         data: {
           date: new Date(payload.date),
-          productionItemInfo: {
+          productioniteminfo: {
             update: {
               status: payload?.status,
             }
@@ -52,11 +51,11 @@ const createProduction = async (
       transactionInfo = await tx.transactionInfo.create({
         data: {
           voucherNo: VoucherNo!,
-          productionItemInfo: {
+          productioniteminfo: {
             create: {
               batchNo: batchNo,
               productId: payload?.productinfo?.productId,
-              status: payload?.status,
+              status: payload?.status
             }
           },
           date: new Date(payload.date),
@@ -64,7 +63,6 @@ const createProduction = async (
         },
       });
     }
-    // ১. আগে চেক করি inventoryId দিয়ে অথবা এই transaction-এ এই প্রোডাক্টের রেকর্ড আছে কি না
     let existingInvetory;
     if (payload.inventoryId && id) {
       existingInvetory = await tx.inventory.findUnique({
@@ -119,7 +117,6 @@ const createProduction = async (
           },
         },
       });
-
       for (const item of payload.rawMaterials) {
         const rawMaterial = await tx.rawMaterial.findFirst({
           where: {
@@ -183,7 +180,6 @@ const createProduction = async (
         });
       }
     }
-
     // 4. Add packing materials consumed
     if (payload?.packingMaterials && payload.packingMaterials.length > 0) {
       await tx.pMInventory.deleteMany({
@@ -221,13 +217,13 @@ const createProduction = async (
     }
     // 5. Add Final packed Products
     if (payload?.products && payload.products.length > 0) {
-      await tx.productionItemInfo.update({
+      await tx.productioniteminfo.update({
         where: {
           transactionId: transactionInfo.id,
-          status: TxStatus.PENDING
+          status: productioniteminfo_status.PENDING
         },
         data: {
-          status: TxStatus.COMPLETE
+          status: productioniteminfo_status.COMPLETE
         }
       })
       await tx.inventory.deleteMany({
@@ -318,11 +314,12 @@ const getProduction = async () => {
       voucherType: VoucherType.PRODUCTION,
     },
     include: {
-      productionItemInfo: {
+      productioniteminfo: {
         select: {
           status: true,
+          batchNo: true,
           productId: true,
-          product: {
+          products: {
             select: {
               name: true,
               id: true,
@@ -382,11 +379,11 @@ const getProductionById = async (id: number) => {
       id: id,
     },
     include: {
-      productionItemInfo: {
+      productioniteminfo: {
         select: {
           batchNo: true,
           status: true,
-          product: {
+          products: {
             select: {
               name: true,
               id: true,

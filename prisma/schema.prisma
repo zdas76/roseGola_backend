@@ -135,10 +135,10 @@ model Product {
   createdAt                DateTime                 @default(now())
   updateAt                 DateTime                 @updatedAt
   inventory                Inventory[]
+  productioniteminfo       productioniteminfo[]
   subCategory              SubCategory              @relation(fields: [subCategoryId], references: [id])
   unit                     Unit                     @relation(fields: [unitId], references: [id])
   purchaseOrderInventories PurchaseOrderInventory[]
-  productionItemInfos      ProductionItemInfo[]
 
   @@index([subCategoryId, name])
   @@index([unitId], map: "products_unitId_fkey")
@@ -315,7 +315,7 @@ model PMInventory {
   creditAmount           Float?           @default(0)
   integratedDebitAmount  Float?           @default(0)
   integratedCreditAmount Float?           @default(0)
-  isOpening              Boolean          @default(false)
+  isOpening              Int              @default(0)
   status                 Status           @default(PENDING)
   createdAt              DateTime         @default(now())
   updatedAt              DateTime         @updatedAt
@@ -341,24 +341,12 @@ model TransactionInfo {
   journal                     Journal[]
   pminventories               PMInventory[]
   productionExpensesInventory ProductionExpensesInventory[]
+  productioniteminfo          productioniteminfo?
   party                       Party?                        @relation(fields: [partyId], references: [id])
-  productionItemInfo          ProductionItemInfo?
 
   @@index([voucherNo, voucherType, partyId])
   @@index([partyId], map: "transaction_info_partyId_fkey")
   @@map("transaction_info")
-}
-
-model ProductionItemInfo {
-  id              Int             @id @default(autoincrement())
-  transactionId   Int             @unique
-  productId       Int
-  batchNo         String          @unique @db.VarChar(50)
-  status          TxStatus        @default(PROCESSING)
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  transactionInfo TransactionInfo @relation(fields: [transactionId], references: [id])
-  product         Product         @relation(fields: [productId], references: [id])
 }
 
 model Journal {
@@ -465,20 +453,26 @@ model productionexpenseitem {
   productionExpensesInventories ProductionExpensesInventory[]
 }
 
+model productioniteminfo {
+  id               Int                       @id @default(autoincrement())
+  transactionId    Int                       @unique(map: "ProductionItemInfo_transactionId_key")
+  productId        Int
+  batchNo          String                    @unique(map: "ProductionItemInfo_batchNo_key") @db.VarChar(50)
+  status           productioniteminfo_status @default(PROCESSING)
+  createdAt        DateTime                  @default(now())
+  updatedAt        DateTime                  @updatedAt
+  products         Product                   @relation(fields: [productId], references: [id], map: "ProductionItemInfo_productId_fkey")
+  transaction_info TransactionInfo           @relation(fields: [transactionId], references: [id], map: "ProductionItemInfo_transactionId_fkey")
+
+  @@index([productId], map: "ProductionItemInfo_productId_fkey")
+}
+
 enum Department {
   PURCHASE
   PRODUCTION
   RM_STORE
   MP_STORE
   FG_STORE
-}
-
-enum TxStatus {
-  PENDING
-  PROCESSING
-  IN_PROGRESS
-  COMPLETE
-  DELETE
 }
 
 enum VoucherType {
@@ -512,4 +506,12 @@ enum PartyType {
   CUSTOMER
   SUPPLIER
   DISTRIBUTOR
+}
+
+enum productioniteminfo_status {
+  PENDING
+  PROCESSING
+  IN_PROGRESS
+  COMPLETE
+  DELETE
 }

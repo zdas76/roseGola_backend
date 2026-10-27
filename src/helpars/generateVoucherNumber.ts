@@ -28,7 +28,6 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
       orderBy: { id: "desc" },
       select: { voucherNo: true },
     });
-
     voucherNo = lastVoucher?.voucherNo;
   }
 
@@ -50,8 +49,9 @@ const getNextNumber = (voucherNo: string) => {
   return nextNumber;
 };
 
+
 const currectDate = new Date().getDate().toString().padStart(2, "0");
 const currectMonth = (new Date().getMonth() + 1).toString().padStart(2, "0");
-const currectYear = new Date().getFullYear().toString().slice(-2);
+const currectYear = new Date().getFullYear().toString();
 
 const currentDate = currectDate + currectMonth + currectYear;

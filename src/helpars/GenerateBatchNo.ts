@@ -3,7 +3,7 @@ import prisma from "../shared/prisma";
 export const GenerateBatchNo = async (productId: number) => {
   let batchNo;
 
-  const lastbatchByid = await prisma.productionItemInfo.findFirst({
+  const lastbatchByid = await prisma.productioniteminfo.findFirst({
     where: {
       productId
     },

@@ -38,8 +38,7 @@ const getInventoryAggValueById = async (query: any) => {
 
     const result = await prisma.$queryRaw`
   SELECT 
-    i.productId,
-    
+    i.productId,    
     SUM(IFNULL(i.quantityAdd, 0) - IFNULL(i.quantityLess, 0)) AS netQuantity,
     SUM(IFNULL(i.debitAmount, 0)- IFNULL(i.creditAmount, 0)) AS netAmount
     
@@ -125,6 +124,7 @@ const getLastRawMaterialRate = async (ids: number[]) => {
         select: {
           rawId: true,
           unitPrice: true,
+          quantityAdd: true,
         }
       });
     })

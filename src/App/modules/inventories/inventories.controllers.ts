@@ -64,7 +64,7 @@ const getInventoryAggigetValue = catchAsync(
 // get last rate of raw material
 const getLastRawMaterialRate = catchAsync(
   async (req: Request, res: Response) => {
-    const ids = JSON.parse(req.query.ids as string);
+    const ids = JSON.parse(req.query.rawids as string);
     const result: any = await InventoryService.getLastRawMaterialRate(ids);
     return sendResponse(res, {
       statusCode: StatusCodes.OK,

@@ -16,7 +16,9 @@ route.put("/", InventoryControllers.deleteInventory);
 
 // get  last used raw material quantity
 route.get("/lastRate", InventoryControllers.getLastRawMaterialRate);
+route.get("/last_voucher_qty", InventoryControllers.getLastUsedVoucherQty)
 
 route.get("/:id", InventoryControllers.getInventoryById);
+
 
 export const InventoryRoute = route;

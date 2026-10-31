@@ -74,11 +74,30 @@ const getLastRawMaterialRate = catchAsync(
     });
   });
 
+const getLastUsedVoucherQty = async (req: Request, res: Response) => {
+  const rawId = req.query.rawId
+    ? Number(req.query.rawId)
+    : undefined;
+
+  const pmMaterialId = req.query.pmMaterialId
+    ? Number(req.query.pmMaterialId)
+    : undefined;
+
+  const result = await InventoryService.getLastVoucherQty({ rawId: rawId, pmMaterialId: pmMaterialId })
+  return sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: "Laused voucher qtyial retrived Successfully",
+    data: result,
+  });
+}
 export const InventoryControllers = {
   getnventory,
   getInventoryById,
   updateInventory,
   deleteInventory,
   getInventoryAggigetValue,
-  getLastRawMaterialRate
+  getLastRawMaterialRate,
+  getLastUsedVoucherQty
 };
+

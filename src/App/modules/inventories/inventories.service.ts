@@ -57,18 +57,14 @@ const getInventoryAggValueById = async (query: any) => {
       },
       orderBy: [{ id: "desc" }],
     });
-
     const result = await prisma.$queryRaw`
   SELECT 
     i.rawId,
-    
     SUM(IFNULL(i.quantityAdd, 0) - IFNULL(i.quantityLess, 0)) AS netQuantity,
     SUM(IFNULL(i.debitAmount, 0) - IFNULL(i.creditAmount, 0)) AS netAmount
-    
   FROM inventories i
   WHERE i.rawId = ${query.rawId} AND i.date>=${getDate?.date}
   GROUP BY i.rawId`;
-
     return result;
   }
   if (query.itemType === "pmmaterial") {
@@ -99,7 +95,6 @@ const getInventoryAggValueById = async (query: any) => {
     return result;
   }
 };
-
 
 const updateInventory = async (id: number, payload: Inventory) => {
   return await prisma.inventory.updateMany({
@@ -132,11 +127,47 @@ const getLastRawMaterialRate = async (ids: number[]) => {
   return result;
 }
 
+const getLastVoucherQty = async (queryIds: { rawId?: number; pmMaterialId?: number }) => {
+  let result;
+  // console.log(rawId, "raw id")
+  if (queryIds.rawId !== undefined) {
+    const resultres = await prisma.inventory.findFirst({
+      where: {
+        rawId: queryIds?.rawId,
+      },
+      orderBy: [{ transactionId: "desc" }],
+      select: {
+        rawId: true,
+        quantityLess: true,
+      }
+    })
+    // console.log(resultres, "resultres")
+    result = resultres
+  }
+  if (queryIds?.pmMaterialId !== undefined) {
+    const pmresult = await prisma.pMInventory.findFirst({
+      where: {
+        packingMaterialId: queryIds.pmMaterialId
+      },
+      orderBy: [{ transactionId: "desc" }],
+      select: {
+        id: true,
+        quantityLess: true
+      }
+    })
+    result = pmresult
+  }
+  return result;
+}
+
+
+
 export const InventoryService = {
   getInventory,
   getInventoryById,
   getInventoryAggValueById,
   updateInventory,
   // deleteInventory,
+  getLastVoucherQty,
   getLastRawMaterialRate
 };

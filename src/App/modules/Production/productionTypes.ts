@@ -1,8 +1,8 @@
-import { TxStatus } from "../../../generated/prisma";
+import { productioniteminfo_status } from "../../../generated/prisma";
 
 export interface Production {
   inventoryId?: number;
-  status?: TxStatus;
+  status?: productioniteminfo_status;
   date: string;
   productinfo: {
     id?: number;

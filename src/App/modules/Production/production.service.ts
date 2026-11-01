@@ -216,6 +216,8 @@ const createProduction = async (
       }
     }
     // 5. Add Final packed Products
+    // console.log(payload?.products, "payload?.products")
+
     if (payload?.products && payload.products.length > 0) {
       await tx.productioniteminfo.update({
         where: {
@@ -226,10 +228,9 @@ const createProduction = async (
           status: productioniteminfo_status.COMPLETE
         }
       })
-      await tx.inventory.deleteMany({
-        where: { transactionId: transactionInfo.id, productId: { not: null } },
-      });
-
+      // await tx.inventory.deleteMany({
+      //   where: { transactionId: transactionInfo.id, productId: { not: null } },
+      // });
       for (const product of payload.products) {
         const isProduct = await tx.product.findFirst({
           where: {
@@ -237,6 +238,7 @@ const createProduction = async (
           },
         });
 
+        // console.log(product, "product inside for")
         if (!isProduct) {
           throw new AppError(
             StatusCodes.NOT_FOUND,
@@ -244,8 +246,11 @@ const createProduction = async (
           );
         }
 
+        // console.log()
+
         await tx.inventory.create({
           data: {
+            productId: product?.productId,
             date: new Date(payload.date),
             transactionId: transactionInfo.id,
             department: Department.PRODUCTION,

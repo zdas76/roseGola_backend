@@ -165,7 +165,6 @@ const rawReport = async (payload: {
     const startDate = payload?.startDate ? payload?.startDate : rawMaterial?.openingDate;
     const endDate = payload?.endDate ? payload?.endDate : new Date();
 
-    console.log(startDate, endDate)
     const total = await prisma.inventory.aggregate({
       _sum: {
         debitAmount: true,

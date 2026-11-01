@@ -122,7 +122,6 @@ const getVoucherByVoucherNo = async (voucherNo: string) => {
       },
     },
   });
-  console.log(voucher, "voucher")
   return voucher;
 };
 

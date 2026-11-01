@@ -36,17 +36,25 @@ const getInventoryAggValueById = async (query: any) => {
       throw new AppError(StatusCodes.NOT_FOUND, "date not found");
     }
 
-    const result = await prisma.$queryRaw`
-  SELECT 
-    i.productId,    
-    SUM(IFNULL(i.quantityAdd, 0) - IFNULL(i.quantityLess, 0)) AS netQuantity,
-    SUM(IFNULL(i.debitAmount, 0)- IFNULL(i.creditAmount, 0)) AS netAmount
-    
-  FROM inventories i
-  WHERE i.productId = ${query.productId} AND i.date>=${getDate?.date}
-  GROUP BY i.productId`;
+    const result = await prisma.inventory.aggregate({
+      where: {
+        productId: Number(query.productId),
+        date: {
+          gte: getDate.date,
+        },
+      },
+      _sum: {
+        quantityAdd: true,
+        quantityLess: true,
+        debitAmount: true,
+        creditAmount: true,
+      },
+    });
+    const netQuantity = result._sum.quantityAdd! - result._sum.quantityLess!;
+    const netAmount = result._sum.debitAmount! - result._sum.creditAmount!;
+    // console.log(netAmount)
 
-    return result;
+    return { netQuantity, netAmount };
   }
 
   if (query.itemType === "raw") {
@@ -57,15 +65,30 @@ const getInventoryAggValueById = async (query: any) => {
       },
       orderBy: [{ id: "desc" }],
     });
-    const result = await prisma.$queryRaw`
-  SELECT 
-    i.rawId,
-    SUM(IFNULL(i.quantityAdd, 0) - IFNULL(i.quantityLess, 0)) AS netQuantity,
-    SUM(IFNULL(i.debitAmount, 0) - IFNULL(i.creditAmount, 0)) AS netAmount
-  FROM inventories i
-  WHERE i.rawId = ${query.rawId} AND i.date>=${getDate?.date}
-  GROUP BY i.rawId`;
-    return result;
+
+    if (!getDate?.date) {
+      throw new AppError(StatusCodes.NOT_FOUND, "date not found");
+    }
+
+    const result = await prisma.inventory.aggregate({
+      where: {
+        rawId: Number(query.rawId),
+        date: {
+          gte: getDate.date,
+        },
+      },
+      _sum: {
+        quantityAdd: true,
+        quantityLess: true,
+        debitAmount: true,
+        creditAmount: true,
+      },
+    });
+
+    const netQuantity = result._sum.quantityAdd! - result._sum.quantityLess!;
+    const netAmount = result._sum.debitAmount! - result._sum.creditAmount!;
+
+    return { netQuantity, netAmount };
   }
   if (query.itemType === "pmmaterial") {
     const getDate = await prisma.pMInventory.findFirst({
@@ -80,19 +103,25 @@ const getInventoryAggValueById = async (query: any) => {
       throw new AppError(StatusCodes.NOT_FOUND, "Opening date not found");
     }
 
-    const result = await prisma.$queryRaw`
-  SELECT 
-    i.packingMaterialId,
-    
-    SUM(IFNULL(i.quantityAdd, 0) - IFNULL(i.quantityLess, 0)) AS netQuantity,
-    SUM(IFNULL(i.debitAmount, 0) - IFNULL(i.creditAmount, 0)) AS netAmount
-    
+    const result = await prisma.inventory.aggregate({
+      where: {
+        rawId: Number(query.packingMaterialId),
+        date: {
+          gte: getDate.date,
+        },
+      },
+      _sum: {
+        quantityAdd: true,
+        quantityLess: true,
+        debitAmount: true,
+        creditAmount: true,
+      },
+    });
 
-  FROM pm_inventories i
-  WHERE i.packingMaterialId = ${Number(query.packingMaterialId)} AND i.date >= ${getDate.date}
-  GROUP BY i.packingMaterialId`;
+    const netQuantity = result._sum.quantityAdd! - result._sum.quantityLess!;
+    const netAmount = result._sum.debitAmount! - result._sum.creditAmount!;
 
-    return result;
+    return { netQuantity, netAmount };
   }
 };
 

@@ -48,7 +48,6 @@ const getPurchaseOrderById = catchAsync(async (req: Request, res: Response) => {
 
 const getPurchaseOrderByOrderNo = catchAsync(async (req: Request, res: Response) => {
   const orderNo = req.params.orderNo as string;
-  console.log("orderNo from controller: ", orderNo);
   const result = await PurchaseOrderService.getPurchaseOrderByOrderNo(orderNo);
   sendResponse(res, {
     statusCode: StatusCodes.OK,

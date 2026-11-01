@@ -664,6 +664,7 @@ const createPaymentVoucher = async (payload: any) => {
       date: string;
       creditAmount: number;
       narration: string;
+      checkOrRTGS: number | null;
     }[] = [];
 
     payload.creditItem.map((item: any) => {
@@ -673,6 +674,7 @@ const createPaymentVoucher = async (payload: any) => {
         date: payload.date,
         creditAmount: Number(item.amount),
         narration: item?.narration || "",
+        checkOrRTGS: item?.checkOrRTGS || null
       });
     });
 
@@ -688,12 +690,14 @@ const createPaymentVoucher = async (payload: any) => {
       date: string;
       creditAmount: number;
       narration: string;
+      checkOrRTGS: number | null;
     }[] = payload.debitItem.map((item: any) => ({
       transectionId: createTransactionInfo.id,
       accountsItemId: item.accountsItemId,
       date: payload.date,
       debitAmount: Number(item.amount),
       narration: item?.narration || "",
+      checkOrRTGS: item?.checkOrRTGS || null,
     }));
 
     const journalItems = [...journalDebitItems, ...journalCreditItems];
@@ -993,9 +997,8 @@ j.accountsItemId,
     
   FROM journals j
   LEFT JOIN transaction_info t ON t.id = j.transectionId
-  WHERE j.accountsItemId = ${payLoad.accountsItemId} AND  j.date >= ${
-    getDate?.date || new Date(payLoad.date)
-  } 
+  WHERE j.accountsItemId = ${payLoad.accountsItemId} AND  j.date >= ${getDate?.date || new Date(payLoad.date)
+    } 
   GROUP BY j.accountsItemId`;
 
   return (result as any[])[0];

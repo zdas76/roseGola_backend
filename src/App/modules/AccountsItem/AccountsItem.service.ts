@@ -47,7 +47,7 @@ const getAccountsItemFromDB = async (payLoad: string) => {
 
   if (payLoad) {
     const filer = JSON.parse(payLoad).map((id: string) => {
-      return { accountMainPillerId: id };
+      return { accountHeadId: id };
     });
     filerValue = {
       OR: filer,

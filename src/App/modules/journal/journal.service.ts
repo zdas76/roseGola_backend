@@ -818,6 +818,13 @@ const createReceiptVoucher = async (payload: any) => {
     where: {
       id: createVoucher,
     },
+    include: {
+      journal: {
+        select: {
+          checkOrRTGS: true
+        }
+      }
+    }
   });
   return result;
 };

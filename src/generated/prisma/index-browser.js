@@ -560,7 +560,7 @@ exports.Department = exports.$Enums.Department = {
 exports.VoucherType = exports.$Enums.VoucherType = {
   SALES: 'SALES',
   PURCHASE: 'PURCHASE',
-  RECEIPT: 'RECEIPT',
+  RECEIVED: 'RECEIVED',
   PAYMENT: 'PAYMENT',
   JOURNAL: 'JOURNAL',
   CONTRA: 'CONTRA',

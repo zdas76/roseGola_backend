@@ -271,7 +271,7 @@ model Inventory {
   productId              Int?
   rawId                  Int?
   transactionId          Int?
-  department             Department?
+  department             Department
   unitPrice              Float            @default(0)
   integratedUnitPrice    Float            @default(0)
   quantityAdd            Float?           @default(0)
@@ -478,7 +478,7 @@ enum Department {
 enum VoucherType {
   SALES
   PURCHASE
-  RECEIPT
+  RECEIVED
   PAYMENT
   JOURNAL
   CONTRA

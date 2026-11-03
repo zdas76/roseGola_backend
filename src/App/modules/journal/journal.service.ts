@@ -740,7 +740,7 @@ const createReceiptVoucher = async (payload: any) => {
       await tx.transactionInfo.create({
         data: {
           voucherNo: payload.voucherNo,
-          voucherType: VoucherType.RECEIPT,
+          voucherType: VoucherType.RECEIVED,
           partyId: isParty?.id || null,
           date: payload.date,
         },

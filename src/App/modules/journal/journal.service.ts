@@ -294,24 +294,24 @@ const createSalesVoucher = async (payload: any) => {
   const createSalseVoucher = await prisma.$transaction(async (tx) => {
     let isParty: Party | null = null;
 
-    if (payload.partyType === "VENDOR") {
+    if (payload.partyType === "DISTRIBUTOR") {
       isParty = await tx.party.findFirst({
         where: {
           id: payload.partyOrcustomerId,
           isDeleted: false,
         },
       });
-
       if (!isParty) {
         throw new Error(`Invalid Vendor`);
       }
     }
-
+    // generate the dynamic sales voucher 
+    const voucherNos = await GenerateVoucherNumber("SV")
     // step 1. create transaction entries
     const createTransactionInfo: TransactionInfo =
       await tx.transactionInfo.create({
         data: {
-          voucherNo: payload.voucherNo,
+          voucherNo: voucherNos,
           voucherType: VoucherType.SALES,
           partyId: isParty?.id || null,
           date: payload.date,
@@ -356,6 +356,7 @@ const createSalesVoucher = async (payload: any) => {
       quantityLess: item.quantity || 0,
       discount: item.discount || 0,
       creditAmount: item.creditAmount,
+      department: Department.FG_STORE
     }));
 
     //Step 3: Insert Inventory Records
@@ -618,11 +619,12 @@ const createPaymentVoucher = async (payload: any) => {
       }
     }
 
+    const voucherNo = await GenerateVoucherNumber("PV")
     // Create Transaction Voucher
     const createTransactionInfo: TransactionInfo =
       await tx.transactionInfo.create({
         data: {
-          voucherNo: payload.voucherNo,
+          voucherNo: voucherNo,
           voucherType: VoucherType.PAYMENT,
           partyId: isParty?.id || null,
           date: payload.date,

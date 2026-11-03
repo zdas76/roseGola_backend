@@ -19827,7 +19827,7 @@ export namespace Prisma {
     productId: number | null
     rawId: number | null
     transactionId: number | null
-    department: $Enums.Department
+    department: $Enums.Department | null
     unitPrice: number
     integratedUnitPrice: number
     quantityAdd: number | null
@@ -19937,7 +19937,7 @@ export namespace Prisma {
       productId: number | null
       rawId: number | null
       transactionId: number | null
-      department: $Enums.Department
+      department: $Enums.Department | null
       unitPrice: number
       integratedUnitPrice: number
       quantityAdd: number | null
@@ -33238,7 +33238,7 @@ export namespace Prisma {
     productId?: IntNullableFilter<"Inventory"> | number | null
     rawId?: IntNullableFilter<"Inventory"> | number | null
     transactionId?: IntNullableFilter<"Inventory"> | number | null
-    department?: EnumDepartmentFilter<"Inventory"> | $Enums.Department
+    department?: EnumDepartmentNullableFilter<"Inventory"> | $Enums.Department | null
     unitPrice?: FloatFilter<"Inventory"> | number
     integratedUnitPrice?: FloatFilter<"Inventory"> | number
     quantityAdd?: FloatNullableFilter<"Inventory"> | number | null
@@ -33265,7 +33265,7 @@ export namespace Prisma {
     productId?: SortOrderInput | SortOrder
     rawId?: SortOrderInput | SortOrder
     transactionId?: SortOrderInput | SortOrder
-    department?: SortOrder
+    department?: SortOrderInput | SortOrder
     unitPrice?: SortOrder
     integratedUnitPrice?: SortOrder
     quantityAdd?: SortOrderInput | SortOrder
@@ -33295,7 +33295,7 @@ export namespace Prisma {
     productId?: IntNullableFilter<"Inventory"> | number | null
     rawId?: IntNullableFilter<"Inventory"> | number | null
     transactionId?: IntNullableFilter<"Inventory"> | number | null
-    department?: EnumDepartmentFilter<"Inventory"> | $Enums.Department
+    department?: EnumDepartmentNullableFilter<"Inventory"> | $Enums.Department | null
     unitPrice?: FloatFilter<"Inventory"> | number
     integratedUnitPrice?: FloatFilter<"Inventory"> | number
     quantityAdd?: FloatNullableFilter<"Inventory"> | number | null
@@ -33322,7 +33322,7 @@ export namespace Prisma {
     productId?: SortOrderInput | SortOrder
     rawId?: SortOrderInput | SortOrder
     transactionId?: SortOrderInput | SortOrder
-    department?: SortOrder
+    department?: SortOrderInput | SortOrder
     unitPrice?: SortOrder
     integratedUnitPrice?: SortOrder
     quantityAdd?: SortOrderInput | SortOrder
@@ -33353,7 +33353,7 @@ export namespace Prisma {
     productId?: IntNullableWithAggregatesFilter<"Inventory"> | number | null
     rawId?: IntNullableWithAggregatesFilter<"Inventory"> | number | null
     transactionId?: IntNullableWithAggregatesFilter<"Inventory"> | number | null
-    department?: EnumDepartmentWithAggregatesFilter<"Inventory"> | $Enums.Department
+    department?: EnumDepartmentNullableWithAggregatesFilter<"Inventory"> | $Enums.Department | null
     unitPrice?: FloatWithAggregatesFilter<"Inventory"> | number
     integratedUnitPrice?: FloatWithAggregatesFilter<"Inventory"> | number
     quantityAdd?: FloatNullableWithAggregatesFilter<"Inventory"> | number | null
@@ -35407,7 +35407,7 @@ export namespace Prisma {
 
   export type InventoryCreateInput = {
     date: Date | string
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -35433,7 +35433,7 @@ export namespace Prisma {
     productId?: number | null
     rawId?: number | null
     transactionId?: number | null
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -35452,7 +35452,7 @@ export namespace Prisma {
 
   export type InventoryUpdateInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -35478,7 +35478,7 @@ export namespace Prisma {
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -35501,7 +35501,7 @@ export namespace Prisma {
     productId?: number | null
     rawId?: number | null
     transactionId?: number | null
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -35520,7 +35520,7 @@ export namespace Prisma {
 
   export type InventoryUpdateManyMutationInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -35542,7 +35542,7 @@ export namespace Prisma {
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -37626,11 +37626,11 @@ export namespace Prisma {
     creditAmount?: SortOrder
   }
 
-  export type EnumDepartmentFilter<$PrismaModel = never> = {
-    equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel>
-    in?: $Enums.Department[]
-    notIn?: $Enums.Department[]
-    not?: NestedEnumDepartmentFilter<$PrismaModel> | $Enums.Department
+  export type EnumDepartmentNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Department[] | null
+    notIn?: $Enums.Department[] | null
+    not?: NestedEnumDepartmentNullableFilter<$PrismaModel> | $Enums.Department | null
   }
 
   export type InventoryCountOrderByAggregateInput = {
@@ -37736,14 +37736,21 @@ export namespace Prisma {
     packingMaterialId?: SortOrder
   }
 
-  export type EnumDepartmentWithAggregatesFilter<$PrismaModel = never> = {
+  export type EnumDepartmentNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Department[] | null
+    notIn?: $Enums.Department[] | null
+    not?: NestedEnumDepartmentNullableWithAggregatesFilter<$PrismaModel> | $Enums.Department | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumDepartmentNullableFilter<$PrismaModel>
+    _max?: NestedEnumDepartmentNullableFilter<$PrismaModel>
+  }
+
+  export type EnumDepartmentFilter<$PrismaModel = never> = {
     equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel>
     in?: $Enums.Department[]
     notIn?: $Enums.Department[]
-    not?: NestedEnumDepartmentWithAggregatesFilter<$PrismaModel> | $Enums.Department
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumDepartmentFilter<$PrismaModel>
-    _max?: NestedEnumDepartmentFilter<$PrismaModel>
+    not?: NestedEnumDepartmentFilter<$PrismaModel> | $Enums.Department
   }
 
   export type PackingMaterialScalarRelationFilter = {
@@ -37854,6 +37861,16 @@ export namespace Prisma {
     integratedDebitAmount?: SortOrder
     integratedCreditAmount?: SortOrder
     isOpening?: SortOrder
+  }
+
+  export type EnumDepartmentWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel>
+    in?: $Enums.Department[]
+    notIn?: $Enums.Department[]
+    not?: NestedEnumDepartmentWithAggregatesFilter<$PrismaModel> | $Enums.Department
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDepartmentFilter<$PrismaModel>
+    _max?: NestedEnumDepartmentFilter<$PrismaModel>
   }
 
   export type EnumVoucherTypeFilter<$PrismaModel = never> = {
@@ -39513,8 +39530,8 @@ export namespace Prisma {
     connect?: TransactionInfoWhereUniqueInput
   }
 
-  export type EnumDepartmentFieldUpdateOperationsInput = {
-    set?: $Enums.Department
+  export type NullableEnumDepartmentFieldUpdateOperationsInput = {
+    set?: $Enums.Department | null
   }
 
   export type PackingMaterialUpdateOneWithoutInventoryNestedInput = {
@@ -39567,6 +39584,10 @@ export namespace Prisma {
     create?: XOR<TransactionInfoCreateWithoutPminventoriesInput, TransactionInfoUncheckedCreateWithoutPminventoriesInput>
     connectOrCreate?: TransactionInfoCreateOrConnectWithoutPminventoriesInput
     connect?: TransactionInfoWhereUniqueInput
+  }
+
+  export type EnumDepartmentFieldUpdateOperationsInput = {
+    set?: $Enums.Department
   }
 
   export type PackingMaterialUpdateOneRequiredWithoutPminventoriesNestedInput = {
@@ -40525,6 +40546,23 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedEnumDepartmentNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Department[] | null
+    notIn?: $Enums.Department[] | null
+    not?: NestedEnumDepartmentNullableFilter<$PrismaModel> | $Enums.Department | null
+  }
+
+  export type NestedEnumDepartmentNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel> | null
+    in?: $Enums.Department[] | null
+    notIn?: $Enums.Department[] | null
+    not?: NestedEnumDepartmentNullableWithAggregatesFilter<$PrismaModel> | $Enums.Department | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumDepartmentNullableFilter<$PrismaModel>
+    _max?: NestedEnumDepartmentNullableFilter<$PrismaModel>
+  }
+
   export type NestedEnumDepartmentFilter<$PrismaModel = never> = {
     equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel>
     in?: $Enums.Department[]
@@ -41294,7 +41332,7 @@ export namespace Prisma {
 
   export type InventoryCreateWithoutProductInput = {
     date: Date | string
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -41318,7 +41356,7 @@ export namespace Prisma {
     date: Date | string
     rawId?: number | null
     transactionId?: number | null
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -41474,7 +41512,7 @@ export namespace Prisma {
     productId?: IntNullableFilter<"Inventory"> | number | null
     rawId?: IntNullableFilter<"Inventory"> | number | null
     transactionId?: IntNullableFilter<"Inventory"> | number | null
-    department?: EnumDepartmentFilter<"Inventory"> | $Enums.Department
+    department?: EnumDepartmentNullableFilter<"Inventory"> | $Enums.Department | null
     unitPrice?: FloatFilter<"Inventory"> | number
     integratedUnitPrice?: FloatFilter<"Inventory"> | number
     quantityAdd?: FloatNullableFilter<"Inventory"> | number | null
@@ -41609,7 +41647,7 @@ export namespace Prisma {
 
   export type InventoryCreateWithoutRaWMaterialInput = {
     date: Date | string
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -41633,7 +41671,7 @@ export namespace Prisma {
     date: Date | string
     productId?: number | null
     transactionId?: number | null
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -41829,7 +41867,7 @@ export namespace Prisma {
 
   export type InventoryCreateWithoutPackingMaterialInput = {
     date: Date | string
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -41854,7 +41892,7 @@ export namespace Prisma {
     productId?: number | null
     rawId?: number | null
     transactionId?: number | null
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -43338,7 +43376,7 @@ export namespace Prisma {
 
   export type InventoryCreateWithoutTransactionInfoInput = {
     date: Date | string
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -43362,7 +43400,7 @@ export namespace Prisma {
     date: Date | string
     productId?: number | null
     rawId?: number | null
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -45249,7 +45287,7 @@ export namespace Prisma {
     date: Date | string
     rawId?: number | null
     transactionId?: number | null
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -45290,7 +45328,7 @@ export namespace Prisma {
 
   export type InventoryUpdateWithoutProductInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45314,7 +45352,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45336,7 +45374,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45422,7 +45460,7 @@ export namespace Prisma {
     date: Date | string
     productId?: number | null
     transactionId?: number | null
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -45461,7 +45499,7 @@ export namespace Prisma {
 
   export type InventoryUpdateWithoutRaWMaterialInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45485,7 +45523,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45507,7 +45545,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45588,7 +45626,7 @@ export namespace Prisma {
     productId?: number | null
     rawId?: number | null
     transactionId?: number | null
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -45648,7 +45686,7 @@ export namespace Prisma {
 
   export type InventoryUpdateWithoutPackingMaterialInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45673,7 +45711,7 @@ export namespace Prisma {
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45695,7 +45733,7 @@ export namespace Prisma {
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45944,7 +45982,7 @@ export namespace Prisma {
     date: Date | string
     productId?: number | null
     rawId?: number | null
-    department: $Enums.Department
+    department?: $Enums.Department | null
     unitPrice?: number
     integratedUnitPrice?: number
     quantityAdd?: number | null
@@ -46043,7 +46081,7 @@ export namespace Prisma {
 
   export type InventoryUpdateWithoutTransactionInfoInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -46067,7 +46105,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -46089,7 +46127,7 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
-    department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
+    department?: NullableEnumDepartmentFieldUpdateOperationsInput | $Enums.Department | null
     unitPrice?: FloatFieldUpdateOperationsInput | number
     integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
     quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null

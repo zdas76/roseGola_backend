@@ -720,7 +720,7 @@ const createReceiptVoucher = async (payload: any) => {
   const createVoucher = await prisma.$transaction(async (tx) => {
     let isParty: Party | null = null;
 
-    if (payload.partyType === "VENDOR" || "PARTY") {
+    if (payload.partyType === "VENDOR" || "PARTY" || "DISTRIBUTOR") {
       isParty = await tx.party.findFirst({
         where: {
           id: payload.partyId,
@@ -736,10 +736,11 @@ const createReceiptVoucher = async (payload: any) => {
     }
 
     // Create Transaction Voucher
+    const voucherNo = await GenerateVoucherNumber("RV")
     const createTransactionInfo: TransactionInfo =
       await tx.transactionInfo.create({
         data: {
-          voucherNo: payload.voucherNo,
+          voucherNo: voucherNo,
           voucherType: VoucherType.RECEIVED,
           partyId: isParty?.id || null,
           date: payload.date,
@@ -842,10 +843,11 @@ const createJournalVoucher = async (payload: any) => {
       });
     }
 
+    const voucherNo = await GenerateVoucherNumber("JV")
     const createTransactionInfo: TransactionInfo =
       await tx.transactionInfo.create({
         data: {
-          voucherNo: payload.voucherNo,
+          voucherNo: voucherNo,
           voucherType: VoucherType.JOURNAL,
           date: payload.date,
           partyId: partyExists?.id || null,

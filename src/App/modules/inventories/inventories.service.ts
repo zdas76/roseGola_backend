@@ -149,14 +149,17 @@ const getLastRawMaterialRate = async (ids: number[]) => {
           rawId: true,
           unitPrice: true,
           quantityAdd: true,
-        }
+        },
       });
-    })
+    }),
   );
   return result;
-}
+};
 
-const getLastVoucherQty = async (queryIds: { rawId?: number; pmMaterialId?: number }) => {
+const getLastVoucherQty = async (queryIds: {
+  rawId?: number;
+  pmMaterialId?: number;
+}) => {
   let result;
   // console.log(rawId, "raw id")
   if (queryIds.rawId !== undefined) {
@@ -168,28 +171,26 @@ const getLastVoucherQty = async (queryIds: { rawId?: number; pmMaterialId?: numb
       select: {
         rawId: true,
         quantityLess: true,
-      }
-    })
+      },
+    });
     // console.log(resultres, "resultres")
-    result = resultres
+    result = resultres;
   }
   if (queryIds?.pmMaterialId !== undefined) {
     const pmresult = await prisma.pMInventory.findFirst({
       where: {
-        packingMaterialId: queryIds.pmMaterialId
+        packingMaterialId: queryIds.pmMaterialId,
       },
       orderBy: [{ transactionId: "desc" }],
       select: {
         id: true,
-        quantityLess: true
-      }
-    })
-    result = pmresult
+        quantityLess: true,
+      },
+    });
+    result = pmresult;
   }
   return result;
-}
-
-
+};
 
 export const InventoryService = {
   getInventory,
@@ -198,5 +199,5 @@ export const InventoryService = {
   updateInventory,
   // deleteInventory,
   getLastVoucherQty,
-  getLastRawMaterialRate
+  getLastRawMaterialRate,
 };

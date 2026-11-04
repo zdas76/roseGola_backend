@@ -31,6 +31,52 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
     voucherNo = lastVoucher?.voucherNo;
   }
 
+  if (type === "PV") {
+    const lastVoucher = await prisma.transactionInfo.findFirst({
+      where: {
+        voucherType: VoucherType.PAYMENT
+      },
+      orderBy: { id: "desc" },
+      select: { voucherNo: true },
+    });
+    // console.log(lastVoucher,)
+    voucherNo = lastVoucher?.voucherNo;
+  }
+  if (type === "SV") {
+    const lastVoucher = await prisma.transactionInfo.findFirst({
+      where: {
+        voucherType: VoucherType.SALES
+      },
+      orderBy: { id: "desc" },
+      select: { voucherNo: true },
+    });
+    // console.log(lastVoucher,)
+    voucherNo = lastVoucher?.voucherNo;
+  }
+  if (type === "RV") {
+    const lastVoucher = await prisma.transactionInfo.findFirst({
+      where: {
+        voucherType: VoucherType.RECEIVED
+      },
+      orderBy: { id: "desc" },
+      select: { voucherNo: true },
+    });
+    // console.log(lastVoucher,)
+    voucherNo = lastVoucher?.voucherNo;
+  }
+  if (type === "JV") {
+    const lastVoucher = await prisma.transactionInfo.findFirst({
+      where: {
+        voucherType: VoucherType.JOURNAL
+      },
+      orderBy: { id: "desc" },
+      select: { voucherNo: true },
+    });
+    // console.log(lastVoucher,)
+    voucherNo = lastVoucher?.voucherNo;
+  }
+
+
   if (voucherNo) {
     const nextNumber = getNextNumber(voucherNo);
     const result = type + "-" + currentDate + "/" + nextNumber;

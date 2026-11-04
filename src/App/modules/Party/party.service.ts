@@ -111,7 +111,6 @@ const getAllParty = async (params: any, paginat: IPaginationOptions) => {
   const { page, limit, skip } = paginationHelper.Pagination(paginat);
 
   const { searchTerm, ...filterData } = params;
-
   const andCondition: Prisma.PartyWhereInput[] = [];
 
   if (params.searchTerm) {

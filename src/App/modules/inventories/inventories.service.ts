@@ -52,6 +52,7 @@ const getInventoryAggValueById = async (query: any) => {
     });
     const netQuantity = result._sum.quantityAdd! - result._sum.quantityLess!;
     const netAmount = result._sum.debitAmount! - result._sum.creditAmount!;
+    // console.log(netAmount)
 
     return { netQuantity, netAmount };
   }

@@ -8,8 +8,6 @@ import { UserfiltersFields } from "./employee.constant";
 
 const createEmployee = catchAsync(async (req: Request, res: Response) => {
 
-  console.log("req.body", req.body);
-
   const result = await EmployeeService.creatEmployeeToDB(req);
 
   sendResponse(res, {
@@ -41,7 +39,7 @@ const getEmployeeById = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: "Employee retrived Successfully", 
+    message: "Employee retrived Successfully",
     data: result,
   });
 });

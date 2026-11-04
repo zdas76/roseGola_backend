@@ -36,6 +36,8 @@ const getAllParty = catchAsync(async (req: Request, res: Response) => {
   const filters = pick(req.query, partyfiltersFields);
   const paginat = pick(req.query, ["page", "limit", "sortBy", "sortOrder"]);
 
+
+
   const result = await PartyService.getAllParty(filters, paginat);
   sendResponse(res, {
     statusCode: StatusCodes.OK,

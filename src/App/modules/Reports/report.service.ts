@@ -89,7 +89,9 @@ const partyLedgerReport = async (payload: {
 
   let accountsItemId: number | undefined;
 
-  if (payload.partyType === 'PARTY') {
+  if (payload.partyType === 'DISTRIBUTOR') {
+
+    // console.log(payload.partyType, "payload", payload)
     const accountsItem: AccountsItem | null = await prisma.accountsItem.findFirst({
       where: {
         accountsItemName: {
@@ -119,7 +121,7 @@ const partyLedgerReport = async (payload: {
       transactionInfo: {
         partyId: party.id,
       },
-      accountsItemId: accountsItemId,
+      // accountsItemId: accountsItemId,
 
       date: {
         gte: startDate ? new Date(startDate) : (party.openingDate || new Date()),
@@ -165,7 +167,6 @@ const rawReport = async (payload: {
     const startDate = payload?.startDate ? payload?.startDate : rawMaterial?.openingDate;
     const endDate = payload?.endDate ? payload?.endDate : new Date();
 
-    console.log(startDate, endDate)
     const total = await prisma.inventory.aggregate({
       _sum: {
         debitAmount: true,

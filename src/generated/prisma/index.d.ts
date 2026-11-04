@@ -162,7 +162,7 @@ export type Department = (typeof Department)[keyof typeof Department]
 export const VoucherType: {
   SALES: 'SALES',
   PURCHASE: 'PURCHASE',
-  RECEIPT: 'RECEIPT',
+  RECEIVED: 'RECEIVED',
   PAYMENT: 'PAYMENT',
   JOURNAL: 'JOURNAL',
   CONTRA: 'CONTRA',

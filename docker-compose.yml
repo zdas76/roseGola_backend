@@ -1,0 +1,23 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./RoseGoald_server/Dockerfile
+    restart: unless-stopped
+    env_file:
+      - ./RoseGoald_server/.env
+    ports:
+      - "3000:3000"
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rosegold_password
+      MYSQL_DATABASE: rosegold_db
+      MYSQL_USER: rosegold
+      MYSQL_PASSWORD: rosegold_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - sqldata:/var/lib/mysql/data

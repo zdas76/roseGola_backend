@@ -1,18 +1,22 @@
 FROM node:24-alpine
 
-WORKDIR /app/roselgold_server
+WORKDIR /app/rosegold_server
 
 COPY package*.json ./
-COPY prisma ./prisma/
 
 RUN npm install
 
 COPY . .
 
-# ঠিক এই লাইনে ENV ভ্যারিয়েবলটি দিতে হবে
-ENV DATABASE_URL="mysql://rosegold:rosegold_password@db:3306/rosegold_db"
+# Generate Prisma Client
+RUN npx prisma generate
 
+# Compile TypeScript
 RUN npm run build
+
+# Copy generated Prisma Client into dist
+RUN mkdir -p dist/generated && \
+    cp -r src/generated/prisma dist/generated/prisma
 
 EXPOSE 5000
 

@@ -9,7 +9,7 @@ services:
     ports:
       - "8082:5000"
     depends_on:
-      - db # Tells Docker to start the database before the backend server
+      - db
 
   db:
     image: mysql:8.0

@@ -417,7 +417,7 @@ model IngredientExpneseItems {
   productionExpenssItemId Int
   createdAt               DateTime              @default(now())
   updatedAt               DateTime              @updatedAt
-  productionExpenseItem   productionexpenseitem @relation(fields: [productionExpenssItemId], references: [id])
+  productionExpenseItem   Productionexpenseitem @relation(fields: [productionExpenssItemId], references: [id])
   productIngradient       ProductionIngradient  @relation(fields: [productionIngradientId], references: [id])
 
   @@index([productionExpenssItemId], map: "ingredient_expnese_productionExpenssItemId_fkey")
@@ -435,7 +435,7 @@ model ProductionExpensesInventory {
   amount                Float                 @default(0)
   createdAt             DateTime              @default(now())
   updatedAt             DateTime              @updatedAt
-  productionExpenseItem productionexpenseitem @relation(fields: [proExpencesItemId], references: [id])
+  productionExpenseItem Productionexpenseitem @relation(fields: [proExpencesItemId], references: [id])
   transactionInfo       TransactionInfo?      @relation(fields: [transectionId], references: [id])
 
   @@index([proExpencesItemId], map: "production_expences_inventory_proExpencesItemId_fkey")
@@ -443,7 +443,7 @@ model ProductionExpensesInventory {
   @@map("production_expences_inventory")
 }
 
-model productionexpenseitem {
+model Productionexpenseitem {
   id                            Int                           @id @default(autoincrement())
   expItemName                   String
   unitRate                      Float                         @default(0)

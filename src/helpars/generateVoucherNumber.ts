@@ -34,7 +34,7 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
   if (type === "PV") {
     const lastVoucher = await prisma.transactionInfo.findFirst({
       where: {
-        voucherType: VoucherType.PAYMENT
+        voucherType: VoucherType.PAYMENT,
       },
       orderBy: { id: "desc" },
       select: { voucherNo: true },
@@ -45,7 +45,7 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
   if (type === "SV") {
     const lastVoucher = await prisma.transactionInfo.findFirst({
       where: {
-        voucherType: VoucherType.SALES
+        voucherType: VoucherType.SALES,
       },
       orderBy: { id: "desc" },
       select: { voucherNo: true },
@@ -56,7 +56,7 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
   if (type === "RV") {
     const lastVoucher = await prisma.transactionInfo.findFirst({
       where: {
-        voucherType: VoucherType.RECEIVED
+        voucherType: VoucherType.RECEIVED,
       },
       orderBy: { id: "desc" },
       select: { voucherNo: true },
@@ -67,7 +67,7 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
   if (type === "JV") {
     const lastVoucher = await prisma.transactionInfo.findFirst({
       where: {
-        voucherType: VoucherType.JOURNAL
+        voucherType: VoucherType.JOURNAL,
       },
       orderBy: { id: "desc" },
       select: { voucherNo: true },
@@ -75,7 +75,6 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
     // console.log(lastVoucher,)
     voucherNo = lastVoucher?.voucherNo;
   }
-
 
   if (voucherNo) {
     const nextNumber = getNextNumber(voucherNo);
@@ -94,7 +93,6 @@ const getNextNumber = (voucherNo: string) => {
   const nextNumber = (lastNumber + 1).toString().padStart(4, "0");
   return nextNumber;
 };
-
 
 const currectDate = new Date().getDate().toString().padStart(2, "0");
 const currectMonth = (new Date().getMonth() + 1).toString().padStart(2, "0");

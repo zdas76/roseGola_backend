@@ -521,7 +521,7 @@ exports.Prisma.JournalOrderByRelevanceFieldEnum = {
   narration: 'narration'
 };
 
-exports.Prisma.productionexpenseitemOrderByRelevanceFieldEnum = {
+exports.Prisma.ProductionexpenseitemOrderByRelevanceFieldEnum = {
   expItemName: 'expItemName'
 };
 
@@ -602,7 +602,7 @@ exports.Prisma.ModelName = {
   IngredientPackingMaterial: 'IngredientPackingMaterial',
   IngredientExpneseItems: 'IngredientExpneseItems',
   ProductionExpensesInventory: 'ProductionExpensesInventory',
-  productionexpenseitem: 'productionexpenseitem',
+  Productionexpenseitem: 'Productionexpenseitem',
   productioniteminfo: 'productioniteminfo'
 };
 

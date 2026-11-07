@@ -11,12 +11,7 @@ const app: Application = express();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://zdas.com.bd",
-      "http://zdas.com.bd",
-      "https://rose-gold-chemical.vercel.app/dashboard",
-    ],
+    origin: ["http://localhost:5173", "http://192.168.0.191:8081"],
     credentials: true,
   }),
 );

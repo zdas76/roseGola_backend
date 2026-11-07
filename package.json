@@ -6,9 +6,8 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "nodemon --exec tsx src/server.ts",
-    "build": "prisma generate && npx tsc",
+    "build": "prisma generate && tsc",
     "start": "node dist/server.js",
-    "postinstall": "prisma generate",
     "db:migrate": "node scripts/run-migrations.mjs",
     "db:push": "prisma db push"
   },

@@ -8,8 +8,8 @@ RUN npm ci
 
 COPY . .
 
-# Generate Prisma Client + TypeScript build
-RUN npm run build
+
+RUN DATABASE_URL="mysql://build:build@127.0.0.1:3306/build" npm run build
 
 # Copy generated Prisma Client
 RUN mkdir -p dist/generated && \

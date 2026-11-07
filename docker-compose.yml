@@ -3,26 +3,51 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+
     restart: unless-stopped
+
     env_file:
       - ./.env
+
     ports:
       - "8082:5000"
+
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
     image: mysql:8.0
+
     restart: unless-stopped
+
     environment:
       MYSQL_ROOT_PASSWORD: rosegold_password
       MYSQL_DATABASE: rosegold_db
       MYSQL_USER: rosegold
       MYSQL_PASSWORD: rosegold_password
+
     ports:
       - "3307:3306"
+
     volumes:
-      - sqldata:/var/lib/mysql # <-- CRITICAL: Persists your database data
+      - sqldata:/var/lib/mysql
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-uroot",
+          "-prosegold_password",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
 
 volumes:
   sqldata:

@@ -3,46 +3,36 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-
     restart: unless-stopped
-
     env_file:
       - ./.env
-
     ports:
       - "8082:5000"
-
     depends_on:
       db:
         condition: service_healthy
 
   db:
     image: mysql
-
     restart: unless-stopped
-
     environment:
-      DATABASE_HOST: db
-      DATABASE_PASSWORD: rosegold_password
-      DATABASE_NAME: rosegold_db
-      DATABASE_USER: rosegold
-
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - "3307:3306"
-
     volumes:
       - sqldata:/var/lib/mysql
-
     healthcheck:
-      test:
-        [
+      test: [
           "CMD",
           "mysqladmin",
           "ping",
           "-h",
           "localhost",
           "-uroot",
-          "-prosegold_password",
+          "-p${DATABASE_PASSWORD}", # এখানেও ভ্যারিয়েবল ব্যবহার করা হয়েছে
         ]
       interval: 10s
       timeout: 5s

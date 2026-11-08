@@ -17,15 +17,15 @@ services:
         condition: service_healthy
 
   db:
-    image: mysql:8.0
+    image: mysql
 
     restart: unless-stopped
 
     environment:
-      MYSQL_ROOT_PASSWORD: rosegold_password
-      MYSQL_DATABASE: rosegold_db
-      MYSQL_USER: rosegold
-      MYSQL_PASSWORD: rosegold_password
+      DATABASE_HOST: db
+      DATABASE_PASSWORD: rosegold_password
+      DATABASE_NAME: rosegold_db
+      DATABASE_USER: rosegold
 
     ports:
       - "3307:3306"

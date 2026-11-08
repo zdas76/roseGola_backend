@@ -6,6 +6,8 @@ services:
     restart: unless-stopped
     env_file:
       - ./.env
+    environment:
+      - DOTENVX_DISABLE=true # Prevents your dotenvx layer from overriding Docker's injected variables
     ports:
       - "8082:5000"
     depends_on:
@@ -25,15 +27,8 @@ services:
     volumes:
       - sqldata:/var/lib/mysql
     healthcheck:
-      test: [
-          "CMD",
-          "mysqladmin",
-          "ping",
-          "-h",
-          "localhost",
-          "-uroot",
-          "-p${DATABASE_PASSWORD}", # এখানেও ভ্যারিয়েবল ব্যবহার করা হয়েছে
-        ]
+      # Switched to string execution syntax to safely parse the variable execution
+      test: mysqladmin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD
       interval: 10s
       timeout: 5s
       retries: 10

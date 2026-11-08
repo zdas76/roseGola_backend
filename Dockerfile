@@ -8,13 +8,14 @@ RUN npm ci
 
 COPY . .
 
+# 1. Build the TypeScript/NestJS application without hardcoding a dummy database URL
+RUN npm run build
 
-RUN DATABASE_URL="mysql://build:build@127.0.0.1:3306/build" npm run build
-
-# Copy generated Prisma Client
+# 2. Copy over necessary assets
 RUN mkdir -p dist/generated && \
     cp -r src/generated/prisma dist/generated/prisma
 
 EXPOSE 5000
 
-CMD ["npm", "start"]
+# 3. CRUCIAL: Generate the Prisma client right before starting the server so it reads the true runtime variables
+CMD ["sh", "-c", "npx prisma generate && npm start"]

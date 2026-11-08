@@ -1,4 +1,4 @@
-import { AccountsItem } from "../../../generated/prisma";
+import { AccountsItem } from "../../../generated/prisma/client";
 import prisma from "../../../shared/prisma";
 import AppError from "../../errors/AppError";
 import { StatusCodes } from "http-status-codes";
@@ -21,7 +21,9 @@ const getAccountLedgerReport = async (payload: {
     throw new AppError(StatusCodes.BAD_REQUEST, "Accounts Item not found");
   }
   const start = startDate ? new Date(startDate) : undefined;
-  const end = endDate ? new Date(new Date(endDate).setHours(23, 59, 59, 999)) : undefined;
+  const end = endDate
+    ? new Date(new Date(endDate).setHours(23, 59, 59, 999))
+    : undefined;
 
   if (start && end) {
     const result = await prisma.journal.findMany({
@@ -71,7 +73,6 @@ const partyLedgerReport = async (payload: {
   endDate: string | null;
   partyType: string;
 }) => {
-
   const partyId = Number(payload.partyId);
   const { startDate, endDate } = payload;
 
@@ -89,27 +90,27 @@ const partyLedgerReport = async (payload: {
 
   let accountsItemId: number | undefined;
 
-  if (payload.partyType === 'DISTRIBUTOR') {
-
+  if (payload.partyType === "DISTRIBUTOR") {
     // console.log(payload.partyType, "payload", payload)
-    const accountsItem: AccountsItem | null = await prisma.accountsItem.findFirst({
-      where: {
-        accountsItemName: {
-          contains: "accounts receivable",
+    const accountsItem: AccountsItem | null =
+      await prisma.accountsItem.findFirst({
+        where: {
+          accountsItemName: {
+            contains: "accounts receivable",
+          },
         },
-      },
-    });
-    accountsItemId = accountsItem?.id
-  } else if (payload.partyType === 'VENDOR') {
-    const accountsItems: AccountsItem | null = await prisma.accountsItem.findFirst({
-      where: {
-        accountsItemName: {
-          contains: "accounts payable",
+      });
+    accountsItemId = accountsItem?.id;
+  } else if (payload.partyType === "VENDOR") {
+    const accountsItems: AccountsItem | null =
+      await prisma.accountsItem.findFirst({
+        where: {
+          accountsItemName: {
+            contains: "accounts payable",
+          },
         },
-      },
-    });
-    accountsItemId = accountsItems?.id
-
+      });
+    accountsItemId = accountsItems?.id;
   }
 
   if (!accountsItemId) {
@@ -124,8 +125,10 @@ const partyLedgerReport = async (payload: {
       // accountsItemId: accountsItemId,
 
       date: {
-        gte: startDate ? new Date(startDate) : (party.openingDate || new Date()),
-        lte: endDate ? new Date(new Date(endDate).setHours(23, 59, 59, 999)) : new Date(),
+        gte: startDate ? new Date(startDate) : party.openingDate || new Date(),
+        lte: endDate
+          ? new Date(new Date(endDate).setHours(23, 59, 59, 999))
+          : new Date(),
       },
     },
     include: {
@@ -142,57 +145,59 @@ const partyLedgerReport = async (payload: {
     },
   });
 
-
   return { party, result };
-
-}
+};
 
 // raw report
 const rawReport = async (payload: {
   startDate?: string | null;
   endDate?: string | null;
 }) => {
-
-
   const allrawMaterial = await prisma.rawMaterial.findMany({
     where: {
-      isDeleted: false
+      isDeleted: false,
     },
   });
   if (allrawMaterial.length < 1) {
     throw new AppError(StatusCodes.BAD_REQUEST, "Raw Material not found");
   }
-  const result = Promise.all(allrawMaterial.map(async (rawMaterial) => {
+  const result = Promise.all(
+    allrawMaterial.map(async (rawMaterial) => {
+      const startDate = payload?.startDate
+        ? payload?.startDate
+        : rawMaterial?.openingDate;
+      const endDate = payload?.endDate ? payload?.endDate : new Date();
 
-    const startDate = payload?.startDate ? payload?.startDate : rawMaterial?.openingDate;
-    const endDate = payload?.endDate ? payload?.endDate : new Date();
+      const total = await prisma.inventory.aggregate({
+        _sum: {
+          debitAmount: true,
+          creditAmount: true,
+          quantityAdd: true,
+          quantityLess: true,
+        },
+        where: {
+          rawId: rawMaterial.id,
+          date: {
+            gte: new Date(startDate),
+            lte: new Date(new Date(endDate).setHours(23, 59, 59, 999)),
+          },
+        },
+      });
 
-    const total = await prisma.inventory.aggregate({
-      _sum: {
-        debitAmount: true,
-        creditAmount: true,
-        quantityAdd: true,
-        quantityLess: true,
-      },
-      where: {
-        rawId: rawMaterial.id,
-        date: {
-          gte: new Date(startDate),
-          lte: new Date(new Date(endDate).setHours(23, 59, 59, 999))
-        }
-      },
-    })
-
-    return { rawMaterial, total }
-  }))
+      return { rawMaterial, total };
+    }),
+  );
 
   return result;
 };
 
-const getRawReportById = async (id: number, payload: {
-  startDate?: string | null;
-  endDate?: string | null;
-}) => {
+const getRawReportById = async (
+  id: number,
+  payload: {
+    startDate?: string | null;
+    endDate?: string | null;
+  },
+) => {
   const rawMaterial = await prisma.rawMaterial.findUnique({
     where: {
       id: id,
@@ -203,17 +208,18 @@ const getRawReportById = async (id: number, payload: {
     throw new AppError(StatusCodes.BAD_REQUEST, "Raw Material not found");
   }
 
-  const startDate = payload?.startDate ? payload?.startDate : rawMaterial?.openingDate;
+  const startDate = payload?.startDate
+    ? payload?.startDate
+    : rawMaterial?.openingDate;
   const endDate = payload?.endDate ? payload?.endDate : new Date();
 
   const report = await prisma.inventory.findMany({
-
     where: {
       rawId: rawMaterial.id,
       date: {
         gte: new Date(startDate),
-        lte: new Date(new Date(endDate).setHours(23, 59, 59, 999))
-      }
+        lte: new Date(new Date(endDate).setHours(23, 59, 59, 999)),
+      },
     },
     include: {
       transactionInfo: {
@@ -223,8 +229,8 @@ const getRawReportById = async (id: number, payload: {
           voucherType: true,
         },
       },
-    }
-  })
+    },
+  });
 
   return { rawMaterial, report };
 };
@@ -233,47 +239,50 @@ const productReport = async (payload: {
   startDate?: string | null;
   endDate?: string | null;
 }) => {
-
-
   const allProduct = await prisma.product.findMany({
     where: {
-      isDeleted: false
+      isDeleted: false,
     },
   });
   if (allProduct.length < 1) {
     throw new AppError(StatusCodes.BAD_REQUEST, "Product not found");
   }
-  const result = Promise.all(allProduct.map(async (product) => {
+  const result = Promise.all(
+    allProduct.map(async (product) => {
+      const startDate = payload?.startDate
+        ? payload?.startDate
+        : product?.openingDate || "";
+      const endDate = payload?.endDate ? payload?.endDate : new Date();
 
-    const startDate = payload?.startDate ? payload?.startDate : product?.openingDate || "";
-    const endDate = payload?.endDate ? payload?.endDate : new Date();
-
-    const total = await prisma.inventory.aggregate({
-      _sum: {
-        debitAmount: true,
-        creditAmount: true,
-        quantityAdd: true,
-        quantityLess: true,
-      },
-      where: {
-        productId: product.id,
-        date: {
-          gte: new Date(startDate),
-          lte: new Date(new Date(endDate).setHours(23, 59, 59, 999))
-        }
-
-      },
-    })
-    return { product, total }
-  }))
+      const total = await prisma.inventory.aggregate({
+        _sum: {
+          debitAmount: true,
+          creditAmount: true,
+          quantityAdd: true,
+          quantityLess: true,
+        },
+        where: {
+          productId: product.id,
+          date: {
+            gte: new Date(startDate),
+            lte: new Date(new Date(endDate).setHours(23, 59, 59, 999)),
+          },
+        },
+      });
+      return { product, total };
+    }),
+  );
 
   return result;
 };
 
-const getProductReportById = async (id: number, payload: {
-  startDate?: string | null;
-  endDate?: string | null;
-}) => {
+const getProductReportById = async (
+  id: number,
+  payload: {
+    startDate?: string | null;
+    endDate?: string | null;
+  },
+) => {
   const product = await prisma.product.findUnique({
     where: {
       id: id,
@@ -285,23 +294,24 @@ const getProductReportById = async (id: number, payload: {
   }
 
   const report = await prisma.inventory.findMany({
-
     where: {
       productId: product.id,
       date: {
         gte: product.openingDate || new Date(payload?.startDate || ""),
-        lte: payload?.endDate ? new Date(new Date(payload.endDate).setHours(23, 59, 59, 999)) : new Date()
-      }
-
+        lte: payload?.endDate
+          ? new Date(new Date(payload.endDate).setHours(23, 59, 59, 999))
+          : new Date(),
+      },
     },
-  })
+  });
 
   return { product, report };
 };
 
-
 const getBalanceSheet = async (date: string | null) => {
-  const targetDate = date ? new Date(new Date(date).setHours(23, 59, 59, 999)) : new Date();
+  const targetDate = date
+    ? new Date(new Date(date).setHours(23, 59, 59, 999))
+    : new Date();
   // Helper to get total debit/credit for an account name up to the target date
   const getAccountBalance = async (accountNameContains: string) => {
     const account = await prisma.accountsItem.findFirst({
@@ -350,7 +360,9 @@ const getBalanceSheet = async (date: string | null) => {
       date: { lte: targetDate },
     },
   });
-  const bankBalance = (bankTransactions._sum.debitAmount || 0) - (bankTransactions._sum.creditAmount || 0);
+  const bankBalance =
+    (bankTransactions._sum.debitAmount || 0) -
+    (bankTransactions._sum.creditAmount || 0);
 
   // Prefer ledger balance, fallback to bank transactions logic depending on system usage
   if (!cashAtBankData.accountId) {
@@ -359,14 +371,15 @@ const getBalanceSheet = async (date: string | null) => {
 
   // Accounts Receivable (Asset: Debit - Credit)
   const accountsReceivableData = await getAccountBalance("accounts receivable");
-  const accountsReceivable = accountsReceivableData.debit - accountsReceivableData.credit;
+  const accountsReceivable =
+    accountsReceivableData.debit - accountsReceivableData.credit;
 
   // Closing Stock / Inventory (Asset: value of stock)
   // Value = (quantityAdd * unitPrice) - (quantityLess * unitPrice)
   const inventoryData = await prisma.inventory.findMany({
     where: {
       date: { lte: targetDate },
-      status: "ACTIVE"
+      status: "ACTIVE",
     },
   });
 
@@ -377,7 +390,7 @@ const getBalanceSheet = async (date: string | null) => {
     const price = inv.unitPrice || 0;
 
     // We assume unitPrice is the value per unit for both addition and deduction
-    closingStock += (qtyAdded * price) - (qtyLess * price);
+    closingStock += qtyAdded * price - qtyLess * price;
   }
 
   // Fallback if inventory logic is simpler in aggregate
@@ -386,23 +399,26 @@ const getBalanceSheet = async (date: string | null) => {
       debitAmount: true,
       creditAmount: true,
     },
-    where: { date: { lte: targetDate } }
+    where: { date: { lte: targetDate } },
   });
 
   // If the system tracks stock value via debit/credit in Inventory
-  const inventoryValueViaLedger = (inventoryAggregate._sum.debitAmount || 0) - (inventoryAggregate._sum.creditAmount || 0);
+  const inventoryValueViaLedger =
+    (inventoryAggregate._sum.debitAmount || 0) -
+    (inventoryAggregate._sum.creditAmount || 0);
   if (closingStock === 0 && inventoryValueViaLedger !== 0) {
     closingStock = inventoryValueViaLedger;
   }
 
-
-  const totalAssets = cashInHand + cashAtBank + accountsReceivable + closingStock;
+  const totalAssets =
+    cashInHand + cashAtBank + accountsReceivable + closingStock;
 
   // 2. Liabilities
 
   // Accounts Payable (Liability: Credit - Debit)
   const accountsPayableData = await getAccountBalance("accounts payable");
-  const accountsPayable = accountsPayableData.credit - accountsPayableData.debit;
+  const accountsPayable =
+    accountsPayableData.credit - accountsPayableData.debit;
 
   const totalLiabilities = accountsPayable;
 
@@ -430,12 +446,12 @@ const getBalanceSheet = async (date: string | null) => {
     equity: {
       calculateEquity: totalAssets - totalLiabilities,
       capitalAccount: capitalData.credit - capitalData.debit,
-      totalEquity: equity
+      totalEquity: equity,
     },
     totals: {
       totalAssets,
       totalLiabilities,
-    }
+    },
   };
 };
 

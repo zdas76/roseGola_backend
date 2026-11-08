@@ -7,21 +7,21 @@ router.post("/", ProductionExpenseItemControllers.createProductionExpenseItem);
 
 router.post(
   "/many",
-  ProductionExpenseItemControllers.createProductionExpenseItemsMany
+  ProductionExpenseItemControllers.createProductionExpenseItemsMany,
 );
 router.get("/", ProductionExpenseItemControllers.getAllProductionExpenseItems);
 
 router.get(
   "/:id",
-  ProductionExpenseItemControllers.getProductionExpenseItemById
+  ProductionExpenseItemControllers.getProductionExpenseItemById,
 );
 router.put(
   "/:id",
-  ProductionExpenseItemControllers.updateProductionExpenseItemById
+  ProductionExpenseItemControllers.updateProductionExpenseItemById,
 );
 router.delete(
   "/:id",
-  ProductionExpenseItemControllers.deleteProductionExpenseItemById
+  ProductionExpenseItemControllers.deleteProductionExpenseItemById,
 );
 
 export const ProductionExpenseItemRoute = router;

@@ -1,4 +1,4 @@
-import { VoucherType } from "../../../generated/prisma";
+import { VoucherType } from "../../../generated/prisma/enums";
 import prisma from "../../../shared/prisma";
 
 const getAllVoucher = async (payload: {
@@ -49,7 +49,7 @@ const getAllVoucher = async (payload: {
     },
     include: {
       party: true,
-    }
+    },
   });
   return voucher;
 };
@@ -131,7 +131,7 @@ const getVoucherByid = async (id: number) => {
   }
   const voucher = await prisma.transactionInfo.findFirst({
     where: {
-      id: id
+      id: id,
     },
     include: {
       party: {

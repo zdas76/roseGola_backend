@@ -1,4 +1,4 @@
-import { productioniteminfo_status } from "../../../generated/prisma";
+import { productioniteminfo_status } from "../../../generated/prisma/enums";
 
 export interface Production {
   inventoryId?: number;
@@ -35,6 +35,3 @@ export interface Production {
     unitPrice: number;
   }[];
 }
-
-
-

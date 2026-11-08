@@ -1,10 +1,9 @@
-
 import prisma from "../../../shared/prisma";
 import AppError from "../../errors/AppError";
 import { StatusCodes } from "http-status-codes";
 import { date } from "zod";
 import { TBankAccount } from "./bank.types";
-import { BankAccount } from "../../../generated/prisma";
+import { BankAccount } from "../../../generated/prisma/client";
 
 const createBankAccount = async (payload: TBankAccount) => {
   //check account number isExisted
@@ -91,7 +90,7 @@ const getBankLedger = async (
   const initialBalance = await prisma.bankTransaction.aggregate({
     _sum: {
       debitAmount: true,
-      creditAmount: true
+      creditAmount: true,
     },
     where: {
       bankAccountId: accountId,
@@ -116,9 +115,12 @@ const getBankLedger = async (
   });
 
   // Calculate ledger balance
-  let ledgerBalance = (initialBalance._sum.debitAmount || 0) - (initialBalance._sum.creditAmount || 0);
+  let ledgerBalance =
+    (initialBalance._sum.debitAmount || 0) -
+    (initialBalance._sum.creditAmount || 0);
   const ledgerTransactions = transactions.map((t) => {
-    const balance = ledgerBalance + (t.debitAmount || 0) - (t.creditAmount || 0);
+    const balance =
+      ledgerBalance + (t.debitAmount || 0) - (t.creditAmount || 0);
     ledgerBalance = balance;
     return {
       ...t,
@@ -130,14 +132,14 @@ const getBankLedger = async (
     accountId,
     fromDate: fromDateObj.toISOString().split("T")[0],
     toDate: toDateObj.toISOString().split("T")[0],
-    initialBalance: (initialBalance._sum.debitAmount || 0) - (initialBalance._sum.creditAmount || 0),
+    initialBalance:
+      (initialBalance._sum.debitAmount || 0) -
+      (initialBalance._sum.creditAmount || 0),
     transactions: ledgerTransactions,
     closingBalance: ledgerBalance,
-    accountIdObj
+    accountIdObj,
   };
 };
-
-
 
 export const BankAccountService = {
   createBankAccount,

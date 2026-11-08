@@ -1,12 +1,11 @@
-
 import prisma from "../../../shared/prisma";
 import AppError from "../../errors/AppError";
 import { StatusCodes } from "http-status-codes";
 import { TcreateProduct } from "./product.type";
-import { Department, Product } from "../../../generated/prisma";
+import { Department } from "../../../generated/prisma/enums";
+import { Product } from "../../../generated/prisma/client";
 
 const createProduct = async (payload: TcreateProduct) => {
-
   const isExist = await prisma.product.findFirst({
     where: {
       name: payload.name,
@@ -17,7 +16,7 @@ const createProduct = async (payload: TcreateProduct) => {
   if (isExist) {
     throw new AppError(
       StatusCodes.BAD_REQUEST,
-      "This product is already existed"
+      "This product is already existed",
     );
   }
   const result = await prisma.product.create({
@@ -98,7 +97,7 @@ const updateProductById = async (id: number, payload: Partial<Product>) => {
       subCategoryId: payload.subCategoryId,
       minPrice: payload.minPrice || 0,
       size: payload.size || "",
-      alertQuantity: payload.alertQuantity
+      alertQuantity: payload.alertQuantity,
     },
   });
 

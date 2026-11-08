@@ -1,8 +1,7 @@
 import prisma from "../../../shared/prisma";
 import { StatusCodes } from "http-status-codes";
 import AppError from "../../errors/AppError";
-import { SubCategory } from "../../../generated/prisma";
-
+import { SubCategory } from "../../../generated/prisma/client";
 
 const createSubCategoryToDB = async (payLoad: SubCategory) => {
   const subCategory = await prisma.subCategory.findFirst({
@@ -36,7 +35,6 @@ const getSubCategory = async (): Promise<SubCategory[] | SubCategory> => {
 };
 
 const subCategoryUpdate = async (payLoad: Partial<SubCategory>, id: number) => {
-
   const subCategory = await prisma.subCategory.findFirst({
     where: {
       id: id,
@@ -81,16 +79,15 @@ const deleteSubService = async (id: number) => {
   const deleteResult = await prisma.subCategory.delete({
     where: {
       id: Number(id),
-    }
+    },
   });
   return deleteResult;
 };
-
 
 export const SubCagetoryService = {
   createSubCategoryToDB,
   getSubCategory,
   subCategoryUpdate,
   getCategorybyId,
-  deleteSubService
+  deleteSubService,
 };

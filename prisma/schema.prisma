@@ -1,5 +1,14 @@
+// generator client {
+//   provider = "prisma-client"
+//   output   = "../generated/prisma"
+// }
+
+// datasource db {
+//   provider = "mysql"
+// }
+
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "../src/generated/prisma"
 }
 

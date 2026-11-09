@@ -8,14 +8,13 @@ RUN npm ci
 
 COPY . .
 
-# Pass a placeholder string so Prisma doesn't crash during the build step
-RUN DATABASE_URL="mysql://placeholder:placeholder@localhost:3306/placeholder" npm run build
+RUN DATABASE_URL="mysql://${DATABASE_USER}:${DATABASE_PASSWORD}@db:3306/${DATABASE_NAME}" npm run build
 
-# Copy generated Prisma Client
+
 RUN mkdir -p dist/generated && \
     cp -r src/generated/prisma dist/generated/prisma
 
 EXPOSE 5000
 
 # Keep this to regenerate the dynamic runtime client when the container boots up
-CMD ["sh", "-c", "npx prisma generate && npm start"]
+CMD ["sh", "-c", "npx prisma generate && npx prisma db push && npm start"]

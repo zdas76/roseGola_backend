@@ -16,8 +16,7 @@ const createProductIngradientSchema = z.object({
             ingredienteQty: z.number().optional(),
           }),
         ]),
-      )
-      .optional(),
+      ).optional(),
     packingMaterialIds: z.array(z.number()).optional(),
     packingMaterials: z
       .array(
@@ -29,8 +28,7 @@ const createProductIngradientSchema = z.object({
             ingredienteQty: z.number().optional(),
           }),
         ]),
-      )
-      .optional(),
+      ).optional(),
   }),
 });
 
@@ -48,8 +46,7 @@ const updateProductIngradientSchema = z.object({
             ingredienteQty: z.number().optional(),
           }),
         ]),
-      )
-      .optional(),
+      ).optional(),
     packingMaterialIds: z.array(z.number()).optional(),
     packingMaterials: z
       .array(
@@ -61,8 +58,7 @@ const updateProductIngradientSchema = z.object({
             ingredienteQty: z.number().optional(),
           }),
         ]),
-      )
-      .optional(),
+      ).optional(),
   }),
 });
 

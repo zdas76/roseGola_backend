@@ -11730,6 +11730,7 @@ export namespace Prisma {
     id: number | null
     subCategoryId: number | null
     minPrice: number | null
+    size: number | null
     quantity: number | null
     unitPrice: number | null
     alertQuantity: number | null
@@ -11741,6 +11742,7 @@ export namespace Prisma {
     id: number | null
     subCategoryId: number | null
     minPrice: number | null
+    size: number | null
     quantity: number | null
     unitPrice: number | null
     alertQuantity: number | null
@@ -11754,7 +11756,7 @@ export namespace Prisma {
     description: string | null
     subCategoryId: number | null
     minPrice: number | null
-    size: string | null
+    size: number | null
     quantity: number | null
     unitPrice: number | null
     alertQuantity: number | null
@@ -11773,7 +11775,7 @@ export namespace Prisma {
     description: string | null
     subCategoryId: number | null
     minPrice: number | null
-    size: string | null
+    size: number | null
     quantity: number | null
     unitPrice: number | null
     alertQuantity: number | null
@@ -11811,6 +11813,7 @@ export namespace Prisma {
     id?: true
     subCategoryId?: true
     minPrice?: true
+    size?: true
     quantity?: true
     unitPrice?: true
     alertQuantity?: true
@@ -11822,6 +11825,7 @@ export namespace Prisma {
     id?: true
     subCategoryId?: true
     minPrice?: true
+    size?: true
     quantity?: true
     unitPrice?: true
     alertQuantity?: true
@@ -11979,7 +11983,7 @@ export namespace Prisma {
     description: string
     subCategoryId: number
     minPrice: number | null
-    size: string | null
+    size: number | null
     quantity: number
     unitPrice: number
     alertQuantity: number
@@ -12082,7 +12086,7 @@ export namespace Prisma {
       description: string
       subCategoryId: number
       minPrice: number | null
-      size: string | null
+      size: number | null
       quantity: number
       unitPrice: number
       alertQuantity: number
@@ -12472,7 +12476,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Product", 'String'>
     readonly subCategoryId: FieldRef<"Product", 'Int'>
     readonly minPrice: FieldRef<"Product", 'Int'>
-    readonly size: FieldRef<"Product", 'String'>
+    readonly size: FieldRef<"Product", 'Int'>
     readonly quantity: FieldRef<"Product", 'Float'>
     readonly unitPrice: FieldRef<"Product", 'Float'>
     readonly alertQuantity: FieldRef<"Product", 'Int'>
@@ -31870,8 +31874,7 @@ export namespace Prisma {
 
   export const ProductOrderByRelevanceFieldEnum: {
     name: 'name',
-    description: 'description',
-    size: 'size'
+    description: 'description'
   };
 
   export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
@@ -32580,7 +32583,7 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     subCategoryId?: IntFilter<"Product"> | number
     minPrice?: IntNullableFilter<"Product"> | number | null
-    size?: StringNullableFilter<"Product"> | string | null
+    size?: IntNullableFilter<"Product"> | number | null
     quantity?: FloatFilter<"Product"> | number
     unitPrice?: FloatFilter<"Product"> | number
     alertQuantity?: IntFilter<"Product"> | number
@@ -32632,7 +32635,7 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     subCategoryId?: IntFilter<"Product"> | number
     minPrice?: IntNullableFilter<"Product"> | number | null
-    size?: StringNullableFilter<"Product"> | string | null
+    size?: IntNullableFilter<"Product"> | number | null
     quantity?: FloatFilter<"Product"> | number
     unitPrice?: FloatFilter<"Product"> | number
     alertQuantity?: IntFilter<"Product"> | number
@@ -32683,7 +32686,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Product"> | string
     subCategoryId?: IntWithAggregatesFilter<"Product"> | number
     minPrice?: IntNullableWithAggregatesFilter<"Product"> | number | null
-    size?: StringNullableWithAggregatesFilter<"Product"> | string | null
+    size?: IntNullableWithAggregatesFilter<"Product"> | number | null
     quantity?: FloatWithAggregatesFilter<"Product"> | number
     unitPrice?: FloatWithAggregatesFilter<"Product"> | number
     alertQuantity?: IntWithAggregatesFilter<"Product"> | number
@@ -34714,7 +34717,7 @@ export namespace Prisma {
     name: string
     description: string
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -34737,7 +34740,7 @@ export namespace Prisma {
     description: string
     subCategoryId: number
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -34757,7 +34760,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -34780,7 +34783,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     subCategoryId?: IntFieldUpdateOperationsInput | number
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -34802,7 +34805,7 @@ export namespace Prisma {
     description: string
     subCategoryId: number
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -34819,7 +34822,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -34837,7 +34840,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     subCategoryId?: IntFieldUpdateOperationsInput | number
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -37108,6 +37111,7 @@ export namespace Prisma {
     id?: SortOrder
     subCategoryId?: SortOrder
     minPrice?: SortOrder
+    size?: SortOrder
     quantity?: SortOrder
     unitPrice?: SortOrder
     alertQuantity?: SortOrder
@@ -37157,6 +37161,7 @@ export namespace Prisma {
     id?: SortOrder
     subCategoryId?: SortOrder
     minPrice?: SortOrder
+    size?: SortOrder
     quantity?: SortOrder
     unitPrice?: SortOrder
     alertQuantity?: SortOrder
@@ -40632,7 +40637,7 @@ export namespace Prisma {
     name: string
     description: string
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -40653,7 +40658,7 @@ export namespace Prisma {
     name: string
     description: string
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -40722,7 +40727,7 @@ export namespace Prisma {
     description?: StringFilter<"Product"> | string
     subCategoryId?: IntFilter<"Product"> | number
     minPrice?: IntNullableFilter<"Product"> | number | null
-    size?: StringNullableFilter<"Product"> | string | null
+    size?: IntNullableFilter<"Product"> | number | null
     quantity?: FloatFilter<"Product"> | number
     unitPrice?: FloatFilter<"Product"> | number
     alertQuantity?: IntFilter<"Product"> | number
@@ -40810,7 +40815,7 @@ export namespace Prisma {
     name: string
     description: string
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -40832,7 +40837,7 @@ export namespace Prisma {
     description: string
     subCategoryId: number
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -42309,7 +42314,7 @@ export namespace Prisma {
     name: string
     description: string
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -42331,7 +42336,7 @@ export namespace Prisma {
     description: string
     subCategoryId: number
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -42478,7 +42483,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -42500,7 +42505,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     subCategoryId?: IntFieldUpdateOperationsInput | number
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -42831,7 +42836,7 @@ export namespace Prisma {
     name: string
     description: string
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -42853,7 +42858,7 @@ export namespace Prisma {
     description: string
     subCategoryId: number
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -43012,7 +43017,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -43034,7 +43039,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     subCategoryId?: IntFieldUpdateOperationsInput | number
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -44577,7 +44582,7 @@ export namespace Prisma {
     name: string
     description: string
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -44599,7 +44604,7 @@ export namespace Prisma {
     description: string
     subCategoryId: number
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -44670,7 +44675,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -44692,7 +44697,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     subCategoryId?: IntFieldUpdateOperationsInput | number
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -44783,7 +44788,7 @@ export namespace Prisma {
     name: string
     description: string
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -44800,7 +44805,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -44821,7 +44826,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -44842,7 +44847,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -44876,7 +44881,7 @@ export namespace Prisma {
     description: string
     subCategoryId: number
     minPrice?: number | null
-    size?: string | null
+    size?: number | null
     quantity: number
     unitPrice: number
     alertQuantity?: number
@@ -44959,7 +44964,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -44981,7 +44986,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     subCategoryId?: IntFieldUpdateOperationsInput | number
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number
@@ -45002,7 +45007,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     subCategoryId?: IntFieldUpdateOperationsInput | number
     minPrice?: NullableIntFieldUpdateOperationsInput | number | null
-    size?: NullableStringFieldUpdateOperationsInput | string | null
+    size?: NullableIntFieldUpdateOperationsInput | number | null
     quantity?: FloatFieldUpdateOperationsInput | number
     unitPrice?: FloatFieldUpdateOperationsInput | number
     alertQuantity?: IntFieldUpdateOperationsInput | number

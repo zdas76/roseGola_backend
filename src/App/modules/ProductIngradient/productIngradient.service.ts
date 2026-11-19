@@ -206,133 +206,31 @@ const getProductionIngradientByProductId = async (productId: number) => {
   };
 };
 
-// const updateProductionIngradientById = async (id: number, payload: any) => {
-//   const isExist = await prisma.productionIngradient.findUnique({
-//     where: { id },
-//   });
+const updateProductIngradientById = async (ingredientid: number, payload: any) => {
+  const isExist = await prisma.productionIngradient.findUnique({
+    where: { id: ingredientid },
+  });
 
-//   if (!isExist) {
-//     throw new AppError(StatusCodes.NOT_FOUND, "Product ingradient not found");
-//   }
+  if (!isExist) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Product ingradient not found");
+  }
 
-//   let productId = isExist.productId;
-//   if (payload.productId) {
-//     productId = Number(payload.productId);
-//     const product = await prisma.product.findUnique({
-//       where: { id: productId },
-//     });
-//     if (!product) {
-//       throw new AppError(StatusCodes.NOT_FOUND, "Product not found");
-//     }
-//   }
+  if (payload.productId !== isExist.productId) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Product not found");
+  }
+  if (payload.rawMaterials && payload.rawMaterials.lngth > 0) {
+    await prisma.ingredientRawMaterial.delete({
+      where: {
+        rawId: payload.rawMaterials?.map(id => id)
+      }
+    })
+  }
 
-//   const hasRaw =
-//     payload.rawMaterials !== undefined || payload.rawMaterialIds !== undefined;
-//   const rawMaterials = hasRaw
-//     ? extractMaterials(payload.rawMaterials ?? payload.rawMaterialIds)
-//     : undefined;
-
-//   const hasPack =
-//     payload.packingMaterials !== undefined ||
-//     payload.packingMaterialIds !== undefined;
-//   const packingMaterials = hasPack
-//     ? extractMaterials(payload.packingMaterials ?? payload.packingMaterialIds)
-//     : undefined;
-
-// const result = await prisma.$transaction(async (tx) => {
-//   if (rawMaterials !== undefined) {
-//     await tx.rawMaterial.updateMany({
-//       where: { production: id },
-//       data: { productionIngradientId: null },
-//     });
-
-//     if (rawMaterials.length > 0) {
-//       const rawIds = rawMaterials.map((item) => item.id);
-//       await tx.rawMaterial.updateMany({
-//         where: { id: { in: rawIds } },
-//         data: { productIngradientId: id },
-//       });
-
-//       for (const raw of rawMaterials) {
-//         if (raw.ingredienteQty !== undefined) {
-//           await tx.rawMaterial.update({
-//             where: { id: raw.id },
-//             data: { ingredienteQty: raw.ingredienteQty },
-//           });
-//         }
-//       }
-//     }
-//   }
-
-//   if (packingMaterials !== undefined) {
-//     await tx.packingMaterial.updateMany({
-//       where: { productIngradientId: id },
-//       data: { productIngradientId: null },
-//     });
-
-//     if (packingMaterials.length > 0) {
-//       const packIds = packingMaterials.map((item) => item.id);
-//       await tx.packingMaterial.updateMany({
-//         where: { id: { in: packIds } },
-//         data: { productIngradientId: id },
-//       });
-
-//       for (const pack of packingMaterials) {
-//         if (pack.ingredienteQty !== undefined) {
-//           await tx.packingMaterial.update({
-//             where: { id: pack.id },
-//             data: { ingredienteQty: pack.ingredienteQty },
-//           });
-//         }
-//       }
-//     }
-//   }
-
-//   const updated = await tx.productIngradient.update({
-//     where: { id },
-//     data: {
-//       productId,
-//     },
-//     include: {
-//       rawMaterials: {
-//         include: {
-//           unit: true,
-//         },
-//       },
-//       packingMaterials: {
-//         include: {
-//           unit: true,
-//         },
-//       },
-//     },
-//   });
-
-//   const finalResult = await tx.productIngradient.findUnique({
-//     where: { id },
-//     include: {
-//       rawMaterials: {
-//         include: {
-//           unit: true,
-//         },
-//       },
-//       packingMaterials: {
-//         include: {
-//           unit: true,
-//         },
-//       },
-//     },
-//   });
-//   return {
-//     ...finalResult,
-//     product,
-//   };
-// });
-
-// return result;
-// };
+};
 
 export const ProductIngradientService = {
   createProductIngradient,
   getAllProductIngradients,
   getProductIngradientById,
+  updateProductIngradientById
 };

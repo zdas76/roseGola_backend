@@ -17,7 +17,6 @@ const createUnit = catchAsync(async (req: Request, res: Response) => {
 
 const getAllUnit = catchAsync(async (req: Request, res: Response) => {
   const result = await UnitService.getAllUnit();
-
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,

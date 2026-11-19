@@ -488,8 +488,7 @@ exports.Prisma.PartyOrderByRelevanceFieldEnum = {
 
 exports.Prisma.ProductOrderByRelevanceFieldEnum = {
   name: 'name',
-  description: 'description',
-  size: 'size'
+  description: 'description'
 };
 
 exports.Prisma.RawMaterialOrderByRelevanceFieldEnum = {

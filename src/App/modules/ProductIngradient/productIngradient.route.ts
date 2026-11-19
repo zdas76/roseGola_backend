@@ -20,11 +20,11 @@ router.get("/", ProductIngradientControllers.getAllProductIngradients);
 
 // router.get("/:id", ProductIngradientControllers.getProductIngradientById);
 
-// router.put(
-//   "/:id",
-//   validationRequiest(ProductIngradientValidation.updateProductIngradientSchema),
-//   // ProductIngradientControllers.updateProductIngradient
-// );
+router.patch(
+  "/:id",
+  validationRequiest(ProductIngradientValidation.updateProductIngradientSchema),
+  ProductIngradientControllers.updateProductIngradient
+);
 
 // router.delete("/:id", ProductIngradientControllers.deleteProductIngradient);
 

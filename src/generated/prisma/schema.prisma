@@ -123,7 +123,7 @@ model Product {
   description              String                   @db.VarChar(250)
   subCategoryId            Int
   minPrice                 Int?
-  size                     String?
+  size                     Int?
   quantity                 Float
   unitPrice                Float
   alertQuantity            Int                      @default(0)

@@ -67,22 +67,23 @@ const getProductIngradientById = catchAsync(
 //   },
 // );
 
-// const updateProductIngradient = catchAsync(
-//   async (req: Request, res: Response) => {
-//     const id = parseInt(req.params.id as string);
-//     const result = await ProductIngradientService.updateProductIngradientById(
-//       id,
-//       req.body,
-//     );
+const updateProductIngradient = catchAsync(
+  async (req: Request, res: Response) => {
+    const ingredientid = parseInt(req.params.id as string);
+    const result = await ProductIngradientService.updateProductIngradientById(
+      ingredientid,
+      req.body,
+    );
 
-//     sendResponse(res, {
-//       statusCode: StatusCodes.OK,
-//       success: true,
-//       message: "Product ingradient updated successfully",
-//       data: result,
-//     });
-//   },
-// );
+
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: "Product ingradient updated successfully",
+      data: result,
+    });
+  },
+);
 
 // const deleteProductIngradient = catchAsync(
 //   async (req: Request, res: Response) => {
@@ -104,6 +105,6 @@ export const ProductIngradientControllers = {
   getAllProductIngradients,
   getProductIngradientById,
   // getProductIngradientByProductId,
-  // updateProductIngradient,
+  updateProductIngradient,
   // deleteProductIngradient,
 };

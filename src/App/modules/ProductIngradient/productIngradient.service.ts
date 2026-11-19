@@ -207,6 +207,7 @@ const getProductionIngradientByProductId = async (productId: number) => {
 };
 
 const updateProductIngradientById = async (ingredientid: number, payload: any) => {
+  console.log(payload)
   const isExist = await prisma.productionIngradient.findUnique({
     where: { id: ingredientid },
   });
@@ -219,9 +220,20 @@ const updateProductIngradientById = async (ingredientid: number, payload: any) =
     throw new AppError(StatusCodes.NOT_FOUND, "Product not found");
   }
   if (payload.rawMaterials && payload.rawMaterials.lngth > 0) {
-    await prisma.ingredientRawMaterial.delete({
+    await prisma.productionIngradient.update({
       where: {
-        rawId: payload.rawMaterials?.map(id => id)
+        id: ingredientid
+      },
+      data: {
+        ingredientRawMaterials: {
+          deleteMany: {},
+          createMany: {
+            data: payload.rawMaterials.map((id: number) => ({ rawId: id }))
+          }
+        },
+      },
+      include: {
+        ingredientRawMaterials: true
       }
     })
   }

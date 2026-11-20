@@ -14,6 +14,10 @@ route.get("/raw/:id", ReportControllers.rawReportById);
 
 route.get("/product", ReportControllers.productReport);
 
+route.get("/packing-materials", ReportControllers.PmReportcontroler);
+
+// route.get("/packing-materials/:id", ReportControllers.productReport);
+
 route.get("/product/:id", ReportControllers.productReportById);
 
 route.get("/balance-sheet", ReportControllers.balanceSheet);

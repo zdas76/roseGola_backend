@@ -299,6 +299,65 @@ const getProductReportById = async (id: number, payload: {
   return { product, report };
 };
 
+//----------------------------------------------------------------packing amterials report
+const packingMaterialsReport = async (payload: {
+  startDate?: string | null;
+  endDate?: string | null;
+}) => {
+
+
+  const allPackingMaterials = await prisma.packingMaterial.findMany({
+    where: {
+      isDeleted: false
+    },
+  });
+  if (allPackingMaterials.length < 1) {
+    throw new AppError(StatusCodes.BAD_REQUEST, "Product not found");
+  }
+  const result = Promise.all(allPackingMaterials.map(async (pm) => {
+    const startDate = payload?.startDate ? payload?.startDate : pm?.openingDate || "";
+    const endDate = payload?.endDate ? payload?.endDate : new Date();
+
+    const total = await prisma.pMInventory.aggregate({
+      _sum: {
+        debitAmount: true,
+        creditAmount: true,
+        quantityAdd: true,
+        quantityLess: true,
+      },
+      where: {
+        packingMaterialId: pm.id,
+        date: {
+          gte: new Date(startDate),
+          lte: new Date(new Date(endDate).setHours(23, 59, 59, 999))
+        }
+
+      },
+    })
+    return { pm, total }
+  }))
+
+  return result;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const getBalanceSheet = async (date: string | null) => {
   const targetDate = date ? new Date(new Date(date).setHours(23, 59, 59, 999)) : new Date();
@@ -447,4 +506,5 @@ export const ReportService = {
   productReport,
   getProductReportById,
   getBalanceSheet,
+  packingMaterialsReport
 };

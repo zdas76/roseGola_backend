@@ -517,6 +517,7 @@ exports.Prisma.TransactionInfoOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.JournalOrderByRelevanceFieldEnum = {
+  checkOrRTGS: 'checkOrRTGS',
   narration: 'narration'
 };
 

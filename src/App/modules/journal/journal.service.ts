@@ -666,7 +666,7 @@ const createPaymentVoucher = async (payload: any) => {
       date: string;
       creditAmount: number;
       narration: string;
-      checkOrRTGS: number | null;
+      checkOrRTGS: string;
     }[] = [];
 
     payload.creditItem.map((item: any) => {
@@ -676,7 +676,7 @@ const createPaymentVoucher = async (payload: any) => {
         date: payload.date,
         creditAmount: Number(item.amount),
         narration: item?.narration || "",
-        checkOrRTGS: item?.checkOrRTGS || null
+        checkOrRTGS: item?.checkOrRTGS
       });
     });
 
@@ -692,14 +692,14 @@ const createPaymentVoucher = async (payload: any) => {
       date: string;
       creditAmount: number;
       narration: string;
-      checkOrRTGS: number | null;
+      checkOrRTGS: string;
     }[] = payload.debitItem.map((item: any) => ({
       transectionId: createTransactionInfo.id,
       accountsItemId: item.accountsItemId,
       date: payload.date,
       debitAmount: Number(item.amount),
       narration: item?.narration || "",
-      checkOrRTGS: item?.checkOrRTGS || null,
+      checkOrRTGS: item?.checkOrRTGS,
     }));
 
     const journalItems = [...journalDebitItems, ...journalCreditItems];

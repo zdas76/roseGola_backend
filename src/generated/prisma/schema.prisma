@@ -315,7 +315,7 @@ model PMInventory {
   creditAmount           Float?           @default(0)
   integratedDebitAmount  Float?           @default(0)
   integratedCreditAmount Float?           @default(0)
-  isOpening              Int              @default(0)
+  isOpening              Boolean          @default(false)
   status                 Status           @default(PENDING)
   createdAt              DateTime         @default(now())
   updatedAt              DateTime         @updatedAt
@@ -354,7 +354,7 @@ model Journal {
   transectionId          Int?
   accountsItemId         Int?
   date                   DateTime         @db.Date
-  checkOrRTGS            Float?           @default(0)
+  checkOrRTGS            String?
   creditAmount           Float?           @default(0)
   debitAmount            Float?           @default(0)
   integratedDebitAmount  Float?           @default(0)

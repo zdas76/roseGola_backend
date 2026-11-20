@@ -20818,7 +20818,6 @@ export namespace Prisma {
     creditAmount: number | null
     integratedDebitAmount: number | null
     integratedCreditAmount: number | null
-    isOpening: number | null
   }
 
   export type PMInventorySumAggregateOutputType = {
@@ -20836,7 +20835,6 @@ export namespace Prisma {
     creditAmount: number | null
     integratedDebitAmount: number | null
     integratedCreditAmount: number | null
-    isOpening: number | null
   }
 
   export type PMInventoryMinAggregateOutputType = {
@@ -20856,7 +20854,7 @@ export namespace Prisma {
     creditAmount: number | null
     integratedDebitAmount: number | null
     integratedCreditAmount: number | null
-    isOpening: number | null
+    isOpening: boolean | null
     status: $Enums.Status | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -20879,7 +20877,7 @@ export namespace Prisma {
     creditAmount: number | null
     integratedDebitAmount: number | null
     integratedCreditAmount: number | null
-    isOpening: number | null
+    isOpening: boolean | null
     status: $Enums.Status | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -20925,7 +20923,6 @@ export namespace Prisma {
     creditAmount?: true
     integratedDebitAmount?: true
     integratedCreditAmount?: true
-    isOpening?: true
   }
 
   export type PMInventorySumAggregateInputType = {
@@ -20943,7 +20940,6 @@ export namespace Prisma {
     creditAmount?: true
     integratedDebitAmount?: true
     integratedCreditAmount?: true
-    isOpening?: true
   }
 
   export type PMInventoryMinAggregateInputType = {
@@ -21119,7 +21115,7 @@ export namespace Prisma {
     creditAmount: number | null
     integratedDebitAmount: number | null
     integratedCreditAmount: number | null
-    isOpening: number
+    isOpening: boolean
     status: $Enums.Status
     createdAt: Date
     updatedAt: Date
@@ -21223,7 +21219,7 @@ export namespace Prisma {
       creditAmount: number | null
       integratedDebitAmount: number | null
       integratedCreditAmount: number | null
-      isOpening: number
+      isOpening: boolean
       status: $Enums.Status
       createdAt: Date
       updatedAt: Date
@@ -21614,7 +21610,7 @@ export namespace Prisma {
     readonly creditAmount: FieldRef<"PMInventory", 'Float'>
     readonly integratedDebitAmount: FieldRef<"PMInventory", 'Float'>
     readonly integratedCreditAmount: FieldRef<"PMInventory", 'Float'>
-    readonly isOpening: FieldRef<"PMInventory", 'Int'>
+    readonly isOpening: FieldRef<"PMInventory", 'Boolean'>
     readonly status: FieldRef<"PMInventory", 'Status'>
     readonly createdAt: FieldRef<"PMInventory", 'DateTime'>
     readonly updatedAt: FieldRef<"PMInventory", 'DateTime'>
@@ -23208,7 +23204,6 @@ export namespace Prisma {
     id: number | null
     transectionId: number | null
     accountsItemId: number | null
-    checkOrRTGS: number | null
     creditAmount: number | null
     debitAmount: number | null
     integratedDebitAmount: number | null
@@ -23219,7 +23214,6 @@ export namespace Prisma {
     id: number | null
     transectionId: number | null
     accountsItemId: number | null
-    checkOrRTGS: number | null
     creditAmount: number | null
     debitAmount: number | null
     integratedDebitAmount: number | null
@@ -23231,7 +23225,7 @@ export namespace Prisma {
     transectionId: number | null
     accountsItemId: number | null
     date: Date | null
-    checkOrRTGS: number | null
+    checkOrRTGS: string | null
     creditAmount: number | null
     debitAmount: number | null
     integratedDebitAmount: number | null
@@ -23247,7 +23241,7 @@ export namespace Prisma {
     transectionId: number | null
     accountsItemId: number | null
     date: Date | null
-    checkOrRTGS: number | null
+    checkOrRTGS: string | null
     creditAmount: number | null
     debitAmount: number | null
     integratedDebitAmount: number | null
@@ -23280,7 +23274,6 @@ export namespace Prisma {
     id?: true
     transectionId?: true
     accountsItemId?: true
-    checkOrRTGS?: true
     creditAmount?: true
     debitAmount?: true
     integratedDebitAmount?: true
@@ -23291,7 +23284,6 @@ export namespace Prisma {
     id?: true
     transectionId?: true
     accountsItemId?: true
-    checkOrRTGS?: true
     creditAmount?: true
     debitAmount?: true
     integratedDebitAmount?: true
@@ -23438,7 +23430,7 @@ export namespace Prisma {
     transectionId: number | null
     accountsItemId: number | null
     date: Date
-    checkOrRTGS: number | null
+    checkOrRTGS: string | null
     creditAmount: number | null
     debitAmount: number | null
     integratedDebitAmount: number | null
@@ -23521,7 +23513,7 @@ export namespace Prisma {
       transectionId: number | null
       accountsItemId: number | null
       date: Date
-      checkOrRTGS: number | null
+      checkOrRTGS: string | null
       creditAmount: number | null
       debitAmount: number | null
       integratedDebitAmount: number | null
@@ -23905,7 +23897,7 @@ export namespace Prisma {
     readonly transectionId: FieldRef<"Journal", 'Int'>
     readonly accountsItemId: FieldRef<"Journal", 'Int'>
     readonly date: FieldRef<"Journal", 'DateTime'>
-    readonly checkOrRTGS: FieldRef<"Journal", 'Float'>
+    readonly checkOrRTGS: FieldRef<"Journal", 'String'>
     readonly creditAmount: FieldRef<"Journal", 'Float'>
     readonly debitAmount: FieldRef<"Journal", 'Float'>
     readonly integratedDebitAmount: FieldRef<"Journal", 'Float'>
@@ -31921,6 +31913,7 @@ export namespace Prisma {
 
 
   export const JournalOrderByRelevanceFieldEnum: {
+    checkOrRTGS: 'checkOrRTGS',
     narration: 'narration'
   };
 
@@ -33393,7 +33386,7 @@ export namespace Prisma {
     creditAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedDebitAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedCreditAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    isOpening?: IntFilter<"PMInventory"> | number
+    isOpening?: BoolFilter<"PMInventory"> | boolean
     status?: EnumStatusFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"PMInventory"> | Date | string
     updatedAt?: DateTimeFilter<"PMInventory"> | Date | string
@@ -33446,7 +33439,7 @@ export namespace Prisma {
     creditAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedDebitAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedCreditAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    isOpening?: IntFilter<"PMInventory"> | number
+    isOpening?: BoolFilter<"PMInventory"> | boolean
     status?: EnumStatusFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"PMInventory"> | Date | string
     updatedAt?: DateTimeFilter<"PMInventory"> | Date | string
@@ -33502,7 +33495,7 @@ export namespace Prisma {
     creditAmount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
     integratedDebitAmount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
     integratedCreditAmount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
-    isOpening?: IntWithAggregatesFilter<"PMInventory"> | number
+    isOpening?: BoolWithAggregatesFilter<"PMInventory"> | boolean
     status?: EnumStatusWithAggregatesFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeWithAggregatesFilter<"PMInventory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"PMInventory"> | Date | string
@@ -33607,7 +33600,7 @@ export namespace Prisma {
     transectionId?: IntNullableFilter<"Journal"> | number | null
     accountsItemId?: IntNullableFilter<"Journal"> | number | null
     date?: DateTimeFilter<"Journal"> | Date | string
-    checkOrRTGS?: FloatNullableFilter<"Journal"> | number | null
+    checkOrRTGS?: StringNullableFilter<"Journal"> | string | null
     creditAmount?: FloatNullableFilter<"Journal"> | number | null
     debitAmount?: FloatNullableFilter<"Journal"> | number | null
     integratedDebitAmount?: FloatNullableFilter<"Journal"> | number | null
@@ -33647,7 +33640,7 @@ export namespace Prisma {
     transectionId?: IntNullableFilter<"Journal"> | number | null
     accountsItemId?: IntNullableFilter<"Journal"> | number | null
     date?: DateTimeFilter<"Journal"> | Date | string
-    checkOrRTGS?: FloatNullableFilter<"Journal"> | number | null
+    checkOrRTGS?: StringNullableFilter<"Journal"> | string | null
     creditAmount?: FloatNullableFilter<"Journal"> | number | null
     debitAmount?: FloatNullableFilter<"Journal"> | number | null
     integratedDebitAmount?: FloatNullableFilter<"Journal"> | number | null
@@ -33689,7 +33682,7 @@ export namespace Prisma {
     transectionId?: IntNullableWithAggregatesFilter<"Journal"> | number | null
     accountsItemId?: IntNullableWithAggregatesFilter<"Journal"> | number | null
     date?: DateTimeWithAggregatesFilter<"Journal"> | Date | string
-    checkOrRTGS?: FloatNullableWithAggregatesFilter<"Journal"> | number | null
+    checkOrRTGS?: StringNullableWithAggregatesFilter<"Journal"> | string | null
     creditAmount?: FloatNullableWithAggregatesFilter<"Journal"> | number | null
     debitAmount?: FloatNullableWithAggregatesFilter<"Journal"> | number | null
     integratedDebitAmount?: FloatNullableWithAggregatesFilter<"Journal"> | number | null
@@ -35576,7 +35569,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: number
+    isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35601,7 +35594,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: number
+    isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35621,7 +35614,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: IntFieldUpdateOperationsInput | number
+    isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35646,7 +35639,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: IntFieldUpdateOperationsInput | number
+    isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35669,7 +35662,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: number
+    isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -35689,7 +35682,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: IntFieldUpdateOperationsInput | number
+    isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35712,7 +35705,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: IntFieldUpdateOperationsInput | number
+    isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -35817,7 +35810,7 @@ export namespace Prisma {
 
   export type JournalCreateInput = {
     date: Date | string
-    checkOrRTGS?: number | null
+    checkOrRTGS?: string | null
     creditAmount?: number | null
     debitAmount?: number | null
     integratedDebitAmount?: number | null
@@ -35835,7 +35828,7 @@ export namespace Prisma {
     transectionId?: number | null
     accountsItemId?: number | null
     date: Date | string
-    checkOrRTGS?: number | null
+    checkOrRTGS?: string | null
     creditAmount?: number | null
     debitAmount?: number | null
     integratedDebitAmount?: number | null
@@ -35848,7 +35841,7 @@ export namespace Prisma {
 
   export type JournalUpdateInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOrRTGS?: NullableFloatFieldUpdateOperationsInput | number | null
+    checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -35866,7 +35859,7 @@ export namespace Prisma {
     transectionId?: NullableIntFieldUpdateOperationsInput | number | null
     accountsItemId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOrRTGS?: NullableFloatFieldUpdateOperationsInput | number | null
+    checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -35882,7 +35875,7 @@ export namespace Prisma {
     transectionId?: number | null
     accountsItemId?: number | null
     date: Date | string
-    checkOrRTGS?: number | null
+    checkOrRTGS?: string | null
     creditAmount?: number | null
     debitAmount?: number | null
     integratedDebitAmount?: number | null
@@ -35895,7 +35888,7 @@ export namespace Prisma {
 
   export type JournalUpdateManyMutationInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOrRTGS?: NullableFloatFieldUpdateOperationsInput | number | null
+    checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -35911,7 +35904,7 @@ export namespace Prisma {
     transectionId?: NullableIntFieldUpdateOperationsInput | number | null
     accountsItemId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOrRTGS?: NullableFloatFieldUpdateOperationsInput | number | null
+    checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -37794,7 +37787,6 @@ export namespace Prisma {
     creditAmount?: SortOrder
     integratedDebitAmount?: SortOrder
     integratedCreditAmount?: SortOrder
-    isOpening?: SortOrder
   }
 
   export type PMInventoryMaxOrderByAggregateInput = {
@@ -37858,7 +37850,6 @@ export namespace Prisma {
     creditAmount?: SortOrder
     integratedDebitAmount?: SortOrder
     integratedCreditAmount?: SortOrder
-    isOpening?: SortOrder
   }
 
   export type EnumVoucherTypeFilter<$PrismaModel = never> = {
@@ -37973,7 +37964,6 @@ export namespace Prisma {
     id?: SortOrder
     transectionId?: SortOrder
     accountsItemId?: SortOrder
-    checkOrRTGS?: SortOrder
     creditAmount?: SortOrder
     debitAmount?: SortOrder
     integratedDebitAmount?: SortOrder
@@ -38016,7 +38006,6 @@ export namespace Prisma {
     id?: SortOrder
     transectionId?: SortOrder
     accountsItemId?: SortOrder
-    checkOrRTGS?: SortOrder
     creditAmount?: SortOrder
     debitAmount?: SortOrder
     integratedDebitAmount?: SortOrder
@@ -41070,7 +41059,7 @@ export namespace Prisma {
 
   export type JournalCreateWithoutAccountsItemInput = {
     date: Date | string
-    checkOrRTGS?: number | null
+    checkOrRTGS?: string | null
     creditAmount?: number | null
     debitAmount?: number | null
     integratedDebitAmount?: number | null
@@ -41086,7 +41075,7 @@ export namespace Prisma {
     id?: number
     transectionId?: number | null
     date: Date | string
-    checkOrRTGS?: number | null
+    checkOrRTGS?: string | null
     creditAmount?: number | null
     debitAmount?: number | null
     integratedDebitAmount?: number | null
@@ -41157,7 +41146,7 @@ export namespace Prisma {
     transectionId?: IntNullableFilter<"Journal"> | number | null
     accountsItemId?: IntNullableFilter<"Journal"> | number | null
     date?: DateTimeFilter<"Journal"> | Date | string
-    checkOrRTGS?: FloatNullableFilter<"Journal"> | number | null
+    checkOrRTGS?: StringNullableFilter<"Journal"> | string | null
     creditAmount?: FloatNullableFilter<"Journal"> | number | null
     debitAmount?: FloatNullableFilter<"Journal"> | number | null
     integratedDebitAmount?: FloatNullableFilter<"Journal"> | number | null
@@ -41921,7 +41910,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: number
+    isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -41944,7 +41933,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: number
+    isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -42098,7 +42087,7 @@ export namespace Prisma {
     creditAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedDebitAmount?: FloatNullableFilter<"PMInventory"> | number | null
     integratedCreditAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    isOpening?: IntFilter<"PMInventory"> | number
+    isOpening?: BoolFilter<"PMInventory"> | boolean
     status?: EnumStatusFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"PMInventory"> | Date | string
     updatedAt?: DateTimeFilter<"PMInventory"> | Date | string
@@ -43396,7 +43385,7 @@ export namespace Prisma {
 
   export type JournalCreateWithoutTransactionInfoInput = {
     date: Date | string
-    checkOrRTGS?: number | null
+    checkOrRTGS?: string | null
     creditAmount?: number | null
     debitAmount?: number | null
     integratedDebitAmount?: number | null
@@ -43412,7 +43401,7 @@ export namespace Prisma {
     id?: number
     accountsItemId?: number | null
     date: Date | string
-    checkOrRTGS?: number | null
+    checkOrRTGS?: string | null
     creditAmount?: number | null
     debitAmount?: number | null
     integratedDebitAmount?: number | null
@@ -43447,7 +43436,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: number
+    isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -43470,7 +43459,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: number
+    isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -45106,7 +45095,7 @@ export namespace Prisma {
     id?: number
     transectionId?: number | null
     date: Date | string
-    checkOrRTGS?: number | null
+    checkOrRTGS?: string | null
     creditAmount?: number | null
     debitAmount?: number | null
     integratedDebitAmount?: number | null
@@ -45119,7 +45108,7 @@ export namespace Prisma {
 
   export type JournalUpdateWithoutAccountsItemInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOrRTGS?: NullableFloatFieldUpdateOperationsInput | number | null
+    checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45135,7 +45124,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     transectionId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOrRTGS?: NullableFloatFieldUpdateOperationsInput | number | null
+    checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45150,7 +45139,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     transectionId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOrRTGS?: NullableFloatFieldUpdateOperationsInput | number | null
+    checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -45625,7 +45614,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: number
+    isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -45730,7 +45719,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: IntFieldUpdateOperationsInput | number
+    isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45753,7 +45742,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: IntFieldUpdateOperationsInput | number
+    isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45775,7 +45764,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: IntFieldUpdateOperationsInput | number
+    isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45970,7 +45959,7 @@ export namespace Prisma {
     id?: number
     accountsItemId?: number | null
     date: Date | string
-    checkOrRTGS?: number | null
+    checkOrRTGS?: string | null
     creditAmount?: number | null
     debitAmount?: number | null
     integratedDebitAmount?: number | null
@@ -45997,7 +45986,7 @@ export namespace Prisma {
     creditAmount?: number | null
     integratedDebitAmount?: number | null
     integratedCreditAmount?: number | null
-    isOpening?: number
+    isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -46113,7 +46102,7 @@ export namespace Prisma {
 
   export type JournalUpdateWithoutTransactionInfoInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOrRTGS?: NullableFloatFieldUpdateOperationsInput | number | null
+    checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -46129,7 +46118,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     accountsItemId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOrRTGS?: NullableFloatFieldUpdateOperationsInput | number | null
+    checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -46144,7 +46133,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     accountsItemId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    checkOrRTGS?: NullableFloatFieldUpdateOperationsInput | number | null
+    checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -46169,7 +46158,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: IntFieldUpdateOperationsInput | number
+    isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46192,7 +46181,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: IntFieldUpdateOperationsInput | number
+    isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46214,7 +46203,7 @@ export namespace Prisma {
     creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    isOpening?: IntFieldUpdateOperationsInput | number
+    isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

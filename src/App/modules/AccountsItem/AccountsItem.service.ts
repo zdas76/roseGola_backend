@@ -42,7 +42,6 @@ const createAccountsItemtoDB = async (payLoad: AccountsItem) => {
 
 const getAccountsItemFromDB = async (payLoad: string) => {
   let filerValue = {
-
   };
 
   if (payLoad) {

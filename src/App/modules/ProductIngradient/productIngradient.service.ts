@@ -206,8 +206,10 @@ const getProductionIngradientByProductId = async (productId: number) => {
   };
 };
 
-const updateProductIngradientById = async (ingredientid: number, payload: any) => {
-  console.log(payload)
+const updateProductIngradientById = async (
+  ingredientid: number,
+  payload: any
+) => {
   const isExist = await prisma.productionIngradient.findUnique({
     where: { id: ingredientid },
   });
@@ -216,11 +218,19 @@ const updateProductIngradientById = async (ingredientid: number, payload: any) =
     throw new AppError(StatusCodes.NOT_FOUND, "Product ingradient not found");
   }
 
-  if (payload.productId !== isExist.productId) {
-    throw new AppError(StatusCodes.NOT_FOUND, "Product not found");
+  const targetProductId = payload.productId ? Number(payload.productId) : isExist.productId;
+
+  if (payload.productId) {
+    const productExists = await prisma.product.findUnique({
+      where: { id: targetProductId },
+    });
+    if (!productExists) {
+      throw new AppError(StatusCodes.NOT_FOUND, "Product not found");
+    }
   }
-  if (payload.rawMaterials && payload.rawMaterials.lngth > 0) {
-    await prisma.productionIngradient.update({
+  // update or
+  const result = await prisma.$transaction(async (tx) => {
+    const created = await tx.productionIngradient.update({
       where: {
         id: ingredientid
       },
@@ -228,16 +238,45 @@ const updateProductIngradientById = async (ingredientid: number, payload: any) =
         ingredientRawMaterials: {
           deleteMany: {},
           createMany: {
-            data: payload.rawMaterials.map((id: number) => ({ rawId: id }))
-          }
+            data: payload.rawMaterials.map((item: number) => ({
+              rawId: Number(item),
+            })),
+          },
+        },
+        ingredientPackingMaterial: {
+          deleteMany: {},
+          createMany: {
+            data: payload.packingMaterials.map((item: number) => ({
+              packingMaterialId: Number(item),
+            })),
+          },
+        },
+        ingredientExpneseItems: {
+          deleteMany: {},
+          createMany: {
+            data: payload.ingredientExpneseItems.map((item: number) => ({
+              productionExpenssItemId: Number(item),
+            })),
+          },
         },
       },
-      include: {
-        ingredientRawMaterials: true
-      }
-    })
-  }
 
+      include: {
+        ingredientRawMaterials: true,
+        ingredientPackingMaterial: true,
+        ingredientExpneseItems: true,
+      },
+    });
+
+    const finalResult = await tx.productionIngradient.findUnique({
+      where: { id: created.id },
+      include: ingredientInclude,
+    });
+    return {
+      ...finalResult,
+    };
+  });
+  return result;
 };
 
 export const ProductIngradientService = {

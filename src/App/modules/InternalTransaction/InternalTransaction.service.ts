@@ -86,20 +86,24 @@ const getAllRequest = async (voucherTypa: VoucherType) => {
             status: true,
             requestInventories: {
                 select: {
+                    id: true,
                     fromDepartment: true,
                     toDepartment: true
                 }
             }
         },
+        orderBy: {
+            id: "desc"
+        }
     })
     return result
 }
 
-const getRequestByid = async (transactionId: number) => {
+const getRequestByid = async ({ transactionId, voucherType }: { transactionId: number; voucherType: VoucherType }) => {
 
     const result = await prisma.transactionInfo.findUnique({
         where: {
-            voucherType: VoucherType.REQUEST,
+            voucherType: voucherType,
             id: transactionId
         },
         select: {
@@ -140,7 +144,7 @@ const approvalRawRequest = async (payload: TRAWRequestApproval) => {
                     }
                     await tx.requestInventory.update({
                         where: {
-                            id: item.id
+                            id: item.requestInvetoryId
                         },
                         data: {
                             approvalQty: item.approvedQty,
@@ -165,7 +169,7 @@ const approvalRawRequest = async (payload: TRAWRequestApproval) => {
                 }
                 await tx.requestInventory.update({
                     where: {
-                        id: item.id
+                        id: item.requestInvetoryId
                     },
                     data: {
                         approvalQty: item.approvedQty,
@@ -294,18 +298,17 @@ const createRequestProduct = async (payload: any) => {
                         transactionId: transaction.id,
                         date: new Date(payload.date),
                         productId: item.productId,
-                        fromDepartment: Department.PRODUCTION,
-                        toDepartment: Department.FG_STORE,
-                        requestQty: item.quantity,
+                        fromDepartment: payload.fromDepartment,
+                        toDepartment: payload.toDepartment,
+                        requestQty: item.requestQty,
                         status: Status.PENDING
                     }
                 })
             }));
         }
-
         return transaction
         // transaction end
-    })
+    });
     return result
 }
 
@@ -328,6 +331,7 @@ const approvalProductTransferRequest = async (payload: any) => {
         if (Array.isArray(payload.products) && payload.products.length > 0) {
             await Promise.all(
                 payload.products.map(async (item: any) => {
+                    console.log(item, "item ")
                     const isexist = await tx.product.findUnique({
                         where: {
                             id: item.productId
@@ -338,7 +342,7 @@ const approvalProductTransferRequest = async (payload: any) => {
                     }
                     await tx.requestInventory.update({
                         where: {
-                            id: item.id
+                            id: item?.requestInvetoryId,
                         },
                         data: {
                             approvalQty: item.approvedQty,

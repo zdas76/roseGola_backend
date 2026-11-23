@@ -8,6 +8,7 @@ interface Material {
 
 interface PackingMaterial extends Material {
     packingMaterialId: number;
+    requestInvetoryId: number;
     quantity: number;
 }
 
@@ -31,11 +32,14 @@ export interface TMaterialRequest {
 interface ApprovePackingMaterial extends Material {
     packingMaterialId: number;
     approvedQty: number;
+    requestInvetoryId: number;
 }
 
 interface ApproveRawMaterial extends Material {
     rawMaterialId: number;
     approvedQty: number;
+
+    requestInvetoryId: number;
 }
 
 export interface TRAWRequestApproval {

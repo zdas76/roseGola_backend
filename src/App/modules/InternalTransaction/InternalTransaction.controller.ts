@@ -28,7 +28,8 @@ const getAllRequest = catchAsync(async (req: Request, res: Response) => {
 
 const getRequestById = catchAsync(async (req: Request, res: Response) => {
     const id = Number(req.params.id)
-    const result = await internalTransactionService.getRequestByid(id);
+    const voucherType = req.query.voucherType as VoucherType;
+    const result = await internalTransactionService.getRequestByid({ transactionId: id, voucherType });
     sendResponse(res, {
         statusCode: StatusCodes.OK,
         success: true,
@@ -46,6 +47,24 @@ const approveRawRequest = catchAsync(async (req: Request, res: Response) => {
         data: result,
     });
 });
+const createProductRequest = catchAsync(async (req: Request, res: Response) => {
+    const result = await internalTransactionService.createRequestProduct(req.body);
+    sendResponse(res, {
+        statusCode: StatusCodes.OK,
+        success: true,
+        message: "Product Request Created Successfully",
+        data: result,
+    });
+});
+const approveProductRequest = catchAsync(async (req: Request, res: Response) => {
+    const result = await internalTransactionService.approvalProductTransferRequest(req.body);
+    sendResponse(res, {
+        statusCode: StatusCodes.OK,
+        success: true,
+        message: "Product approved Successfully",
+        data: result,
+    });
+});
 
 
-export const internalTransactionController = { createRequest, getAllRequest, approveRawRequest, getRequestById }
+export const internalTransactionController = { createRequest, getAllRequest, approveRawRequest, getRequestById, createProductRequest, approveProductRequest }

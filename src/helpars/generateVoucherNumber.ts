@@ -28,6 +28,13 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
     });
     voucherNo = lastVoucher?.voucherNo;
   }
+  if (type === "TRANS") {
+    const lastVoucher = await prisma.transactionInfo.findFirst({
+      orderBy: { id: "desc" },
+      select: { voucherNo: true },
+    });
+    voucherNo = lastVoucher?.voucherNo;
+  }
 
   if (type === "PROD") {
     const lastVoucher = await prisma.transactionInfo.findFirst({

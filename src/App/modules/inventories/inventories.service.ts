@@ -84,28 +84,26 @@ const getInventoryAggValueById = async (query: any) => {
         creditAmount: true,
       },
     });
-
     const netQuantity = result._sum.quantityAdd! - result._sum.quantityLess!;
     const netAmount = result._sum.debitAmount! - result._sum.creditAmount!;
-
     return { netQuantity, netAmount };
   }
   if (query.itemType === "pmmaterial") {
     const getDate = await prisma.pMInventory.findFirst({
       where: {
         packingMaterialId: Number(query.packingMaterialId),
-        isOpening: 1,
+        isOpening: true,
       },
       orderBy: [{ id: "desc" }],
     });
 
     if (!getDate?.date) {
-      throw new AppError(StatusCodes.NOT_FOUND, "Opening date not found");
+      throw new AppError(StatusCodes.NOT_FOUND, "Inventory not found");
     }
 
-    const result = await prisma.inventory.aggregate({
+    const result = await prisma.pMInventory.aggregate({
       where: {
-        rawId: Number(query.packingMaterialId),
+        packingMaterialId: Number(query.packingMaterialId),
         date: {
           gte: getDate.date,
         },
@@ -117,7 +115,6 @@ const getInventoryAggValueById = async (query: any) => {
         creditAmount: true,
       },
     });
-
     const netQuantity = result._sum.quantityAdd! - result._sum.quantityLess!;
     const netAmount = result._sum.debitAmount! - result._sum.creditAmount!;
 

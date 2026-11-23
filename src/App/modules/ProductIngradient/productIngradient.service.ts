@@ -279,9 +279,20 @@ const updateProductIngradientById = async (
   return result;
 };
 
+const deleteIngredient = async (ingredientId: number) => {
+  console.log(ingredientId, "ingredientId")
+  const result = await prisma.productionIngradient.delete({
+    where: {
+      id: ingredientId
+    }
+  });
+  return result
+}
+
 export const ProductIngradientService = {
   createProductIngradient,
   getAllProductIngradients,
   getProductIngradientById,
-  updateProductIngradientById
+  updateProductIngradientById,
+  deleteIngredient
 };

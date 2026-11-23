@@ -23,6 +23,7 @@ import { PurchaseOrderRoute } from "../modules/PurchaseOrder/purchaseOrder.route
 import { ProductIngradientRoute } from "../modules/ProductIngradient/productIngradient.route";
 import { PackingMaterialRoute } from "../modules/PackingMaterial/packingMaterials.route";
 import { ProductionExpItemRoute } from "../modules/ProductionExpItem/ProductionExpItem.route";
+import { InternalTransaction } from "../modules/InternalTransaction/InternalTransaction.route";
 
 const router = express.Router();
 
@@ -126,6 +127,10 @@ const moduleRoutes = [
   {
     path: "/production-exp-item",
     route: ProductionExpItemRoute,
+  },
+  {
+    path: "/internal-transaction",
+    route: InternalTransaction,
   },
 ];
 

@@ -56,7 +56,7 @@ const getInventoryAggigetValue = catchAsync(
     sendResponse(res, {
       statusCode: StatusCodes.OK,
       success: true,
-      message: "Parties retrived Successfully",
+      message: "Inventory total Successfully",
       data: result,
     });
   }

@@ -53,6 +53,7 @@ CREATE TABLE `account_items` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    INDEX `account_items_accountHeadId_fkey`(`accountHeadId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -64,7 +65,7 @@ CREATE TABLE `user` (
     `name` VARCHAR(50) NOT NULL,
     `phone` VARCHAR(14) NOT NULL,
     `role` ENUM('SUPER_ADMIN', 'ADMIN', 'USER') NOT NULL DEFAULT 'USER',
-    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING', 'CHECKED', 'CLOSED', 'CONVERTED') NOT NULL DEFAULT 'ACTIVE',
+    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'ACTIVE',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -84,7 +85,7 @@ CREATE TABLE `employees` (
     `photo` VARCHAR(191) NULL,
     `address` VARCHAR(191) NOT NULL,
     `mobile` VARCHAR(14) NOT NULL,
-    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING', 'CHECKED', 'CLOSED', 'CONVERTED') NOT NULL DEFAULT 'ACTIVE',
+    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'ACTIVE',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -101,7 +102,7 @@ CREATE TABLE `parties` (
     `address` VARCHAR(200) NOT NULL,
     `partyType` ENUM('VENDOR', 'CUSTOMER', 'SUPPLIER', 'DISTRIBUTOR') NOT NULL,
     `openingDate` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `openingAmount` DOUBLE NULL DEFAULT 0.00,
+    `openingAmount` DOUBLE NULL DEFAULT 0,
     `isDeleted` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -116,7 +117,7 @@ CREATE TABLE `products` (
     `description` VARCHAR(250) NOT NULL,
     `subCategoryId` INTEGER NOT NULL,
     `minPrice` INTEGER NULL,
-    `size` VARCHAR(191) NULL,
+    `size` INTEGER NULL,
     `quantity` DOUBLE NOT NULL,
     `unitPrice` DOUBLE NOT NULL,
     `alertQuantity` INTEGER NOT NULL DEFAULT 0,
@@ -124,11 +125,12 @@ CREATE TABLE `products` (
     `openingDate` DATETIME(3) NOT NULL,
     `openingAmount` DOUBLE NOT NULL,
     `isDeleted` BOOLEAN NOT NULL DEFAULT false,
-    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING', 'CHECKED', 'CLOSED', 'CONVERTED') NOT NULL DEFAULT 'ACTIVE',
+    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'ACTIVE',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updateAt` DATETIME(3) NOT NULL,
 
     INDEX `products_subCategoryId_name_idx`(`subCategoryId`, `name`),
+    INDEX `products_unitId_fkey`(`unitId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -144,10 +146,11 @@ CREATE TABLE `raw_materials` (
     `alertQuantity` INTEGER NOT NULL DEFAULT 0,
     `unitPrice` DOUBLE NOT NULL,
     `isDeleted` BOOLEAN NOT NULL DEFAULT false,
-    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING', 'CHECKED', 'CLOSED', 'CONVERTED') NOT NULL DEFAULT 'ACTIVE',
+    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'ACTIVE',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updateAt` DATETIME(3) NOT NULL,
 
+    INDEX `raw_materials_unitId_fkey`(`unitId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -163,10 +166,11 @@ CREATE TABLE `packing_materials` (
     `openingAmount` DOUBLE NOT NULL,
     `unitPrice` DOUBLE NOT NULL,
     `isDeleted` BOOLEAN NOT NULL DEFAULT false,
-    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING', 'CHECKED', 'CLOSED', 'CONVERTED') NOT NULL DEFAULT 'ACTIVE',
+    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'ACTIVE',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updateAt` DATETIME(3) NOT NULL,
 
+    INDEX `packing_materials_unitId_fkey`(`unitId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -176,7 +180,7 @@ CREATE TABLE `purchase_order_info` (
     `orderNo` VARCHAR(191) NOT NULL,
     `date` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
     `partyId` INTEGER NULL,
-    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING', 'CHECKED', 'CLOSED', 'CONVERTED') NOT NULL DEFAULT 'PENDING',
+    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'PENDING',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -192,10 +196,10 @@ CREATE TABLE `purchase_order_inventory` (
     `purchaseOrderId` INTEGER NOT NULL,
     `productId` INTEGER NULL,
     `rawId` INTEGER NULL,
-    `unitPrice` DOUBLE NOT NULL DEFAULT 0.00,
-    `quantity` DOUBLE NOT NULL DEFAULT 0.00,
-    `amount` DOUBLE NULL DEFAULT 0.00,
-    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING', 'CHECKED', 'CLOSED', 'CONVERTED') NOT NULL DEFAULT 'PENDING',
+    `unitPrice` DOUBLE NOT NULL DEFAULT 0,
+    `quantity` DOUBLE NOT NULL DEFAULT 0,
+    `amount` DOUBLE NULL DEFAULT 0,
+    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'PENDING',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `packingMaterialId` INTEGER NULL,
@@ -204,6 +208,7 @@ CREATE TABLE `purchase_order_inventory` (
     INDEX `purchase_order_inventory_purchaseOrderId_productId_idx`(`purchaseOrderId`, `productId`),
     INDEX `purchase_order_inventory_productId_idx`(`productId`),
     INDEX `purchase_order_inventory_rawId_idx`(`rawId`),
+    INDEX `purchase_order_inventory_packingMaterialId_fkey`(`packingMaterialId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -213,7 +218,7 @@ CREATE TABLE `bank_accounts` (
     `bankName` VARCHAR(191) NOT NULL,
     `branceName` VARCHAR(191) NULL,
     `accountNumber` VARCHAR(191) NOT NULL,
-    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING', 'CHECKED', 'CLOSED', 'CONVERTED') NOT NULL DEFAULT 'ACTIVE',
+    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'ACTIVE',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -233,6 +238,8 @@ CREATE TABLE `bank_transactions` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    INDEX `bank_transactions_bankAccountId_fkey`(`bankAccountId`),
+    INDEX `bank_transactions_transectionId_fkey`(`transectionId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -244,23 +251,25 @@ CREATE TABLE `inventories` (
     `rawId` INTEGER NULL,
     `transactionId` INTEGER NULL,
     `department` ENUM('PURCHASE', 'PRODUCTION', 'RM_STORE', 'MP_STORE', 'FG_STORE') NOT NULL,
-    `unitPrice` DOUBLE NOT NULL DEFAULT 0.00,
-    `integratedUnitPrice` DOUBLE NOT NULL DEFAULT 0.00,
-    `quantityAdd` DOUBLE NULL DEFAULT 0.00,
-    `quantityLess` DOUBLE NULL DEFAULT 0.00,
-    `discount` DOUBLE NULL DEFAULT 0.00,
-    `debitAmount` DOUBLE NULL DEFAULT 0.00,
-    `creditAmount` DOUBLE NULL DEFAULT 0.00,
-    `integratedDebitAmount` DOUBLE NULL DEFAULT 0.00,
-    `integratedCreditAmount` DOUBLE NULL DEFAULT 0.00,
+    `unitPrice` DOUBLE NOT NULL DEFAULT 0,
+    `integratedUnitPrice` DOUBLE NOT NULL DEFAULT 0,
+    `quantityAdd` DOUBLE NULL DEFAULT 0,
+    `quantityLess` DOUBLE NULL DEFAULT 0,
+    `discount` DOUBLE NULL DEFAULT 0,
+    `debitAmount` DOUBLE NULL DEFAULT 0,
+    `creditAmount` DOUBLE NULL DEFAULT 0,
+    `integratedDebitAmount` DOUBLE NULL DEFAULT 0,
+    `integratedCreditAmount` DOUBLE NULL DEFAULT 0,
     `isOpening` BOOLEAN NOT NULL DEFAULT false,
-    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING', 'CHECKED', 'CLOSED', 'CONVERTED') NOT NULL DEFAULT 'PENDING',
+    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'PENDING',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
     `packingMaterialId` INTEGER NULL,
 
     INDEX `inventories_productId_transactionId_idx`(`productId`, `transactionId`),
     INDEX `inventories_rawId_idx`(`rawId`),
+    INDEX `inventories_packingMaterialId_fkey`(`packingMaterialId`),
+    INDEX `inventories_transactionId_fkey`(`transactionId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -271,22 +280,24 @@ CREATE TABLE `pm_inventories` (
     `packingMaterialId` INTEGER NOT NULL,
     `transactionId` INTEGER NULL,
     `department` ENUM('PURCHASE', 'PRODUCTION', 'RM_STORE', 'MP_STORE', 'FG_STORE') NOT NULL,
-    `perUnitQty` DOUBLE NULL DEFAULT 0.00,
-    `perUnitCost` DOUBLE NULL DEFAULT 0.00,
-    `unitPrice` DOUBLE NOT NULL DEFAULT 0.00,
-    `integratedUnitPrice` DOUBLE NOT NULL DEFAULT 0.00,
-    `quantityAdd` DOUBLE NULL DEFAULT 0.00,
-    `quantityLess` DOUBLE NULL DEFAULT 0.00,
-    `discount` DOUBLE NULL DEFAULT 0.00,
-    `debitAmount` DOUBLE NULL DEFAULT 0.00,
-    `creditAmount` DOUBLE NULL DEFAULT 0.00,
-    `integratedDebitAmount` DOUBLE NULL DEFAULT 0.00,
-    `integratedCreditAmount` DOUBLE NULL DEFAULT 0.00,
+    `perUnitQty` DOUBLE NULL DEFAULT 0,
+    `perUnitCost` DOUBLE NULL DEFAULT 0,
+    `unitPrice` DOUBLE NOT NULL DEFAULT 0,
+    `integratedUnitPrice` DOUBLE NOT NULL DEFAULT 0,
+    `quantityAdd` DOUBLE NULL DEFAULT 0,
+    `quantityLess` DOUBLE NULL DEFAULT 0,
+    `discount` DOUBLE NULL DEFAULT 0,
+    `debitAmount` DOUBLE NULL DEFAULT 0,
+    `creditAmount` DOUBLE NULL DEFAULT 0,
+    `integratedDebitAmount` DOUBLE NULL DEFAULT 0,
+    `integratedCreditAmount` DOUBLE NULL DEFAULT 0,
     `isOpening` BOOLEAN NOT NULL DEFAULT false,
-    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING', 'CHECKED', 'CLOSED', 'CONVERTED') NOT NULL DEFAULT 'PENDING',
+    `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'PENDING',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    INDEX `pm_inventories_packingMaterialId_fkey`(`packingMaterialId`),
+    INDEX `pm_inventories_transactionId_fkey`(`transactionId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -295,16 +306,16 @@ CREATE TABLE `transaction_info` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `voucherNo` VARCHAR(191) NOT NULL,
     `invoiceNo` VARCHAR(191) NULL,
+    `status` ENUM('PARTIAL', 'PAID', 'DUE', 'PENDING', 'CONFIRMED') NULL DEFAULT 'DUE',
     `date` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `batchNo` VARCHAR(50) NULL,
     `partyId` INTEGER NULL,
-    `voucherType` ENUM('SALES', 'PURCHASE', 'RECEIPT', 'PAYMENT', 'JOURNAL', 'CONTRA', 'PRODUCTION', 'REQUISITION', 'FINISH_GOODS') NOT NULL,
+    `voucherType` ENUM('SALES', 'PURCHASE', 'RECEIVED', 'PAYMENT', 'JOURNAL', 'CONTRA', 'PRODUCTION', 'REQUISITION', 'TRANSFER', 'REQUEST') NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
     UNIQUE INDEX `transaction_info_voucherNo_key`(`voucherNo`),
-    UNIQUE INDEX `transaction_info_batchNo_key`(`batchNo`),
     INDEX `transaction_info_voucherNo_voucherType_partyId_idx`(`voucherNo`, `voucherType`, `partyId`),
+    INDEX `transaction_info_partyId_fkey`(`partyId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -314,17 +325,18 @@ CREATE TABLE `journals` (
     `transectionId` INTEGER NULL,
     `accountsItemId` INTEGER NULL,
     `date` DATE NOT NULL,
-    `checkOrRTGS` DOUBLE NULL DEFAULT 0.00,
-    `creditAmount` DOUBLE NULL DEFAULT 0.00,
-    `debitAmount` DOUBLE NULL DEFAULT 0.00,
-    `integratedDebitAmount` DOUBLE NULL DEFAULT 0.00,
-    `integratedCreditAmount` DOUBLE NULL DEFAULT 0.00,
+    `checkOrRTGS` VARCHAR(191) NULL,
+    `creditAmount` DOUBLE NULL DEFAULT 0,
+    `debitAmount` DOUBLE NULL DEFAULT 0,
+    `integratedDebitAmount` DOUBLE NULL DEFAULT 0,
+    `integratedCreditAmount` DOUBLE NULL DEFAULT 0,
     `narration` VARCHAR(191) NULL,
     `isClosing` BOOLEAN NOT NULL DEFAULT false,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
     INDEX `journals_accountsItemId_idx`(`accountsItemId`),
+    INDEX `journals_transectionId_fkey`(`transectionId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -339,13 +351,15 @@ CREATE TABLE `product_ingradients` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `product_raw_materials` (
+CREATE TABLE `ingredientRawMaterials` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `productionIngradientId` INTEGER NOT NULL,
     `rawId` INTEGER NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    INDEX `product_raw_materials_productionIngradientId_fkey`(`productionIngradientId`),
+    INDEX `product_raw_materials_rawId_fkey`(`rawId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -357,6 +371,8 @@ CREATE TABLE `production_packing_materials` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    INDEX `production_packing_materials_packingMaterialId_fkey`(`packingMaterialId`),
+    INDEX `production_packing_materials_productionIngradientId_fkey`(`productionIngradientId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -368,17 +384,8 @@ CREATE TABLE `ingredient_expnese` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
-    PRIMARY KEY (`id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `ProductionExpenseItem` (
-    `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `expItemName` VARCHAR(191) NOT NULL,
-    `unitRate` DOUBLE NOT NULL DEFAULT 0.00,
-    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
-    `updatedAt` DATETIME(3) NOT NULL,
-
+    INDEX `ingredient_expnese_productionExpenssItemId_fkey`(`productionExpenssItemId`),
+    INDEX `ingredient_expnese_productionIngradientId_fkey`(`productionIngradientId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -388,12 +395,41 @@ CREATE TABLE `production_expences_inventory` (
     `date` DATETIME(3) NOT NULL,
     `proExpencesItemId` INTEGER NOT NULL,
     `transectionId` INTEGER NULL,
-    `unitRate` DOUBLE NOT NULL DEFAULT 0.00,
-    `expDuration` DOUBLE NOT NULL DEFAULT 0.00,
-    `amount` DOUBLE NOT NULL DEFAULT 0.00,
+    `unitRate` DOUBLE NOT NULL DEFAULT 0,
+    `expDuration` DOUBLE NOT NULL DEFAULT 0,
+    `amount` DOUBLE NOT NULL DEFAULT 0,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    INDEX `production_expences_inventory_proExpencesItemId_fkey`(`proExpencesItemId`),
+    INDEX `production_expences_inventory_transectionId_fkey`(`transectionId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Productionexpenseitem` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `expItemName` VARCHAR(191) NOT NULL,
+    `unitRate` DOUBLE NOT NULL DEFAULT 0,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Productioniteminfo` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `transactionId` INTEGER NOT NULL,
+    `productId` INTEGER NOT NULL,
+    `batchNo` VARCHAR(50) NOT NULL,
+    `status` ENUM('PENDING', 'PROCESSING', 'IN_PROGRESS', 'COMPLETE', 'DELETE') NOT NULL DEFAULT 'PROCESSING',
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `updatedAt` DATETIME(3) NOT NULL,
+
+    UNIQUE INDEX `ProductionItemInfo_transactionId_key`(`transactionId`),
+    UNIQUE INDEX `ProductionItemInfo_batchNo_key`(`batchNo`),
+    INDEX `ProductionItemInfo_productId_fkey`(`productId`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -404,10 +440,10 @@ ALTER TABLE `sub_categoris` ADD CONSTRAINT `sub_categoris_categoryId_fkey` FOREI
 ALTER TABLE `account_items` ADD CONSTRAINT `account_items_accountHeadId_fkey` FOREIGN KEY (`accountHeadId`) REFERENCES `account_head`(`headId`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `products` ADD CONSTRAINT `products_unitId_fkey` FOREIGN KEY (`unitId`) REFERENCES `units`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `products` ADD CONSTRAINT `products_subCategoryId_fkey` FOREIGN KEY (`subCategoryId`) REFERENCES `sub_categoris`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `products` ADD CONSTRAINT `products_subCategoryId_fkey` FOREIGN KEY (`subCategoryId`) REFERENCES `sub_categoris`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `products` ADD CONSTRAINT `products_unitId_fkey` FOREIGN KEY (`unitId`) REFERENCES `units`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `raw_materials` ADD CONSTRAINT `raw_materials_unitId_fkey` FOREIGN KEY (`unitId`) REFERENCES `units`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -419,22 +455,25 @@ ALTER TABLE `packing_materials` ADD CONSTRAINT `packing_materials_unitId_fkey` F
 ALTER TABLE `purchase_order_info` ADD CONSTRAINT `purchase_order_info_partyId_fkey` FOREIGN KEY (`partyId`) REFERENCES `parties`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `purchase_order_inventory` ADD CONSTRAINT `purchase_order_inventory_purchaseOrderId_fkey` FOREIGN KEY (`purchaseOrderId`) REFERENCES `purchase_order_info`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `purchase_order_inventory` ADD CONSTRAINT `purchase_order_inventory_packingMaterialId_fkey` FOREIGN KEY (`packingMaterialId`) REFERENCES `packing_materials`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `purchase_order_inventory` ADD CONSTRAINT `purchase_order_inventory_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `products`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `purchase_order_inventory` ADD CONSTRAINT `purchase_order_inventory_rawId_fkey` FOREIGN KEY (`rawId`) REFERENCES `raw_materials`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `purchase_order_inventory` ADD CONSTRAINT `purchase_order_inventory_purchaseOrderId_fkey` FOREIGN KEY (`purchaseOrderId`) REFERENCES `purchase_order_info`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `purchase_order_inventory` ADD CONSTRAINT `purchase_order_inventory_packingMaterialId_fkey` FOREIGN KEY (`packingMaterialId`) REFERENCES `packing_materials`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `purchase_order_inventory` ADD CONSTRAINT `purchase_order_inventory_rawId_fkey` FOREIGN KEY (`rawId`) REFERENCES `raw_materials`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `bank_transactions` ADD CONSTRAINT `bank_transactions_bankAccountId_fkey` FOREIGN KEY (`bankAccountId`) REFERENCES `bank_accounts`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `bank_transactions` ADD CONSTRAINT `bank_transactions_transectionId_fkey` FOREIGN KEY (`transectionId`) REFERENCES `transaction_info`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `inventories` ADD CONSTRAINT `inventories_packingMaterialId_fkey` FOREIGN KEY (`packingMaterialId`) REFERENCES `packing_materials`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `inventories` ADD CONSTRAINT `inventories_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `products`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
@@ -446,28 +485,25 @@ ALTER TABLE `inventories` ADD CONSTRAINT `inventories_rawId_fkey` FOREIGN KEY (`
 ALTER TABLE `inventories` ADD CONSTRAINT `inventories_transactionId_fkey` FOREIGN KEY (`transactionId`) REFERENCES `transaction_info`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `inventories` ADD CONSTRAINT `inventories_packingMaterialId_fkey` FOREIGN KEY (`packingMaterialId`) REFERENCES `packing_materials`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE `pm_inventories` ADD CONSTRAINT `pm_inventories_packingMaterialId_fkey` FOREIGN KEY (`packingMaterialId`) REFERENCES `packing_materials`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `pm_inventories` ADD CONSTRAINT `pm_inventories_transactionId_fkey` FOREIGN KEY (`transactionId`) REFERENCES `transaction_info`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `pm_inventories` ADD CONSTRAINT `pm_inventories_packingMaterialId_fkey` FOREIGN KEY (`packingMaterialId`) REFERENCES `packing_materials`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE `transaction_info` ADD CONSTRAINT `transaction_info_partyId_fkey` FOREIGN KEY (`partyId`) REFERENCES `parties`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE `journals` ADD CONSTRAINT `journals_transectionId_fkey` FOREIGN KEY (`transectionId`) REFERENCES `transaction_info`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `journals` ADD CONSTRAINT `journals_accountsItemId_fkey` FOREIGN KEY (`accountsItemId`) REFERENCES `account_items`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `product_raw_materials` ADD CONSTRAINT `product_raw_materials_productionIngradientId_fkey` FOREIGN KEY (`productionIngradientId`) REFERENCES `product_ingradients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `journals` ADD CONSTRAINT `journals_transectionId_fkey` FOREIGN KEY (`transectionId`) REFERENCES `transaction_info`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `product_raw_materials` ADD CONSTRAINT `product_raw_materials_rawId_fkey` FOREIGN KEY (`rawId`) REFERENCES `raw_materials`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `ingredientRawMaterials` ADD CONSTRAINT `ingredientRawMaterials_productionIngradientId_fkey` FOREIGN KEY (`productionIngradientId`) REFERENCES `product_ingradients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `ingredientRawMaterials` ADD CONSTRAINT `ingredientRawMaterials_rawId_fkey` FOREIGN KEY (`rawId`) REFERENCES `raw_materials`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `production_packing_materials` ADD CONSTRAINT `production_packing_materials_packingMaterialId_fkey` FOREIGN KEY (`packingMaterialId`) REFERENCES `packing_materials`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -476,13 +512,19 @@ ALTER TABLE `production_packing_materials` ADD CONSTRAINT `production_packing_ma
 ALTER TABLE `production_packing_materials` ADD CONSTRAINT `production_packing_materials_productionIngradientId_fkey` FOREIGN KEY (`productionIngradientId`) REFERENCES `product_ingradients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE `ingredient_expnese` ADD CONSTRAINT `ingredient_expnese_productionExpenssItemId_fkey` FOREIGN KEY (`productionExpenssItemId`) REFERENCES `Productionexpenseitem`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE `ingredient_expnese` ADD CONSTRAINT `ingredient_expnese_productionIngradientId_fkey` FOREIGN KEY (`productionIngradientId`) REFERENCES `product_ingradients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `ingredient_expnese` ADD CONSTRAINT `ingredient_expnese_productionExpenssItemId_fkey` FOREIGN KEY (`productionExpenssItemId`) REFERENCES `ProductionExpenseItem`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `production_expences_inventory` ADD CONSTRAINT `production_expences_inventory_proExpencesItemId_fkey` FOREIGN KEY (`proExpencesItemId`) REFERENCES `Productionexpenseitem`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `production_expences_inventory` ADD CONSTRAINT `production_expences_inventory_transectionId_fkey` FOREIGN KEY (`transectionId`) REFERENCES `transaction_info`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `production_expences_inventory` ADD CONSTRAINT `production_expences_inventory_proExpencesItemId_fkey` FOREIGN KEY (`proExpencesItemId`) REFERENCES `ProductionExpenseItem`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `Productioniteminfo` ADD CONSTRAINT `ProductionItemInfo_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `products`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Productioniteminfo` ADD CONSTRAINT `ProductionItemInfo_transactionId_fkey` FOREIGN KEY (`transactionId`) REFERENCES `transaction_info`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

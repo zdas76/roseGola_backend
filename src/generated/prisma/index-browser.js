@@ -315,8 +315,7 @@ exports.Prisma.InventoryScalarFieldEnum = {
   isOpening: 'isOpening',
   status: 'status',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  packingMaterialId: 'packingMaterialId'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.PMInventoryScalarFieldEnum = {
@@ -346,9 +345,26 @@ exports.Prisma.TransactionInfoScalarFieldEnum = {
   id: 'id',
   voucherNo: 'voucherNo',
   invoiceNo: 'invoiceNo',
+  status: 'status',
   date: 'date',
   partyId: 'partyId',
   voucherType: 'voucherType',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.RequestInventoryScalarFieldEnum = {
+  id: 'id',
+  date: 'date',
+  productId: 'productId',
+  rawId: 'rawId',
+  packingMaterialId: 'packingMaterialId',
+  transactionId: 'transactionId',
+  fromDepartment: 'fromDepartment',
+  toDepartment: 'toDepartment',
+  requestQty: 'requestQty',
+  approvalQty: 'approvalQty',
+  status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -536,10 +552,10 @@ exports.UserRole = exports.$Enums.UserRole = {
 
 exports.Status = exports.$Enums.Status = {
   ACTIVE: 'ACTIVE',
-  DELETED: 'DELETED',
   PUSH: 'PUSH',
   BLOCK: 'BLOCK',
-  PENDING: 'PENDING'
+  PENDING: 'PENDING',
+  DELETED: 'DELETED'
 };
 
 exports.PartyType = exports.$Enums.PartyType = {
@@ -550,11 +566,17 @@ exports.PartyType = exports.$Enums.PartyType = {
 };
 
 exports.Department = exports.$Enums.Department = {
-  PURCHASE: 'PURCHASE',
   PRODUCTION: 'PRODUCTION',
-  RM_STORE: 'RM_STORE',
-  MP_STORE: 'MP_STORE',
+  RMPM_STORE: 'RMPM_STORE',
   FG_STORE: 'FG_STORE'
+};
+
+exports.TxStatus = exports.$Enums.TxStatus = {
+  PARTIAL: 'PARTIAL',
+  PAID: 'PAID',
+  DUE: 'DUE',
+  PENDING: 'PENDING',
+  CONFIRMED: 'CONFIRMED'
 };
 
 exports.VoucherType = exports.$Enums.VoucherType = {
@@ -566,7 +588,8 @@ exports.VoucherType = exports.$Enums.VoucherType = {
   CONTRA: 'CONTRA',
   PRODUCTION: 'PRODUCTION',
   REQUISITION: 'REQUISITION',
-  FINISH_GOODS: 'FINISH_GOODS'
+  TRANSFER: 'TRANSFER',
+  REQUEST: 'REQUEST'
 };
 
 exports.productioniteminfo_status = exports.$Enums.productioniteminfo_status = {
@@ -596,6 +619,7 @@ exports.Prisma.ModelName = {
   Inventory: 'Inventory',
   PMInventory: 'PMInventory',
   TransactionInfo: 'TransactionInfo',
+  RequestInventory: 'RequestInventory',
   Journal: 'Journal',
   ProductionIngradient: 'ProductionIngradient',
   IngredientRawMaterial: 'IngredientRawMaterial',

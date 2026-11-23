@@ -223,7 +223,10 @@ const getRawReportById = async (id: number, payload: {
           voucherType: true,
         },
       },
-    }
+    },
+    orderBy: {
+      date: "desc",
+    },
   })
 
   return { rawMaterial, report };
@@ -292,7 +295,9 @@ const getProductReportById = async (id: number, payload: {
         gte: product.openingDate || new Date(payload?.startDate || ""),
         lte: payload?.endDate ? new Date(new Date(payload.endDate).setHours(23, 59, 59, 999)) : new Date()
       }
-
+    },
+    orderBy: {
+      date: "desc",
     },
   })
 
@@ -339,25 +344,37 @@ const packingMaterialsReport = async (payload: {
 
   return result;
 };
+// get product report by id
+const getPmReportById = async (id: number, payload: {
+  startDate?: string | null;
+  endDate?: string | null;
+}) => {
+  const packingMaterials = await prisma.packingMaterial.findUnique({
+    where: {
+      id: id,
+    },
+  });
 
+  if (!packingMaterials) {
+    throw new AppError(StatusCodes.BAD_REQUEST, "Product not found");
+  }
 
+  const report = await prisma.pMInventory.findMany({
 
+    where: {
+      packingMaterialId: packingMaterials.id,
+      date: {
+        gte: packingMaterials.openingDate || new Date(payload?.startDate || ""),
+        lte: payload?.endDate ? new Date(new Date(payload.endDate).setHours(23, 59, 59, 999)) : new Date()
+      }
+    },
+    orderBy: {
+      date: "desc",
+    },
+  })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  return { packingMaterials, report };
+};
 
 const getBalanceSheet = async (date: string | null) => {
   const targetDate = date ? new Date(new Date(date).setHours(23, 59, 59, 999)) : new Date();
@@ -506,5 +523,6 @@ export const ReportService = {
   productReport,
   getProductReportById,
   getBalanceSheet,
-  packingMaterialsReport
+  packingMaterialsReport,
+  getPmReportById
 };

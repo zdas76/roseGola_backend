@@ -26,6 +26,6 @@ router.patch(
   ProductIngradientControllers.updateProductIngradient
 );
 
-// router.delete("/:id", ProductIngradientControllers.deleteProductIngradient);
+router.delete("/:id", ProductIngradientControllers.deleteProductIngradient);
 
 export const ProductIngradientRoute = router;

@@ -274,15 +274,15 @@ model Inventory {
   rawId                  Int?
   transactionId          Int?
   department             Department
-  unitPrice              Float            @default(0)
-  integratedUnitPrice    Float            @default(0)
-  quantityAdd            Float?           @default(0)
-  quantityLess           Float?           @default(0)
-  discount               Float?           @default(0)
-  debitAmount            Float?           @default(0)
-  creditAmount           Float?           @default(0)
-  integratedDebitAmount  Float?           @default(0)
-  integratedCreditAmount Float?           @default(0)
+  unitPrice              Decimal          @default(0) @db.Decimal(18, 2)
+  integratedUnitPrice    Decimal          @default(0) @db.Decimal(18, 2)
+  quantityAdd            Decimal?         @default(0) @db.Decimal(18, 2)
+  quantityLess           Decimal?         @default(0) @db.Decimal(18, 2)
+  discount               Decimal?         @default(0) @db.Decimal(18, 2)
+  debitAmount            Decimal?         @default(0) @db.Decimal(18, 2)
+  creditAmount           Decimal?         @default(0) @db.Decimal(18, 2)
+  integratedDebitAmount  Decimal?         @default(0) @db.Decimal(18, 2)
+  integratedCreditAmount Decimal?         @default(0) @db.Decimal(18, 2)
   isOpening              Boolean          @default(false)
   status                 Status           @default(ACTIVE)
   createdAt              DateTime         @default(now())
@@ -303,17 +303,17 @@ model PMInventory {
   packingMaterialId      Int
   transactionId          Int?
   department             Department
-  perUnitQty             Float?           @default(0)
-  perUnitCost            Float?           @default(0)
-  unitPrice              Float            @default(0)
-  integratedUnitPrice    Float            @default(0)
-  quantityAdd            Float?           @default(0)
-  quantityLess           Float?           @default(0)
-  discount               Float?           @default(0)
-  debitAmount            Float?           @default(0)
-  creditAmount           Float?           @default(0)
-  integratedDebitAmount  Float?           @default(0)
-  integratedCreditAmount Float?           @default(0)
+  perUnitQty             Decimal?         @default(0) @db.Decimal(18, 2)
+  perUnitCost            Decimal?         @default(0) @db.Decimal(18, 2)
+  unitPrice              Decimal          @default(0) @db.Decimal(18, 2)
+  integratedUnitPrice    Decimal          @default(0) @db.Decimal(18, 2)
+  quantityAdd            Decimal?         @default(0) @db.Decimal(18, 2)
+  quantityLess           Decimal?         @default(0) @db.Decimal(18, 2)
+  discount               Decimal?         @default(0) @db.Decimal(18, 2)
+  debitAmount            Decimal?         @default(0) @db.Decimal(18, 2)
+  creditAmount           Decimal?         @default(0) @db.Decimal(18, 2)
+  integratedDebitAmount  Decimal?         @default(0) @db.Decimal(18, 2)
+  integratedCreditAmount Decimal?         @default(0) @db.Decimal(18, 2)
   isOpening              Boolean          @default(false)
   status                 Status           @default(ACTIVE)
   createdAt              DateTime         @default(now())
@@ -330,7 +330,7 @@ model TransactionInfo {
   id                          Int                           @id @default(autoincrement())
   voucherNo                   String                        @unique
   invoiceNo                   String?
-  status                      TxStatus?
+  status                      TxStatus                      @default(CONFIRMED)
   date                        DateTime                      @default(now())
   partyId                     Int?
   voucherType                 VoucherType
@@ -399,10 +399,10 @@ model Journal {
   accountsItemId         Int?
   date                   DateTime         @db.Date
   checkOrRTGS            String?
-  creditAmount           Float?           @default(0)
-  debitAmount            Float?           @default(0)
-  integratedDebitAmount  Float?           @default(0)
-  integratedCreditAmount Float?           @default(0)
+  creditAmount           Decimal?         @default(0) @db.Decimal(18, 2)
+  debitAmount            Decimal?         @default(0) @db.Decimal(18, 2)
+  integratedDebitAmount  Decimal?         @default(0) @db.Decimal(18, 2)
+  integratedCreditAmount Decimal?         @default(0) @db.Decimal(18, 2)
   narration              String?
   isClosing              Boolean          @default(false)
   createdAt              DateTime         @default(now())
@@ -474,9 +474,9 @@ model ProductionExpensesInventory {
   date                  DateTime
   proExpencesItemId     Int
   transectionId         Int?
-  unitRate              Float                 @default(0)
-  expDuration           Float                 @default(0)
-  amount                Float                 @default(0)
+  unitRate              Decimal               @default(0) @db.Decimal(18, 2)
+  expDuration           Decimal               @default(0) @db.Decimal(18, 2)
+  amount                Decimal               @default(0) @db.Decimal(18, 2)
   createdAt             DateTime              @default(now())
   updatedAt             DateTime              @updatedAt
   productionExpenseItem Productionexpenseitem @relation(fields: [proExpencesItemId], references: [id])
@@ -490,7 +490,7 @@ model ProductionExpensesInventory {
 model Productionexpenseitem {
   id                            Int                           @id @default(autoincrement())
   expItemName                   String
-  unitRate                      Float                         @default(0)
+  unitRate                      Decimal                       @default(0) @db.Decimal(18, 2)
   createdAt                     DateTime                      @default(now())
   updatedAt                     DateTime                      @updatedAt
   ingredientExpneseItems        IngredientExpneseItems[]

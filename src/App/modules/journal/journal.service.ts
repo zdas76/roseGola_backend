@@ -7,8 +7,9 @@ import {
   VoucherType,
 } from "../../../generated/prisma/client";
 import { GenerateVoucherNumber } from "../../../helpars/generateVoucherNumber";
+import { getUnitPriceFromInventory, getUnitPriceFromPmInventory, getUnitPriceFromProduct } from "../../../helpars/getUnitPrice";
 import prisma from "../../../shared/prisma";
-import { AccountItemService } from "../AccountsItem/AccountsItem.service";
+import { PurchasePayload, TItems } from "./journal.interface";
 
 //Create Purchase Received Voucher
 const createPurchestReceivedIntoDB = async (payload: any) => {
@@ -23,12 +24,11 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
       );
     }
     const voucherNo = await GenerateVoucherNumber("PRV");
-
     // step 1. create transaction entries
     const createTransactionInfo: TransactionInfo =
       await tx.transactionInfo.create({
         data: {
-          invoiceNo: payload.invoiceNo || null,
+          invoiceNo: payload.invoiceNo,
           voucherNo: voucherNo,
           date: payload.date,
           voucherType: VoucherType.PURCHASE,
@@ -42,7 +42,8 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
     let inventoryData: any = [];
     //step 3: Prepare Inventory Data
     if (payload.itemType === "RAW_MATERIAL") {
-      payload.items.map((item: any) => {
+      payload.items.map(async (item: any) => {
+        const { integretedUnitePrice } = await getUnitPriceFromInventory(item.rawMaterialId, "RMPM_STORE")
         inventoryData.push({
           transactionId: createTransactionInfo.id,
           date: payload.date,
@@ -52,12 +53,12 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
           quantityAdd: item.quantityAdd,
           discount: item?.discount || 0,
           debitAmount: item.debitAmount,
-          integratedDebitAmount: item?.integratedUnitPrice * item.quantityAdd,
-          integratedUnitPrice: item?.integratedUnitPrice
+          integratedDebitAmount: integretedUnitePrice * item.quantityAdd,
+          integratedUnitPrice: integretedUnitePrice
         })
       })
     } else if (payload.itemType === "PRODUCT") {
-      payload.items.map((item: any) => {
+      payload.items.map(async (item: any) => {
         inventoryData.push({
           transactionId: createTransactionInfo.id,
           productId: item.rawOrProductId,
@@ -67,8 +68,8 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
           date: payload.date,
           department: Department.RMPM_STORE,
           debitAmount: item.debitAmount,
-          integratedDebitAmount: item?.integratedUnitPrice * item.quantityAdd,
-          integratedUnitPrice: item?.integratedUnitPrice
+          integratedDebitAmount: item.integratedUnitPrice * item.quantityAdd,
+          integratedUnitPrice: item.integratedUnitPrice
         })
       })
     }
@@ -80,10 +81,7 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
         }),
       ),
     );
-
-
     let journalItem: any[] = [];
-
     let purchaseInventory;
     if (payload?.itemType === "PRODUCT") {
       const debiteAccountsId = await tx.accountsItem.findFirst({
@@ -143,9 +141,6 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
         purchaseInventory = debiteAccountsId
       }
     }
-
-
-
     journalItem.push({
       transectionId: createTransactionInfo.id,
       accountsItemId: purchaseInventory!.id,
@@ -195,7 +190,7 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
     await tx.journal.createMany({
       data: journalItem,
     });
-
+    // create payment voucher for make payment
     const paymentVoucherNo = await GenerateVoucherNumber("PV")
     const expTransactioninfo = await tx.transactionInfo.create({
       data: {
@@ -203,6 +198,7 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
         voucherNo: paymentVoucherNo,
         date: payload.date,
         voucherType: VoucherType.PAYMENT,
+        status: TxStatus.PENDING
       },
     });
 
@@ -222,8 +218,9 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
   return createPurchestVoucher;
 };
 //Create Purchase Received Voucher
-const createPurchestReceivedPackingMaterialIntoDB = async (payload: any) => {
-  console.log(payload, "payload for pm materirals")
+const createPurchestReceivedPackingMaterialIntoDB = async (payload: PurchasePayload) => {
+  // console.log(payload, "packing materials payload")
+
   const createPurchestVoucher = await prisma.$transaction(async (tx) => {
     const partyExists = await tx.party.findUnique({
       where: { id: payload.partyOrcustomerId },
@@ -234,14 +231,13 @@ const createPurchestReceivedPackingMaterialIntoDB = async (payload: any) => {
       );
     }
     const voucherNo = await GenerateVoucherNumber("PRPMV");
-
     // step 1. create transaction entries
     const createTransactionInfo: TransactionInfo =
       await tx.transactionInfo.create({
         data: {
           invoiceNo: payload.invoiceNo || null,
           voucherNo: voucherNo,
-          date: payload.date,
+          date: new Date(payload.date),
           voucherType: VoucherType.PURCHASE,
           partyId: partyExists.id,
         },
@@ -251,35 +247,28 @@ const createPurchestReceivedPackingMaterialIntoDB = async (payload: any) => {
       throw new Error("Invalid data: items must be a non-empty array");
     }
 
-    //step 3: Prepare Inventory Data
-    const inventoryData = payload.items.map((item: any) => {
-      return {
-        transactionId: createTransactionInfo.id,
-        date: payload.date,
-        packingMaterialId: item.packingMaterialId,
-        perUnitQty: item.perUnitQty,
-        perUnitCost: item.perUnitCost,
-        unitPrice: item.unitPrice || 0,
-        integratedUnitPrice: item.integratedUnitPrice,
-        department: Department.RMPM_STORE,
-        quantityAdd: item.quantityAdd,
-        discount: item?.discount || 0,
-        debitAmount: item.debitAmount,
-        integratedDebitAmount: item.integratedDebitAmount,
-      };
-    });
-
-    //Step 3: Insert Inventory Records
+    //step 3: Prepare Inventory data for packing materials
     await Promise.all(
-      inventoryData.map((item: any) =>
-        tx.pMInventory.create({
-          data: item,
-        }),
-      ),
-    );
-    let journalItem: any[] = [];
+      payload.items.map(async (item: TItems) => {
+        const pmInvnItem = {
+          transactionId: createTransactionInfo.id,
+          date: new Date(payload.date),
+          packingMaterialId: item.packingMaterialId,
+          unitPrice: item.unitPrice,
+          department: Department.RMPM_STORE,
+          quantityAdd: item.quantityAdd,
+          discount: item?.discount || 0,
+          debitAmount: item.quantityAdd * item.unitPrice,
+          integratedUnitPrice: item.integratedUnitPrice,
+          integratedDebitAmount: item.integratedUnitPrice * item.quantityAdd,
+        };
+        await tx.pMInventory.create({
+          data: pmInvnItem
+        })
+      }));
 
-    let pmaccountsItemId;
+    let journalItem: any[] = [];
+    let pmaccountsItem;
     const accountsItempm = await tx.accountsItem.findFirst({
       where: {
         accountsItemName: {
@@ -297,7 +286,7 @@ const createPurchestReceivedPackingMaterialIntoDB = async (payload: any) => {
         }
       });
       const newRandomNumber = Number(lastAccountsItemId?.accountsItemId) + 1;
-      pmaccountsItemId = await tx.accountsItem.create({
+      pmaccountsItem = await tx.accountsItem.create({
         data: {
           accountHeadId: "01",
           accountsItemId: newRandomNumber.toString(),
@@ -305,24 +294,23 @@ const createPurchestReceivedPackingMaterialIntoDB = async (payload: any) => {
         }
       })
     } else {
-      pmaccountsItemId = accountsItempm
+      pmaccountsItem = accountsItempm
     }
+    // get total for debit items
+    const totalProductAmout = payload.items.reduce(
+      (total: number, item: TItems) => total + (Number(item.debitAmount) || 0),
+      0,
+    );
+
     journalItem.push({
       transectionId: createTransactionInfo.id,
-      accountsItemId: pmaccountsItemId.id,
-      debitAmount: payload.grandTotal,
+      accountsItemId: pmaccountsItem.id,
+      debitAmount: totalProductAmout,
+      // integratedDebitAmount: 
       narration: "Purchase Inventory Received",
       date: new Date(payload.date),
     });
-    // const debitAmount = journalItem.reduce(
-    //   (total: number, item: any) => total + (Number(item.debitAmount) || 0),
-    //   0,
-    // );
 
-    // const creditAmount = journalItem.reduce(
-    //   (total: number, item: any) => total + (Number(item.creditAmount) || 0),
-    //   0,
-    // );
     let paymentItemId;
     const pyamentItem = await tx.accountsItem.findFirst({
       where: {
@@ -352,10 +340,12 @@ const createPurchestReceivedPackingMaterialIntoDB = async (payload: any) => {
       })
       paymentItemId = cretedpayable?.id
     }
+
+
     journalItem.push({
       transectionId: createTransactionInfo.id,
       accountsItemId: paymentItemId,
-      creditAmount: payload.grandTotal,
+      creditAmount: totalProductAmout,
       narration: "Payment on creadit",
       date: new Date(payload.date),
     });
@@ -364,19 +354,21 @@ const createPurchestReceivedPackingMaterialIntoDB = async (payload: any) => {
       data: journalItem,
     });
 
+    // --------------------------------------------------make payment for expense---------------------------------
 
     const paymentVoucherNo = await GenerateVoucherNumber("PV")
     const expTransactioninfo = await tx.transactionInfo.create({
       data: {
         invoiceNo: createTransactionInfo?.voucherNo,
         voucherNo: paymentVoucherNo,
-        date: payload.date,
+        date: new Date(payload.date),
         voucherType: VoucherType.PAYMENT,
+        status: TxStatus.PENDING
       },
     });
 
     const expJournal: any[] = [];
-    payload.expenseItems?.map((item: { expItemId: number; amount: number; narration: string }) => {
+    await Promise.all(payload.expenseItems?.map((item: { expItemId: number; amount: number; narration: string }) => {
       expJournal.push({
         transectionId: expTransactioninfo.id,
         accountsItemId: item?.expItemId,
@@ -385,7 +377,7 @@ const createPurchestReceivedPackingMaterialIntoDB = async (payload: any) => {
         date: new Date(payload.date),
         status: TxStatus.DUE,
       })
-    })
+    }))
     return createTransactionInfo;
 
   });

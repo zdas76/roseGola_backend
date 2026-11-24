@@ -19715,15 +19715,15 @@ export namespace Prisma {
     productId: number | null
     rawId: number | null
     transactionId: number | null
-    unitPrice: number | null
-    integratedUnitPrice: number | null
-    quantityAdd: number | null
-    quantityLess: number | null
-    discount: number | null
-    debitAmount: number | null
-    creditAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    unitPrice: Decimal | null
+    integratedUnitPrice: Decimal | null
+    quantityAdd: Decimal | null
+    quantityLess: Decimal | null
+    discount: Decimal | null
+    debitAmount: Decimal | null
+    creditAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
   }
 
   export type InventorySumAggregateOutputType = {
@@ -19731,15 +19731,15 @@ export namespace Prisma {
     productId: number | null
     rawId: number | null
     transactionId: number | null
-    unitPrice: number | null
-    integratedUnitPrice: number | null
-    quantityAdd: number | null
-    quantityLess: number | null
-    discount: number | null
-    debitAmount: number | null
-    creditAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    unitPrice: Decimal | null
+    integratedUnitPrice: Decimal | null
+    quantityAdd: Decimal | null
+    quantityLess: Decimal | null
+    discount: Decimal | null
+    debitAmount: Decimal | null
+    creditAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
   }
 
   export type InventoryMinAggregateOutputType = {
@@ -19749,15 +19749,15 @@ export namespace Prisma {
     rawId: number | null
     transactionId: number | null
     department: $Enums.Department | null
-    unitPrice: number | null
-    integratedUnitPrice: number | null
-    quantityAdd: number | null
-    quantityLess: number | null
-    discount: number | null
-    debitAmount: number | null
-    creditAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    unitPrice: Decimal | null
+    integratedUnitPrice: Decimal | null
+    quantityAdd: Decimal | null
+    quantityLess: Decimal | null
+    discount: Decimal | null
+    debitAmount: Decimal | null
+    creditAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
     isOpening: boolean | null
     status: $Enums.Status | null
     createdAt: Date | null
@@ -19771,15 +19771,15 @@ export namespace Prisma {
     rawId: number | null
     transactionId: number | null
     department: $Enums.Department | null
-    unitPrice: number | null
-    integratedUnitPrice: number | null
-    quantityAdd: number | null
-    quantityLess: number | null
-    discount: number | null
-    debitAmount: number | null
-    creditAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    unitPrice: Decimal | null
+    integratedUnitPrice: Decimal | null
+    quantityAdd: Decimal | null
+    quantityLess: Decimal | null
+    discount: Decimal | null
+    debitAmount: Decimal | null
+    creditAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
     isOpening: boolean | null
     status: $Enums.Status | null
     createdAt: Date | null
@@ -20002,15 +20002,15 @@ export namespace Prisma {
     rawId: number | null
     transactionId: number | null
     department: $Enums.Department
-    unitPrice: number
-    integratedUnitPrice: number
-    quantityAdd: number | null
-    quantityLess: number | null
-    discount: number | null
-    debitAmount: number | null
-    creditAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    unitPrice: Decimal
+    integratedUnitPrice: Decimal
+    quantityAdd: Decimal | null
+    quantityLess: Decimal | null
+    discount: Decimal | null
+    debitAmount: Decimal | null
+    creditAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
     isOpening: boolean
     status: $Enums.Status
     createdAt: Date
@@ -20106,15 +20106,15 @@ export namespace Prisma {
       rawId: number | null
       transactionId: number | null
       department: $Enums.Department
-      unitPrice: number
-      integratedUnitPrice: number
-      quantityAdd: number | null
-      quantityLess: number | null
-      discount: number | null
-      debitAmount: number | null
-      creditAmount: number | null
-      integratedDebitAmount: number | null
-      integratedCreditAmount: number | null
+      unitPrice: Prisma.Decimal
+      integratedUnitPrice: Prisma.Decimal
+      quantityAdd: Prisma.Decimal | null
+      quantityLess: Prisma.Decimal | null
+      discount: Prisma.Decimal | null
+      debitAmount: Prisma.Decimal | null
+      creditAmount: Prisma.Decimal | null
+      integratedDebitAmount: Prisma.Decimal | null
+      integratedCreditAmount: Prisma.Decimal | null
       isOpening: boolean
       status: $Enums.Status
       createdAt: Date
@@ -20497,15 +20497,15 @@ export namespace Prisma {
     readonly rawId: FieldRef<"Inventory", 'Int'>
     readonly transactionId: FieldRef<"Inventory", 'Int'>
     readonly department: FieldRef<"Inventory", 'Department'>
-    readonly unitPrice: FieldRef<"Inventory", 'Float'>
-    readonly integratedUnitPrice: FieldRef<"Inventory", 'Float'>
-    readonly quantityAdd: FieldRef<"Inventory", 'Float'>
-    readonly quantityLess: FieldRef<"Inventory", 'Float'>
-    readonly discount: FieldRef<"Inventory", 'Float'>
-    readonly debitAmount: FieldRef<"Inventory", 'Float'>
-    readonly creditAmount: FieldRef<"Inventory", 'Float'>
-    readonly integratedDebitAmount: FieldRef<"Inventory", 'Float'>
-    readonly integratedCreditAmount: FieldRef<"Inventory", 'Float'>
+    readonly unitPrice: FieldRef<"Inventory", 'Decimal'>
+    readonly integratedUnitPrice: FieldRef<"Inventory", 'Decimal'>
+    readonly quantityAdd: FieldRef<"Inventory", 'Decimal'>
+    readonly quantityLess: FieldRef<"Inventory", 'Decimal'>
+    readonly discount: FieldRef<"Inventory", 'Decimal'>
+    readonly debitAmount: FieldRef<"Inventory", 'Decimal'>
+    readonly creditAmount: FieldRef<"Inventory", 'Decimal'>
+    readonly integratedDebitAmount: FieldRef<"Inventory", 'Decimal'>
+    readonly integratedCreditAmount: FieldRef<"Inventory", 'Decimal'>
     readonly isOpening: FieldRef<"Inventory", 'Boolean'>
     readonly status: FieldRef<"Inventory", 'Status'>
     readonly createdAt: FieldRef<"Inventory", 'DateTime'>
@@ -20949,34 +20949,34 @@ export namespace Prisma {
     id: number | null
     packingMaterialId: number | null
     transactionId: number | null
-    perUnitQty: number | null
-    perUnitCost: number | null
-    unitPrice: number | null
-    integratedUnitPrice: number | null
-    quantityAdd: number | null
-    quantityLess: number | null
-    discount: number | null
-    debitAmount: number | null
-    creditAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    perUnitQty: Decimal | null
+    perUnitCost: Decimal | null
+    unitPrice: Decimal | null
+    integratedUnitPrice: Decimal | null
+    quantityAdd: Decimal | null
+    quantityLess: Decimal | null
+    discount: Decimal | null
+    debitAmount: Decimal | null
+    creditAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
   }
 
   export type PMInventorySumAggregateOutputType = {
     id: number | null
     packingMaterialId: number | null
     transactionId: number | null
-    perUnitQty: number | null
-    perUnitCost: number | null
-    unitPrice: number | null
-    integratedUnitPrice: number | null
-    quantityAdd: number | null
-    quantityLess: number | null
-    discount: number | null
-    debitAmount: number | null
-    creditAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    perUnitQty: Decimal | null
+    perUnitCost: Decimal | null
+    unitPrice: Decimal | null
+    integratedUnitPrice: Decimal | null
+    quantityAdd: Decimal | null
+    quantityLess: Decimal | null
+    discount: Decimal | null
+    debitAmount: Decimal | null
+    creditAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
   }
 
   export type PMInventoryMinAggregateOutputType = {
@@ -20985,17 +20985,17 @@ export namespace Prisma {
     packingMaterialId: number | null
     transactionId: number | null
     department: $Enums.Department | null
-    perUnitQty: number | null
-    perUnitCost: number | null
-    unitPrice: number | null
-    integratedUnitPrice: number | null
-    quantityAdd: number | null
-    quantityLess: number | null
-    discount: number | null
-    debitAmount: number | null
-    creditAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    perUnitQty: Decimal | null
+    perUnitCost: Decimal | null
+    unitPrice: Decimal | null
+    integratedUnitPrice: Decimal | null
+    quantityAdd: Decimal | null
+    quantityLess: Decimal | null
+    discount: Decimal | null
+    debitAmount: Decimal | null
+    creditAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
     isOpening: boolean | null
     status: $Enums.Status | null
     createdAt: Date | null
@@ -21008,17 +21008,17 @@ export namespace Prisma {
     packingMaterialId: number | null
     transactionId: number | null
     department: $Enums.Department | null
-    perUnitQty: number | null
-    perUnitCost: number | null
-    unitPrice: number | null
-    integratedUnitPrice: number | null
-    quantityAdd: number | null
-    quantityLess: number | null
-    discount: number | null
-    debitAmount: number | null
-    creditAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    perUnitQty: Decimal | null
+    perUnitCost: Decimal | null
+    unitPrice: Decimal | null
+    integratedUnitPrice: Decimal | null
+    quantityAdd: Decimal | null
+    quantityLess: Decimal | null
+    discount: Decimal | null
+    debitAmount: Decimal | null
+    creditAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
     isOpening: boolean | null
     status: $Enums.Status | null
     createdAt: Date | null
@@ -21246,17 +21246,17 @@ export namespace Prisma {
     packingMaterialId: number
     transactionId: number | null
     department: $Enums.Department
-    perUnitQty: number | null
-    perUnitCost: number | null
-    unitPrice: number
-    integratedUnitPrice: number
-    quantityAdd: number | null
-    quantityLess: number | null
-    discount: number | null
-    debitAmount: number | null
-    creditAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    perUnitQty: Decimal | null
+    perUnitCost: Decimal | null
+    unitPrice: Decimal
+    integratedUnitPrice: Decimal
+    quantityAdd: Decimal | null
+    quantityLess: Decimal | null
+    discount: Decimal | null
+    debitAmount: Decimal | null
+    creditAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
     isOpening: boolean
     status: $Enums.Status
     createdAt: Date
@@ -21350,17 +21350,17 @@ export namespace Prisma {
       packingMaterialId: number
       transactionId: number | null
       department: $Enums.Department
-      perUnitQty: number | null
-      perUnitCost: number | null
-      unitPrice: number
-      integratedUnitPrice: number
-      quantityAdd: number | null
-      quantityLess: number | null
-      discount: number | null
-      debitAmount: number | null
-      creditAmount: number | null
-      integratedDebitAmount: number | null
-      integratedCreditAmount: number | null
+      perUnitQty: Prisma.Decimal | null
+      perUnitCost: Prisma.Decimal | null
+      unitPrice: Prisma.Decimal
+      integratedUnitPrice: Prisma.Decimal
+      quantityAdd: Prisma.Decimal | null
+      quantityLess: Prisma.Decimal | null
+      discount: Prisma.Decimal | null
+      debitAmount: Prisma.Decimal | null
+      creditAmount: Prisma.Decimal | null
+      integratedDebitAmount: Prisma.Decimal | null
+      integratedCreditAmount: Prisma.Decimal | null
       isOpening: boolean
       status: $Enums.Status
       createdAt: Date
@@ -21741,17 +21741,17 @@ export namespace Prisma {
     readonly packingMaterialId: FieldRef<"PMInventory", 'Int'>
     readonly transactionId: FieldRef<"PMInventory", 'Int'>
     readonly department: FieldRef<"PMInventory", 'Department'>
-    readonly perUnitQty: FieldRef<"PMInventory", 'Float'>
-    readonly perUnitCost: FieldRef<"PMInventory", 'Float'>
-    readonly unitPrice: FieldRef<"PMInventory", 'Float'>
-    readonly integratedUnitPrice: FieldRef<"PMInventory", 'Float'>
-    readonly quantityAdd: FieldRef<"PMInventory", 'Float'>
-    readonly quantityLess: FieldRef<"PMInventory", 'Float'>
-    readonly discount: FieldRef<"PMInventory", 'Float'>
-    readonly debitAmount: FieldRef<"PMInventory", 'Float'>
-    readonly creditAmount: FieldRef<"PMInventory", 'Float'>
-    readonly integratedDebitAmount: FieldRef<"PMInventory", 'Float'>
-    readonly integratedCreditAmount: FieldRef<"PMInventory", 'Float'>
+    readonly perUnitQty: FieldRef<"PMInventory", 'Decimal'>
+    readonly perUnitCost: FieldRef<"PMInventory", 'Decimal'>
+    readonly unitPrice: FieldRef<"PMInventory", 'Decimal'>
+    readonly integratedUnitPrice: FieldRef<"PMInventory", 'Decimal'>
+    readonly quantityAdd: FieldRef<"PMInventory", 'Decimal'>
+    readonly quantityLess: FieldRef<"PMInventory", 'Decimal'>
+    readonly discount: FieldRef<"PMInventory", 'Decimal'>
+    readonly debitAmount: FieldRef<"PMInventory", 'Decimal'>
+    readonly creditAmount: FieldRef<"PMInventory", 'Decimal'>
+    readonly integratedDebitAmount: FieldRef<"PMInventory", 'Decimal'>
+    readonly integratedCreditAmount: FieldRef<"PMInventory", 'Decimal'>
     readonly isOpening: FieldRef<"PMInventory", 'Boolean'>
     readonly status: FieldRef<"PMInventory", 'Status'>
     readonly createdAt: FieldRef<"PMInventory", 'DateTime'>
@@ -22338,7 +22338,7 @@ export namespace Prisma {
     id: number
     voucherNo: string
     invoiceNo: string | null
-    status: $Enums.TxStatus | null
+    status: $Enums.TxStatus
     date: Date
     partyId: number | null
     voucherType: $Enums.VoucherType
@@ -22429,7 +22429,7 @@ export namespace Prisma {
       id: number
       voucherNo: string
       invoiceNo: string | null
-      status: $Enums.TxStatus | null
+      status: $Enums.TxStatus
       date: Date
       partyId: number | null
       voucherType: $Enums.VoucherType
@@ -24553,20 +24553,20 @@ export namespace Prisma {
     id: number | null
     transectionId: number | null
     accountsItemId: number | null
-    creditAmount: number | null
-    debitAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    creditAmount: Decimal | null
+    debitAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
   }
 
   export type JournalSumAggregateOutputType = {
     id: number | null
     transectionId: number | null
     accountsItemId: number | null
-    creditAmount: number | null
-    debitAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    creditAmount: Decimal | null
+    debitAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
   }
 
   export type JournalMinAggregateOutputType = {
@@ -24575,10 +24575,10 @@ export namespace Prisma {
     accountsItemId: number | null
     date: Date | null
     checkOrRTGS: string | null
-    creditAmount: number | null
-    debitAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    creditAmount: Decimal | null
+    debitAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
     narration: string | null
     isClosing: boolean | null
     createdAt: Date | null
@@ -24591,10 +24591,10 @@ export namespace Prisma {
     accountsItemId: number | null
     date: Date | null
     checkOrRTGS: string | null
-    creditAmount: number | null
-    debitAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    creditAmount: Decimal | null
+    debitAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
     narration: string | null
     isClosing: boolean | null
     createdAt: Date | null
@@ -24780,10 +24780,10 @@ export namespace Prisma {
     accountsItemId: number | null
     date: Date
     checkOrRTGS: string | null
-    creditAmount: number | null
-    debitAmount: number | null
-    integratedDebitAmount: number | null
-    integratedCreditAmount: number | null
+    creditAmount: Decimal | null
+    debitAmount: Decimal | null
+    integratedDebitAmount: Decimal | null
+    integratedCreditAmount: Decimal | null
     narration: string | null
     isClosing: boolean
     createdAt: Date
@@ -24863,10 +24863,10 @@ export namespace Prisma {
       accountsItemId: number | null
       date: Date
       checkOrRTGS: string | null
-      creditAmount: number | null
-      debitAmount: number | null
-      integratedDebitAmount: number | null
-      integratedCreditAmount: number | null
+      creditAmount: Prisma.Decimal | null
+      debitAmount: Prisma.Decimal | null
+      integratedDebitAmount: Prisma.Decimal | null
+      integratedCreditAmount: Prisma.Decimal | null
       narration: string | null
       isClosing: boolean
       createdAt: Date
@@ -25247,10 +25247,10 @@ export namespace Prisma {
     readonly accountsItemId: FieldRef<"Journal", 'Int'>
     readonly date: FieldRef<"Journal", 'DateTime'>
     readonly checkOrRTGS: FieldRef<"Journal", 'String'>
-    readonly creditAmount: FieldRef<"Journal", 'Float'>
-    readonly debitAmount: FieldRef<"Journal", 'Float'>
-    readonly integratedDebitAmount: FieldRef<"Journal", 'Float'>
-    readonly integratedCreditAmount: FieldRef<"Journal", 'Float'>
+    readonly creditAmount: FieldRef<"Journal", 'Decimal'>
+    readonly debitAmount: FieldRef<"Journal", 'Decimal'>
+    readonly integratedDebitAmount: FieldRef<"Journal", 'Decimal'>
+    readonly integratedCreditAmount: FieldRef<"Journal", 'Decimal'>
     readonly narration: FieldRef<"Journal", 'String'>
     readonly isClosing: FieldRef<"Journal", 'Boolean'>
     readonly createdAt: FieldRef<"Journal", 'DateTime'>
@@ -29658,18 +29658,18 @@ export namespace Prisma {
     id: number | null
     proExpencesItemId: number | null
     transectionId: number | null
-    unitRate: number | null
-    expDuration: number | null
-    amount: number | null
+    unitRate: Decimal | null
+    expDuration: Decimal | null
+    amount: Decimal | null
   }
 
   export type ProductionExpensesInventorySumAggregateOutputType = {
     id: number | null
     proExpencesItemId: number | null
     transectionId: number | null
-    unitRate: number | null
-    expDuration: number | null
-    amount: number | null
+    unitRate: Decimal | null
+    expDuration: Decimal | null
+    amount: Decimal | null
   }
 
   export type ProductionExpensesInventoryMinAggregateOutputType = {
@@ -29677,9 +29677,9 @@ export namespace Prisma {
     date: Date | null
     proExpencesItemId: number | null
     transectionId: number | null
-    unitRate: number | null
-    expDuration: number | null
-    amount: number | null
+    unitRate: Decimal | null
+    expDuration: Decimal | null
+    amount: Decimal | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -29689,9 +29689,9 @@ export namespace Prisma {
     date: Date | null
     proExpencesItemId: number | null
     transectionId: number | null
-    unitRate: number | null
-    expDuration: number | null
-    amount: number | null
+    unitRate: Decimal | null
+    expDuration: Decimal | null
+    amount: Decimal | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -29856,9 +29856,9 @@ export namespace Prisma {
     date: Date
     proExpencesItemId: number
     transectionId: number | null
-    unitRate: number
-    expDuration: number
-    amount: number
+    unitRate: Decimal
+    expDuration: Decimal
+    amount: Decimal
     createdAt: Date
     updatedAt: Date
     _count: ProductionExpensesInventoryCountAggregateOutputType | null
@@ -29927,9 +29927,9 @@ export namespace Prisma {
       date: Date
       proExpencesItemId: number
       transectionId: number | null
-      unitRate: number
-      expDuration: number
-      amount: number
+      unitRate: Prisma.Decimal
+      expDuration: Prisma.Decimal
+      amount: Prisma.Decimal
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["productionExpensesInventory"]>
@@ -30307,9 +30307,9 @@ export namespace Prisma {
     readonly date: FieldRef<"ProductionExpensesInventory", 'DateTime'>
     readonly proExpencesItemId: FieldRef<"ProductionExpensesInventory", 'Int'>
     readonly transectionId: FieldRef<"ProductionExpensesInventory", 'Int'>
-    readonly unitRate: FieldRef<"ProductionExpensesInventory", 'Float'>
-    readonly expDuration: FieldRef<"ProductionExpensesInventory", 'Float'>
-    readonly amount: FieldRef<"ProductionExpensesInventory", 'Float'>
+    readonly unitRate: FieldRef<"ProductionExpensesInventory", 'Decimal'>
+    readonly expDuration: FieldRef<"ProductionExpensesInventory", 'Decimal'>
+    readonly amount: FieldRef<"ProductionExpensesInventory", 'Decimal'>
     readonly createdAt: FieldRef<"ProductionExpensesInventory", 'DateTime'>
     readonly updatedAt: FieldRef<"ProductionExpensesInventory", 'DateTime'>
   }
@@ -30711,18 +30711,18 @@ export namespace Prisma {
 
   export type ProductionexpenseitemAvgAggregateOutputType = {
     id: number | null
-    unitRate: number | null
+    unitRate: Decimal | null
   }
 
   export type ProductionexpenseitemSumAggregateOutputType = {
     id: number | null
-    unitRate: number | null
+    unitRate: Decimal | null
   }
 
   export type ProductionexpenseitemMinAggregateOutputType = {
     id: number | null
     expItemName: string | null
-    unitRate: number | null
+    unitRate: Decimal | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -30730,7 +30730,7 @@ export namespace Prisma {
   export type ProductionexpenseitemMaxAggregateOutputType = {
     id: number | null
     expItemName: string | null
-    unitRate: number | null
+    unitRate: Decimal | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -30869,7 +30869,7 @@ export namespace Prisma {
   export type ProductionexpenseitemGroupByOutputType = {
     id: number
     expItemName: string
-    unitRate: number
+    unitRate: Decimal
     createdAt: Date
     updatedAt: Date
     _count: ProductionexpenseitemCountAggregateOutputType | null
@@ -30930,7 +30930,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       expItemName: string
-      unitRate: number
+      unitRate: Prisma.Decimal
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["productionexpenseitem"]>
@@ -31306,7 +31306,7 @@ export namespace Prisma {
   interface ProductionexpenseitemFieldRefs {
     readonly id: FieldRef<"Productionexpenseitem", 'Int'>
     readonly expItemName: FieldRef<"Productionexpenseitem", 'String'>
-    readonly unitRate: FieldRef<"Productionexpenseitem", 'Float'>
+    readonly unitRate: FieldRef<"Productionexpenseitem", 'Decimal'>
     readonly createdAt: FieldRef<"Productionexpenseitem", 'DateTime'>
     readonly updatedAt: FieldRef<"Productionexpenseitem", 'DateTime'>
   }
@@ -33371,6 +33371,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
    * Reference to a field of type 'TxStatus'
    */
   export type EnumTxStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TxStatus'>
@@ -34616,15 +34623,15 @@ export namespace Prisma {
     rawId?: IntNullableFilter<"Inventory"> | number | null
     transactionId?: IntNullableFilter<"Inventory"> | number | null
     department?: EnumDepartmentFilter<"Inventory"> | $Enums.Department
-    unitPrice?: FloatFilter<"Inventory"> | number
-    integratedUnitPrice?: FloatFilter<"Inventory"> | number
-    quantityAdd?: FloatNullableFilter<"Inventory"> | number | null
-    quantityLess?: FloatNullableFilter<"Inventory"> | number | null
-    discount?: FloatNullableFilter<"Inventory"> | number | null
-    debitAmount?: FloatNullableFilter<"Inventory"> | number | null
-    creditAmount?: FloatNullableFilter<"Inventory"> | number | null
-    integratedDebitAmount?: FloatNullableFilter<"Inventory"> | number | null
-    integratedCreditAmount?: FloatNullableFilter<"Inventory"> | number | null
+    unitPrice?: DecimalFilter<"Inventory"> | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFilter<"Inventory"> | Decimal | DecimalJsLike | number | string
+    quantityAdd?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    discount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFilter<"Inventory"> | boolean
     status?: EnumStatusFilter<"Inventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"Inventory"> | Date | string
@@ -34669,15 +34676,15 @@ export namespace Prisma {
     rawId?: IntNullableFilter<"Inventory"> | number | null
     transactionId?: IntNullableFilter<"Inventory"> | number | null
     department?: EnumDepartmentFilter<"Inventory"> | $Enums.Department
-    unitPrice?: FloatFilter<"Inventory"> | number
-    integratedUnitPrice?: FloatFilter<"Inventory"> | number
-    quantityAdd?: FloatNullableFilter<"Inventory"> | number | null
-    quantityLess?: FloatNullableFilter<"Inventory"> | number | null
-    discount?: FloatNullableFilter<"Inventory"> | number | null
-    debitAmount?: FloatNullableFilter<"Inventory"> | number | null
-    creditAmount?: FloatNullableFilter<"Inventory"> | number | null
-    integratedDebitAmount?: FloatNullableFilter<"Inventory"> | number | null
-    integratedCreditAmount?: FloatNullableFilter<"Inventory"> | number | null
+    unitPrice?: DecimalFilter<"Inventory"> | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFilter<"Inventory"> | Decimal | DecimalJsLike | number | string
+    quantityAdd?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    discount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFilter<"Inventory"> | boolean
     status?: EnumStatusFilter<"Inventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"Inventory"> | Date | string
@@ -34724,15 +34731,15 @@ export namespace Prisma {
     rawId?: IntNullableWithAggregatesFilter<"Inventory"> | number | null
     transactionId?: IntNullableWithAggregatesFilter<"Inventory"> | number | null
     department?: EnumDepartmentWithAggregatesFilter<"Inventory"> | $Enums.Department
-    unitPrice?: FloatWithAggregatesFilter<"Inventory"> | number
-    integratedUnitPrice?: FloatWithAggregatesFilter<"Inventory"> | number
-    quantityAdd?: FloatNullableWithAggregatesFilter<"Inventory"> | number | null
-    quantityLess?: FloatNullableWithAggregatesFilter<"Inventory"> | number | null
-    discount?: FloatNullableWithAggregatesFilter<"Inventory"> | number | null
-    debitAmount?: FloatNullableWithAggregatesFilter<"Inventory"> | number | null
-    creditAmount?: FloatNullableWithAggregatesFilter<"Inventory"> | number | null
-    integratedDebitAmount?: FloatNullableWithAggregatesFilter<"Inventory"> | number | null
-    integratedCreditAmount?: FloatNullableWithAggregatesFilter<"Inventory"> | number | null
+    unitPrice?: DecimalWithAggregatesFilter<"Inventory"> | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalWithAggregatesFilter<"Inventory"> | Decimal | DecimalJsLike | number | string
+    quantityAdd?: DecimalNullableWithAggregatesFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: DecimalNullableWithAggregatesFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    discount?: DecimalNullableWithAggregatesFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableWithAggregatesFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: DecimalNullableWithAggregatesFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableWithAggregatesFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableWithAggregatesFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolWithAggregatesFilter<"Inventory"> | boolean
     status?: EnumStatusWithAggregatesFilter<"Inventory"> | $Enums.Status
     createdAt?: DateTimeWithAggregatesFilter<"Inventory"> | Date | string
@@ -34748,17 +34755,17 @@ export namespace Prisma {
     packingMaterialId?: IntFilter<"PMInventory"> | number
     transactionId?: IntNullableFilter<"PMInventory"> | number | null
     department?: EnumDepartmentFilter<"PMInventory"> | $Enums.Department
-    perUnitQty?: FloatNullableFilter<"PMInventory"> | number | null
-    perUnitCost?: FloatNullableFilter<"PMInventory"> | number | null
-    unitPrice?: FloatFilter<"PMInventory"> | number
-    integratedUnitPrice?: FloatFilter<"PMInventory"> | number
-    quantityAdd?: FloatNullableFilter<"PMInventory"> | number | null
-    quantityLess?: FloatNullableFilter<"PMInventory"> | number | null
-    discount?: FloatNullableFilter<"PMInventory"> | number | null
-    debitAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    creditAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    integratedDebitAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    integratedCreditAmount?: FloatNullableFilter<"PMInventory"> | number | null
+    perUnitQty?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string
+    quantityAdd?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    discount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFilter<"PMInventory"> | boolean
     status?: EnumStatusFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"PMInventory"> | Date | string
@@ -34801,17 +34808,17 @@ export namespace Prisma {
     packingMaterialId?: IntFilter<"PMInventory"> | number
     transactionId?: IntNullableFilter<"PMInventory"> | number | null
     department?: EnumDepartmentFilter<"PMInventory"> | $Enums.Department
-    perUnitQty?: FloatNullableFilter<"PMInventory"> | number | null
-    perUnitCost?: FloatNullableFilter<"PMInventory"> | number | null
-    unitPrice?: FloatFilter<"PMInventory"> | number
-    integratedUnitPrice?: FloatFilter<"PMInventory"> | number
-    quantityAdd?: FloatNullableFilter<"PMInventory"> | number | null
-    quantityLess?: FloatNullableFilter<"PMInventory"> | number | null
-    discount?: FloatNullableFilter<"PMInventory"> | number | null
-    debitAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    creditAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    integratedDebitAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    integratedCreditAmount?: FloatNullableFilter<"PMInventory"> | number | null
+    perUnitQty?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string
+    quantityAdd?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    discount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFilter<"PMInventory"> | boolean
     status?: EnumStatusFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"PMInventory"> | Date | string
@@ -34857,17 +34864,17 @@ export namespace Prisma {
     packingMaterialId?: IntWithAggregatesFilter<"PMInventory"> | number
     transactionId?: IntNullableWithAggregatesFilter<"PMInventory"> | number | null
     department?: EnumDepartmentWithAggregatesFilter<"PMInventory"> | $Enums.Department
-    perUnitQty?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
-    perUnitCost?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
-    unitPrice?: FloatWithAggregatesFilter<"PMInventory"> | number
-    integratedUnitPrice?: FloatWithAggregatesFilter<"PMInventory"> | number
-    quantityAdd?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
-    quantityLess?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
-    discount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
-    debitAmount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
-    creditAmount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
-    integratedDebitAmount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
-    integratedCreditAmount?: FloatNullableWithAggregatesFilter<"PMInventory"> | number | null
+    perUnitQty?: DecimalNullableWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: DecimalNullableWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string
+    quantityAdd?: DecimalNullableWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: DecimalNullableWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    discount?: DecimalNullableWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: DecimalNullableWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableWithAggregatesFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolWithAggregatesFilter<"PMInventory"> | boolean
     status?: EnumStatusWithAggregatesFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeWithAggregatesFilter<"PMInventory"> | Date | string
@@ -34881,7 +34888,7 @@ export namespace Prisma {
     id?: IntFilter<"TransactionInfo"> | number
     voucherNo?: StringFilter<"TransactionInfo"> | string
     invoiceNo?: StringNullableFilter<"TransactionInfo"> | string | null
-    status?: EnumTxStatusNullableFilter<"TransactionInfo"> | $Enums.TxStatus | null
+    status?: EnumTxStatusFilter<"TransactionInfo"> | $Enums.TxStatus
     date?: DateTimeFilter<"TransactionInfo"> | Date | string
     partyId?: IntNullableFilter<"TransactionInfo"> | number | null
     voucherType?: EnumVoucherTypeFilter<"TransactionInfo"> | $Enums.VoucherType
@@ -34901,7 +34908,7 @@ export namespace Prisma {
     id?: SortOrder
     voucherNo?: SortOrder
     invoiceNo?: SortOrderInput | SortOrder
-    status?: SortOrderInput | SortOrder
+    status?: SortOrder
     date?: SortOrder
     partyId?: SortOrderInput | SortOrder
     voucherType?: SortOrder
@@ -34925,7 +34932,7 @@ export namespace Prisma {
     OR?: TransactionInfoWhereInput[]
     NOT?: TransactionInfoWhereInput | TransactionInfoWhereInput[]
     invoiceNo?: StringNullableFilter<"TransactionInfo"> | string | null
-    status?: EnumTxStatusNullableFilter<"TransactionInfo"> | $Enums.TxStatus | null
+    status?: EnumTxStatusFilter<"TransactionInfo"> | $Enums.TxStatus
     date?: DateTimeFilter<"TransactionInfo"> | Date | string
     partyId?: IntNullableFilter<"TransactionInfo"> | number | null
     voucherType?: EnumVoucherTypeFilter<"TransactionInfo"> | $Enums.VoucherType
@@ -34945,7 +34952,7 @@ export namespace Prisma {
     id?: SortOrder
     voucherNo?: SortOrder
     invoiceNo?: SortOrderInput | SortOrder
-    status?: SortOrderInput | SortOrder
+    status?: SortOrder
     date?: SortOrder
     partyId?: SortOrderInput | SortOrder
     voucherType?: SortOrder
@@ -34965,7 +34972,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"TransactionInfo"> | number
     voucherNo?: StringWithAggregatesFilter<"TransactionInfo"> | string
     invoiceNo?: StringNullableWithAggregatesFilter<"TransactionInfo"> | string | null
-    status?: EnumTxStatusNullableWithAggregatesFilter<"TransactionInfo"> | $Enums.TxStatus | null
+    status?: EnumTxStatusWithAggregatesFilter<"TransactionInfo"> | $Enums.TxStatus
     date?: DateTimeWithAggregatesFilter<"TransactionInfo"> | Date | string
     partyId?: IntNullableWithAggregatesFilter<"TransactionInfo"> | number | null
     voucherType?: EnumVoucherTypeWithAggregatesFilter<"TransactionInfo"> | $Enums.VoucherType
@@ -35088,10 +35095,10 @@ export namespace Prisma {
     accountsItemId?: IntNullableFilter<"Journal"> | number | null
     date?: DateTimeFilter<"Journal"> | Date | string
     checkOrRTGS?: StringNullableFilter<"Journal"> | string | null
-    creditAmount?: FloatNullableFilter<"Journal"> | number | null
-    debitAmount?: FloatNullableFilter<"Journal"> | number | null
-    integratedDebitAmount?: FloatNullableFilter<"Journal"> | number | null
-    integratedCreditAmount?: FloatNullableFilter<"Journal"> | number | null
+    creditAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
     narration?: StringNullableFilter<"Journal"> | string | null
     isClosing?: BoolFilter<"Journal"> | boolean
     createdAt?: DateTimeFilter<"Journal"> | Date | string
@@ -35128,10 +35135,10 @@ export namespace Prisma {
     accountsItemId?: IntNullableFilter<"Journal"> | number | null
     date?: DateTimeFilter<"Journal"> | Date | string
     checkOrRTGS?: StringNullableFilter<"Journal"> | string | null
-    creditAmount?: FloatNullableFilter<"Journal"> | number | null
-    debitAmount?: FloatNullableFilter<"Journal"> | number | null
-    integratedDebitAmount?: FloatNullableFilter<"Journal"> | number | null
-    integratedCreditAmount?: FloatNullableFilter<"Journal"> | number | null
+    creditAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
     narration?: StringNullableFilter<"Journal"> | string | null
     isClosing?: BoolFilter<"Journal"> | boolean
     createdAt?: DateTimeFilter<"Journal"> | Date | string
@@ -35170,10 +35177,10 @@ export namespace Prisma {
     accountsItemId?: IntNullableWithAggregatesFilter<"Journal"> | number | null
     date?: DateTimeWithAggregatesFilter<"Journal"> | Date | string
     checkOrRTGS?: StringNullableWithAggregatesFilter<"Journal"> | string | null
-    creditAmount?: FloatNullableWithAggregatesFilter<"Journal"> | number | null
-    debitAmount?: FloatNullableWithAggregatesFilter<"Journal"> | number | null
-    integratedDebitAmount?: FloatNullableWithAggregatesFilter<"Journal"> | number | null
-    integratedCreditAmount?: FloatNullableWithAggregatesFilter<"Journal"> | number | null
+    creditAmount?: DecimalNullableWithAggregatesFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableWithAggregatesFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableWithAggregatesFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableWithAggregatesFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
     narration?: StringNullableWithAggregatesFilter<"Journal"> | string | null
     isClosing?: BoolWithAggregatesFilter<"Journal"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Journal"> | Date | string
@@ -35426,9 +35433,9 @@ export namespace Prisma {
     date?: DateTimeFilter<"ProductionExpensesInventory"> | Date | string
     proExpencesItemId?: IntFilter<"ProductionExpensesInventory"> | number
     transectionId?: IntNullableFilter<"ProductionExpensesInventory"> | number | null
-    unitRate?: FloatFilter<"ProductionExpensesInventory"> | number
-    expDuration?: FloatFilter<"ProductionExpensesInventory"> | number
-    amount?: FloatFilter<"ProductionExpensesInventory"> | number
+    unitRate?: DecimalFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"ProductionExpensesInventory"> | Date | string
     updatedAt?: DateTimeFilter<"ProductionExpensesInventory"> | Date | string
     productionExpenseItem?: XOR<ProductionexpenseitemScalarRelationFilter, ProductionexpenseitemWhereInput>
@@ -35457,9 +35464,9 @@ export namespace Prisma {
     date?: DateTimeFilter<"ProductionExpensesInventory"> | Date | string
     proExpencesItemId?: IntFilter<"ProductionExpensesInventory"> | number
     transectionId?: IntNullableFilter<"ProductionExpensesInventory"> | number | null
-    unitRate?: FloatFilter<"ProductionExpensesInventory"> | number
-    expDuration?: FloatFilter<"ProductionExpensesInventory"> | number
-    amount?: FloatFilter<"ProductionExpensesInventory"> | number
+    unitRate?: DecimalFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"ProductionExpensesInventory"> | Date | string
     updatedAt?: DateTimeFilter<"ProductionExpensesInventory"> | Date | string
     productionExpenseItem?: XOR<ProductionexpenseitemScalarRelationFilter, ProductionexpenseitemWhereInput>
@@ -35491,9 +35498,9 @@ export namespace Prisma {
     date?: DateTimeWithAggregatesFilter<"ProductionExpensesInventory"> | Date | string
     proExpencesItemId?: IntWithAggregatesFilter<"ProductionExpensesInventory"> | number
     transectionId?: IntNullableWithAggregatesFilter<"ProductionExpensesInventory"> | number | null
-    unitRate?: FloatWithAggregatesFilter<"ProductionExpensesInventory"> | number
-    expDuration?: FloatWithAggregatesFilter<"ProductionExpensesInventory"> | number
-    amount?: FloatWithAggregatesFilter<"ProductionExpensesInventory"> | number
+    unitRate?: DecimalWithAggregatesFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalWithAggregatesFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalWithAggregatesFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeWithAggregatesFilter<"ProductionExpensesInventory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProductionExpensesInventory"> | Date | string
   }
@@ -35504,7 +35511,7 @@ export namespace Prisma {
     NOT?: ProductionexpenseitemWhereInput | ProductionexpenseitemWhereInput[]
     id?: IntFilter<"Productionexpenseitem"> | number
     expItemName?: StringFilter<"Productionexpenseitem"> | string
-    unitRate?: FloatFilter<"Productionexpenseitem"> | number
+    unitRate?: DecimalFilter<"Productionexpenseitem"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"Productionexpenseitem"> | Date | string
     updatedAt?: DateTimeFilter<"Productionexpenseitem"> | Date | string
     ingredientExpneseItems?: IngredientExpneseItemsListRelationFilter
@@ -35528,7 +35535,7 @@ export namespace Prisma {
     OR?: ProductionexpenseitemWhereInput[]
     NOT?: ProductionexpenseitemWhereInput | ProductionexpenseitemWhereInput[]
     expItemName?: StringFilter<"Productionexpenseitem"> | string
-    unitRate?: FloatFilter<"Productionexpenseitem"> | number
+    unitRate?: DecimalFilter<"Productionexpenseitem"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"Productionexpenseitem"> | Date | string
     updatedAt?: DateTimeFilter<"Productionexpenseitem"> | Date | string
     ingredientExpneseItems?: IngredientExpneseItemsListRelationFilter
@@ -35554,7 +35561,7 @@ export namespace Prisma {
     NOT?: ProductionexpenseitemScalarWhereWithAggregatesInput | ProductionexpenseitemScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Productionexpenseitem"> | number
     expItemName?: StringWithAggregatesFilter<"Productionexpenseitem"> | string
-    unitRate?: FloatWithAggregatesFilter<"Productionexpenseitem"> | number
+    unitRate?: DecimalWithAggregatesFilter<"Productionexpenseitem"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeWithAggregatesFilter<"Productionexpenseitem"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Productionexpenseitem"> | Date | string
   }
@@ -36899,15 +36906,15 @@ export namespace Prisma {
   export type InventoryCreateInput = {
     date: Date | string
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -36924,15 +36931,15 @@ export namespace Prisma {
     rawId?: number | null
     transactionId?: number | null
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -36942,15 +36949,15 @@ export namespace Prisma {
   export type InventoryUpdateInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36967,15 +36974,15 @@ export namespace Prisma {
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -36989,15 +36996,15 @@ export namespace Prisma {
     rawId?: number | null
     transactionId?: number | null
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -37007,15 +37014,15 @@ export namespace Prisma {
   export type InventoryUpdateManyMutationInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37029,15 +37036,15 @@ export namespace Prisma {
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37047,17 +37054,17 @@ export namespace Prisma {
   export type PMInventoryCreateInput = {
     date: Date | string
     department: $Enums.Department
-    perUnitQty?: number | null
-    perUnitCost?: number | null
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    perUnitQty?: Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: Decimal | DecimalJsLike | number | string | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -37072,17 +37079,17 @@ export namespace Prisma {
     packingMaterialId: number
     transactionId?: number | null
     department: $Enums.Department
-    perUnitQty?: number | null
-    perUnitCost?: number | null
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    perUnitQty?: Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: Decimal | DecimalJsLike | number | string | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -37092,17 +37099,17 @@ export namespace Prisma {
   export type PMInventoryUpdateInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    perUnitQty?: NullableFloatFieldUpdateOperationsInput | number | null
-    perUnitCost?: NullableFloatFieldUpdateOperationsInput | number | null
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    perUnitQty?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37117,17 +37124,17 @@ export namespace Prisma {
     packingMaterialId?: IntFieldUpdateOperationsInput | number
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    perUnitQty?: NullableFloatFieldUpdateOperationsInput | number | null
-    perUnitCost?: NullableFloatFieldUpdateOperationsInput | number | null
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    perUnitQty?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37140,17 +37147,17 @@ export namespace Prisma {
     packingMaterialId: number
     transactionId?: number | null
     department: $Enums.Department
-    perUnitQty?: number | null
-    perUnitCost?: number | null
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    perUnitQty?: Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: Decimal | DecimalJsLike | number | string | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -37160,17 +37167,17 @@ export namespace Prisma {
   export type PMInventoryUpdateManyMutationInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    perUnitQty?: NullableFloatFieldUpdateOperationsInput | number | null
-    perUnitCost?: NullableFloatFieldUpdateOperationsInput | number | null
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    perUnitQty?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37183,17 +37190,17 @@ export namespace Prisma {
     packingMaterialId?: IntFieldUpdateOperationsInput | number
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    perUnitQty?: NullableFloatFieldUpdateOperationsInput | number | null
-    perUnitCost?: NullableFloatFieldUpdateOperationsInput | number | null
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    perUnitQty?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37203,7 +37210,7 @@ export namespace Prisma {
   export type TransactionInfoCreateInput = {
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -37222,7 +37229,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     partyId?: number | null
     voucherType: $Enums.VoucherType
@@ -37240,7 +37247,7 @@ export namespace Prisma {
   export type TransactionInfoUpdateInput = {
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37259,7 +37266,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     partyId?: NullableIntFieldUpdateOperationsInput | number | null
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
@@ -37278,7 +37285,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     partyId?: number | null
     voucherType: $Enums.VoucherType
@@ -37289,7 +37296,7 @@ export namespace Prisma {
   export type TransactionInfoUpdateManyMutationInput = {
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37300,7 +37307,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     partyId?: NullableIntFieldUpdateOperationsInput | number | null
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
@@ -37416,10 +37423,10 @@ export namespace Prisma {
   export type JournalCreateInput = {
     date: Date | string
     checkOrRTGS?: string | null
-    creditAmount?: number | null
-    debitAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     narration?: string | null
     isClosing?: boolean
     createdAt?: Date | string
@@ -37434,10 +37441,10 @@ export namespace Prisma {
     accountsItemId?: number | null
     date: Date | string
     checkOrRTGS?: string | null
-    creditAmount?: number | null
-    debitAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     narration?: string | null
     isClosing?: boolean
     createdAt?: Date | string
@@ -37447,10 +37454,10 @@ export namespace Prisma {
   export type JournalUpdateInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     narration?: NullableStringFieldUpdateOperationsInput | string | null
     isClosing?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37465,10 +37472,10 @@ export namespace Prisma {
     accountsItemId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     narration?: NullableStringFieldUpdateOperationsInput | string | null
     isClosing?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37481,10 +37488,10 @@ export namespace Prisma {
     accountsItemId?: number | null
     date: Date | string
     checkOrRTGS?: string | null
-    creditAmount?: number | null
-    debitAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     narration?: string | null
     isClosing?: boolean
     createdAt?: Date | string
@@ -37494,10 +37501,10 @@ export namespace Prisma {
   export type JournalUpdateManyMutationInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     narration?: NullableStringFieldUpdateOperationsInput | string | null
     isClosing?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37510,10 +37517,10 @@ export namespace Prisma {
     accountsItemId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     narration?: NullableStringFieldUpdateOperationsInput | string | null
     isClosing?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -37733,9 +37740,9 @@ export namespace Prisma {
 
   export type ProductionExpensesInventoryCreateInput = {
     date: Date | string
-    unitRate?: number
-    expDuration?: number
-    amount?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
+    expDuration?: Decimal | DecimalJsLike | number | string
+    amount?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
     productionExpenseItem: ProductionexpenseitemCreateNestedOneWithoutProductionExpensesInventoriesInput
@@ -37747,18 +37754,18 @@ export namespace Prisma {
     date: Date | string
     proExpencesItemId: number
     transectionId?: number | null
-    unitRate?: number
-    expDuration?: number
-    amount?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
+    expDuration?: Decimal | DecimalJsLike | number | string
+    amount?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type ProductionExpensesInventoryUpdateInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
-    expDuration?: FloatFieldUpdateOperationsInput | number
-    amount?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productionExpenseItem?: ProductionexpenseitemUpdateOneRequiredWithoutProductionExpensesInventoriesNestedInput
@@ -37770,9 +37777,9 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     proExpencesItemId?: IntFieldUpdateOperationsInput | number
     transectionId?: NullableIntFieldUpdateOperationsInput | number | null
-    unitRate?: FloatFieldUpdateOperationsInput | number
-    expDuration?: FloatFieldUpdateOperationsInput | number
-    amount?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37782,18 +37789,18 @@ export namespace Prisma {
     date: Date | string
     proExpencesItemId: number
     transectionId?: number | null
-    unitRate?: number
-    expDuration?: number
-    amount?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
+    expDuration?: Decimal | DecimalJsLike | number | string
+    amount?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type ProductionExpensesInventoryUpdateManyMutationInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
-    expDuration?: FloatFieldUpdateOperationsInput | number
-    amount?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37803,16 +37810,16 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     proExpencesItemId?: IntFieldUpdateOperationsInput | number
     transectionId?: NullableIntFieldUpdateOperationsInput | number | null
-    unitRate?: FloatFieldUpdateOperationsInput | number
-    expDuration?: FloatFieldUpdateOperationsInput | number
-    amount?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProductionexpenseitemCreateInput = {
     expItemName: string
-    unitRate?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredientExpneseItems?: IngredientExpneseItemsCreateNestedManyWithoutProductionExpenseItemInput
@@ -37822,7 +37829,7 @@ export namespace Prisma {
   export type ProductionexpenseitemUncheckedCreateInput = {
     id?: number
     expItemName: string
-    unitRate?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredientExpneseItems?: IngredientExpneseItemsUncheckedCreateNestedManyWithoutProductionExpenseItemInput
@@ -37831,7 +37838,7 @@ export namespace Prisma {
 
   export type ProductionexpenseitemUpdateInput = {
     expItemName?: StringFieldUpdateOperationsInput | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredientExpneseItems?: IngredientExpneseItemsUpdateManyWithoutProductionExpenseItemNestedInput
@@ -37841,7 +37848,7 @@ export namespace Prisma {
   export type ProductionexpenseitemUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     expItemName?: StringFieldUpdateOperationsInput | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredientExpneseItems?: IngredientExpneseItemsUncheckedUpdateManyWithoutProductionExpenseItemNestedInput
@@ -37851,14 +37858,14 @@ export namespace Prisma {
   export type ProductionexpenseitemCreateManyInput = {
     id?: number
     expItemName: string
-    unitRate?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type ProductionexpenseitemUpdateManyMutationInput = {
     expItemName?: StringFieldUpdateOperationsInput | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -37866,7 +37873,7 @@ export namespace Prisma {
   export type ProductionexpenseitemUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     expItemName?: StringFieldUpdateOperationsInput | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -39246,6 +39253,28 @@ export namespace Prisma {
     not?: NestedEnumDepartmentFilter<$PrismaModel> | $Enums.Department
   }
 
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type DecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
   export type InventoryCountOrderByAggregateInput = {
     id?: SortOrder
     date?: SortOrder
@@ -39352,6 +39381,38 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumDepartmentFilter<$PrismaModel>
     _max?: NestedEnumDepartmentFilter<$PrismaModel>
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type DecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
   }
 
   export type PackingMaterialScalarRelationFilter = {
@@ -39462,11 +39523,11 @@ export namespace Prisma {
     integratedCreditAmount?: SortOrder
   }
 
-  export type EnumTxStatusNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.TxStatus[] | null
-    notIn?: $Enums.TxStatus[] | null
-    not?: NestedEnumTxStatusNullableFilter<$PrismaModel> | $Enums.TxStatus | null
+  export type EnumTxStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TxStatus[]
+    notIn?: $Enums.TxStatus[]
+    not?: NestedEnumTxStatusFilter<$PrismaModel> | $Enums.TxStatus
   }
 
   export type EnumVoucherTypeFilter<$PrismaModel = never> = {
@@ -39543,14 +39604,14 @@ export namespace Prisma {
     partyId?: SortOrder
   }
 
-  export type EnumTxStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.TxStatus[] | null
-    notIn?: $Enums.TxStatus[] | null
-    not?: NestedEnumTxStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.TxStatus | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumTxStatusNullableFilter<$PrismaModel>
-    _max?: NestedEnumTxStatusNullableFilter<$PrismaModel>
+  export type EnumTxStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TxStatus[]
+    notIn?: $Enums.TxStatus[]
+    not?: NestedEnumTxStatusWithAggregatesFilter<$PrismaModel> | $Enums.TxStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTxStatusFilter<$PrismaModel>
+    _max?: NestedEnumTxStatusFilter<$PrismaModel>
   }
 
   export type EnumVoucherTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -41287,6 +41348,22 @@ export namespace Prisma {
     set?: $Enums.Department
   }
 
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type NullableDecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string | null
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
   export type ProductUpdateOneWithoutInventoryNestedInput = {
     create?: XOR<ProductCreateWithoutInventoryInput, ProductUncheckedCreateWithoutInventoryInput>
     connectOrCreate?: ProductCreateOrConnectWithoutInventoryInput
@@ -41449,8 +41526,8 @@ export namespace Prisma {
     connect?: RequestInventoryWhereUniqueInput | RequestInventoryWhereUniqueInput[]
   }
 
-  export type NullableEnumTxStatusFieldUpdateOperationsInput = {
-    set?: $Enums.TxStatus | null
+  export type EnumTxStatusFieldUpdateOperationsInput = {
+    set?: $Enums.TxStatus
   }
 
   export type EnumVoucherTypeFieldUpdateOperationsInput = {
@@ -42402,6 +42479,28 @@ export namespace Prisma {
     not?: NestedEnumDepartmentFilter<$PrismaModel> | $Enums.Department
   }
 
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDecimalNullableFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+  }
+
   export type NestedEnumDepartmentWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Department | EnumDepartmentFieldRefInput<$PrismaModel>
     in?: $Enums.Department[]
@@ -42412,11 +42511,43 @@ export namespace Prisma {
     _max?: NestedEnumDepartmentFilter<$PrismaModel>
   }
 
-  export type NestedEnumTxStatusNullableFilter<$PrismaModel = never> = {
-    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.TxStatus[] | null
-    notIn?: $Enums.TxStatus[] | null
-    not?: NestedEnumTxStatusNullableFilter<$PrismaModel> | $Enums.TxStatus | null
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel> | null
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | null
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalNullableWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedDecimalNullableFilter<$PrismaModel>
+    _sum?: NestedDecimalNullableFilter<$PrismaModel>
+    _min?: NestedDecimalNullableFilter<$PrismaModel>
+    _max?: NestedDecimalNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTxStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TxStatus[]
+    notIn?: $Enums.TxStatus[]
+    not?: NestedEnumTxStatusFilter<$PrismaModel> | $Enums.TxStatus
   }
 
   export type NestedEnumVoucherTypeFilter<$PrismaModel = never> = {
@@ -42426,14 +42557,14 @@ export namespace Prisma {
     not?: NestedEnumVoucherTypeFilter<$PrismaModel> | $Enums.VoucherType
   }
 
-  export type NestedEnumTxStatusNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel> | null
-    in?: $Enums.TxStatus[] | null
-    notIn?: $Enums.TxStatus[] | null
-    not?: NestedEnumTxStatusNullableWithAggregatesFilter<$PrismaModel> | $Enums.TxStatus | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedEnumTxStatusNullableFilter<$PrismaModel>
-    _max?: NestedEnumTxStatusNullableFilter<$PrismaModel>
+  export type NestedEnumTxStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TxStatus | EnumTxStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TxStatus[]
+    notIn?: $Enums.TxStatus[]
+    not?: NestedEnumTxStatusWithAggregatesFilter<$PrismaModel> | $Enums.TxStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTxStatusFilter<$PrismaModel>
+    _max?: NestedEnumTxStatusFilter<$PrismaModel>
   }
 
   export type NestedEnumVoucherTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -42959,10 +43090,10 @@ export namespace Prisma {
   export type JournalCreateWithoutAccountsItemInput = {
     date: Date | string
     checkOrRTGS?: string | null
-    creditAmount?: number | null
-    debitAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     narration?: string | null
     isClosing?: boolean
     createdAt?: Date | string
@@ -42975,10 +43106,10 @@ export namespace Prisma {
     transectionId?: number | null
     date: Date | string
     checkOrRTGS?: string | null
-    creditAmount?: number | null
-    debitAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     narration?: string | null
     isClosing?: boolean
     createdAt?: Date | string
@@ -43046,10 +43177,10 @@ export namespace Prisma {
     accountsItemId?: IntNullableFilter<"Journal"> | number | null
     date?: DateTimeFilter<"Journal"> | Date | string
     checkOrRTGS?: StringNullableFilter<"Journal"> | string | null
-    creditAmount?: FloatNullableFilter<"Journal"> | number | null
-    debitAmount?: FloatNullableFilter<"Journal"> | number | null
-    integratedDebitAmount?: FloatNullableFilter<"Journal"> | number | null
-    integratedCreditAmount?: FloatNullableFilter<"Journal"> | number | null
+    creditAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableFilter<"Journal"> | Decimal | DecimalJsLike | number | string | null
     narration?: StringNullableFilter<"Journal"> | string | null
     isClosing?: BoolFilter<"Journal"> | boolean
     createdAt?: DateTimeFilter<"Journal"> | Date | string
@@ -43088,7 +43219,7 @@ export namespace Prisma {
   export type TransactionInfoCreateWithoutPartyInput = {
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -43106,7 +43237,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -43182,7 +43313,7 @@ export namespace Prisma {
     id?: IntFilter<"TransactionInfo"> | number
     voucherNo?: StringFilter<"TransactionInfo"> | string
     invoiceNo?: StringNullableFilter<"TransactionInfo"> | string | null
-    status?: EnumTxStatusNullableFilter<"TransactionInfo"> | $Enums.TxStatus | null
+    status?: EnumTxStatusFilter<"TransactionInfo"> | $Enums.TxStatus
     date?: DateTimeFilter<"TransactionInfo"> | Date | string
     partyId?: IntNullableFilter<"TransactionInfo"> | number | null
     voucherType?: EnumVoucherTypeFilter<"TransactionInfo"> | $Enums.VoucherType
@@ -43193,15 +43324,15 @@ export namespace Prisma {
   export type InventoryCreateWithoutProductInput = {
     date: Date | string
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -43216,15 +43347,15 @@ export namespace Prisma {
     rawId?: number | null
     transactionId?: number | null
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -43410,15 +43541,15 @@ export namespace Prisma {
     rawId?: IntNullableFilter<"Inventory"> | number | null
     transactionId?: IntNullableFilter<"Inventory"> | number | null
     department?: EnumDepartmentFilter<"Inventory"> | $Enums.Department
-    unitPrice?: FloatFilter<"Inventory"> | number
-    integratedUnitPrice?: FloatFilter<"Inventory"> | number
-    quantityAdd?: FloatNullableFilter<"Inventory"> | number | null
-    quantityLess?: FloatNullableFilter<"Inventory"> | number | null
-    discount?: FloatNullableFilter<"Inventory"> | number | null
-    debitAmount?: FloatNullableFilter<"Inventory"> | number | null
-    creditAmount?: FloatNullableFilter<"Inventory"> | number | null
-    integratedDebitAmount?: FloatNullableFilter<"Inventory"> | number | null
-    integratedCreditAmount?: FloatNullableFilter<"Inventory"> | number | null
+    unitPrice?: DecimalFilter<"Inventory"> | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFilter<"Inventory"> | Decimal | DecimalJsLike | number | string
+    quantityAdd?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    discount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableFilter<"Inventory"> | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFilter<"Inventory"> | boolean
     status?: EnumStatusFilter<"Inventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"Inventory"> | Date | string
@@ -43579,15 +43710,15 @@ export namespace Prisma {
   export type InventoryCreateWithoutRaWMaterialInput = {
     date: Date | string
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -43602,15 +43733,15 @@ export namespace Prisma {
     productId?: number | null
     transactionId?: number | null
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -43874,17 +44005,17 @@ export namespace Prisma {
   export type PMInventoryCreateWithoutPackingMaterialInput = {
     date: Date | string
     department: $Enums.Department
-    perUnitQty?: number | null
-    perUnitCost?: number | null
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    perUnitQty?: Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: Decimal | DecimalJsLike | number | string | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -43897,17 +44028,17 @@ export namespace Prisma {
     date: Date | string
     transactionId?: number | null
     department: $Enums.Department
-    perUnitQty?: number | null
-    perUnitCost?: number | null
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    perUnitQty?: Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: Decimal | DecimalJsLike | number | string | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -44074,17 +44205,17 @@ export namespace Prisma {
     packingMaterialId?: IntFilter<"PMInventory"> | number
     transactionId?: IntNullableFilter<"PMInventory"> | number | null
     department?: EnumDepartmentFilter<"PMInventory"> | $Enums.Department
-    perUnitQty?: FloatNullableFilter<"PMInventory"> | number | null
-    perUnitCost?: FloatNullableFilter<"PMInventory"> | number | null
-    unitPrice?: FloatFilter<"PMInventory"> | number
-    integratedUnitPrice?: FloatFilter<"PMInventory"> | number
-    quantityAdd?: FloatNullableFilter<"PMInventory"> | number | null
-    quantityLess?: FloatNullableFilter<"PMInventory"> | number | null
-    discount?: FloatNullableFilter<"PMInventory"> | number | null
-    debitAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    creditAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    integratedDebitAmount?: FloatNullableFilter<"PMInventory"> | number | null
-    integratedCreditAmount?: FloatNullableFilter<"PMInventory"> | number | null
+    perUnitQty?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string
+    quantityAdd?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    discount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: DecimalNullableFilter<"PMInventory"> | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFilter<"PMInventory"> | boolean
     status?: EnumStatusFilter<"PMInventory"> | $Enums.Status
     createdAt?: DateTimeFilter<"PMInventory"> | Date | string
@@ -44696,7 +44827,7 @@ export namespace Prisma {
   export type TransactionInfoCreateWithoutBankTransactionInput = {
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -44714,7 +44845,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     partyId?: number | null
     voucherType: $Enums.VoucherType
@@ -44777,7 +44908,7 @@ export namespace Prisma {
   export type TransactionInfoUpdateWithoutBankTransactionInput = {
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -44795,7 +44926,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     partyId?: NullableIntFieldUpdateOperationsInput | number | null
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
@@ -44902,7 +45033,7 @@ export namespace Prisma {
   export type TransactionInfoCreateWithoutInventoryInput = {
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -44920,7 +45051,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     partyId?: number | null
     voucherType: $Enums.VoucherType
@@ -45055,7 +45186,7 @@ export namespace Prisma {
   export type TransactionInfoUpdateWithoutInventoryInput = {
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45073,7 +45204,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     partyId?: NullableIntFieldUpdateOperationsInput | number | null
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
@@ -45132,7 +45263,7 @@ export namespace Prisma {
   export type TransactionInfoCreateWithoutPminventoriesInput = {
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -45150,7 +45281,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     partyId?: number | null
     voucherType: $Enums.VoucherType
@@ -45231,7 +45362,7 @@ export namespace Prisma {
   export type TransactionInfoUpdateWithoutPminventoriesInput = {
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -45249,7 +45380,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     partyId?: NullableIntFieldUpdateOperationsInput | number | null
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
@@ -45297,15 +45428,15 @@ export namespace Prisma {
   export type InventoryCreateWithoutTransactionInfoInput = {
     date: Date | string
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -45320,15 +45451,15 @@ export namespace Prisma {
     productId?: number | null
     rawId?: number | null
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -45348,10 +45479,10 @@ export namespace Prisma {
   export type JournalCreateWithoutTransactionInfoInput = {
     date: Date | string
     checkOrRTGS?: string | null
-    creditAmount?: number | null
-    debitAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     narration?: string | null
     isClosing?: boolean
     createdAt?: Date | string
@@ -45364,10 +45495,10 @@ export namespace Prisma {
     accountsItemId?: number | null
     date: Date | string
     checkOrRTGS?: string | null
-    creditAmount?: number | null
-    debitAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     narration?: string | null
     isClosing?: boolean
     createdAt?: Date | string
@@ -45387,17 +45518,17 @@ export namespace Prisma {
   export type PMInventoryCreateWithoutTransactionInfoInput = {
     date: Date | string
     department: $Enums.Department
-    perUnitQty?: number | null
-    perUnitCost?: number | null
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    perUnitQty?: Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: Decimal | DecimalJsLike | number | string | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -45410,17 +45541,17 @@ export namespace Prisma {
     date: Date | string
     packingMaterialId: number
     department: $Enums.Department
-    perUnitQty?: number | null
-    perUnitCost?: number | null
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    perUnitQty?: Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: Decimal | DecimalJsLike | number | string | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -45439,9 +45570,9 @@ export namespace Prisma {
 
   export type ProductionExpensesInventoryCreateWithoutTransactionInfoInput = {
     date: Date | string
-    unitRate?: number
-    expDuration?: number
-    amount?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
+    expDuration?: Decimal | DecimalJsLike | number | string
+    amount?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
     productionExpenseItem: ProductionexpenseitemCreateNestedOneWithoutProductionExpensesInventoriesInput
@@ -45451,9 +45582,9 @@ export namespace Prisma {
     id?: number
     date: Date | string
     proExpencesItemId: number
-    unitRate?: number
-    expDuration?: number
-    amount?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
+    expDuration?: Decimal | DecimalJsLike | number | string
+    amount?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -45649,9 +45780,9 @@ export namespace Prisma {
     date?: DateTimeFilter<"ProductionExpensesInventory"> | Date | string
     proExpencesItemId?: IntFilter<"ProductionExpensesInventory"> | number
     transectionId?: IntNullableFilter<"ProductionExpensesInventory"> | number | null
-    unitRate?: FloatFilter<"ProductionExpensesInventory"> | number
-    expDuration?: FloatFilter<"ProductionExpensesInventory"> | number
-    amount?: FloatFilter<"ProductionExpensesInventory"> | number
+    unitRate?: DecimalFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFilter<"ProductionExpensesInventory"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"ProductionExpensesInventory"> | Date | string
     updatedAt?: DateTimeFilter<"ProductionExpensesInventory"> | Date | string
   }
@@ -45873,7 +46004,7 @@ export namespace Prisma {
   export type TransactionInfoCreateWithoutRequestInventoriesInput = {
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -45891,7 +46022,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     partyId?: number | null
     voucherType: $Enums.VoucherType
@@ -46074,7 +46205,7 @@ export namespace Prisma {
   export type TransactionInfoUpdateWithoutRequestInventoriesInput = {
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46092,7 +46223,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     partyId?: NullableIntFieldUpdateOperationsInput | number | null
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
@@ -46131,7 +46262,7 @@ export namespace Prisma {
   export type TransactionInfoCreateWithoutJournalInput = {
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -46149,7 +46280,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     partyId?: number | null
     voucherType: $Enums.VoucherType
@@ -46210,7 +46341,7 @@ export namespace Prisma {
   export type TransactionInfoUpdateWithoutJournalInput = {
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46228,7 +46359,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     partyId?: NullableIntFieldUpdateOperationsInput | number | null
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
@@ -46652,7 +46783,7 @@ export namespace Prisma {
 
   export type ProductionexpenseitemCreateWithoutIngredientExpneseItemsInput = {
     expItemName: string
-    unitRate?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
     productionExpensesInventories?: ProductionExpensesInventoryCreateNestedManyWithoutProductionExpenseItemInput
@@ -46661,7 +46792,7 @@ export namespace Prisma {
   export type ProductionexpenseitemUncheckedCreateWithoutIngredientExpneseItemsInput = {
     id?: number
     expItemName: string
-    unitRate?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
     productionExpensesInventories?: ProductionExpensesInventoryUncheckedCreateNestedManyWithoutProductionExpenseItemInput
@@ -46707,7 +46838,7 @@ export namespace Prisma {
 
   export type ProductionexpenseitemUpdateWithoutIngredientExpneseItemsInput = {
     expItemName?: StringFieldUpdateOperationsInput | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productionExpensesInventories?: ProductionExpensesInventoryUpdateManyWithoutProductionExpenseItemNestedInput
@@ -46716,7 +46847,7 @@ export namespace Prisma {
   export type ProductionexpenseitemUncheckedUpdateWithoutIngredientExpneseItemsInput = {
     id?: IntFieldUpdateOperationsInput | number
     expItemName?: StringFieldUpdateOperationsInput | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productionExpensesInventories?: ProductionExpensesInventoryUncheckedUpdateManyWithoutProductionExpenseItemNestedInput
@@ -46752,7 +46883,7 @@ export namespace Prisma {
 
   export type ProductionexpenseitemCreateWithoutProductionExpensesInventoriesInput = {
     expItemName: string
-    unitRate?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredientExpneseItems?: IngredientExpneseItemsCreateNestedManyWithoutProductionExpenseItemInput
@@ -46761,7 +46892,7 @@ export namespace Prisma {
   export type ProductionexpenseitemUncheckedCreateWithoutProductionExpensesInventoriesInput = {
     id?: number
     expItemName: string
-    unitRate?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
     ingredientExpneseItems?: IngredientExpneseItemsUncheckedCreateNestedManyWithoutProductionExpenseItemInput
@@ -46775,7 +46906,7 @@ export namespace Prisma {
   export type TransactionInfoCreateWithoutProductionExpensesInventoryInput = {
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -46793,7 +46924,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     partyId?: number | null
     voucherType: $Enums.VoucherType
@@ -46825,7 +46956,7 @@ export namespace Prisma {
 
   export type ProductionexpenseitemUpdateWithoutProductionExpensesInventoriesInput = {
     expItemName?: StringFieldUpdateOperationsInput | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredientExpneseItems?: IngredientExpneseItemsUpdateManyWithoutProductionExpenseItemNestedInput
@@ -46834,7 +46965,7 @@ export namespace Prisma {
   export type ProductionexpenseitemUncheckedUpdateWithoutProductionExpensesInventoriesInput = {
     id?: IntFieldUpdateOperationsInput | number
     expItemName?: StringFieldUpdateOperationsInput | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ingredientExpneseItems?: IngredientExpneseItemsUncheckedUpdateManyWithoutProductionExpenseItemNestedInput
@@ -46854,7 +46985,7 @@ export namespace Prisma {
   export type TransactionInfoUpdateWithoutProductionExpensesInventoryInput = {
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -46872,7 +47003,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     partyId?: NullableIntFieldUpdateOperationsInput | number | null
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
@@ -46911,9 +47042,9 @@ export namespace Prisma {
 
   export type ProductionExpensesInventoryCreateWithoutProductionExpenseItemInput = {
     date: Date | string
-    unitRate?: number
-    expDuration?: number
-    amount?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
+    expDuration?: Decimal | DecimalJsLike | number | string
+    amount?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
     transactionInfo?: TransactionInfoCreateNestedOneWithoutProductionExpensesInventoryInput
@@ -46923,9 +47054,9 @@ export namespace Prisma {
     id?: number
     date: Date | string
     transectionId?: number | null
-    unitRate?: number
-    expDuration?: number
-    amount?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
+    expDuration?: Decimal | DecimalJsLike | number | string
+    amount?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -47023,7 +47154,7 @@ export namespace Prisma {
   export type TransactionInfoCreateWithoutProductioniteminfoInput = {
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -47041,7 +47172,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     partyId?: number | null
     voucherType: $Enums.VoucherType
@@ -47128,7 +47259,7 @@ export namespace Prisma {
   export type TransactionInfoUpdateWithoutProductioniteminfoInput = {
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47146,7 +47277,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     partyId?: NullableIntFieldUpdateOperationsInput | number | null
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
@@ -47519,10 +47650,10 @@ export namespace Prisma {
     transectionId?: number | null
     date: Date | string
     checkOrRTGS?: string | null
-    creditAmount?: number | null
-    debitAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     narration?: string | null
     isClosing?: boolean
     createdAt?: Date | string
@@ -47532,10 +47663,10 @@ export namespace Prisma {
   export type JournalUpdateWithoutAccountsItemInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     narration?: NullableStringFieldUpdateOperationsInput | string | null
     isClosing?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47548,10 +47679,10 @@ export namespace Prisma {
     transectionId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     narration?: NullableStringFieldUpdateOperationsInput | string | null
     isClosing?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47563,10 +47694,10 @@ export namespace Prisma {
     transectionId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     narration?: NullableStringFieldUpdateOperationsInput | string | null
     isClosing?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47586,7 +47717,7 @@ export namespace Prisma {
     id?: number
     voucherNo: string
     invoiceNo?: string | null
-    status?: $Enums.TxStatus | null
+    status?: $Enums.TxStatus
     date?: Date | string
     voucherType: $Enums.VoucherType
     createdAt?: Date | string
@@ -47624,7 +47755,7 @@ export namespace Prisma {
   export type TransactionInfoUpdateWithoutPartyInput = {
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47642,7 +47773,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47660,7 +47791,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     voucherNo?: StringFieldUpdateOperationsInput | string
     invoiceNo?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: NullableEnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus | null
+    status?: EnumTxStatusFieldUpdateOperationsInput | $Enums.TxStatus
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     voucherType?: EnumVoucherTypeFieldUpdateOperationsInput | $Enums.VoucherType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47673,15 +47804,15 @@ export namespace Prisma {
     rawId?: number | null
     transactionId?: number | null
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -47728,15 +47859,15 @@ export namespace Prisma {
   export type InventoryUpdateWithoutProductInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47751,15 +47882,15 @@ export namespace Prisma {
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47772,15 +47903,15 @@ export namespace Prisma {
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47901,15 +48032,15 @@ export namespace Prisma {
     productId?: number | null
     transactionId?: number | null
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -47954,15 +48085,15 @@ export namespace Prisma {
   export type InventoryUpdateWithoutRaWMaterialInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47977,15 +48108,15 @@ export namespace Prisma {
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -47998,15 +48129,15 @@ export namespace Prisma {
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48120,17 +48251,17 @@ export namespace Prisma {
     date: Date | string
     transactionId?: number | null
     department: $Enums.Department
-    perUnitQty?: number | null
-    perUnitCost?: number | null
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    perUnitQty?: Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: Decimal | DecimalJsLike | number | string | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -48175,17 +48306,17 @@ export namespace Prisma {
   export type PMInventoryUpdateWithoutPackingMaterialInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    perUnitQty?: NullableFloatFieldUpdateOperationsInput | number | null
-    perUnitCost?: NullableFloatFieldUpdateOperationsInput | number | null
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    perUnitQty?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48198,17 +48329,17 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    perUnitQty?: NullableFloatFieldUpdateOperationsInput | number | null
-    perUnitCost?: NullableFloatFieldUpdateOperationsInput | number | null
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    perUnitQty?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48220,17 +48351,17 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     transactionId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    perUnitQty?: NullableFloatFieldUpdateOperationsInput | number | null
-    perUnitCost?: NullableFloatFieldUpdateOperationsInput | number | null
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    perUnitQty?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48450,15 +48581,15 @@ export namespace Prisma {
     productId?: number | null
     rawId?: number | null
     department: $Enums.Department
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -48470,10 +48601,10 @@ export namespace Prisma {
     accountsItemId?: number | null
     date: Date | string
     checkOrRTGS?: string | null
-    creditAmount?: number | null
-    debitAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     narration?: string | null
     isClosing?: boolean
     createdAt?: Date | string
@@ -48485,17 +48616,17 @@ export namespace Prisma {
     date: Date | string
     packingMaterialId: number
     department: $Enums.Department
-    perUnitQty?: number | null
-    perUnitCost?: number | null
-    unitPrice?: number
-    integratedUnitPrice?: number
-    quantityAdd?: number | null
-    quantityLess?: number | null
-    discount?: number | null
-    debitAmount?: number | null
-    creditAmount?: number | null
-    integratedDebitAmount?: number | null
-    integratedCreditAmount?: number | null
+    perUnitQty?: Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: Decimal | DecimalJsLike | number | string | null
+    unitPrice?: Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: Decimal | DecimalJsLike | number | string
+    quantityAdd?: Decimal | DecimalJsLike | number | string | null
+    quantityLess?: Decimal | DecimalJsLike | number | string | null
+    discount?: Decimal | DecimalJsLike | number | string | null
+    debitAmount?: Decimal | DecimalJsLike | number | string | null
+    creditAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: Decimal | DecimalJsLike | number | string | null
     isOpening?: boolean
     status?: $Enums.Status
     createdAt?: Date | string
@@ -48506,9 +48637,9 @@ export namespace Prisma {
     id?: number
     date: Date | string
     proExpencesItemId: number
-    unitRate?: number
-    expDuration?: number
-    amount?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
+    expDuration?: Decimal | DecimalJsLike | number | string
+    amount?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -48563,15 +48694,15 @@ export namespace Prisma {
   export type InventoryUpdateWithoutTransactionInfoInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48586,15 +48717,15 @@ export namespace Prisma {
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48607,15 +48738,15 @@ export namespace Prisma {
     productId?: NullableIntFieldUpdateOperationsInput | number | null
     rawId?: NullableIntFieldUpdateOperationsInput | number | null
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48625,10 +48756,10 @@ export namespace Prisma {
   export type JournalUpdateWithoutTransactionInfoInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     narration?: NullableStringFieldUpdateOperationsInput | string | null
     isClosing?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48641,10 +48772,10 @@ export namespace Prisma {
     accountsItemId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     narration?: NullableStringFieldUpdateOperationsInput | string | null
     isClosing?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48656,10 +48787,10 @@ export namespace Prisma {
     accountsItemId?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     checkOrRTGS?: NullableStringFieldUpdateOperationsInput | string | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     narration?: NullableStringFieldUpdateOperationsInput | string | null
     isClosing?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48669,17 +48800,17 @@ export namespace Prisma {
   export type PMInventoryUpdateWithoutTransactionInfoInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    perUnitQty?: NullableFloatFieldUpdateOperationsInput | number | null
-    perUnitCost?: NullableFloatFieldUpdateOperationsInput | number | null
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    perUnitQty?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48692,17 +48823,17 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     packingMaterialId?: IntFieldUpdateOperationsInput | number
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    perUnitQty?: NullableFloatFieldUpdateOperationsInput | number | null
-    perUnitCost?: NullableFloatFieldUpdateOperationsInput | number | null
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    perUnitQty?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48714,17 +48845,17 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     packingMaterialId?: IntFieldUpdateOperationsInput | number
     department?: EnumDepartmentFieldUpdateOperationsInput | $Enums.Department
-    perUnitQty?: NullableFloatFieldUpdateOperationsInput | number | null
-    perUnitCost?: NullableFloatFieldUpdateOperationsInput | number | null
-    unitPrice?: FloatFieldUpdateOperationsInput | number
-    integratedUnitPrice?: FloatFieldUpdateOperationsInput | number
-    quantityAdd?: NullableFloatFieldUpdateOperationsInput | number | null
-    quantityLess?: NullableFloatFieldUpdateOperationsInput | number | null
-    discount?: NullableFloatFieldUpdateOperationsInput | number | null
-    debitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    creditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedDebitAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    integratedCreditAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    perUnitQty?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    perUnitCost?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    unitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    integratedUnitPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantityAdd?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    quantityLess?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    discount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    debitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    creditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedDebitAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
+    integratedCreditAmount?: NullableDecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string | null
     isOpening?: BoolFieldUpdateOperationsInput | boolean
     status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -48733,9 +48864,9 @@ export namespace Prisma {
 
   export type ProductionExpensesInventoryUpdateWithoutTransactionInfoInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
-    expDuration?: FloatFieldUpdateOperationsInput | number
-    amount?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     productionExpenseItem?: ProductionexpenseitemUpdateOneRequiredWithoutProductionExpensesInventoriesNestedInput
@@ -48745,9 +48876,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     proExpencesItemId?: IntFieldUpdateOperationsInput | number
-    unitRate?: FloatFieldUpdateOperationsInput | number
-    expDuration?: FloatFieldUpdateOperationsInput | number
-    amount?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -48756,9 +48887,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     proExpencesItemId?: IntFieldUpdateOperationsInput | number
-    unitRate?: FloatFieldUpdateOperationsInput | number
-    expDuration?: FloatFieldUpdateOperationsInput | number
-    amount?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -48899,9 +49030,9 @@ export namespace Prisma {
     id?: number
     date: Date | string
     transectionId?: number | null
-    unitRate?: number
-    expDuration?: number
-    amount?: number
+    unitRate?: Decimal | DecimalJsLike | number | string
+    expDuration?: Decimal | DecimalJsLike | number | string
+    amount?: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -48928,9 +49059,9 @@ export namespace Prisma {
 
   export type ProductionExpensesInventoryUpdateWithoutProductionExpenseItemInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
-    unitRate?: FloatFieldUpdateOperationsInput | number
-    expDuration?: FloatFieldUpdateOperationsInput | number
-    amount?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     transactionInfo?: TransactionInfoUpdateOneWithoutProductionExpensesInventoryNestedInput
@@ -48940,9 +49071,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     transectionId?: NullableIntFieldUpdateOperationsInput | number | null
-    unitRate?: FloatFieldUpdateOperationsInput | number
-    expDuration?: FloatFieldUpdateOperationsInput | number
-    amount?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -48951,9 +49082,9 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     transectionId?: NullableIntFieldUpdateOperationsInput | number | null
-    unitRate?: FloatFieldUpdateOperationsInput | number
-    expDuration?: FloatFieldUpdateOperationsInput | number
-    amount?: FloatFieldUpdateOperationsInput | number
+    unitRate?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    expDuration?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

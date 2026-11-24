@@ -96,7 +96,6 @@ const getInventoryAggValueById = async (query: any) => {
       },
       orderBy: [{ id: "desc" }],
     });
-
     if (!getDate?.date) {
       throw new AppError(StatusCodes.NOT_FOUND, "Inventory not found");
     }

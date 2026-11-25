@@ -118,6 +118,36 @@ const getRequestByid = async ({ transactionId, voucherType }: { transactionId: n
     return result
 }
 
+const updateRequestRaw = async (requestInventoryId: number, payload: { rawMaterials: any[] }) => {
+
+    const result = await prisma.$transaction(async (tx) => {
+        if (Array.isArray(payload.rawMaterials) && payload.rawMaterials.length > 0) {
+            await Promise.all(payload.rawMaterials.map(async (item: any) => {
+                const isexist = await tx.rawMaterial.findUnique({
+                    where: {
+                        id: item.rawMaterialId
+                    }
+                });
+                if (!isexist) {
+                    throw new AppError(StatusCodes.NOT_FOUND, "There is no Raw materials")
+                }
+
+                await tx.requestInventory.update({
+                    where: {
+                        id: requestInventoryId,
+                        rawId: item.rawMaterialId
+                    },
+                    data: {
+                        requestQty: item.requestQty,
+                    }
+                })
+            }));
+        }
+        return {}
+        // transaction end
+    });
+    return result
+}
 const approvalRawRequest = async (payload: TRAWRequestApproval) => {
     const result = await prisma.$transaction(async (tx) => {
         const transactioninfo = await tx.transactionInfo.findUnique({ where: { id: payload.transactionId } })
@@ -427,7 +457,7 @@ const approvalProductTransferRequest = async (payload: any) => {
 }
 
 
-export const internalTransactionService = { createRawRequest, approvalRawRequest, getAllRequest, getRequestByid, createRequestProduct, approvalProductTransferRequest, updateRequestProduct }
+export const internalTransactionService = { createRawRequest, approvalRawRequest, getAllRequest, getRequestByid, createRequestProduct, approvalProductTransferRequest, updateRequestProduct, updateRequestRaw }
 
 
 

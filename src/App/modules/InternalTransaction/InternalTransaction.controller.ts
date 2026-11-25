@@ -14,7 +14,16 @@ const createRequest = catchAsync(async (req: Request, res: Response) => {
         data: result,
     });
 });
-
+const updateRawRequest = catchAsync(async (req: Request, res: Response) => {
+    const requestId = Number(req.params.requestId)
+    const result = await internalTransactionService.updateRequestRaw(requestId, req.body);
+    sendResponse(res, {
+        statusCode: StatusCodes.OK,
+        success: true,
+        message: "Raw Request Updated Successfully",
+        data: result,
+    });
+})
 const getAllRequest = catchAsync(async (req: Request, res: Response) => {
     const voucherType = req.query.voucherType as VoucherType;
     const result = await internalTransactionService.getAllRequest(voucherType);
@@ -66,6 +75,7 @@ const updateProductRequest = catchAsync(async (req: Request, res: Response) => {
         data: result,
     });
 })
+
 const approveProductRequest = catchAsync(async (req: Request, res: Response) => {
     const result = await internalTransactionService.approvalProductTransferRequest(req.body);
     sendResponse(res, {
@@ -77,4 +87,4 @@ const approveProductRequest = catchAsync(async (req: Request, res: Response) => 
 });
 
 
-export const internalTransactionController = { createRequest, getAllRequest, approveRawRequest, getRequestById, createProductRequest, updateProductRequest, approveProductRequest, }
+export const internalTransactionController = { createRequest, getAllRequest, approveRawRequest, getRequestById, createProductRequest, updateProductRequest, approveProductRequest, updateRawRequest }

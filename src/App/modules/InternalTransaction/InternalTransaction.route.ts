@@ -4,6 +4,7 @@ import { internalTransactionController } from "./InternalTransaction.controller"
 
 const router = express.Router();
 router.post("/raw-request", internalTransactionController.createRequest)
+router.patch("/raw-request/:requestId", internalTransactionController.updateRawRequest)
 router.post("/raw-approve", internalTransactionController.approveRawRequest)
 
 router.get("/request", internalTransactionController.getAllRequest)

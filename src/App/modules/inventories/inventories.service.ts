@@ -3,7 +3,7 @@ import { date } from "zod";
 import prisma from "../../../shared/prisma";
 import AppError from "../../errors/AppError";
 import { StatusCodes } from "http-status-codes";
-import { Inventory } from "../../../generated/prisma/client";
+import { Department, Inventory } from "../../../generated/prisma/client";
 
 const getInventory = async () => {
   return await prisma.inventory.findMany({
@@ -22,8 +22,10 @@ const getInventoryById = async (id: number) => {
   });
 };
 
-const getInventoryAggValueById = async (query: any) => {
+const getInventoryAggValueById = async (query: { department: Department; itemType: string, productId: number, rawId: number; packingMaterialId: number }) => {
+
   if (query.itemType === "product") {
+    let startDate;
     const getDate = await prisma.inventory.findFirst({
       where: {
         productId: Number(query.productId),
@@ -31,16 +33,26 @@ const getInventoryAggValueById = async (query: any) => {
       },
       orderBy: [{ id: "desc" }],
     });
-
-    if (!getDate?.date) {
-      throw new AppError(StatusCodes.NOT_FOUND, "date not found");
+    if (getDate && getDate.date) {
+      startDate = getDate?.date;
+    } else if (!getDate) {
+      const getDate = await prisma.inventory.findFirst({
+        where: {
+          productId: Number(query.productId)
+        },
+        orderBy: [{ id: "desc" }],
+      });
+      startDate = getDate?.date
+    } else {
+      throw new Error("No Product Found")
     }
 
     const result = await prisma.inventory.aggregate({
       where: {
         productId: Number(query.productId),
+        department: query.department,
         date: {
-          gte: getDate.date,
+          gte: startDate,
         },
       },
       _sum: {
@@ -48,16 +60,24 @@ const getInventoryAggValueById = async (query: any) => {
         quantityLess: true,
         debitAmount: true,
         creditAmount: true,
+        integratedDebitAmount: true,
+        integratedCreditAmount: true,
       },
     });
-    const netQuantity = Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!);
+    // const netQuantity = Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!);
+    const netQuantity = Math.max(
+      0,
+      Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!)
+    );
     const netAmount = Number(result._sum.debitAmount!) - Number(result._sum.creditAmount!);
+    const netIntegratedAmount = Number((Number(result._sum.integratedDebitAmount!) - Number(result._sum.integratedCreditAmount!)).toFixed(2));
     // console.log(netAmount)
 
-    return { netQuantity, netAmount };
+    return { netQuantity, netAmount, netIntegratedAmount };
   }
 
   if (query.itemType === "raw") {
+    let startDate;
     const getDate = await prisma.inventory.findFirst({
       where: {
         rawId: Number(query.rawId),
@@ -65,17 +85,25 @@ const getInventoryAggValueById = async (query: any) => {
       },
       orderBy: [{ id: "desc" }],
     });
-
-    if (!getDate?.date) {
-      throw new AppError(StatusCodes.NOT_FOUND, "date not found");
+    if (getDate && getDate.date) {
+      startDate = getDate?.date;
+    } else if (!getDate) {
+      const getDate = await prisma.inventory.findFirst({
+        where: {
+          rawId: Number(query.rawId)
+        },
+        orderBy: [{ id: "desc" }],
+      });
+      startDate = getDate?.date
+    } else {
+      throw new Error("No Product Found")
     }
 
     const result = await prisma.inventory.aggregate({
       where: {
         rawId: Number(query.rawId),
         date: {
-          gte: getDate.date,
-          lte: new Date()
+          gte: startDate
         },
       },
       _sum: {
@@ -83,13 +111,21 @@ const getInventoryAggValueById = async (query: any) => {
         quantityLess: true,
         debitAmount: true,
         creditAmount: true,
+        integratedDebitAmount: true,
+        integratedCreditAmount: true,
       },
     });
-    const netQuantity = Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!);
+    // const netQuantity = Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!);
+    const netQuantity = Math.max(
+      0,
+      Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!)
+    );
     const netAmount = Number(result._sum.debitAmount!) - Number(result._sum.creditAmount!);
-    return { netQuantity, netAmount };
+    const netIntegratedAmount = Number((Number(result._sum.integratedDebitAmount!) - Number(result._sum.integratedCreditAmount!)).toFixed(2));
+    return { netQuantity, netAmount, netIntegratedAmount };
   }
   if (query.itemType === "pmmaterial") {
+    let startDate;
     const getDate = await prisma.pMInventory.findFirst({
       where: {
         packingMaterialId: Number(query.packingMaterialId),
@@ -97,15 +133,24 @@ const getInventoryAggValueById = async (query: any) => {
       },
       orderBy: [{ id: "desc" }],
     });
-    if (!getDate?.date) {
-      throw new AppError(StatusCodes.NOT_FOUND, "Inventory not found");
+    if (getDate && getDate.date) {
+      startDate = getDate?.date;
+    } else if (!getDate) {
+      const getDate = await prisma.pMInventory.findFirst({
+        where: {
+          packingMaterialId: Number(query.packingMaterialId)
+        },
+        orderBy: [{ id: "desc" }],
+      });
+      startDate = getDate?.date
+    } else {
+      throw new Error("No Product Found")
     }
-
     const result = await prisma.pMInventory.aggregate({
       where: {
         packingMaterialId: Number(query.packingMaterialId),
         date: {
-          gte: getDate.date,
+          gte: startDate,
         },
       },
       _sum: {
@@ -113,12 +158,19 @@ const getInventoryAggValueById = async (query: any) => {
         quantityLess: true,
         debitAmount: true,
         creditAmount: true,
+        integratedDebitAmount: true,
+        integratedCreditAmount: true,
       },
     });
-    const netQuantity = Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!);
+    // const netQuantity = Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!);
+    const netQuantity = Math.max(
+      0,
+      Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!)
+    );
     const netAmount = Number(result._sum.debitAmount!) - Number(result._sum.creditAmount!);
+    const netIntegratedAmount = Number((Number(result._sum.integratedDebitAmount!) - Number(result._sum.integratedCreditAmount!)).toFixed(2));
 
-    return { netQuantity, netAmount };
+    return { netQuantity, netAmount, netIntegratedAmount };
   }
 };
 

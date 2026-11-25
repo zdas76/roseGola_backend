@@ -4,6 +4,7 @@ import prisma from "../../../shared/prisma";
 import { InventoryService } from "./inventories.service";
 import sendResponse from "../../../shared/sendResponse";
 import { StatusCodes } from "http-status-codes";
+import { Department } from "../../../generated/prisma";
 
 const getnventory = catchAsync(async (req: Request, res: Response) => {
   const result = await InventoryService.getInventory();
@@ -49,8 +50,13 @@ const deleteInventory = catchAsync(async (req: Request, res: Response) => {
 
 const getInventoryAggigetValue = catchAsync(
   async (req: Request, res: Response) => {
+    const department = req.query.department as Department;
+    const productId = Number(req.query.productId)
+    const packingMaterialId = Number(req.query.packingMaterialId)
+    const rawId = Number(req.query.rawId)
+    const itemType = req.query.itemType as string;
     const result: any = await InventoryService.getInventoryAggValueById(
-      req.query
+      { department, productId, packingMaterialId, rawId, itemType }
     );
 
     sendResponse(res, {

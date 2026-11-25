@@ -9,11 +9,11 @@ import {
 import { GenerateVoucherNumber } from "../../../helpars/generateVoucherNumber";
 import { getUnitPriceFromInventory, getUnitPriceFromPmInventory, getUnitPriceFromProduct } from "../../../helpars/getUnitPrice";
 import prisma from "../../../shared/prisma";
+import { ICreatePurchasePayload } from "../InternalTransaction/InternalTransaction.type";
 import { PurchasePayload, TItems } from "./journal.interface";
 
 //Create Purchase Received Voucher
-const createPurchestReceivedIntoDB = async (payload: any) => {
-
+const createPurchestReceivedIntoDB = async (payload: ICreatePurchasePayload) => {
   const createPurchestVoucher = await prisma.$transaction(async (tx) => {
     const partyExists = await tx.party.findUnique({
       where: { id: payload.partyOrcustomerId },
@@ -42,36 +42,39 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
     let inventoryData: any = [];
     //step 3: Prepare Inventory Data
     if (payload.itemType === "RAW_MATERIAL") {
-      payload.items.map(async (item: any) => {
-        const { integretedUnitePrice } = await getUnitPriceFromInventory(item.rawMaterialId, "RMPM_STORE")
-        inventoryData.push({
-          transactionId: createTransactionInfo.id,
-          date: payload.date,
-          rawId: item.rawOrProductId,
-          unitPrice: item.unitPrice,
-          department: Department.RMPM_STORE,
-          quantityAdd: item.quantityAdd,
-          discount: item?.discount || 0,
-          debitAmount: item.debitAmount,
-          integratedDebitAmount: integretedUnitePrice * item.quantityAdd,
-          integratedUnitPrice: integretedUnitePrice
+      await Promise.all(
+        payload.items.map(async (item: any) => {
+          const { integretedUnitePrice } = await getUnitPriceFromInventory(item.rawMaterialId, "RMPM_STORE")
+          inventoryData.push({
+            transactionId: createTransactionInfo.id,
+            date: payload.date,
+            rawId: item.rawOrProductId,
+            unitPrice: item.unitPrice,
+            department: Department.RMPM_STORE,
+            quantityAdd: item.quantityAdd,
+            discount: item?.discount || 0,
+            debitAmount: item.debitAmount,
+            integratedUnitPrice: integretedUnitePrice,
+            integratedDebitAmount: integretedUnitePrice * item.quantityAdd,
+          })
         })
-      })
+      )
     } else if (payload.itemType === "PRODUCT") {
-      payload.items.map(async (item: any) => {
-        inventoryData.push({
-          transactionId: createTransactionInfo.id,
-          productId: item.rawOrProductId,
-          unitPrice: item.unitPrice,
-          quantityAdd: item.quantityAdd,
-          discount: item?.discount || 0,
-          date: payload.date,
-          department: Department.RMPM_STORE,
-          debitAmount: item.debitAmount,
-          integratedDebitAmount: item.integratedUnitPrice * item.quantityAdd,
-          integratedUnitPrice: item.integratedUnitPrice
-        })
-      })
+      await Promise.all(
+        payload.items.map(async (item: any) => {
+          inventoryData.push({
+            transactionId: createTransactionInfo.id,
+            productId: item.rawOrProductId,
+            unitPrice: item.unitPrice,
+            quantityAdd: item.quantityAdd,
+            discount: item?.discount || 0,
+            date: payload.date,
+            department: Department.RMPM_STORE,
+            debitAmount: item.debitAmount,
+            integratedDebitAmount: item.integratedUnitPrice * item.quantityAdd,
+            integratedUnitPrice: item.integratedUnitPrice
+          })
+        }))
     }
     //Step 3: Insert Inventory Records
     await Promise.all(
@@ -219,8 +222,6 @@ const createPurchestReceivedIntoDB = async (payload: any) => {
 };
 //Create Purchase Received Voucher
 const createPurchestReceivedPackingMaterialIntoDB = async (payload: PurchasePayload) => {
-  // console.log(payload, "packing materials payload")
-
   const createPurchestVoucher = await prisma.$transaction(async (tx) => {
     const partyExists = await tx.party.findUnique({
       where: { id: payload.partyOrcustomerId },

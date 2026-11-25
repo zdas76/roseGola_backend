@@ -55,7 +55,17 @@ const createProductRequest = catchAsync(async (req: Request, res: Response) => {
         message: "Product Request Created Successfully",
         data: result,
     });
-});
+})
+const updateProductRequest = catchAsync(async (req: Request, res: Response) => {
+    const requestId = Number(req.params.requestId)
+    const result = await internalTransactionService.updateRequestProduct(requestId, req.body);
+    sendResponse(res, {
+        statusCode: StatusCodes.OK,
+        success: true,
+        message: "Product Request Updated Successfully",
+        data: result,
+    });
+})
 const approveProductRequest = catchAsync(async (req: Request, res: Response) => {
     const result = await internalTransactionService.approvalProductTransferRequest(req.body);
     sendResponse(res, {
@@ -67,4 +77,4 @@ const approveProductRequest = catchAsync(async (req: Request, res: Response) => 
 });
 
 
-export const internalTransactionController = { createRequest, getAllRequest, approveRawRequest, getRequestById, createProductRequest, approveProductRequest }
+export const internalTransactionController = { createRequest, getAllRequest, approveRawRequest, getRequestById, createProductRequest, updateProductRequest, approveProductRequest, }

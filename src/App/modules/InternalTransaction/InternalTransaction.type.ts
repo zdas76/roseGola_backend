@@ -53,3 +53,31 @@ export interface TRAWRequestApproval {
     totalQuantity: number;
     transactionId: number
 }
+
+
+export interface IRawOrProductItem {
+    key: number;
+    rawOrProductId: number;
+    quantityAdd: number;
+    unitPrice: number;
+    integratedUnitPrice: number;
+}
+
+export interface IExpenseItem {
+    key: number;
+    expItemId: number;
+    expItemName: string;
+    amount: number;
+    narration: string;
+}
+
+export interface ICreatePurchasePayload {
+    partyOrcustomerId: number;
+    date: string;
+    invoiceNo: string;
+    itemType: "RAW_MATERIAL" | "PRODUCT";
+    subTotal: number;
+    grandTotal: number;
+    expenseItems: IExpenseItem[];
+    items: IRawOrProductItem[];
+}

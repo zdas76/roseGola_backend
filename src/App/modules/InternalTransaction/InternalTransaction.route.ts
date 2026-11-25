@@ -10,6 +10,7 @@ router.get("/request", internalTransactionController.getAllRequest)
 router.get("/request/:id", internalTransactionController.getRequestById)
 
 router.post("/product-request", internalTransactionController.createProductRequest)
+router.patch("/product-request/:requestId", internalTransactionController.updateProductRequest)
 router.post("/prodcut-approve", internalTransactionController.approveProductRequest)
 
 

@@ -88,7 +88,8 @@ const getAllRequest = async (voucherTypa: VoucherType) => {
                 select: {
                     id: true,
                     fromDepartment: true,
-                    toDepartment: true
+                    toDepartment: true,
+                    requestQty: true,
                 }
             }
         },
@@ -312,6 +313,38 @@ const createRequestProduct = async (payload: any) => {
     return result
 }
 
+const updateRequestProduct = async (requestInventoryId: number, payload: { products: any[] }) => {
+    console.log(payload, requestInventoryId)
+    const result = await prisma.$transaction(async (tx) => {
+        if (Array.isArray(payload.products) && payload.products.length > 0) {
+            await Promise.all(payload.products.map(async (item: any) => {
+                const isexist = await tx.product.findUnique({
+                    where: {
+                        id: item.productId
+                    }
+                });
+                if (!isexist) {
+                    throw new AppError(StatusCodes.NOT_FOUND, "There is no Raw materials")
+                }
+
+                await tx.requestInventory.update({
+                    where: {
+                        id: requestInventoryId,
+                        productId: item.productId
+                    },
+                    data: {
+                        requestQty: item.requestQty,
+                    }
+                })
+            }));
+        }
+        return {}
+        // transaction end
+    });
+    return result
+}
+
+
 const approvalProductTransferRequest = async (payload: any) => {
     const result = await prisma.$transaction(async (tx) => {
 
@@ -394,7 +427,7 @@ const approvalProductTransferRequest = async (payload: any) => {
 }
 
 
-export const internalTransactionService = { createRawRequest, approvalRawRequest, getAllRequest, getRequestByid, createRequestProduct, approvalProductTransferRequest }
+export const internalTransactionService = { createRawRequest, approvalRawRequest, getAllRequest, getRequestByid, createRequestProduct, approvalProductTransferRequest, updateRequestProduct }
 
 
 

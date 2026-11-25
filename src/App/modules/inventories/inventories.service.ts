@@ -50,8 +50,8 @@ const getInventoryAggValueById = async (query: any) => {
         creditAmount: true,
       },
     });
-    const netQuantity = result._sum.quantityAdd! - result._sum.quantityLess!;
-    const netAmount = result._sum.debitAmount! - result._sum.creditAmount!;
+    const netQuantity = Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!);
+    const netAmount = Number(result._sum.debitAmount!) - Number(result._sum.creditAmount!);
     // console.log(netAmount)
 
     return { netQuantity, netAmount };
@@ -75,6 +75,7 @@ const getInventoryAggValueById = async (query: any) => {
         rawId: Number(query.rawId),
         date: {
           gte: getDate.date,
+          lte: new Date()
         },
       },
       _sum: {
@@ -84,8 +85,8 @@ const getInventoryAggValueById = async (query: any) => {
         creditAmount: true,
       },
     });
-    const netQuantity = result._sum.quantityAdd! - result._sum.quantityLess!;
-    const netAmount = result._sum.debitAmount! - result._sum.creditAmount!;
+    const netQuantity = Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!);
+    const netAmount = Number(result._sum.debitAmount!) - Number(result._sum.creditAmount!);
     return { netQuantity, netAmount };
   }
   if (query.itemType === "pmmaterial") {
@@ -114,8 +115,8 @@ const getInventoryAggValueById = async (query: any) => {
         creditAmount: true,
       },
     });
-    const netQuantity = result._sum.quantityAdd! - result._sum.quantityLess!;
-    const netAmount = result._sum.debitAmount! - result._sum.creditAmount!;
+    const netQuantity = Number(result._sum.quantityAdd!) - Number(result._sum.quantityLess!);
+    const netAmount = Number(result._sum.debitAmount!) - Number(result._sum.creditAmount!);
 
     return { netQuantity, netAmount };
   }

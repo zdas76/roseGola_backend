@@ -55,7 +55,7 @@ const createPurchestReceivedIntoDB = async (payload: ICreatePurchasePayload) => 
             discount: item?.discount || 0,
             debitAmount: item.debitAmount,
             integratedUnitPrice: integretedUnitePrice,
-            integratedDebitAmount: integretedUnitePrice * item.quantityAdd,
+            integratedDebitAmount: Number((integretedUnitePrice * item.quantityAdd).toFixed(2))
           })
         })
       )
@@ -73,8 +73,8 @@ const createPurchestReceivedIntoDB = async (payload: ICreatePurchasePayload) => 
             debitAmount: item.debitAmount,
             integratedDebitAmount: item.integratedUnitPrice * item.quantityAdd,
             integratedUnitPrice: item.integratedUnitPrice
-          })
-        }))
+          });
+        }));
     }
     //Step 3: Insert Inventory Records
     await Promise.all(

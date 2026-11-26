@@ -17,4 +17,5 @@ RUN mkdir -p dist/generated && \
 EXPOSE 5000
 
 # Keep this to regenerate the dynamic runtime client when the container boots up
-CMD ["sh", "-c", "npx prisma generate && npx prisma db push && npm start"]
+# CMD ["sh", "-c", "npx prisma generate && npx prisma db push && npm start"]
+CMD ["sh", "-c", "npx prisma generate && npx prisma db push --accept-data-loss && npm start"]

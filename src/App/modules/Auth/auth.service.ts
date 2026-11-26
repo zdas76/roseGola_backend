@@ -6,9 +6,7 @@ import { jwtHelpers } from "../../../helpars/jwtHelpers";
 import config from "../../../config";
 import emailSender from "./emailSender";
 import AppError from "../../errors/AppError";
-import { Status } from "../../../generated/prisma";
-
-
+import { Status } from "../../../generated/prisma/enums";
 
 const loginUser = async (payLoad: { email: string; password: string }) => {
   const userData = await prisma.user.findFirst({
@@ -24,7 +22,7 @@ const loginUser = async (payLoad: { email: string; password: string }) => {
 
   const isCurrentPasword = await bcrypt.compare(
     payLoad.password,
-    userData?.password as string
+    userData?.password as string,
   );
 
   if (!isCurrentPasword) {
@@ -39,7 +37,7 @@ const loginUser = async (payLoad: { email: string; password: string }) => {
       role: userData?.role,
     },
     config.jwt.jwt_secret as Secret,
-    config.jwt.expires_in as string
+    config.jwt.expires_in as string,
   );
 
   const refreshToken = jwtHelpers.generateToken(
@@ -50,7 +48,7 @@ const loginUser = async (payLoad: { email: string; password: string }) => {
       role: userData?.role,
     },
     config.jwt.refresh_token_secret as Secret,
-    config.jwt.refresh_token_expires_in as string
+    config.jwt.refresh_token_expires_in as string,
   );
   return {
     accessToken,
@@ -63,7 +61,7 @@ const refreshToken = async (token: string) => {
   try {
     userData = jwtHelpers.verifyToken(
       token,
-      config.jwt.refresh_token_secret as Secret
+      config.jwt.refresh_token_secret as Secret,
     );
   } catch (error) {
     throw new AppError(StatusCodes.UNAUTHORIZED, "Your are not Authorized");
@@ -85,7 +83,7 @@ const refreshToken = async (token: string) => {
       role: userData?.role,
     },
     config.jwt.jwt_secret as Secret,
-    config.jwt.expires_in as string
+    config.jwt.expires_in as string,
   );
 
   return {
@@ -95,7 +93,7 @@ const refreshToken = async (token: string) => {
 
 const changePassword = async (
   user: { email: string; role: string; iat: number; exp: number },
-  data: { olePassword: string; newPassword: string }
+  data: { olePassword: string; newPassword: string },
 ) => {
   const userData = await prisma.user.findUniqueOrThrow({
     where: {
@@ -104,7 +102,7 @@ const changePassword = async (
   });
   const isCorrectPassword: boolean = await bcrypt.compare(
     data.olePassword,
-    userData.password
+    userData.password,
   );
 
   if (!isCorrectPassword) {
@@ -112,7 +110,7 @@ const changePassword = async (
   }
   const hassPassWord: string = await bcrypt.hash(
     data.newPassword,
-    parseInt(config.hash_round as string)
+    parseInt(config.hash_round as string),
   );
 
   await prisma.user.update({
@@ -146,7 +144,7 @@ const forgotPassword = async (playLoad: { email: string }) => {
       role: userData?.role,
     },
     config.jwt.reset_pass_secret as Secret,
-    config.jwt.reset_pass_token_expires_in as string
+    config.jwt.reset_pass_token_expires_in as string,
   );
   const resetPassLink =
     config.reset_pass_link +
@@ -159,13 +157,13 @@ const forgotPassword = async (playLoad: { email: string }) => {
       Reset Password
     </a>
     </p>
-    `
+    `,
   );
 };
 
 const resetPassword = async (
   token: string,
-  payLoad: { email: string; passWord: string }
+  payLoad: { email: string; passWord: string },
 ) => {
   const userData = await prisma.employee.findUniqueOrThrow({
     where: {
@@ -176,7 +174,7 @@ const resetPassword = async (
 
   const isValidToken = jwtHelpers.verifyToken(
     token,
-    config.jwt.reset_pass_secret as Secret
+    config.jwt.reset_pass_secret as Secret,
   );
 
   if (!isValidToken) {
@@ -184,7 +182,7 @@ const resetPassword = async (
   }
   const hassPassWord: string = await bcrypt.hash(
     payLoad.passWord,
-    parseInt(config.hash_round as string)
+    parseInt(config.hash_round as string),
   );
   await prisma.user.update({
     where: {

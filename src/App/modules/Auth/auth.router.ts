@@ -1,7 +1,7 @@
 import express from "express";
 import { AuthControllers } from "./auth.controllers";
 import auth from "../../middlewares/auth";
-import { UserRole } from "../../../generated/prisma";
+import { UserRole } from "../../../generated/prisma/enums";
 
 const router = express.Router();
 
@@ -12,7 +12,7 @@ router.post("/refresh-token", AuthControllers.refreshToken);
 router.post(
   "/change-password",
   auth(UserRole.SUPER_ADMIN, UserRole.ADMIN),
-  AuthControllers.changePassword
+  AuthControllers.changePassword,
 );
 
 router.post("/forgot-password", AuthControllers.forgotPassword);

@@ -1,17 +1,14 @@
-
 import prisma from "../../../shared/prisma";
 import bcrypt from "bcryptjs";
 import config from "../../../config";
-// import { IPaginationOptions } from "../../interfaces/pagination";
-// import { paginationHelper } from "../../../helpars/paginationHelpers";
-import { Request } from "express";
 import { TUser } from "./user.validation";
-import { Status, User } from "../../../generated/prisma";
+import { Status } from "../../../generated/prisma/enums";
+import { User } from "../../../generated/prisma/client";
 
 const creatUserToDB = async (payload: TUser) => {
   const hashedPassword = bcrypt.hashSync(
     payload.password,
-    parseInt(config.hash_round as any)
+    parseInt(config.hash_round as any),
   );
 
   const createUser = await prisma.user.create({

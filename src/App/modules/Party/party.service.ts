@@ -1,12 +1,10 @@
-
 import prisma from "../../../shared/prisma";
 import { StatusCodes } from "http-status-codes";
 import { paginationHelper } from "../../../helpars/paginationHelpers";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { PartySearchAbleFields } from "./party.constant";
 import AppError from "../../errors/AppError";
-import { Party, Prisma } from "../../../generated/prisma";
-
+import { Party, Prisma } from "../../../generated/prisma/client";
 
 const getPertyLedgerInfo = async (params: any, paginat: IPaginationOptions) => {
   const { page, limit, skip } = paginationHelper.Pagination(paginat);
@@ -44,7 +42,8 @@ const getPertyLedgerInfo = async (params: any, paginat: IPaginationOptions) => {
           // or just ensure it's a valid enum value for the related Party model
           return {
             party: {
-              partyType: filterData[key] === "PARTY" ? undefined : filterData[key],
+              partyType:
+                filterData[key] === "PARTY" ? undefined : filterData[key],
             },
           };
         }
@@ -72,17 +71,16 @@ const getPertyLedgerInfo = async (params: any, paginat: IPaginationOptions) => {
     orderBy:
       paginat.sortBy && paginat.sortOrder
         ? {
-          [paginat.sortBy]: paginat.sortOrder,
-        }
+            [paginat.sortBy]: paginat.sortOrder,
+          }
         : {
-          createdAt: "desc",
-        },
+            createdAt: "desc",
+          },
   });
   return result;
 };
 
 const createParty = async (payload: Party) => {
-
   const isExist = await prisma.party.findFirst({
     where: {
       name: payload.name,
@@ -125,24 +123,29 @@ const getAllParty = async (params: any, paginat: IPaginationOptions) => {
   if (params?.partyType) {
     andCondition.push({
       partyType: params.partyType,
-    })
+    });
   }
 
   if (Object.keys(filterData).length > 0) {
-    const filterConditions = Object.keys(filterData).map((key) => {
-      if (key === "partyType") {
+    const filterConditions = Object.keys(filterData)
+      .map((key) => {
+        if (key === "partyType") {
+          return {
+            [key]: {
+              equals:
+                filterData[key] === "PARTY"
+                  ? undefined
+                  : (filterData[key] as Prisma.EnumPartyTypeFilter),
+            },
+          };
+        }
         return {
           [key]: {
-            equals: filterData[key] === "PARTY" ? undefined : (filterData[key] as Prisma.EnumPartyTypeFilter),
+            equals: filterData[key],
           },
         };
-      }
-      return {
-        [key]: {
-          equals: filterData[key],
-        },
-      };
-    }).filter(condition => Object.values(condition)[0].equals !== undefined);
+      })
+      .filter((condition) => Object.values(condition)[0].equals !== undefined);
 
     if (filterConditions.length > 0) {
       andCondition.push({
@@ -150,7 +153,6 @@ const getAllParty = async (params: any, paginat: IPaginationOptions) => {
       });
     }
   }
-
 
   const whereConditions: Prisma.PartyWhereInput =
     andCondition.length > 0 ? { AND: andCondition } : { isDeleted: false };
@@ -162,11 +164,11 @@ const getAllParty = async (params: any, paginat: IPaginationOptions) => {
     orderBy:
       paginat.sortBy && paginat.sortOrder
         ? {
-          [paginat.sortBy]: paginat.sortOrder,
-        }
+            [paginat.sortBy]: paginat.sortOrder,
+          }
         : {
-          createdAt: "desc",
-        },
+            createdAt: "desc",
+          },
   });
 
   return result;

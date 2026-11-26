@@ -1,17 +1,16 @@
-
 import prisma from "../../../shared/prisma";
 import { StatusCodes } from "http-status-codes";
 import { paginationHelper } from "../../../helpars/paginationHelpers";
 import { IPaginationOptions } from "../../interfaces/pagination";
 import { PurchaseOrderSearchAbleFields } from "./purchaseOrder.constant";
 import AppError from "../../errors/AppError";
-import { Prisma, Status } from "../../../generated/prisma";
 import { GenerateVoucherNumber } from "../../../helpars/generateVoucherNumber";
 
 import {
   CreatePurchaseOrder,
   UpdatePurchaseOrder,
 } from "./purchaseOrder.validation";
+import { Prisma, Status } from "../../../generated/prisma/client";
 
 const createPurchaseOrder = async (payload: CreatePurchaseOrder) => {
   const orderNo = await GenerateVoucherNumber("ReqO");
@@ -127,7 +126,12 @@ const getAllPurchaseOrders = async (
 
   const filterConditions = Object.keys(filterData)
     .map((key) => {
-      if (key === "status" || key === "partyId" || key === "type" || key === "searchTerm") {
+      if (
+        key === "status" ||
+        key === "partyId" ||
+        key === "type" ||
+        key === "searchTerm"
+      ) {
         return undefined;
       }
       return {
@@ -160,11 +164,11 @@ const getAllPurchaseOrders = async (
     orderBy:
       paginat.sortBy && paginat.sortOrder
         ? {
-          [paginat.sortBy]: paginat.sortOrder,
-        }
+            [paginat.sortBy]: paginat.sortOrder,
+          }
         : {
-          createdAt: "desc",
-        },
+            createdAt: "desc",
+          },
     include: {
       party: {
         select: {
@@ -269,7 +273,6 @@ const updatePurchaseOrderById = async (
   if (!isExist) {
     throw new AppError(StatusCodes.BAD_REQUEST, "No Purchase Order Found");
   }
-
 
   const { purchaseOrder, ...orderData } = payload as any;
 

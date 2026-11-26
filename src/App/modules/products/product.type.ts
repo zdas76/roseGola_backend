@@ -1,4 +1,4 @@
-import { Status } from "../../../generated/prisma";
+import { Status } from "../../../generated/prisma/enums";
 
 export type TcreateProduct = {
   id: number;

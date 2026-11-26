@@ -11,13 +11,10 @@ const app: Application = express();
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://zdas.com.bd",
-      "http://zdas.com.bd",
-      "https://rose-gold-chemical.vercel.app/dashboard",
-    ],
+    origin: ["http://localhost:5173", "http://201.18.208.104:5173"],
     credentials: true,
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    allowedHeaders: "Content-Type, Accept, Authorization",
   }),
 );
 app.use(cookieParser());

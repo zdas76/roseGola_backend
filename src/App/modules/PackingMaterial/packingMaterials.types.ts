@@ -1,4 +1,4 @@
-import { Status } from "../../../generated/prisma";
+import { Status } from "../../../generated/prisma/enums";
 
 type Inventory = {
   date: string;
@@ -24,4 +24,3 @@ export type TpackingMaterial = {
   inventory?: Inventory[];
   alertQuantity?: number;
 };
-

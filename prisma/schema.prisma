@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "../src/generated/prisma"
 }
 
@@ -462,7 +462,11 @@ model IngredientExpneseItems {
   createdAt               DateTime              @default(now())
   updatedAt               DateTime              @updatedAt
   productionExpenseItem   Productionexpenseitem @relation(fields: [productionExpenssItemId], references: [id])
+<<<<<<< HEAD
   productIngradient       ProductionIngradient  @relation(fields: [productionIngradientId], references: [id], onDelete: Cascade)
+=======
+  productIngradient       ProductionIngradient  @relation(fields: [productionIngradientId], references: [id])
+>>>>>>> main
 
   @@index([productionExpenssItemId], map: "ingredient_expnese_productionExpenssItemId_fkey")
   @@index([productionIngradientId], map: "ingredient_expnese_productionIngradientId_fkey")

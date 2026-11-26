@@ -1,5 +1,4 @@
-
-import { Unit } from "../../../generated/prisma";
+import { Unit } from "../../../generated/prisma/client";
 import prisma from "../../../shared/prisma";
 import AppError from "../../errors/AppError";
 import { StatusCodes } from "http-status-codes";
@@ -52,8 +51,8 @@ const updateUnit = async (id: number, payload: Unit) => {
 const deleteUnit = async (id: number) => {
   const existUnit = await prisma.unit.findUnique({
     where: {
-      id: id
-    }
+      id: id,
+    },
   });
 
   if (!existUnit) {
@@ -68,23 +67,22 @@ const deleteUnit = async (id: number) => {
   if (productCount > 0 || rawMaterialCount > 0) {
     throw new AppError(
       StatusCodes.BAD_REQUEST,
-      `Cannot delete this unit because it is used by ${productCount} product(s) and ${rawMaterialCount} raw material(s)`
+      `Cannot delete this unit because it is used by ${productCount} product(s) and ${rawMaterialCount} raw material(s)`,
     );
   }
 
   const result = await prisma.unit.delete({
     where: {
-      id: id
-    }
+      id: id,
+    },
   });
   return result;
-}
-
+};
 
 export const UnitService = {
   createUnit,
   getAllUnit,
   getUnitById,
   updateUnit,
-  deleteUnit
+  deleteUnit,
 };

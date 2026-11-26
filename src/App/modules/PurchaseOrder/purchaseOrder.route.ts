@@ -3,7 +3,6 @@ import { PurchaseOrderControllers } from "./purchaseOrder.controllers";
 import validationRequiest from "../../middlewares/validationRequest";
 import { purchaseOrderValidaton } from "./purchaseOrder.validation";
 import auth from "../../middlewares/auth";
-import { UserRole } from "../../../generated/prisma";
 
 const route = express.Router();
 
@@ -19,7 +18,6 @@ route.get(
   // auth(UserRole.SUPER_ADMIN, UserRole.ADMIN, UserRole.USER),
   PurchaseOrderControllers.getAllPurchaseOrders,
 );
-
 
 route.get(
   "/:id",

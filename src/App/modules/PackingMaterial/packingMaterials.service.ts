@@ -2,7 +2,8 @@ import prisma from "../../../shared/prisma";
 import AppError from "../../errors/AppError";
 import { StatusCodes } from "http-status-codes";
 import { TpackingMaterial } from "./packingMaterials.types";
-import { Department, PackingMaterial } from "../../../generated/prisma";
+import { Department } from "../../../generated/prisma/enums";
+import { PackingMaterial } from "../../../generated/prisma/client";
 
 const createPackingMaterial = async (payload: TpackingMaterial) => {
   const isExist = await prisma.packingMaterial.findFirst({
@@ -23,7 +24,7 @@ const createPackingMaterial = async (payload: TpackingMaterial) => {
   if (!isUnitExist) {
     throw new AppError(
       StatusCodes.BAD_REQUEST,
-      `Unit with ID ${payload.unitId} does not exist.`
+      `Unit with ID ${payload.unitId} does not exist.`,
     );
   }
 
@@ -65,7 +66,7 @@ const createPackingMaterialsMany = async (payloads: TpackingMaterial[]) => {
   if (!Array.isArray(payloads) || payloads.length === 0) {
     throw new AppError(
       StatusCodes.BAD_REQUEST,
-      "At least one packing material is required"
+      "At least one packing material is required",
     );
   }
   const names = payloads.map((item) => item?.name?.trim()).filter(Boolean);
@@ -87,7 +88,7 @@ const createPackingMaterialsMany = async (payloads: TpackingMaterial[]) => {
       StatusCodes.BAD_REQUEST,
       `These names are already used: ${existing
         .map((item) => item.name)
-        .join(", ")}`
+        .join(", ")}`,
     );
   }
 
@@ -110,7 +111,7 @@ const createPackingMaterialsMany = async (payloads: TpackingMaterial[]) => {
   if (missingUnits.length > 0) {
     throw new AppError(
       StatusCodes.BAD_REQUEST,
-      `Unit ID(s) not found in database: ${missingUnits.join(", ")}. Please create unit(s) first.`
+      `Unit ID(s) not found in database: ${missingUnits.join(", ")}. Please create unit(s) first.`,
     );
   }
 
@@ -143,7 +144,7 @@ const createPackingMaterialsMany = async (payloads: TpackingMaterial[]) => {
           },
         },
       });
-    })
+    }),
   );
 
   return result;
@@ -192,7 +193,7 @@ const getPackingMaterialById = async (id: number) => {
 
 const updatePackingMaterial = async (
   id: number,
-  payload: Partial<PackingMaterial> & { amount?: number }
+  payload: Partial<PackingMaterial> & { amount?: number },
 ) => {
   const isExist = await prisma.packingMaterial.findFirst({
     where: { id, isDeleted: false },
@@ -210,9 +211,14 @@ const updatePackingMaterial = async (
       name: payload.name,
       unitId: payload.unitId ? Number(payload.unitId) : undefined,
       description: payload.description,
-      unitPrice: payload.unitPrice !== undefined ? Number(payload.unitPrice) : undefined,
-      quantity: payload.quantity !== undefined ? Number(payload.quantity) : undefined,
-      alertQuantity: payload.alertQuantity !== undefined ? Number(payload.alertQuantity) : undefined,
+      unitPrice:
+        payload.unitPrice !== undefined ? Number(payload.unitPrice) : undefined,
+      quantity:
+        payload.quantity !== undefined ? Number(payload.quantity) : undefined,
+      alertQuantity:
+        payload.alertQuantity !== undefined
+          ? Number(payload.alertQuantity)
+          : undefined,
       openingAmount:
         payload.openingAmount !== undefined
           ? Number(payload.openingAmount)

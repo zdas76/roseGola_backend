@@ -1,10 +1,15 @@
-import { Department, Status, productioniteminfo_status, VoucherType } from "../../../generated/prisma";
 import { GenerateVoucherNumber } from "../../../helpars/generateVoucherNumber";
 import prisma from "../../../shared/prisma";
 import AppError from "../../errors/AppError";
 import { StatusCodes } from "http-status-codes";
 import { Production } from "./productionTypes";
 import { GenerateBatchNo } from "../../../helpars/GenerateBatchNo";
+import {
+  Department,
+  productioniteminfo_status,
+  Status,
+  VoucherType,
+} from "../../../generated/prisma/enums";
 
 const createProduction = async (
   id: number | undefined,
@@ -41,8 +46,8 @@ const createProduction = async (
           productioniteminfo: {
             update: {
               status: payload?.status,
-            }
-          }
+            },
+          },
         },
       });
     } else {
@@ -55,8 +60,8 @@ const createProduction = async (
             create: {
               batchNo: batchNo,
               productId: payload?.productinfo?.productId,
-              status: payload?.status
-            }
+              status: payload?.status,
+            },
           },
           date: new Date(payload.date),
           voucherType: VoucherType.PRODUCTION,
@@ -70,8 +75,8 @@ const createProduction = async (
           id: payload.inventoryId,
           transactionId: id,
           productId: payload?.productinfo?.productId,
-        }
-      })
+        },
+      });
     }
     if (existingInvetory) {
       // যদি রেকর্ড পাওয়া যায় -> Update হবে
@@ -210,7 +215,9 @@ const createProduction = async (
             perUnitCost: Number(packmaterial.perUnitCost) || 0,
             unitPrice: Number(packmaterial.unitPrice) || 0,
             quantityLess: Number(packmaterial.qty) || 0,
-            creditAmount: Number(packmaterial.perUnitCost) * (Number(packmaterial.qty) || 0) || 0,
+            creditAmount:
+              Number(packmaterial.perUnitCost) *
+                (Number(packmaterial.qty) || 0) || 0,
           },
         });
       }
@@ -222,12 +229,12 @@ const createProduction = async (
       await tx.productioniteminfo.update({
         where: {
           transactionId: transactionInfo.id,
-          status: productioniteminfo_status.PENDING
+          status: productioniteminfo_status.PENDING,
         },
         data: {
-          status: productioniteminfo_status.COMPLETE
-        }
-      })
+          status: productioniteminfo_status.COMPLETE,
+        },
+      });
       // await tx.inventory.deleteMany({
       //   where: { transactionId: transactionInfo.id, productId: { not: null } },
       // });
@@ -257,8 +264,12 @@ const createProduction = async (
             unitPrice: Number(product.unitPrice) || 0,
             quantityLess: Number(product.quantityLess) || null,
             quantityAdd: Number(product.quantityAdd) || null,
-            debitAmount: Number(product.unitPrice) * (Number(product.quantityAdd) || 0) || null,
-            creditAmount: Number(product.unitPrice) * (Number(product.quantityLess) || 0) || null,
+            debitAmount:
+              Number(product.unitPrice) * (Number(product.quantityAdd) || 0) ||
+              null,
+            creditAmount:
+              Number(product.unitPrice) * (Number(product.quantityLess) || 0) ||
+              null,
           },
         });
       }
@@ -329,7 +340,7 @@ const getProduction = async () => {
               name: true,
               id: true,
               unit: true,
-            }
+            },
           },
         },
       },
@@ -413,8 +424,8 @@ const getProductionById = async (id: number) => {
                 select: {
                   id: true,
                   subCategoryName: true,
-                }
-              }
+                },
+              },
             },
           },
           raWMaterial: {

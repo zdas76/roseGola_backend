@@ -51,13 +51,17 @@ const deleteInventory = catchAsync(async (req: Request, res: Response) => {
 const getInventoryAggigetValue = catchAsync(
   async (req: Request, res: Response) => {
     const department = req.query.department as Department;
-    const productId = Number(req.query.productId)
-    const packingMaterialId = Number(req.query.packingMaterialId)
-    const rawId = Number(req.query.rawId)
+    const productId = Number(req.query.productId);
+    const packingMaterialId = Number(req.query.packingMaterialId);
+    const rawId = Number(req.query.rawId);
     const itemType = req.query.itemType as string;
-    const result: any = await InventoryService.getInventoryAggValueById(
-      { department, productId, packingMaterialId, rawId, itemType }
-    );
+    const result: any = await InventoryService.getInventoryAggValueById({
+      department,
+      productId,
+      packingMaterialId,
+      rawId,
+      itemType,
+    });
 
     sendResponse(res, {
       statusCode: StatusCodes.OK,
@@ -65,7 +69,7 @@ const getInventoryAggigetValue = catchAsync(
       message: "Inventory total Successfully",
       data: result,
     });
-  }
+  },
 );
 // get last rate of raw material
 const getLastRawMaterialRate = catchAsync(
@@ -78,25 +82,27 @@ const getLastRawMaterialRate = catchAsync(
       message: "Last rate of raw material retrived Successfully",
       data: result,
     });
-  });
+  },
+);
 
 const getLastUsedVoucherQty = async (req: Request, res: Response) => {
-  const rawId = req.query.rawId
-    ? Number(req.query.rawId)
-    : undefined;
+  const rawId = req.query.rawId ? Number(req.query.rawId) : undefined;
 
   const pmMaterialId = req.query.pmMaterialId
     ? Number(req.query.pmMaterialId)
     : undefined;
 
-  const result = await InventoryService.getLastVoucherQty({ rawId: rawId, pmMaterialId: pmMaterialId })
+  const result = await InventoryService.getLastVoucherQty({
+    rawId: rawId,
+    pmMaterialId: pmMaterialId,
+  });
   return sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
     message: "Laused voucher qtyial retrived Successfully",
     data: result,
   });
-}
+};
 export const InventoryControllers = {
   getnventory,
   getInventoryById,
@@ -104,6 +110,5 @@ export const InventoryControllers = {
   deleteInventory,
   getInventoryAggigetValue,
   getLastRawMaterialRate,
-  getLastUsedVoucherQty
+  getLastUsedVoucherQty,
 };
-

@@ -26,7 +26,7 @@ const createProduct = async (payload: TcreateProduct) => {
       unitId: payload.unitId,
       subCategoryId: payload.subCategoryId,
       minPrice: payload.minPrice || 0,
-      size: payload.size || "",
+      size: Number(payload.size),
       openingDate: new Date(payload.initialStock.date),
       openingAmount: Number(payload.initialStock.amount),
       quantity: payload.initialStock.quantity,
@@ -96,7 +96,7 @@ const updateProductById = async (id: number, payload: Partial<Product>) => {
       unitId: payload.unitId,
       subCategoryId: payload.subCategoryId,
       minPrice: payload.minPrice || 0,
-      size: payload.size || "",
+      size: payload.size,
       alertQuantity: payload.alertQuantity,
     },
   });

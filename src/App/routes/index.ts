@@ -13,12 +13,10 @@ import { RawMaterialRoute } from "../modules/rawMaterials/raw.route";
 import { JournalRoute } from "../modules/journal/journal.route";
 import { BankRoute } from "../modules/bank/bank.route";
 import { TransactionRoute } from "../modules/bankTransaction/transaction.route";
-import { createProductRoute } from "../modules/createProduce/createProduct.route";
 import { ReportRouter } from "../modules/Reports/report.route";
 import { VoucherRoute } from "../modules/TransctionVoucher/transction.route";
 import { UserRoute } from "../modules/User/user.route";
 import { ProductionRouter } from "../modules/Production/production.route";
-// import { PackageRouter } from "../modules/Package/package.route";
 import { PurchaseOrderRoute } from "../modules/PurchaseOrder/purchaseOrder.route";
 import { ProductIngradientRoute } from "../modules/ProductIngradient/productIngradient.route";
 import { PackingMaterialRoute } from "../modules/PackingMaterial/packingMaterials.route";
@@ -87,10 +85,6 @@ const moduleRoutes = [
   {
     path: "/transaction",
     route: TransactionRoute,
-  },
-  {
-    path: "/create-product",
-    route: createProductRoute,
   },
   {
     path: "/report",

@@ -8,7 +8,7 @@ export type TcreateProduct = {
   unitId: number;
   minPrice?: number | null;
   color?: string | null;
-  size?: string | null;
+  size?: number;
   isDeleted: boolean;
   status: Status;
   alertQuantity?: number | null;

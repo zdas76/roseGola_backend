@@ -1,4 +1,4 @@
-import { Department } from "../../../generated/prisma";
+import { Department } from "../../../generated/prisma/client";
 
 interface Material {
     id: number;

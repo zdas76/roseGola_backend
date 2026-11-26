@@ -78,7 +78,7 @@ const createProductIngradient = async (payload: {
     throw new AppError(StatusCodes.NOT_FOUND, "Product not found");
   }
 
-  const result = await prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx: any) => {
     const created = await tx.productionIngradient.create({
       data: {
         productId,
@@ -139,7 +139,9 @@ const getAllProductIngradients = async (filters?: { productId?: number }) => {
     },
   });
 
-  const productIds = Array.from(new Set(result.map((item) => item.productId)));
+  const productIds = Array.from(
+    new Set(result.map((item: any) => item.productId)),
+  );
   const products = await prisma.product.findMany({
     where: { id: { in: productIds } },
     include: {
@@ -147,9 +149,9 @@ const getAllProductIngradients = async (filters?: { productId?: number }) => {
       subCategory: true,
     },
   });
-  const productMap = new Map(products.map((p) => [p.id, p]));
+  const productMap = new Map(products.map((p: any) => [p.id, p]));
 
-  return result.map((item) => ({
+  return result.map((item: any) => ({
     ...item,
     product: productMap.get(item.productId) || null,
   }));
@@ -208,7 +210,7 @@ const getProductionIngradientByProductId = async (productId: number) => {
 
 const updateProductIngradientById = async (
   ingredientid: number,
-  payload: any
+  payload: any,
 ) => {
   const isExist = await prisma.productionIngradient.findUnique({
     where: { id: ingredientid },
@@ -218,7 +220,9 @@ const updateProductIngradientById = async (
     throw new AppError(StatusCodes.NOT_FOUND, "Product ingradient not found");
   }
 
-  const targetProductId = payload.productId ? Number(payload.productId) : isExist.productId;
+  const targetProductId = payload.productId
+    ? Number(payload.productId)
+    : isExist.productId;
 
   if (payload.productId) {
     const productExists = await prisma.product.findUnique({
@@ -229,10 +233,10 @@ const updateProductIngradientById = async (
     }
   }
   // update or
-  const result = await prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx: any) => {
     const created = await tx.productionIngradient.update({
       where: {
-        id: ingredientid
+        id: ingredientid,
       },
       data: {
         ingredientRawMaterials: {
@@ -280,19 +284,19 @@ const updateProductIngradientById = async (
 };
 
 const deleteIngredient = async (ingredientId: number) => {
-  console.log(ingredientId, "ingredientId")
+  console.log(ingredientId, "ingredientId");
   const result = await prisma.productionIngradient.delete({
     where: {
-      id: ingredientId
-    }
+      id: ingredientId,
+    },
   });
-  return result
-}
+  return result;
+};
 
 export const ProductIngradientService = {
   createProductIngradient,
   getAllProductIngradients,
   getProductIngradientById,
   updateProductIngradientById,
-  deleteIngredient
+  deleteIngredient,
 };

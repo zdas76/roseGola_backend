@@ -1,21 +1,28 @@
-import validationRequiest from "../../middlewares/validationRequest";
 import express from "express";
 import { internalTransactionController } from "./InternalTransaction.controller";
 
 const router = express.Router();
-router.post("/raw-request", internalTransactionController.createRequest)
-router.patch("/raw-request/:requestId", internalTransactionController.updateRawRequest)
-router.post("/raw-approve", internalTransactionController.approveRawRequest)
+router.post("/raw-request", internalTransactionController.createRequest);
+router.patch(
+  "/raw-request/:requestId",
+  internalTransactionController.updateRawRequest,
+);
+router.post("/raw-approve", internalTransactionController.approveRawRequest);
 
-router.get("/request", internalTransactionController.getAllRequest)
-router.get("/request/:id", internalTransactionController.getRequestById)
+router.get("/request", internalTransactionController.getAllRequest);
+router.get("/request/:id", internalTransactionController.getRequestById);
 
-router.post("/product-request", internalTransactionController.createProductRequest)
-router.patch("/product-request/:requestId", internalTransactionController.updateProductRequest)
-router.post("/prodcut-approve", internalTransactionController.approveProductRequest)
-
+router.post(
+  "/product-request",
+  internalTransactionController.createProductRequest,
+);
+router.patch(
+  "/product-request/:requestId",
+  internalTransactionController.updateProductRequest,
+);
+router.post(
+  "/prodcut-approve",
+  internalTransactionController.approveProductRequest,
+);
 
 export const InternalTransaction = router;
-
-
-

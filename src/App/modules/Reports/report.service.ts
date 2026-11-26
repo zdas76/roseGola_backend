@@ -230,14 +230,7 @@ const getRawReportById = async (
         },
       },
     },
-<<<<<<< HEAD
-    orderBy: {
-      date: "desc",
-    },
-  })
-=======
   });
->>>>>>> main
 
   return { rawMaterial, report };
 };
@@ -305,70 +298,65 @@ const getProductReportById = async (
       productId: product.id,
       date: {
         gte: product.openingDate || new Date(payload?.startDate || ""),
-<<<<<<< HEAD
-        lte: payload?.endDate ? new Date(new Date(payload.endDate).setHours(23, 59, 59, 999)) : new Date()
-      }
-    },
-    orderBy: {
-      date: "desc",
-=======
         lte: payload?.endDate
           ? new Date(new Date(payload.endDate).setHours(23, 59, 59, 999))
           : new Date(),
       },
->>>>>>> main
     },
   });
 
   return { product, report };
 };
 
-<<<<<<< HEAD
 //----------------------------------------------------------------packing amterials report
 const packingMaterialsReport = async (payload: {
   startDate?: string | null;
   endDate?: string | null;
 }) => {
-
-
   const allPackingMaterials = await prisma.packingMaterial.findMany({
     where: {
-      isDeleted: false
+      isDeleted: false,
     },
   });
   if (allPackingMaterials.length < 1) {
     throw new AppError(StatusCodes.BAD_REQUEST, "Product not found");
   }
-  const result = Promise.all(allPackingMaterials.map(async (pm) => {
-    const startDate = payload?.startDate ? payload?.startDate : pm?.openingDate || "";
-    const endDate = payload?.endDate ? payload?.endDate : new Date();
+  const result = Promise.all(
+    allPackingMaterials.map(async (pm) => {
+      const startDate = payload?.startDate
+        ? payload?.startDate
+        : pm?.openingDate || "";
+      const endDate = payload?.endDate ? payload?.endDate : new Date();
 
-    const total = await prisma.pMInventory.aggregate({
-      _sum: {
-        debitAmount: true,
-        creditAmount: true,
-        quantityAdd: true,
-        quantityLess: true,
-      },
-      where: {
-        packingMaterialId: pm.id,
-        date: {
-          gte: new Date(startDate),
-          lte: new Date(new Date(endDate).setHours(23, 59, 59, 999))
-        }
-
-      },
-    })
-    return { pm, total }
-  }))
+      const total = await prisma.pMInventory.aggregate({
+        _sum: {
+          debitAmount: true,
+          creditAmount: true,
+          quantityAdd: true,
+          quantityLess: true,
+        },
+        where: {
+          packingMaterialId: pm.id,
+          date: {
+            gte: new Date(startDate),
+            lte: new Date(new Date(endDate).setHours(23, 59, 59, 999)),
+          },
+        },
+      });
+      return { pm, total };
+    }),
+  );
 
   return result;
 };
 // get product report by id
-const getPmReportById = async (id: number, payload: {
-  startDate?: string | null;
-  endDate?: string | null;
-}) => {
+const getPmReportById = async (
+  id: number,
+  payload: {
+    startDate?: string | null;
+    endDate?: string | null;
+  },
+) => {
   const packingMaterials = await prisma.packingMaterial.findUnique({
     where: {
       id: id,
@@ -380,24 +368,23 @@ const getPmReportById = async (id: number, payload: {
   }
 
   const report = await prisma.pMInventory.findMany({
-
     where: {
       packingMaterialId: packingMaterials.id,
       date: {
         gte: packingMaterials.openingDate || new Date(payload?.startDate || ""),
-        lte: payload?.endDate ? new Date(new Date(payload.endDate).setHours(23, 59, 59, 999)) : new Date()
-      }
+        lte: payload?.endDate
+          ? new Date(new Date(payload.endDate).setHours(23, 59, 59, 999))
+          : new Date(),
+      },
     },
     orderBy: {
       date: "desc",
     },
-  })
+  });
 
   return { packingMaterials, report };
 };
 
-=======
->>>>>>> main
 const getBalanceSheet = async (date: string | null) => {
   const targetDate = date
     ? new Date(new Date(date).setHours(23, 59, 59, 999))
@@ -434,11 +421,12 @@ const getBalanceSheet = async (date: string | null) => {
 
   // Cash in Hand (Asset: Debit - Credit)
   const cashInHandData = await getAccountBalance("cash in hand");
-  const cashInHand = cashInHandData.debit - cashInHandData.credit;
+  const cashInHand =
+    Number(cashInHandData.debit) - Number(cashInHandData.credit);
 
   // Cash at Bank (Asset: Debit - Credit)
   const cashAtBankData = await getAccountBalance("cash at bank");
-  let cashAtBank = cashAtBankData.debit - cashAtBankData.credit;
+  let cashAtBank = Number(cashAtBankData.debit) - Number(cashAtBankData.credit);
 
   // If "cash at bank" isn't a single account, we can alternatively aggregate BankTransaction
   const bankTransactions = await prisma.bankTransaction.aggregate({
@@ -462,7 +450,8 @@ const getBalanceSheet = async (date: string | null) => {
   // Accounts Receivable (Asset: Debit - Credit)
   const accountsReceivableData = await getAccountBalance("accounts receivable");
   const accountsReceivable =
-    accountsReceivableData.debit - accountsReceivableData.credit;
+    Number(accountsReceivableData.debit) -
+    Number(accountsReceivableData.credit);
 
   // Closing Stock / Inventory (Asset: value of stock)
   // Value = (quantityAdd * unitPrice) - (quantityLess * unitPrice)
@@ -475,9 +464,9 @@ const getBalanceSheet = async (date: string | null) => {
 
   let closingStock = 0;
   for (const inv of inventoryData) {
-    const qtyAdded = inv.quantityAdd || 0;
-    const qtyLess = inv.quantityLess || 0;
-    const price = inv.unitPrice || 0;
+    const qtyAdded = Number(inv.quantityAdd || 0);
+    const qtyLess = Number(inv.quantityLess || 0);
+    const price = Number(inv.unitPrice || 0);
 
     // We assume unitPrice is the value per unit for both addition and deduction
     closingStock += qtyAdded * price - qtyLess * price;
@@ -494,8 +483,8 @@ const getBalanceSheet = async (date: string | null) => {
 
   // If the system tracks stock value via debit/credit in Inventory
   const inventoryValueViaLedger =
-    (inventoryAggregate._sum.debitAmount || 0) -
-    (inventoryAggregate._sum.creditAmount || 0);
+    Number(inventoryAggregate._sum.debitAmount || 0) -
+    Number(inventoryAggregate._sum.creditAmount || 0);
   if (closingStock === 0 && inventoryValueViaLedger !== 0) {
     closingStock = inventoryValueViaLedger;
   }
@@ -508,7 +497,7 @@ const getBalanceSheet = async (date: string | null) => {
   // Accounts Payable (Liability: Credit - Debit)
   const accountsPayableData = await getAccountBalance("accounts payable");
   const accountsPayable =
-    accountsPayableData.credit - accountsPayableData.debit;
+    Number(accountsPayableData.credit) - Number(accountsPayableData.debit);
 
   const totalLiabilities = accountsPayable;
 
@@ -516,7 +505,7 @@ const getBalanceSheet = async (date: string | null) => {
   // Simplest equity formula: Equity = Assets - Liabilities
   // Alternatively, query a "Capital" account
   const capitalData = await getAccountBalance("capital");
-  let equity = capitalData.credit - capitalData.debit;
+  let equity = Number(capitalData.credit) - Number(capitalData.debit);
 
   if (equity === 0) {
     equity = totalAssets - totalLiabilities;
@@ -535,7 +524,7 @@ const getBalanceSheet = async (date: string | null) => {
     },
     equity: {
       calculateEquity: totalAssets - totalLiabilities,
-      capitalAccount: capitalData.credit - capitalData.debit,
+      capitalAccount: Number(capitalData.credit) - Number(capitalData.debit),
       totalEquity: equity,
     },
     totals: {
@@ -554,5 +543,5 @@ export const ReportService = {
   getProductReportById,
   getBalanceSheet,
   packingMaterialsReport,
-  getPmReportById
+  getPmReportById,
 };

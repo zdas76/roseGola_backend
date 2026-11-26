@@ -4,7 +4,7 @@ import prisma from "../../../shared/prisma";
 import { InventoryService } from "./inventories.service";
 import sendResponse from "../../../shared/sendResponse";
 import { StatusCodes } from "http-status-codes";
-import { Department } from "../../../generated/prisma";
+import { Department } from "../../../generated/prisma/client";
 
 const getnventory = catchAsync(async (req: Request, res: Response) => {
   const result = await InventoryService.getInventory();
@@ -22,7 +22,7 @@ const getInventoryById = catchAsync(async (req: Request, res: Response) => {
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     success: true,
-    message: "Parties retrived Successfully",
+    message: "Invetory retrived Successfully",
     data: result,
   });
 });

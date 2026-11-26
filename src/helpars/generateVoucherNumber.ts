@@ -21,6 +21,20 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
 
     voucherNo = lastVoucher?.orderNo;
   }
+  if (type === "REQ") {
+    const lastVoucher = await prisma.transactionInfo.findFirst({
+      orderBy: { id: "desc" },
+      select: { voucherNo: true },
+    });
+    voucherNo = lastVoucher?.voucherNo;
+  }
+  if (type === "TRANS") {
+    const lastVoucher = await prisma.transactionInfo.findFirst({
+      orderBy: { id: "desc" },
+      select: { voucherNo: true },
+    });
+    voucherNo = lastVoucher?.voucherNo;
+  }
 
   if (type === "PROD") {
     const lastVoucher = await prisma.transactionInfo.findFirst({
@@ -39,7 +53,17 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
       orderBy: { id: "desc" },
       select: { voucherNo: true },
     });
-    // console.log(lastVoucher,)
+
+    voucherNo = lastVoucher?.voucherNo;
+  }
+  if (type === "PRPMV") {
+    const lastVoucher = await prisma.transactionInfo.findFirst({
+      where: {
+        voucherType: VoucherType.PURCHASE
+      },
+      orderBy: { id: "desc" },
+      select: { voucherNo: true },
+    });
     voucherNo = lastVoucher?.voucherNo;
   }
   if (type === "SV") {
@@ -50,7 +74,6 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
       orderBy: { id: "desc" },
       select: { voucherNo: true },
     });
-    // console.log(lastVoucher,)
     voucherNo = lastVoucher?.voucherNo;
   }
   if (type === "RV") {
@@ -61,7 +84,6 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
       orderBy: { id: "desc" },
       select: { voucherNo: true },
     });
-    // console.log(lastVoucher,)
     voucherNo = lastVoucher?.voucherNo;
   }
   if (type === "JV") {
@@ -72,7 +94,7 @@ export const GenerateVoucherNumber = async (type: string): Promise<string> => {
       orderBy: { id: "desc" },
       select: { voucherNo: true },
     });
-    // console.log(lastVoucher,)
+
     voucherNo = lastVoucher?.voucherNo;
   }
 

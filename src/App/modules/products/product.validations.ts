@@ -9,7 +9,7 @@ const CreateProductValidationSchema = z.object({
     subCategoryId: z.number(),
     minPrice: z.number().optional(),
     color: z.string().optional(),
-    size: z.string().optional(),
+    size: z.number().optional(),
     alertQuantity: z.number().optional(),
   }),
 });
@@ -28,7 +28,7 @@ const updateProductValidationSchema = z.object({
     subCategoryId: z.number().optional(),
     minPrice: z.number().optional(),
     color: z.string().optional(),
-    size: z.string().optional(),
+    size: z.number().optional(),
   }),
 });
 

@@ -117,7 +117,7 @@ CREATE TABLE `products` (
     `description` VARCHAR(250) NOT NULL,
     `subCategoryId` INTEGER NOT NULL,
     `minPrice` INTEGER NULL,
-    `size` VARCHAR(191) NULL,
+    `size` INTEGER NULL,
     `quantity` DOUBLE NOT NULL,
     `unitPrice` DOUBLE NOT NULL,
     `alertQuantity` INTEGER NOT NULL DEFAULT 0,
@@ -291,7 +291,11 @@ CREATE TABLE `pm_inventories` (
     `creditAmount` DOUBLE NULL DEFAULT 0,
     `integratedDebitAmount` DOUBLE NULL DEFAULT 0,
     `integratedCreditAmount` DOUBLE NULL DEFAULT 0,
+<<<<<<<< HEAD:prisma/migrations/20261122081913_init/migration.sql
+    `isOpening` BOOLEAN NOT NULL DEFAULT false,
+========
     `isOpening` INTEGER NOT NULL DEFAULT 0,
+>>>>>>>> main:prisma/migrations/0_init/migration.sql
     `status` ENUM('ACTIVE', 'DELETED', 'PUSH', 'BLOCK', 'PENDING') NOT NULL DEFAULT 'PENDING',
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
@@ -306,9 +310,14 @@ CREATE TABLE `transaction_info` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `voucherNo` VARCHAR(191) NOT NULL,
     `invoiceNo` VARCHAR(191) NULL,
+    `status` ENUM('PARTIAL', 'PAID', 'DUE', 'PENDING', 'CONFIRMED') NULL DEFAULT 'DUE',
     `date` DATETIME(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
     `partyId` INTEGER NULL,
+<<<<<<<< HEAD:prisma/migrations/20261122081913_init/migration.sql
+    `voucherType` ENUM('SALES', 'PURCHASE', 'RECEIVED', 'PAYMENT', 'JOURNAL', 'CONTRA', 'PRODUCTION', 'REQUISITION', 'TRANSFER', 'REQUEST') NOT NULL,
+========
     `voucherType` ENUM('SALES', 'PURCHASE', 'RECEIVED', 'PAYMENT', 'JOURNAL', 'CONTRA', 'PRODUCTION', 'REQUISITION', 'FINISH_GOODS') NOT NULL,
+>>>>>>>> main:prisma/migrations/0_init/migration.sql
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
@@ -324,7 +333,11 @@ CREATE TABLE `journals` (
     `transectionId` INTEGER NULL,
     `accountsItemId` INTEGER NULL,
     `date` DATE NOT NULL,
+<<<<<<<< HEAD:prisma/migrations/20261122081913_init/migration.sql
+    `checkOrRTGS` VARCHAR(191) NULL,
+========
     `checkOrRTGS` DOUBLE NULL DEFAULT 0,
+>>>>>>>> main:prisma/migrations/0_init/migration.sql
     `creditAmount` DOUBLE NULL DEFAULT 0,
     `debitAmount` DOUBLE NULL DEFAULT 0,
     `integratedDebitAmount` DOUBLE NULL DEFAULT 0,
@@ -350,7 +363,7 @@ CREATE TABLE `product_ingradients` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `product_raw_materials` (
+CREATE TABLE `ingredientRawMaterials` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `productionIngradientId` INTEGER NOT NULL,
     `rawId` INTEGER NOT NULL,
@@ -406,7 +419,11 @@ CREATE TABLE `production_expences_inventory` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+<<<<<<<< HEAD:prisma/migrations/20261122081913_init/migration.sql
+CREATE TABLE `Productionexpenseitem` (
+========
 CREATE TABLE `productionexpenseitem` (
+>>>>>>>> main:prisma/migrations/0_init/migration.sql
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `expItemName` VARCHAR(191) NOT NULL,
     `unitRate` DOUBLE NOT NULL DEFAULT 0,
@@ -417,7 +434,11 @@ CREATE TABLE `productionexpenseitem` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+<<<<<<<< HEAD:prisma/migrations/20261122081913_init/migration.sql
+CREATE TABLE `Productioniteminfo` (
+========
 CREATE TABLE `productioniteminfo` (
+>>>>>>>> main:prisma/migrations/0_init/migration.sql
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `transactionId` INTEGER NOT NULL,
     `productId` INTEGER NOT NULL,
@@ -494,15 +515,21 @@ ALTER TABLE `transaction_info` ADD CONSTRAINT `transaction_info_partyId_fkey` FO
 
 -- AddForeignKey
 ALTER TABLE `journals` ADD CONSTRAINT `journals_accountsItemId_fkey` FOREIGN KEY (`accountsItemId`) REFERENCES `account_items`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+<<<<<<<< HEAD:prisma/migrations/20261122081913_init/migration.sql
+========
+
+-- AddForeignKey
+ALTER TABLE `journals` ADD CONSTRAINT `journals_transectionId_fkey` FOREIGN KEY (`transectionId`) REFERENCES `transaction_info`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+>>>>>>>> main:prisma/migrations/0_init/migration.sql
 
 -- AddForeignKey
 ALTER TABLE `journals` ADD CONSTRAINT `journals_transectionId_fkey` FOREIGN KEY (`transectionId`) REFERENCES `transaction_info`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `product_raw_materials` ADD CONSTRAINT `product_raw_materials_productionIngradientId_fkey` FOREIGN KEY (`productionIngradientId`) REFERENCES `product_ingradients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `ingredientRawMaterials` ADD CONSTRAINT `ingredientRawMaterials_productionIngradientId_fkey` FOREIGN KEY (`productionIngradientId`) REFERENCES `product_ingradients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE `product_raw_materials` ADD CONSTRAINT `product_raw_materials_rawId_fkey` FOREIGN KEY (`rawId`) REFERENCES `raw_materials`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE `ingredientRawMaterials` ADD CONSTRAINT `ingredientRawMaterials_rawId_fkey` FOREIGN KEY (`rawId`) REFERENCES `raw_materials`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `production_packing_materials` ADD CONSTRAINT `production_packing_materials_packingMaterialId_fkey` FOREIGN KEY (`packingMaterialId`) REFERENCES `packing_materials`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -511,20 +538,35 @@ ALTER TABLE `production_packing_materials` ADD CONSTRAINT `production_packing_ma
 ALTER TABLE `production_packing_materials` ADD CONSTRAINT `production_packing_materials_productionIngradientId_fkey` FOREIGN KEY (`productionIngradientId`) REFERENCES `product_ingradients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+<<<<<<<< HEAD:prisma/migrations/20261122081913_init/migration.sql
+ALTER TABLE `ingredient_expnese` ADD CONSTRAINT `ingredient_expnese_productionExpenssItemId_fkey` FOREIGN KEY (`productionExpenssItemId`) REFERENCES `Productionexpenseitem`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+========
 ALTER TABLE `ingredient_expnese` ADD CONSTRAINT `ingredient_expnese_productionExpenssItemId_fkey` FOREIGN KEY (`productionExpenssItemId`) REFERENCES `productionexpenseitem`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+>>>>>>>> main:prisma/migrations/0_init/migration.sql
 
 -- AddForeignKey
 ALTER TABLE `ingredient_expnese` ADD CONSTRAINT `ingredient_expnese_productionIngradientId_fkey` FOREIGN KEY (`productionIngradientId`) REFERENCES `product_ingradients`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+<<<<<<<< HEAD:prisma/migrations/20261122081913_init/migration.sql
+ALTER TABLE `production_expences_inventory` ADD CONSTRAINT `production_expences_inventory_proExpencesItemId_fkey` FOREIGN KEY (`proExpencesItemId`) REFERENCES `Productionexpenseitem`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+========
 ALTER TABLE `production_expences_inventory` ADD CONSTRAINT `production_expences_inventory_proExpencesItemId_fkey` FOREIGN KEY (`proExpencesItemId`) REFERENCES `productionexpenseitem`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+>>>>>>>> main:prisma/migrations/0_init/migration.sql
 
 -- AddForeignKey
 ALTER TABLE `production_expences_inventory` ADD CONSTRAINT `production_expences_inventory_transectionId_fkey` FOREIGN KEY (`transectionId`) REFERENCES `transaction_info`(`id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
+<<<<<<<< HEAD:prisma/migrations/20261122081913_init/migration.sql
+ALTER TABLE `Productioniteminfo` ADD CONSTRAINT `ProductionItemInfo_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `products`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Productioniteminfo` ADD CONSTRAINT `ProductionItemInfo_transactionId_fkey` FOREIGN KEY (`transactionId`) REFERENCES `transaction_info`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+========
 ALTER TABLE `productioniteminfo` ADD CONSTRAINT `ProductionItemInfo_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `products`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `productioniteminfo` ADD CONSTRAINT `ProductionItemInfo_transactionId_fkey` FOREIGN KEY (`transactionId`) REFERENCES `transaction_info`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
+>>>>>>>> main:prisma/migrations/0_init/migration.sql

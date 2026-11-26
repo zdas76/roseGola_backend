@@ -43,10 +43,10 @@ const createPackingMaterial = async (payload: TpackingMaterial) => {
       alertQuantity: Number(payload.alertQuantity) || 0,
       openingDate,
       openingAmount: Number(payload.amount) || 0,
-      inventory: {
+      pminventories: {
         create: {
           date: openingDate,
-          department: Department.MP_STORE,
+          department: Department.RMPM_STORE,
           unitPrice: Number(payload.unitPrice) || 0,
           quantityAdd: Number(payload.quantity) || 0,
           debitAmount: Number(payload.amount) || 0,
@@ -132,10 +132,10 @@ const createPackingMaterialsMany = async (payloads: TpackingMaterial[]) => {
           alertQuantity: Number(payload.alertQuantity) || 0,
           openingDate,
           openingAmount: Number(payload.amount) || 0,
-          inventory: {
+          pminventories: {
             create: {
               date: openingDate,
-              department: Department.MP_STORE,
+              department: Department.RMPM_STORE,
               unitPrice: Number(payload.unitPrice) || 0,
               quantityAdd: Number(payload.quantity) || 0,
               debitAmount: Number(payload.amount) || 0,

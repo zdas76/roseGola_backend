@@ -137,6 +137,39 @@ const balanceSheet = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// ----------------------------------------- packing materials report -----------------------------
+const PmReportcontroler = catchAsync(async (req: Request, res: Response) => {
+  const startDate = req.query.startDate ? String(req.query.startDate) : null;
+  const endDate = req.query.endDate ? String(req.query.endDate) : null;
+
+  const result = await ReportService.packingMaterialsReport({
+    startDate,
+    endDate,
+  });
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: "Ladger report retrived successfully",
+    data: result,
+  });
+});
+const PmReportByid = catchAsync(async (req: Request, res: Response) => {
+  const startDate = req.query.startDate ? String(req.query.startDate) : null;
+  const endDate = req.query.endDate ? String(req.query.endDate) : null;
+  const id = Number(req.params.id)
+  const result = await ReportService.getPmReportById(id, {
+    startDate,
+    endDate,
+  });
+
+  sendResponse(res, {
+    statusCode: StatusCodes.OK,
+    success: true,
+    message: "Ladger report retrived successfully",
+    data: result,
+  });
+});
 export const ReportControllers = {
   ladgerReport,
   partyReport,
@@ -145,4 +178,6 @@ export const ReportControllers = {
   productReport,
   productReportById,
   balanceSheet,
+  PmReportcontroler,
+  PmReportByid
 };

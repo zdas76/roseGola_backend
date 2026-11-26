@@ -8,7 +8,6 @@ const createAccountsItemtoDB = async (payLoad: AccountsItem) => {
 
   const accountsItemId = Number(payLoad.accountHeadId) + payLoad.accountsItemId;
 
-
   const isExistItemId = await prisma.accountsItem.findFirst({
     where: {
       accountsItemId: accountsItemId,
@@ -42,7 +41,6 @@ const createAccountsItemtoDB = async (payLoad: AccountsItem) => {
 
 const getAccountsItemFromDB = async (payLoad: string) => {
   let filerValue = {
-
   };
 
   if (payLoad) {

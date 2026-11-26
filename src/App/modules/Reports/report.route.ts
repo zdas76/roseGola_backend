@@ -9,12 +9,15 @@ route.get("/party/:partyId", ReportControllers.partyReport);
 
 
 route.get("/raw", ReportControllers.rawReport);
-
 route.get("/raw/:id", ReportControllers.rawReportById);
 
-route.get("/product", ReportControllers.productReport);
 
+route.get("/product", ReportControllers.productReport);
 route.get("/product/:id", ReportControllers.productReportById);
+
+
+route.get("/packing-materials", ReportControllers.PmReportcontroler);
+route.get("/packing-materials/:id", ReportControllers.PmReportByid);
 
 route.get("/balance-sheet", ReportControllers.balanceSheet);
 

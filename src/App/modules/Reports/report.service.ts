@@ -182,6 +182,9 @@ const rawReport = async (payload: {
             lte: new Date(new Date(endDate).setHours(23, 59, 59, 999)),
           },
         },
+        orderBy: {
+          id: "desc"
+        }
       });
 
       return { rawMaterial, total };
@@ -220,6 +223,9 @@ const getRawReportById = async (
         gte: new Date(startDate),
         lte: new Date(new Date(endDate).setHours(23, 59, 59, 999)),
       },
+    },
+    orderBy: {
+      id: "asc"
     },
     include: {
       transactionInfo: {
@@ -260,6 +266,8 @@ const productReport = async (payload: {
           creditAmount: true,
           quantityAdd: true,
           quantityLess: true,
+          integratedDebitAmount: true,
+          integratedCreditAmount: true,
         },
         where: {
           productId: product.id,
@@ -269,7 +277,21 @@ const productReport = async (payload: {
           },
         },
       });
-      return { product, total };
+
+      const latestInventory = await prisma.inventory.findFirst({
+        where: { productId: product.id },
+        orderBy: { id: "desc" },
+        select: { integratedUnitPrice: true },
+      });
+
+      const integratedUnitPrice = latestInventory?.integratedUnitPrice
+        ? Number(latestInventory.integratedUnitPrice)
+        : product.unitPrice;
+
+      return {
+        product: { ...product, integratedUnitPrice },
+        total,
+      };
     }),
   );
 
